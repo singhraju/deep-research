@@ -1,0 +1,26 @@
+2026-04-12 04:01:33,623 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:170 - === Policy Extractor Logging Initialized ===
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:171 - Log directory: /Users/AH45807/project/deep-research/apps/ui/logs
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:172 - Max file size: 50.0MB
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:173 - Backup count: 10
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:174 - Process ID: 58976
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:175 - Component log levels:
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_store: WARNING
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_bulk_operations: WARNING
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.pipeline: INFO
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.api: INFO
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.rendering: INFO
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.url_extraction: INFO
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.chunking: DEBUG
+2026-04-12 04:09:34,568 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:170 - === Policy Extractor Logging Initialized ===
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:171 - Log directory: /Users/AH45807/project/deep-research/apps/ui/logs
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:172 - Max file size: 50.0MB
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:173 - Backup count: 10
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:174 - Process ID: 60149
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:175 - Component log levels:
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_store: WARNING
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_bulk_operations: WARNING
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.pipeline: INFO
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.api: INFO
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.rendering: INFO
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.url_extraction: INFO
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.chunking: DEBUG

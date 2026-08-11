@@ -1,0 +1,47 @@
+2026-04-12 04:10:14,745 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: Find what changed in HCPCS H0010...
+2026-04-12 04:10:14,745 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'period': 'Rolling 3'}
+2026-04-12 04:10:14,746 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: Find what changed in HCPCS H0010...
+2026-04-12 04:10:23,705 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 04:10:23,705 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 04:10:25,576 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:10:25,576 - PID:60149 - TID:6197358592 - user_intent - WARNING - validate_intent_output:884 - filter field 'amount_type' not found in semantic model (dimensions/time_dimensions/facts)
+2026-04-12 04:10:25,576 - PID:60149 - TID:6197358592 - user_intent - WARNING - validate_intent_output:884 - filter field 'incurred_ending_month' not found in semantic model (dimensions/time_dimensions/facts)
+2026-04-12 04:10:25,577 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 2 warning(s) found
+2026-04-12 04:11:51,672 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:11:51,672 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'period': 'Rolling 3'}
+2026-04-12 04:11:51,672 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:11:58,011 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 04:11:58,011 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 04:12:01,272 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:12:01,273 - PID:60149 - TID:6197358592 - user_intent - WARNING - validate_intent_output:884 - filter field 'hcc' not found in semantic model (dimensions/time_dimensions/facts)
+2026-04-12 04:12:01,273 - PID:60149 - TID:6197358592 - user_intent - WARNING - validate_intent_output:884 - filter field 'amount_type' not found in semantic model (dimensions/time_dimensions/facts)
+2026-04-12 04:12:01,273 - PID:60149 - TID:6197358592 - user_intent - WARNING - validate_intent_output:884 - filter field 'incurred_ending_month' not found in semantic model (dimensions/time_dimensions/facts)
+2026-04-12 04:12:01,273 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 3 warning(s) found
+2026-04-12 04:24:41,043 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: "claims_expense.total_allowed"...
+2026-04-12 04:24:41,044 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'drill_metric': 'claims_expense.total_allowed', 'period': 'Rolling 3', 'rolling_window': '3_months'}
+2026-04-12 04:24:41,044 - PID:60149 - TID:6231584768 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: "claims_expense.total_allowed"...
+2026-04-12 04:24:43,388 - PID:60149 - TID:6231584768 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 04:24:43,388 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 04:24:45,571 - PID:60149 - TID:6231584768 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:24:45,571 - PID:60149 - TID:6231584768 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:30:37,071 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:30:37,071 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'drill_metric': 'claims_expense.total_allowed', 'period': 'Rolling 3', 'rolling_window': '3_months'}
+2026-04-12 04:30:37,071 - PID:60149 - TID:6231584768 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:30:46,266 - PID:60149 - TID:6231584768 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 04:30:46,266 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 04:30:48,111 - PID:60149 - TID:6231584768 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:30:48,111 - PID:60149 - TID:6231584768 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:31:28,887 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:31:28,888 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'drill_metric': 'claims_expense.total_allowed', 'period': 'Rolling 3', 'rolling_window': '3_months'}
+2026-04-12 04:31:28,888 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:31:37,285 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 04:31:37,286 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 04:31:41,330 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:31:41,330 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 14:31:49,973 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: Find what changed in HCPCS H0010?...
+2026-04-12 14:31:49,975 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'drill_metric': 'claims_expense.total_allowed', 'period': 'Rolling 3', 'rolling_window': '3_months'}
+2026-04-12 14:31:49,975 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: Find what changed in HCPCS H0010?...
+2026-04-12 14:31:56,068 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 14:31:56,068 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 14:31:59,571 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 14:31:59,571 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found

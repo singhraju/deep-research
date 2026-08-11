@@ -1,0 +1,2052 @@
+{
+  "test_scenarios": [
+    {
+      "lob_code": "MCM006",
+      "lob_desc": "Commercial Individual",
+      "model_code": "OON",
+      "period_code": "R12",
+      "snap_month": 202606,
+      "period_end": 202603,
+      "key_insight": {
+        "whats_happening": "",
+        "top_contributors": {
+          "provider_trends": [
+            {
+              "name": "CLEVELAND CLINIC MARYMOUNT HOSPITAL",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+1793%"
+            },
+            {
+              "name": "KATHLEEN R LOWRY",
+              "insight": "Substantial increase in non-participating paid amount",
+              "percentage_change": "+1136%"
+            },
+            {
+              "name": "UNION HOSPITAL",
+              "insight": "Notable increase in non-participating paid amount",
+              "percentage_change": "+651%"
+            },
+            {
+              "name": "AKRON CHILDREN'S HOSPITAL",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+535%"
+            },
+            {
+              "name": "KAUP PHARMACY",
+              "insight": "Substantial increase in non-participating paid amount",
+              "percentage_change": "+609%"
+            }
+          ],
+          "states": [
+            {
+              "name": "ME",
+              "insight": "Highest increase in non-participating paid amount",
+              "percentage_change": "+540%"
+            },
+            {
+              "name": "CT",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+184%"
+            }
+          ],
+          "drgs": [
+            {
+              "name": "Poisoning and Toxic Effects of Drugs without MCC",
+              "insight": "Highest growth in non-participating paid amount",
+              "percentage_change": "+68%"
+            },
+            {
+              "name": "Hypertension without MCC",
+              "insight": "Significant growth in non-participating paid amount",
+              "percentage_change": "+46%"
+            },
+            {
+              "name": "Esophagitis, Gastroenteritis and Miscellaneous Digestive Disorders with MCC",
+              "insight": "Notable growth in non-participating paid amount",
+              "percentage_change": "+21%"
+            },
+            {
+              "name": "Miscellaneous Disorders of Nutrition, Metabolism, and Fluids and Electrolytes without MCC",
+              "insight": "Significant growth in non-participating paid amount",
+              "percentage_change": "+22%"
+            },
+            {
+              "name": "Degenerative Nervous System Disorders with MCC",
+              "insight": "Notable growth in non-participating paid amount",
+              "percentage_change": "+26%"
+            }
+          ]
+        }
+      },
+      "deep_dive": {
+        "report_title": "Deep Dive OON Analysis - Commercial Individual (MCM006) - R12 Period Ending 202603",
+        "top_state_drivers": {
+          "section_title": "State-Level NPAR Trends and Drivers",
+          "states": [
+            {
+              "state_name": "GA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 397,532 total claims, NPAR Claims count percentage increased by 45.96% and PMPM ratio increased by 115.47% for R12 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In GA, out of 397,532 total claims (for R12), 329,175 (82.8%) were NPAR, resulting in $394.45M in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "Out of 972 total NPAR claims for Provider TANNER MEDICAL CENTER/VILLA RICA under the HMO product, 45.22% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In GA, IDR claims represented 91.56% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In GA, out of 329,175 total NPAR claims, 301,386 (91.56%) were flagged for IDR, representing a 3.07% increase from the prior period.",
+                    "Among the 301,386 IDR-flagged claims, the top providers are NGMC GAINESVILLE, GRADY MEMORIAL HOSPITAL, MEMORIAL SATILLA HEALTH.",
+                    "For NGMC GAINESVILLE, 100.0% of claims were processed as PAR for the HMO product over the past 12 months, indicating potential network configuration issues."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "IN",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 249,211 total claims, NPAR Claims count percentage increased by -17.96% and PMPM ratio increased by 5.97% for R12 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In IN, out of 249,211 total claims (for R12), 204,388 (82.01%) were NPAR, resulting in $312.03M in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "Out of 163 total NPAR claims for Provider FRANCISCAN HEALTH MICHIGAN CITY under the HMO product, 85.45% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In IN, IDR claims represented 77.14% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In IN, out of 204,388 total NPAR claims, 157,663 (77.14%) were flagged for IDR, representing a -5.97% decrease from the prior period.",
+                    "Among the 157,663 IDR-flagged claims, the top providers are SIDNEY AND LOIS ESKENAZI HOSPITAL, COMMUNITY HOSPITAL EAST, ASCENSION SAINT VINCENT EVANSVILLE."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "TX",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 120,952 total claims, NPAR Claims count percentage increased by 782.88% and PMPM ratio increased by 29.93% for R12 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In TX, out of 120,952 total claims (for R12), 116,284 (96.14%) were NPAR, resulting in $55.11M in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "Out of 15 total NPAR claims for Provider MEMORIAL HERMANN KATY HEALTH SYSTEM under the POS product, 100.0% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In TX, IDR claims represented 88.57% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In TX, out of 116,284 total NPAR claims, 102,997 (88.57%) were flagged for IDR, representing a -0.82% decrease from the prior period.",
+                    "Among the 102,997 IDR-flagged claims, the top providers are TEXAS HEALTH HEB, TEXAS HEALTH FORT WORTH, TEXAS HEALTH ARLINGTON MEMORIAL."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "top_provider_drivers": {
+          "section_title": "Provider-Level NPAR Trends and Drivers",
+          "providers": [
+            {
+              "provider_name": "NGMC GAINESVILLE",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "NGMC GAINESVILLE shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRG 885 (Psychoses) and DRG 871 (Septicemia or Severe Sepsis without Mechanical Ventilation >96 Hours with MCC) account for approximately 80% of total OON reimbursements for NGMC GAINESVILLE."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "LONE STAR PATHOLOGY PLLC",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "LONE STAR PATHOLOGY PLLC shows a recurring PAR/OON reimbursement overlap for similar member populations and professional service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRG data is NOT_MAPPED for professional service claims for LONE STAR PATHOLOGY PLLC."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "NGMC GAINESVILLE",
+              "metrics": [
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of 30,170 total OON claims for NGMC GAINESVILLE, IDR claims represented 98.80%, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "Within NGMC GAINESVILLE's IDR claims, 100% are concentrated in DRG 393 (Other Digestive System Diagnoses with MCC), and 100% are concentrated in DRG 862 (Postoperative and Posttraumatic Infections with MCC).",
+                    "Additionally, DRG 897 (Alcohol, Drug Abuse or Dependence without Rehabilitation Therapy without MCC) claims for NGMC GAINESVILLE has 25.00% PAR claims for last 12 months, indicating potential network and/or configuration issues."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "GRADY MEMORIAL HOSPITAL",
+              "metrics": [
+                {
+                  "metric_label": "NPAR volume and spend impact - Facility",
+                  "detail_statements": [
+                    "During the same R12 period, NPAR claim volume and associated paid amounts increased for GRADY MEMORIAL HOSPITAL, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "MEDEX BIOCARE PHARMACY",
+              "metrics": [
+                {
+                  "metric_label": "Non-Par Provider Growth - Professional",
+                  "detail_statements": [
+                    "During the same R12 period, NPAR claim volume and associated allowed/paid amounts increased for MEDEX BIOCARE PHARMACY, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "lob_code": "MCM006",
+      "lob_desc": "Commercial Individual",
+      "model_code": "OON",
+      "period_code": "R3",
+      "snap_month": 202606,
+      "period_end": 202603,
+      "key_insight": {
+        "whats_happening": "",
+        "top_contributors": {
+          "provider_trends": [
+            {
+              "name": "APRIA HEALTHCARE",
+              "insight": "Significant increase in non-participating paid amount, indicating a potential shift in service utilization or billing practices.",
+              "percentage_change": "+781%"
+            },
+            {
+              "name": "BELLIN HOSPITAL",
+              "insight": "Substantial increase in non-participating paid amount, suggesting a change in service demand or billing patterns.",
+              "percentage_change": "+680%"
+            },
+            {
+              "name": "CLEVELAND CLINIC MARYMOUNT HOSPITAL",
+              "insight": "Major increase in non-participating paid amount, possibly due to increased service volume or changes in billing.",
+              "percentage_change": "+808%"
+            },
+            {
+              "name": "DOCTORS HOSPITAL OF AUGUSTA",
+              "insight": "Notable increase in non-participating paid amount, indicating a shift in service utilization or billing practices.",
+              "percentage_change": "+653%"
+            },
+            {
+              "name": "DEARBORN COUNTY HOSPITAL",
+              "insight": "Significant increase in non-participating paid amount, suggesting a change in service demand or billing patterns.",
+              "percentage_change": "+252%"
+            }
+          ],
+          "states": [
+            {
+              "name": "ME",
+              "insight": "Substantial increase in non-participating paid amount, indicating a significant change in service utilization or billing practices in Maine.",
+              "percentage_change": "+1725%"
+            },
+            {
+              "name": "KY",
+              "insight": "Notable increase in non-participating paid amount, suggesting a shift in service demand or billing patterns in Kentucky.",
+              "percentage_change": "+138%"
+            }
+          ],
+          "drgs": [
+            {
+              "name": "Alcohol, Drug Abuse or Dependence without Rehabilitation Therapy without MCC",
+              "insight": "Significant increase in non-participating paid amount for this DRG, indicating a rise in related services or billing changes.",
+              "percentage_change": "+314%"
+            },
+            {
+              "name": "Cesarean Section without Sterilization with MCC",
+              "insight": "Major increase in non-participating paid amount for this DRG, suggesting a rise in related services or billing changes.",
+              "percentage_change": "+254%"
+            },
+            {
+              "name": "Red Blood Cell Disorders without MCC",
+              "insight": "Notable increase in non-participating paid amount for this DRG, indicating a rise in related services or billing changes.",
+              "percentage_change": "+40%"
+            }
+          ]
+        }
+      },
+      "deep_dive": {
+        "report_title": "Deep Dive OON Analysis - Commercial Individual (MCM006) - R3 Period (Jan 2026 - Mar 2026)",
+        "top_state_drivers": {
+          "section_title": "State-Level OON Trends",
+          "states": [
+            {
+              "state_name": "GA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 107,646 total claims, NPAR claims count percentage increased by 21.7% and PMPM ratio increased by 3.1% for R3 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In GA, out of 107,646 total claims (for R3), 89,001 (82.7%) were NPAR, resulting in $74,352,778.73 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In GA, out of 108 total NPAR claims for Provider NGMC GAINESVILLE under the HMO product, 65.9% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In GA, IDR claims represented 93.9% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In GA, out of 89,001 total NPAR claims, 83,532 (93.9%) were flagged for IDR, representing a 8.3% increase from the prior period.",
+                    "Among the 83,532 IDR-flagged claims, the top providers are NGMC GAINESVILLE, GRADY MEMORIAL HOSPITAL, PIEDMONT HENRY HOSPITAL.",
+                    "For NGMC GAINESVILLE, 100.0% of claims were processed as PAR for the HMO product over the past 12 months, indicating potential network configuration issues."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "TX",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 62,404 total claims, NPAR claims count percentage increased by 346.4% and PMPM ratio increased by 59.3% for R3 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In TX, out of 62,404 total claims (for R3), 58,798 (94.2%) were NPAR, resulting in $32,167,613.78 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In TX, out of 15 total NPAR claims for Provider MEMORIAL HERMANN KATY HEALTH SYSTEM under the POS product, 100.0% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In TX, IDR claims represented 88.9% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In TX, out of 58,798 total NPAR claims, 52,253 (88.9%) were flagged for IDR, representing a -0.5% decrease from the prior period.",
+                    "Among the 52,253 IDR-flagged claims, the top providers are BAYLOR SCOTT & WHITE MEDICAL CENTER - LAKE POINTE, LONE STAR PATHOLOGY PLLC, BAYLOR UNIVERSITY MEDICAL CENTER."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "IN",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 38,359 total claims, NPAR claims count percentage decreased by -39.1% and PMPM ratio decreased by -72.7% for R3 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In IN, out of 38,359 total claims (for R3), 35,717 (93.1%) were NPAR, resulting in $28,449,399.45 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In IN, out of 29 total NPAR claims for Provider JOHNSON MEMORIAL HEALTH under the HMO product, 100.0% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In IN, IDR claims represented 35.6% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In IN, out of 35,717 total NPAR claims, 12,698 (35.6%) were flagged for IDR, representing a -57.5% decrease from the prior period.",
+                    "Among the 12,698 IDR-flagged claims, the top providers are SIDNEY AND LOIS ESKENAZI HOSPITAL, COMMUNITY HOSPITAL EAST, COMMUNITY HOSPITAL SOUTH."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "top_provider_drivers": {
+          "section_title": "Provider-Level OON Trends",
+          "providers": [
+            {
+              "provider_name": "GRADY MEMORIAL HOSPITAL",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "GRADY MEMORIAL HOSPITAL shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "Heart Failure and Shock with MCC and Poisoning and Toxic Effects of Drugs with MCC are the top mapped DRGs contributing to OON reimbursements for GRADY MEMORIAL HOSPITAL, though NOT_MAPPED claims account for the majority (6,433 of 6,529 NPAR claims)."
+                  ]
+                },
+                {
+                  "metric_label": "NPAR volume and spend impact - Facility",
+                  "detail_statements": [
+                    "During the same R3 period, NPAR claim volume and associated paid amounts increased for GRADY MEMORIAL HOSPITAL (claim increase: 3,929, paid amount increase: $28,654,793.61), indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "LONE STAR PATHOLOGY PLLC",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "LONE STAR PATHOLOGY PLLC shows a recurring PAR/OON reimbursement overlap for similar member populations and professional service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "All NPAR claims for LONE STAR PATHOLOGY PLLC are classified under NOT_MAPPED DRG category (1,910 NPAR claims)."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "LABORATORY PHYSICIANS ASSOC",
+              "metrics": [
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of 84 total OON claims for LABORATORY PHYSICIANS ASSOC, IDR claims represented 100.0%, indicating a high rate of dispute activity relative to overall OON volume.",
+                    "All IDR claims for LABORATORY PHYSICIANS ASSOC are classified under NOT_MAPPED DRG category.",
+                    "No PAR claims were identified for LABORATORY PHYSICIANS ASSOC over the past 12 months for any product, indicating no network configuration overlap."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "EXACT SCIENCES LABORATORIES",
+              "metrics": [
+                {
+                  "metric_label": "Non-Par Provider Growth - Professional",
+                  "detail_statements": [
+                    "During the same R3 period, NPAR claim volume and associated paid amounts increased for EXACT SCIENCES LABORATORIES (claim increase: 195, paid amount increase: $45,058.90), indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "lob_code": "MCM006",
+      "lob_desc": "Commercial Individual",
+      "model_code": "OON",
+      "period_code": "R6",
+      "snap_month": 202606,
+      "period_end": 202603,
+      "key_insight": {
+        "whats_happening": "",
+        "top_contributors": {
+          "provider_trends": [
+            {
+              "name": "CLEVELAND CLINIC MARYMOUNT HOSPITAL",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+706%"
+            },
+            {
+              "name": "UCHEALTH EMERGENCY ROOM - COMMERCE CITY",
+              "insight": "Substantial increase in non-participating paid amount",
+              "percentage_change": "+423%"
+            },
+            {
+              "name": "PIEDMONT ATLANTA HOSPITAL",
+              "insight": "Notable increase in non-participating paid amount",
+              "percentage_change": "+418%"
+            },
+            {
+              "name": "SOUTH BAY MEDICAL CENTER",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+332%"
+            },
+            {
+              "name": "KETTERING HEALTH DAYTON",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+333%"
+            }
+          ],
+          "states": [
+            {
+              "name": "ME",
+              "insight": "Extreme increase in non-participating paid amount",
+              "percentage_change": "+997%"
+            },
+            {
+              "name": "CT",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+128%"
+            }
+          ],
+          "drgs": [
+            {
+              "name": "Aftercare with CC/MCC",
+              "insight": "Substantial growth in non-participating paid amount",
+              "percentage_change": "+447%"
+            },
+            {
+              "name": "Alcohol, Drug Abuse or Dependence without Rehabilitation Therapy without MCC",
+              "insight": "Significant growth in non-participating paid amount",
+              "percentage_change": "+221%"
+            },
+            {
+              "name": "Red Blood Cell Disorders without MCC",
+              "insight": "Notable growth in non-participating paid amount",
+              "percentage_change": "+80%"
+            },
+            {
+              "name": "Diabetes without CC/MCC",
+              "insight": "Moderate growth in non-participating paid amount",
+              "percentage_change": "+37%"
+            },
+            {
+              "name": "Other Digestive System Diagnoses with CC",
+              "insight": "Significant growth in non-participating paid amount",
+              "percentage_change": "+55%"
+            }
+          ]
+        }
+      },
+      "deep_dive": {
+        "report_title": "Deep Dive OON Analysis - Commercial Individual (MCM006) - R6 Period (Oct 2025 - Mar 2026)",
+        "top_state_drivers": {
+          "section_title": "State-Level OON Trends and Insights",
+          "states": [
+            {
+              "state_name": "GA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 208,859 total claims, NPAR claims count percentage increased by 29.2% and PMPM ratio increased by 94.0% for R6 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In GA, out of 208,859 total claims (for R6), 169,847 (81.3%) were NPAR, resulting in $213.0M in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential Configuration Issues",
+                  "detail_statements": [
+                    "In GA, out of 582 total NPAR claims for NORTHSIDE HOSPITAL GWINNETT under the HMO product, 31.3% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In GA, IDR claims represented 92.9% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In GA, out of 169,847 total NPAR claims, 157,827 (92.9%) were flagged for IDR, representing a 5.6% increase from the prior period.",
+                    "Among the 157,827 IDR-flagged claims, the top providers are NGMC GAINESVILLE, GRADY MEMORIAL HOSPITAL, PIEDMONT HENRY HOSPITAL.",
+                    "For NGMC GAINESVILLE, 65.9% of claims were processed as PAR for the HMO product over the past 12 months, indicating potential network configuration issues."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "IN",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 99,409 total claims, NPAR claims count percentage increased by -29.0% and PMPM ratio increased by -45.1% for R6 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In IN, out of 99,409 total claims (for R6), 85,832 (86.3%) were NPAR, resulting in $95.1M in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential Configuration Issues",
+                  "detail_statements": [
+                    "In IN, out of 57 total NPAR claims for ASCENSION SAINT VINCENT HOSPITAL - INDIANAPOLIS under the HMO product, 78.7% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In IN, IDR claims represented 64.5% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In IN, out of 85,832 total NPAR claims, 55,349 (64.5%) were flagged for IDR, representing a -22.6% decrease from the prior period.",
+                    "Among the 55,349 IDR-flagged claims, the top providers are SIDNEY AND LOIS ESKENAZI HOSPITAL, COMMUNITY HOSPITAL EAST, ASCENSION SAINT VINCENT EVANSVILLE."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "TX",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 83,265 total claims, NPAR claims count percentage increased by 502.0% and PMPM ratio increased by 44.9% for R6 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In TX, out of 83,265 total claims (for R6), 79,289 (95.2%) were NPAR, resulting in $40.0M in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential Configuration Issues",
+                  "detail_statements": [
+                    "In TX, out of 15 total NPAR claims for MEMORIAL HERMANN KATY HEALTH SYSTEM under the POS product, 100.0% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In TX, IDR claims represented 88.7% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In TX, out of 79,289 total NPAR claims, 70,327 (88.7%) were flagged for IDR, representing a -0.7% decrease from the prior period.",
+                    "Among the 70,327 IDR-flagged claims, the top providers are TEXAS HEALTH HEB, TEXAS HEALTH FORT WORTH, LONE STAR PATHOLOGY PLLC."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "top_provider_drivers": {
+          "section_title": "Provider-Level OON Trends and Insights",
+          "providers": [
+            {
+              "provider_name": "NGMC GAINESVILLE",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "NGMC GAINESVILLE shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRG 885 (Psychoses) and DRG 433 (Cirrhosis and Alcoholic Hepatitis with CC) account for approximately 14% of total OON reimbursements for NGMC GAINESVILLE."
+                  ]
+                },
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "All professional service DRGs for NGMC GAINESVILLE are NOT_MAPPED. DRG-level analysis is not available for professional service types in this dataset."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "GRADY MEMORIAL HOSPITAL",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "GRADY MEMORIAL HOSPITAL shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRG 291 (Heart Failure and Shock with MCC) and DRG 812 (Red Blood Cell Disorders without MCC) account for approximately 10% of total OON reimbursements for GRADY MEMORIAL HOSPITAL."
+                  ]
+                },
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "All professional service DRGs for GRADY MEMORIAL HOSPITAL are NOT_MAPPED. DRG-level analysis is not available for professional service types in this dataset."
+                  ]
+                },
+                {
+                  "metric_label": "NPAR volume and spend impact - Facility",
+                  "detail_statements": [
+                    "During the same R6 period, NPAR claim volume and associated paid amounts increased for GRADY MEMORIAL HOSPITAL, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "SIDNEY AND LOIS ESKENAZI HOSPITAL",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "SIDNEY AND LOIS ESKENAZI HOSPITAL shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRG 885 (Psychoses) and DRG 807 (Vaginal Delivery without Sterilization or D&C without CC/MCC) account for approximately 13% of total OON reimbursements for SIDNEY AND LOIS ESKENAZI HOSPITAL."
+                  ]
+                },
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "All professional service DRGs for SIDNEY AND LOIS ESKENAZI HOSPITAL are NOT_MAPPED. DRG-level analysis is not available for professional service types in this dataset."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "COMMUNITY HOSPITAL EAST",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "COMMUNITY HOSPITAL EAST shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRG 885 (Psychoses) and DRG 897 (Alcohol, Drug Abuse or Dependence without Rehabilitation Therapy without MCC) account for approximately 47% of total OON reimbursements for COMMUNITY HOSPITAL EAST."
+                  ]
+                },
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "All professional service DRGs for COMMUNITY HOSPITAL EAST are NOT_MAPPED. DRG-level analysis is not available for professional service types in this dataset."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "PIEDMONT HENRY HOSPITAL",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "PIEDMONT HENRY HOSPITAL shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRG 871 (Septicemia or Severe Sepsis without Mechanical Ventilation >96 Hours with MCC) and DRG 872 (Septicemia or Severe Sepsis without Mechanical Ventilation >96 Hours without MCC) account for approximately 16% of total OON reimbursements for PIEDMONT HENRY HOSPITAL."
+                  ]
+                },
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "All professional service DRGs for PIEDMONT HENRY HOSPITAL are NOT_MAPPED. DRG-level analysis is not available for professional service types in this dataset."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "MIHOKO FUJITA",
+              "metrics": [
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of 133 total OON claims for MIHOKO FUJITA, IDR claims represented 100%, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "Within MIHOKO FUJITA's IDR claims, all DRGs are NOT_MAPPED for professional service types.",
+                    "Additionally, MIHOKO FUJITA has 0.0% PAR claims for last 12 months, indicating potential network and/or configuration issues."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "MEDEX BIOCARE PHARMACY",
+              "metrics": [
+                {
+                  "metric_label": "Non-Par Provider Growth - Professional",
+                  "detail_statements": [
+                    "During the same R6 period, NPAR claim volume and associated allowed/paid amounts increased for MEDEX BIOCARE PHARMACY, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "lob_code": "MCM006",
+      "lob_desc": "Commercial Individual",
+      "model_code": "OON",
+      "period_code": "YTD",
+      "snap_month": 202606,
+      "period_end": 202603,
+      "key_insight": {
+        "whats_happening": "",
+        "top_contributors": {
+          "provider_trends": [
+            {
+              "name": "CLEVELAND CLINIC MARYMOUNT HOSPITAL",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+808%"
+            },
+            {
+              "name": "HEALTHTRACKRX OF CALIFORNIA",
+              "insight": "Substantial rise in non-participating paid amount",
+              "percentage_change": "+722%"
+            },
+            {
+              "name": "APRIA HEALTHCARE",
+              "insight": "Marked increase in non-participating paid amount",
+              "percentage_change": "+781%"
+            },
+            {
+              "name": "BELLIN HOSPITAL",
+              "insight": "Notable increase in non-participating paid amount",
+              "percentage_change": "+680%"
+            },
+            {
+              "name": "DOCTORS HOSPITAL OF AUGUSTA",
+              "insight": "Significant rise in non-participating paid amount",
+              "percentage_change": "+653%"
+            }
+          ],
+          "states": [
+            {
+              "name": "ME",
+              "insight": "Substantial increase in non-participating paid amount",
+              "percentage_change": "+1725%"
+            },
+            {
+              "name": "KY",
+              "insight": "Significant rise in non-participating paid amount",
+              "percentage_change": "+138%"
+            }
+          ],
+          "drgs": [
+            {
+              "name": "Aftercare, Musculoskeletal System and Connective Tissue with CC",
+              "insight": "Significant growth in non-participating paid amount",
+              "percentage_change": "+846%"
+            },
+            {
+              "name": "Alcohol, Drug Abuse or Dependence without Rehabilitation Therapy without MCC",
+              "insight": "Substantial increase in non-participating paid amount",
+              "percentage_change": "+314%"
+            },
+            {
+              "name": "Hypertension without MCC",
+              "insight": "Notable rise in non-participating paid amount",
+              "percentage_change": "+162%"
+            },
+            {
+              "name": "Other Kidney and Urinary Tract Diagnoses with MCC",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+81%"
+            },
+            {
+              "name": "Degenerative Nervous System Disorders with MCC",
+              "insight": "Marked growth in non-participating paid amount",
+              "percentage_change": "+83%"
+            }
+          ]
+        }
+      },
+      "deep_dive": {
+        "report_title": "Deep Dive OON Analysis - Commercial Individual (MCM006) - YTD (Jan-Mar 2026)",
+        "top_state_drivers": {
+          "section_title": "State-Level OON Trends",
+          "states": [
+            {
+              "state_name": "GA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 107,646 total claims, NPAR claims count percentage increased by 21.70% and PMPM ratio increased by 3.14% for YTD period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In GA, out of 107,646 total claims (for YTD), 89,001 (82.68%) were NPAR, resulting in $74,352,778.73 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In GA, out of 108 total NPAR claims for NGMC GAINESVILLE under the HMO product, 65.92% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In GA, IDR claims represented 93.86% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In GA, out of 89,001 total NPAR claims, 83,532 (93.86%) were flagged for IDR, representing a 8.33% increase from the prior period.",
+                    "Among the 83,532 IDR-flagged claims, the top providers are NGMC GAINESVILLE, GRADY MEMORIAL HOSPITAL, PIEDMONT HENRY HOSPITAL.",
+                    "For PIEDMONT HENRY HOSPITAL, 100.00% of claims were processed as PAR for the HMO product over the past 12 months, indicating potential network configuration issues."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "TX",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 62,404 total claims, NPAR claims count percentage increased by 346.42% and PMPM ratio increased by 59.33% for YTD period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In TX, out of 62,404 total claims (for YTD), 58,798 (94.22%) were NPAR, resulting in $32,167,613.78 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In TX, out of 15 total NPAR claims for MEMORIAL HERMANN KATY HEALTH SYSTEM under the POS product, 100.00% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In TX, IDR claims represented 88.87% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In TX, out of 58,798 total NPAR claims, 52,253 (88.87%) were flagged for IDR, representing a 0.49% decrease from the prior period.",
+                    "Among the 52,253 IDR-flagged claims, the top providers are BAYLOR SCOTT & WHITE MEDICAL CENTER - LAKE POINTE, LONE STAR PATHOLOGY PLLC, BAYLOR UNIVERSITY MEDICAL CENTER."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "IN",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 38,359 total claims, NPAR claims count percentage increased by -39.13% and PMPM ratio increased by -72.73% for YTD period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In IN, out of 38,359 total claims (for YTD), 35,717 (93.11%) were NPAR, resulting in $28,449,399.45 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In IN, out of 29 total NPAR claims for JOHNSON MEMORIAL HEALTH under the HMO product, 100.00% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In IN, IDR claims represented 35.55% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In IN, out of 35,717 total NPAR claims, 12,698 (35.55%) were flagged for IDR, representing a 57.53% decrease from the prior period.",
+                    "Among the 12,698 IDR-flagged claims, the top providers are SIDNEY AND LOIS ESKENAZI HOSPITAL, COMMUNITY HOSPITAL EAST, COMMUNITY HOSPITAL SOUTH."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "top_provider_drivers": {
+          "section_title": "Provider-Level OON Trends",
+          "providers": [
+            {
+              "provider_name": "GRADY MEMORIAL HOSPITAL",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "GRADY MEMORIAL HOSPITAL shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "Heart Failure and Shock with MCC and Poisoning and Toxic Effects of Drugs with MCC are the top DRGs among mapped claims for GRADY MEMORIAL HOSPITAL, though the majority of OON claims (6,433 of 6,529) are not mapped to specific DRGs."
+                  ]
+                },
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "Professional service DRG data is not available (all DRGs are NOT_MAPPED) for provider-level DRG analysis in this period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of 6,529 total OON claims for GRADY MEMORIAL HOSPITAL, IDR claims represented 93.21%, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "DRG-level breakdown is limited as the majority of claims are not mapped to specific DRGs in this period."
+                  ]
+                },
+                {
+                  "metric_label": "NPAR volume and spend impact - Facility",
+                  "detail_statements": [
+                    "During the same YTD period, NPAR claim volume increased by 3,929 claims and associated paid amounts increased by $28,654,793.61 for GRADY MEMORIAL HOSPITAL, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                },
+                {
+                  "metric_label": "Non-Par Provider Growth - Professional",
+                  "detail_statements": [
+                    "During the same YTD period, NPAR claim volume and associated paid amounts increased for MEDEX BIOCARE PHARMACY (top professional ancillary provider), indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "NGMC GAINESVILLE",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "NGMC GAINESVILLE shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "Psychoses and Other Musculoskeletal System and Connective Tissue Diagnoses with MCC are the top mapped DRGs for NGMC GAINESVILLE, though the majority of OON claims (6,302 of 6,398) are not mapped to specific DRGs."
+                  ]
+                },
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "Professional service DRG data is not available (all DRGs are NOT_MAPPED) for provider-level DRG analysis in this period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of 6,398 total OON claims for NGMC GAINESVILLE, IDR claims represented 99.53%, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "DRG-level breakdown is limited as the majority of claims are not mapped to specific DRGs in this period."
+                  ]
+                },
+                {
+                  "metric_label": "NPAR volume and spend impact - Facility",
+                  "detail_statements": [
+                    "During the same YTD period, NPAR claim volume increased by 147 claims while associated paid amounts decreased by $4,560,267.16 for NGMC GAINESVILLE, indicating a mixed NPAR utilization pattern relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "PIEDMONT HENRY HOSPITAL",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "PIEDMONT HENRY HOSPITAL shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps."
+                  ]
+                },
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "Professional service DRG data is not available (all DRGs are NOT_MAPPED) for provider-level DRG analysis in this period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of 5,503 total OON claims for PIEDMONT HENRY HOSPITAL, IDR claims represented 99.27%, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "DRG-level breakdown is limited as the majority of claims are not mapped to specific DRGs in this period."
+                  ]
+                },
+                {
+                  "metric_label": "NPAR volume and spend impact - Facility",
+                  "detail_statements": [
+                    "During the same YTD period, NPAR claim volume increased by 3,487 claims and associated paid amounts increased by $1,013,813.86 for PIEDMONT HENRY HOSPITAL, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "SIDNEY AND LOIS ESKENAZI HOSPITAL",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "SIDNEY AND LOIS ESKENAZI HOSPITAL shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps."
+                  ]
+                },
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "Professional service DRG data is not available (all DRGs are NOT_MAPPED) for provider-level DRG analysis in this period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of 4,423 total OON claims for SIDNEY AND LOIS ESKENAZI HOSPITAL, IDR claims represented 48.59%, indicating a notable trend in dispute activity relative to overall OON volume.",
+                    "DRG-level breakdown is limited as the majority of claims are not mapped to specific DRGs in this period."
+                  ]
+                },
+                {
+                  "metric_label": "NPAR volume and spend impact - Facility",
+                  "detail_statements": [
+                    "During the same YTD period, NPAR claim volume decreased by 1,671 claims and associated paid amounts decreased by $20,369,195.77 for SIDNEY AND LOIS ESKENAZI HOSPITAL, indicating lower NPAR utilization and a reduced PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "COMMUNITY HOSPITAL EAST",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "COMMUNITY HOSPITAL EAST shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps."
+                  ]
+                },
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "Professional service DRG data is not available (all DRGs are NOT_MAPPED) for provider-level DRG analysis in this period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of 3,673 total OON claims for COMMUNITY HOSPITAL EAST, IDR claims represented 45.74%, indicating a notable trend in dispute activity relative to overall OON volume.",
+                    "DRG-level breakdown is limited as the majority of claims are not mapped to specific DRGs in this period."
+                  ]
+                },
+                {
+                  "metric_label": "NPAR volume and spend impact - Facility",
+                  "detail_statements": [
+                    "During the same YTD period, NPAR claim volume decreased by 875 claims and associated paid amounts decreased by $12,232,582.36 for COMMUNITY HOSPITAL EAST, indicating lower NPAR utilization and a reduced PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "lob_code": "MCM006",
+      "lob_desc": "Commercial Local Group",
+      "model_code": "OON",
+      "period_code": "R12",
+      "snap_month": 202606,
+      "period_end": 202603,
+      "key_insight": {
+        "whats_happening": "",
+        "top_contributors": {
+          "provider_trends": [
+            {
+              "name": "UCI MEDICAL CENTER",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+14469%"
+            },
+            {
+              "name": "LASER SPINE & PAIN CENTERS LLC",
+              "insight": "Substantial increase in non-participating paid amount",
+              "percentage_change": "+3838%"
+            },
+            {
+              "name": "OHIOHEALTH MANSFIELD HOSPITAL",
+              "insight": "Notable increase in non-participating paid amount",
+              "percentage_change": "+3097%"
+            },
+            {
+              "name": "COMMUNITY HOSPITAL NORTH",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+2808%"
+            },
+            {
+              "name": "BILLIONTOONE",
+              "insight": "Substantial increase in non-participating paid amount",
+              "percentage_change": "+1788%"
+            }
+          ],
+          "states": [
+            {
+              "name": "NH",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+14%"
+            },
+            {
+              "name": "IN",
+              "insight": "Notable increase in non-participating paid amount",
+              "percentage_change": "+13%"
+            }
+          ],
+          "drgs": [
+            {
+              "name": "Laparoscopic Cholecystectomy without C.D.E. without CC/MCC",
+              "insight": "Substantial growth in non-participating paid amount",
+              "percentage_change": "+378%"
+            },
+            {
+              "name": "Esophagitis, Gastroenteritis and Miscellaneous Digestive Disorders without MCC",
+              "insight": "Significant growth in non-participating paid amount",
+              "percentage_change": "+144%"
+            },
+            {
+              "name": "Extreme Immaturity or Respiratory Distress Syndrome, Neonate",
+              "insight": "Notable growth in non-participating paid amount",
+              "percentage_change": "+106%"
+            },
+            {
+              "name": "Intracranial Hemorrhage or Cerebral Infarction with MCC",
+              "insight": "Substantial growth in non-participating paid amount",
+              "percentage_change": "+69%"
+            }
+          ]
+        }
+      },
+      "deep_dive": {
+        "report_title": "Deep Dive OON Analysis - Commercial Local Group (MCM006) - R12 Period (Apr 2025 - Mar 2026)",
+        "top_state_drivers": {
+          "section_title": "State-Level OON Trends",
+          "states": [
+            {
+              "state_name": "CA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 255,165 total claims, NPAR Claims count percentage decreased by -7.21% and PMPM ratio increased by 4.36% for R12 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In CA, out of 255,165 total claims (for R12), 249,496 (97.78%) were NPAR, resulting in $138,108,346.39 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In CA, out of 60 total NPAR claims for Provider SUTTER MEMORIAL MEDICAL CENTER under the PPO product, 96.77% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In CA, IDR claims represented 10.74% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In CA, out of 249,496 total NPAR claims, 26,788 (10.74%) were flagged for IDR, representing a 47.87% increase from the prior period.",
+                    "Among the 26,788 IDR-flagged claims, the top providers were BAYMONT EMERGENCY ROOM LLC, HEALTHQUEST ESOTERICS, MONARCH DIAGNOSTICS."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "NY",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 93,418 total claims, NPAR Claims count percentage decreased by -2.54% and PMPM ratio decreased by -2.80% for R12 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In NY, out of 93,418 total claims (for R12), 92,350 (98.86%) were NPAR, resulting in $17,837,299.20 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In NY, out of 200 total NPAR claims for Provider ENGLEWOOD HOSPITAL under the PPO product, 87.26% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In NY, IDR claims represented 2.13% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In NY, out of 92,350 total NPAR claims, 1,968 (2.13%) were flagged for IDR, representing a 35.61% increase from the prior period.",
+                    "Among the 1,968 IDR-flagged claims, the top providers were KAISER PERMANENTE SAN FRANCISCO MEDICAL CENTER, MEMORIAL REGIONAL HOSPITAL, LOS ANGELES MEDICAL CENTER."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "GA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 47,510 total claims, NPAR Claims count percentage decreased by -36.59% and PMPM ratio decreased by -33.18% for R12 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In GA, out of 47,510 total claims (for R12), 47,395 (99.76%) were NPAR, resulting in $3,903,071.30 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In GA, out of 36 total NPAR claims for Provider QUEST DIAGNOSTICS CLINICAL LABORATORIES, INC. under the POS product, 100.00% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In GA, IDR claims represented 0.76% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In GA, out of 47,395 total NPAR claims, 359 (0.76%) were flagged for IDR, representing a -20.15% decrease from the prior period.",
+                    "Among the 359 IDR-flagged claims, the top providers were CYTOMETRY SPECIALISTS, FONTANA MEDICAL CENTER, CHINO VALLEY MEDICAL CENTER."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "top_provider_drivers": {
+          "section_title": "Provider-Level OON Trends",
+          "providers": [
+            {
+              "provider_name": "UCI MEDICAL CENTER",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "UCI MEDICAL CENTER shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRG 314 (Other Circulatory System Diagnoses with MCC) and DRG 805 (Vaginal Delivery without Sterilization or D&C with MCC) account for approximately 80% of total OON reimbursements for UCI MEDICAL CENTER among mapped DRGs."
+                  ]
+                },
+                {
+                  "metric_label": "NPAR volume and spend impact - Facility",
+                  "detail_statements": [
+                    "During the same R12 period, NPAR claim volume increased by 2,588 claims (from 127 to 2,715) and associated paid amounts increased by $4,231,856.72 (from $28,055.53 to $4,259,912.25) for UCI MEDICAL CENTER, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "PATHGROUP LABS",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "PATHGROUP LABS shows a recurring PAR/OON reimbursement overlap for similar member populations and professional service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "All 20,739 NPAR claims for PATHGROUP LABS are categorized under NOT_MAPPED DRGs, so no specific DRG concentration could be identified."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "AMIT K SHARMA",
+              "metrics": [
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of 84 total OON claims for AMIT K SHARMA, IDR claims represented 100.00%, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "All claims for AMIT K SHARMA are categorized under NOT_MAPPED DRGs. No PAR claims were processed for this provider over the past 12 months (PAR_NO_MATCH category only)."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "SPECIALTY CARE RX",
+              "metrics": [
+                {
+                  "metric_label": "Non-Par Provider Growth - Professional",
+                  "detail_statements": [
+                    "During the same R12 period, NPAR claim volume increased by 22 claims (from 31 to 53) and associated paid amounts increased by $5,239,305.40 (from $7,354,369.71 to $12,593,675.11) for SPECIALTY CARE RX, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "lob_code": "MCM006",
+      "lob_desc": "Commercial Local Group",
+      "model_code": "OON",
+      "period_code": "R3",
+      "snap_month": 202606,
+      "period_end": 202603,
+      "key_insight": {
+        "whats_happening": "",
+        "top_contributors": {
+          "provider_trends": [
+            {
+              "name": "NEOGENOMICS LABORATORIES",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+5308%"
+            },
+            {
+              "name": "LAB SERVICES OF GEORGIA",
+              "insight": "Substantial increase in non-participating paid amount",
+              "percentage_change": "+1139%"
+            },
+            {
+              "name": "INDIANA DETOX LLC",
+              "insight": "Notable increase in non-participating paid amount",
+              "percentage_change": "+926%"
+            },
+            {
+              "name": "OCEAN HOME HEALTH SUPPLY",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+837%"
+            },
+            {
+              "name": "DEGC ENTERPRISES (U.S.)",
+              "insight": "Notable increase in non-participating paid amount",
+              "percentage_change": "+821%"
+            }
+          ],
+          "states": [
+            {
+              "name": "CT",
+              "insight": "Highest state increase in non-participating paid amount",
+              "percentage_change": "+40%"
+            }
+          ],
+          "drgs": [
+            {
+              "name": "Medical Back Problems without MCC",
+              "insight": "Highest DRG growth in non-participating paid amount",
+              "percentage_change": "+407%"
+            },
+            {
+              "name": "Nonspecific Cerebrovascular Disorders with CC",
+              "insight": "Significant DRG growth in non-participating paid amount",
+              "percentage_change": "+145%"
+            },
+            {
+              "name": "Cesarean Section without Sterilization without CC/MCC",
+              "insight": "Notable DRG growth in non-participating paid amount",
+              "percentage_change": "+141%"
+            }
+          ]
+        }
+      },
+      "deep_dive": {
+        "report_title": "Deep Dive OON Analysis - Commercial Local Group (MCM006) - R3 Period (Jan 2026 - Mar 2026)",
+        "top_state_drivers": {
+          "section_title": "State-Level OON Trends",
+          "states": [
+            {
+              "state_name": "CA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 61,669 total claims, NPAR Claims count percentage increased by -5.20% and PMPM ratio increased by -4.81% for R3 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In CA, out of 61,669 total claims (for R3), 59,347 (96.23%) were NPAR, resulting in $32,504,647.46 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In CA, out of 46 total NPAR claims for HEMET GLOBAL MEDICAL CENTER under the HMO product, 43.0% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In CA, IDR claims represented 11.89% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In CA, out of 59,347 total NPAR claims, 7,055 (11.89%) were flagged for IDR, representing a 52.79% increase from the prior period.",
+                    "Among the 7,055 IDR-flagged claims, the top providers are HEALTHQUEST ESOTERICS, MONARCH DIAGNOSTICS, WACO TEXAS EMERGENCY CENTER LLC."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "NY",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 23,799 total claims, NPAR Claims count percentage increased by 0.49% and PMPM ratio increased by -26.28% for R3 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In NY, out of 23,799 total claims (for R3), 23,618 (99.24%) were NPAR, resulting in $3,420,815.74 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In NY, out of 73 total NPAR claims for MOUNT SINAI BETH ISRAEL PETRIE under the FFS product, 69.6% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In NY, IDR claims represented 2.74% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In NY, out of 23,618 total NPAR claims, 648 (2.74%) were flagged for IDR, representing a 86.36% increase from the prior period.",
+                    "Among the 648 IDR-flagged claims, the top providers are MEMORIAL REGIONAL HOSPITAL, ER OF NRH LLC, BROWARD HEALTH MEDICAL CENTER."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "GA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 7,715 total claims, NPAR Claims count percentage increased by -41.94% and PMPM ratio increased by -67.13% for R3 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In GA, out of 7,715 total claims (for R3), 7,708 (99.91%) were NPAR, resulting in $754,600.08 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In GA, out of 28 total NPAR claims for UNILAB CORPORATION (DE) (DBA QUEST DIAGNOSTICS) under the POS product, 82.1% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In GA, IDR claims represented 1.19% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In GA, out of 7,708 total NPAR claims, 92 (1.19%) were flagged for IDR, representing a -34.52% decrease from the prior period.",
+                    "Among the 92 IDR-flagged claims, the top providers are KAISER PERMANENTE SAN MARCOS MEDICAL CENTER, CYTOMETRY SPECIALISTS, HEMET GLOBAL MEDICAL CENTER.",
+                    "For HEMET GLOBAL MEDICAL CENTER, 100% of claims were processed as PAR for the POS product over the past 12 months, indicating potential network configuration issues."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "top_provider_drivers": {
+          "section_title": "Provider-Level OON Trends",
+          "providers": [
+            {
+              "provider_name": "UCI MEDICAL CENTER",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "UCI MEDICAL CENTER shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "Esophagitis, Gastroenteritis and Miscellaneous Digestive Disorders without MCC and Other Circulatory System Diagnoses with MCC account for approximately 80% of total OON reimbursements among mapped DRGs for UCI MEDICAL CENTER."
+                  ]
+                },
+                {
+                  "metric_label": "NPAR volume and spend impact - Facility",
+                  "detail_statements": [
+                    "During the same R3 period, NPAR claim volume and associated paid amounts increased for UCI MEDICAL CENTER, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "EXAGEN",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "EXAGEN shows a recurring PAR/OON reimbursement overlap for similar member populations and professional service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "All NPAR claims for EXAGEN are classified under NOT_MAPPED DRGs. No mapped DRG ranking is available for this provider."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "AMIT K SHARMA",
+              "metrics": [
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of total OON claims for AMIT K SHARMA, IDR claims represented 100.00%, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "Within AMIT K SHARMA's IDR claims, all claims are concentrated in NOT_MAPPED DRGs.",
+                    "Additionally, NOT_MAPPED DRG claims for AMIT K SHARMA has 0% PAR claims for last 12 months, indicating potential network and/or configuration issues."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "HUENEME FAMILY PHARMACY",
+              "metrics": [
+                {
+                  "metric_label": "Non-Par Provider Growth - Professional",
+                  "detail_statements": [
+                    "During the same R3 period, NPAR claim volume and associated allowed/paid amounts increased for HUENEME FAMILY PHARMACY, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "lob_code": "MCM006",
+      "lob_desc": "Commercial Local Group",
+      "model_code": "OON",
+      "period_code": "R6",
+      "snap_month": 202606,
+      "period_end": 202603,
+      "key_insight": {
+        "whats_happening": "",
+        "top_contributors": {
+          "provider_trends": [
+            {
+              "name": "WESTERN CONNECTICUT MEDICAL GROUP IN",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+2654%"
+            },
+            {
+              "name": "BILLIONTOONE",
+              "insight": "Substantial increase in non-participating paid amount",
+              "percentage_change": "+2498%"
+            },
+            {
+              "name": "OHIOHEALTH MANSFIELD HOSPITAL",
+              "insight": "Large increase in non-participating paid amount",
+              "percentage_change": "+2274%"
+            },
+            {
+              "name": "REHABILITATION INSTITUTE OF CHICAGO",
+              "insight": "Notable increase in non-participating paid amount",
+              "percentage_change": "+1704%"
+            },
+            {
+              "name": "ANNIE KO ACUPUNCTURE & HERBAL MEDICAL CENTER",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+1233%"
+            }
+          ],
+          "states": [
+            {
+              "name": "ME",
+              "insight": "Significant increase in non-participating paid amount",
+              "percentage_change": "+36%"
+            },
+            {
+              "name": "CT",
+              "insight": "Substantial increase in non-participating paid amount",
+              "percentage_change": "+37%"
+            }
+          ],
+          "drgs": [
+            {
+              "name": "Ungroupable",
+              "insight": "Extreme growth in non-participating paid amount",
+              "percentage_change": "+623%"
+            },
+            {
+              "name": "Nonspecific Cerebrovascular Disorders with CC",
+              "insight": "Significant growth in non-participating paid amount",
+              "percentage_change": "+106%"
+            },
+            {
+              "name": "Vaginal Delivery without Sterilization or D&C without CC/MCC",
+              "insight": "Notable growth in non-participating paid amount",
+              "percentage_change": "+51%"
+            }
+          ]
+        }
+      },
+      "deep_dive": {
+        "report_title": "Deep Dive OON Analysis - MCM006 Commercial Local Group - R6 Period (202510-202603)",
+        "top_state_drivers": {
+          "section_title": "State-Level NPAR Trends and Insights",
+          "states": [
+            {
+              "state_name": "CA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 124,592 total claims, NPAR claims count percentage changed by -6.72% and PMPM ratio changed by 0.53% for the R6 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In CA, out of 124,592 total claims (for R6), 121,359 (97.4%) were NPAR, resulting in $68,957,174.77 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In CA, out of 48 total NPAR claims for Provider BOSTON HEART DIAGNOSTICS CORPORATION under the PPO product, 100.0% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In CA, IDR claims represented 12.13% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In CA, out of 121,359 total NPAR claims, 14,715 (12.13%) were flagged for IDR, representing a 58.05% increase from the prior period.",
+                    "Among the 14,715 IDR-flagged claims, the top providers were HEALTHQUEST ESOTERICS, MONARCH DIAGNOSTICS, BAYMONT EMERGENCY ROOM LLC."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "NY",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 47,001 total claims, NPAR claims count percentage changed by -0.53% and PMPM ratio changed by -18.32% for the R6 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In NY, out of 47,001 total claims (for R6), 46,511 (99.0%) were NPAR, resulting in $7,290,797.20 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In NY, out of 73 total NPAR claims for Provider MOUNT SINAI BETH ISRAEL PETRIE under the FFS product, 69.6% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In NY, IDR claims represented 2.46% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In NY, out of 46,511 total NPAR claims, 1,145 (2.46%) were flagged for IDR, representing a 47.01% increase from the prior period.",
+                    "Among the 1,145 IDR-flagged claims, the top providers were MEMORIAL REGIONAL HOSPITAL, BROWARD HEALTH CORAL SPRINGS, LOS ANGELES MEDICAL CENTER."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "GA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 21,022 total claims, NPAR claims count percentage changed by -36.06% and PMPM ratio changed by -61.69% for the R6 period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In GA, out of 21,022 total claims (for R6), 20,998 (99.9%) were NPAR, resulting in $1,612,031.97 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential configuration issues",
+                  "detail_statements": [
+                    "In GA, out of 36 total NPAR claims for Provider QUEST DIAGNOSTICS CLINICAL LABORATORIES, INC. under the POS product, 100.0% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In GA, IDR claims represented 0.75% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In GA, out of 20,998 total NPAR claims, 157 (0.75%) were flagged for IDR, representing a -43.68% decrease from the prior period.",
+                    "Among the 157 IDR-flagged claims, the top providers were CYTOMETRY SPECIALISTS, URBANA GI ENDOSCOPY CENTER, KAISER PERMANENTE SAN MARCOS MEDICAL CENTER."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "top_provider_drivers": {
+          "section_title": "Provider-Level NPAR Trends and Insights",
+          "providers": [
+            {
+              "provider_name": "UCI MEDICAL CENTER",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "UCI MEDICAL CENTER shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRG 314 (Other Circulatory System Diagnoses with MCC), DRG 806 (Vaginal Delivery without Sterilization or D&C with CC), DRG 807 (Vaginal Delivery without Sterilization or D&C without CC/MCC), DRG 805 (Vaginal Delivery without Sterilization or D&C with MCC), and DRG 392 (Esophagitis, Gastroenteritis and Miscellaneous Digestive Disorders without MCC) account for approximately 80% of total OON reimbursements for UCI MEDICAL CENTER."
+                  ]
+                },
+                {
+                  "metric_label": "NPAR volume and spend impact - Facility",
+                  "detail_statements": [
+                    "During the same R6 period, NPAR claim volume increased from 102 to 2,585 (+2,483 claims) and associated paid amounts increased from $27,045.58 to $4,170,192.27 for UCI MEDICAL CENTER, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "CEDARS-SINAI MEDICAL CENTER",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "CEDARS-SINAI MEDICAL CENTER shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRG 788 (Cesarean Section without Sterilization without CC/MCC), DRG 786 (Cesarean Section without Sterilization with MCC), and DRG 807 (Vaginal Delivery without Sterilization or D&C without CC/MCC) account for approximately 80% of total OON reimbursements for CEDARS-SINAI MEDICAL CENTER."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "SPECIALTY CARE RX",
+              "metrics": [
+                {
+                  "metric_label": "Non-Par Provider Growth - Professional",
+                  "detail_statements": [
+                    "During the same R6 period, NPAR claim volume increased from 24 to 28 and associated paid amounts increased from $5,899,546.04 to $6,647,672.93 (+$748,126.89) for SPECIALTY CARE RX, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "MEMBER SUBMITTED DAY TRAINING, DEVELOPMENTALLY DISABLED SERVICES",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "MEMBER SUBMITTED DAY TRAINING, DEVELOPMENTALLY DISABLED SERVICES shows a recurring PAR/OON reimbursement overlap for similar member populations and professional service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRGs are NOT_MAPPED for this provider, as professional claims do not typically map to facility DRG groupings."
+                  ]
+                },
+                {
+                  "metric_label": "Non-Par Provider Growth - Professional",
+                  "detail_statements": [
+                    "During the same R6 period, NPAR claim volume increased from 842 to 2,957 (+2,115 claims) and associated paid amounts increased from $81,452.01 to $272,541.91 (+$191,089.90) for MEMBER SUBMITTED DAY TRAINING, DEVELOPMENTALLY DISABLED SERVICES, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "ERIK J MAKI",
+              "metrics": [
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of 97 total OON claims for ERIK J MAKI, IDR claims represented 100.0%, indicating a significant trend in dispute activity relative to overall OON volume.",
+                    "DRGs are NOT_MAPPED for ERIK J MAKI, as professional/physician claims do not map to facility DRG groupings."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "lob_code": "MCM006",
+      "lob_desc": "Commercial Local Group",
+      "model_code": "OON",
+      "period_code": "YTD",
+      "snap_month": 202606,
+      "period_end": 202603,
+      "key_insight": {
+        "whats_happening": "",
+        "top_contributors": {
+          "provider_trends": [
+            {
+              "name": "UCI MEDICAL CENTER",
+              "insight": "Significant increase in non-participating paid amount, indicating a potential shift in provider utilization or billing practices.",
+              "percentage_change": "+14166%"
+            },
+            {
+              "name": "OLYMPIC MEDICAL HOSPITAL",
+              "insight": "Substantial increase in non-participating paid amount, suggesting a change in service usage or billing patterns.",
+              "percentage_change": "+10340%"
+            },
+            {
+              "name": "VALLEJO MEDICAL CENTER",
+              "insight": "Notable increase in non-participating paid amount, reflecting a shift in provider services or billing.",
+              "percentage_change": "+3870%"
+            },
+            {
+              "name": "MEDARBOR",
+              "insight": "Significant increase in non-participating paid amount, indicating a change in service provision or billing.",
+              "percentage_change": "+1283%"
+            },
+            {
+              "name": "OCEAN HOME HEALTH SUPPLY",
+              "insight": "Marked increase in non-participating paid amount, suggesting a shift in service usage or billing practices.",
+              "percentage_change": "+837%"
+            }
+          ],
+          "states": [
+            {
+              "name": "CT",
+              "insight": "Substantial increase in non-participating paid amount, indicating a rise in out-of-network services or billing changes.",
+              "percentage_change": "+40%"
+            }
+          ],
+          "drgs": [
+            {
+              "name": "Laparoscopic Cholecystectomy without C.D.E. without CC/MCC",
+              "insight": "Significant growth in non-participating paid amount for this procedure, suggesting increased out-of-network utilization.",
+              "percentage_change": "+197%"
+            },
+            {
+              "name": "Esophagitis, Gastroenteritis and Miscellaneous Digestive Disorders without MCC",
+              "insight": "Notable increase in non-participating paid amount for these conditions, indicating a rise in out-of-network services.",
+              "percentage_change": "+70%"
+            }
+          ]
+        }
+      },
+      "deep_dive": {
+        "report_title": "Deep Dive OON Analysis - MCM006 Commercial Local Group - YTD (Jan-Mar 2026)",
+        "top_state_drivers": {
+          "section_title": "State-Level OON Trends",
+          "states": [
+            {
+              "state_name": "CA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 61,669 total claims, NPAR Claims count percentage changed by -5.2% and PMPM ratio changed by -4.8% for YTD period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In CA, out of 61,669 total claims (for YTD), 59,347 (96.2%) were NPAR, resulting in $32,504,647.46 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential Configuration Issues",
+                  "detail_statements": [
+                    "In CA, out of 46 total NPAR claims for HEMET GLOBAL MEDICAL CENTER (top provider) under the HMO product, 43.0% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In CA, IDR claims represented 11.9% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In CA, out of 59,347 total NPAR claims, 7,055 (11.9%) were flagged for IDR, representing a 52.8% change from the prior period.",
+                    "Among the 7,055 IDR-flagged claims, the top providers were HEALTHQUEST ESOTERICS, MONARCH DIAGNOSTICS, WACO TEXAS EMERGENCY CENTER LLC."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "NY",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 23,799 total claims, NPAR Claims count percentage changed by 0.5% and PMPM ratio changed by -26.3% for YTD period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In NY, out of 23,799 total claims (for YTD), 23,618 (99.2%) were NPAR, resulting in $3,420,815.74 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential Configuration Issues",
+                  "detail_statements": [
+                    "In NY, out of 73 total NPAR claims for MOUNT SINAI BETH ISRAEL PETRIE (top provider) under the FFS product, 69.6% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In NY, IDR claims represented 2.7% of total OON claims, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "In NY, out of 23,618 total NPAR claims, 648 (2.7%) were flagged for IDR, representing a 86.4% change from the prior period.",
+                    "Among the 648 IDR-flagged claims, the top providers were MEMORIAL REGIONAL HOSPITAL, ER OF NRH LLC, BROWARD HEALTH MEDICAL CENTER."
+                  ]
+                }
+              ]
+            },
+            {
+              "state_name": "GA",
+              "metrics": [
+                {
+                  "metric_label": "NPAR Cost Pressure Trend",
+                  "detail_statements": [
+                    "Out of 7,715 total claims, NPAR Claims count percentage changed by -41.9% and PMPM ratio changed by -67.1% for YTD period."
+                  ]
+                },
+                {
+                  "metric_label": "OON Provider Contracted Trend",
+                  "detail_statements": [
+                    "In GA, out of 7,715 total claims (for YTD), 7,708 (99.9%) were NPAR, resulting in $754,600.08 in OON payments."
+                  ]
+                },
+                {
+                  "metric_label": "OON Potential Configuration Issues",
+                  "detail_statements": [
+                    "In GA, out of 28 total NPAR claims for UNILAB CORPORATION (DE) (DBA QUEST DIAGNOSTICS) (top provider) under the POS product, 82.1% were processed as PAR over the past 12 months. This pattern indicates potential network configuration improvement opportunities (e.g., provider/network assignment or adjudication setup)."
+                  ]
+                },
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "In GA, IDR claims represented 1.2% of total OON claims, indicating a downward trend in dispute activity relative to overall OON volume.",
+                    "In GA, out of 7,708 total NPAR claims, 92 (1.2%) were flagged for IDR, representing a -34.5% change from the prior period.",
+                    "Among the 92 IDR-flagged claims, the top providers were KAISER PERMANENTE SAN MARCOS MEDICAL CENTER, CYTOMETRY SPECIALISTS, ST. FRANCIS MEDICAL CENTER."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "top_provider_drivers": {
+          "section_title": "Provider-Level OON Trends",
+          "providers": [
+            {
+              "provider_name": "UCI MEDICAL CENTER",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Facility",
+                  "detail_statements": [
+                    "UCI MEDICAL CENTER shows a recurring PAR/OON reimbursement overlap for the same provider and facility service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "DRG 392 (Esophagitis, Gastroenteritis and Miscellaneous Digestive Disorders without MCC) and DRG 807 (Vaginal Delivery without Sterilization or D&C without CC/MCC) are among the top DRGs contributing to OON reimbursements for UCI MEDICAL CENTER. Note: 98.7% of NPAR claims (2,363 of 2,394) have NOT_MAPPED DRG codes."
+                  ]
+                },
+                {
+                  "metric_label": "NPAR Volume and Spend Impact - Facility",
+                  "detail_statements": [
+                    "During the same YTD period, NPAR claim volume increased from 78 to 2,394 and associated paid amounts increased from $26,669.85 to $3,977,127.62 for UCI MEDICAL CENTER, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "EXAGEN",
+              "metrics": [
+                {
+                  "metric_label": "Provider PAR/OON Overlap Trend - Professional",
+                  "detail_statements": [
+                    "EXAGEN shows a recurring PAR/OON reimbursement overlap for similar member populations and professional service types, indicating inconsistent network assignment and potential provider configuration gaps.",
+                    "All DRG codes for EXAGEN are NOT_MAPPED, therefore DRG-level breakdown is not available for this provider."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "SOUTH GRANVILLE PRIMARY CARE",
+              "metrics": [
+                {
+                  "metric_label": "OON Volume IDR Trend",
+                  "detail_statements": [
+                    "Out of 26 total OON claims for SOUTH GRANVILLE PRIMARY CARE, IDR claims represented 100.0%, indicating an upward trend in dispute activity relative to overall OON volume.",
+                    "Within SOUTH GRANVILLE PRIMARY CARE's IDR claims, all 26 claims are concentrated in NOT_MAPPED DRG.",
+                    "Additionally, NOT_MAPPED DRG claims for SOUTH GRANVILLE PRIMARY CARE have 0.0% PAR claims for last 12 months, indicating no PAR processing history."
+                  ]
+                }
+              ]
+            },
+            {
+              "provider_name": "HUENEME FAMILY PHARMACY",
+              "metrics": [
+                {
+                  "metric_label": "Non-Par Provider Growth - Professional",
+                  "detail_statements": [
+                    "During the same YTD period, NPAR claim volume increased from 2 to 15 and associated paid amounts increased from $207,292.39 to $597,997.49 for HUENEME FAMILY PHARMACY, indicating higher NPAR utilization and an elevated PMPM impact (NPAR spend per member month) relative to the baseline."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

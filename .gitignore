@@ -1,0 +1,135 @@
+# =============================================================================
+# Deep Research - Git Ignore Configuration
+# =============================================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+.virtualenv/
+
+# UV Package Manager
+.uv/
+uv.lock
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.windsurf/
+.devin/
+.codeiumignore
+*.sublime-project
+*.sublime-workspace
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Environment Files
+.env
+.env.local
+.env.*.local
+!.env.sample
+
+# Logs
+logs/
+*.log
+log/
+
+# Application Runtime Data
+correlation_runs/
+*.tmp
+*.temp
+*.bak
+
+# Test Coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tox/
+.hypothesis/
+coverage.xml
+*.cover
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+# Exception: Track notebooks in the notebooks/ directory
+!notebooks/**/*.ipynb
+
+# Documentation Build
+docs/_build/
+site/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Data Files (exclude large data files)
+*.csv
+*.xlsx
+*.xls
+*.parquet
+!configs/*.yaml
+!configs/*.yml
+
+# Temporary Files
+*.swp
+*.swo
+*~
+
+# Build Artifacts
+*.whl
+*.tar.gz
+# Exception: internal vault connector
+!secure_snowflake_connector*.whl
+!flexible_snowflake_connector*.whl
+
+# Security
+*.pem
+*.key
+*.crt
+!root.pem
+!cacert.pem
+!root_chain.pem
+
+# Legacy Files (from old application)
+# Uncomment to ignore if they still exist
+# app.py
+# simple_app.py
+# requirements.txt
+# data_generator.py
+# data_types.py
+# ui_components.py
+# utils.py
+# visualizations.py
+# spike_detector.py
+/logs/
+/temp/
+uv.lock/.env
+.env

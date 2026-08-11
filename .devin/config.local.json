@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Exec(find)",
+      "Exec(uv add)",
+      "Exec(uv venv)",
+      "Exec(git checkout)",
+      "Exec(git branch)",
+      "Exec(git status)",
+      "Exec(git fetch)",
+      "Exec(git log)",
+      "Exec(mkdir)",
+      "Exec(cp)",
+      "Exec(pytest)",
+      "Exec(tree)",
+      "Exec(git ls-files)",
+      "Exec(uvicorn)"
+    ]
+  }
+}

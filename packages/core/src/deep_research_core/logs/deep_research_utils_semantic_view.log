@@ -1,0 +1,140 @@
+2026-04-07 17:56:11,927 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:58 - Reading semantic view configuration from /Users/AH45807/project/deep-research/configs/ecap_semantic_view.yaml
+2026-04-07 17:56:11,983 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:70 - Connecting to Snowflake...
+2026-04-07 17:57:51,664 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:58 - Reading semantic view configuration from /Users/AH45807/project/deep-research/configs/ecap_semantic_view.yaml
+2026-04-07 17:57:51,690 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:70 - Connecting to Snowflake...
+2026-04-07 17:57:59,657 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:94 - Processing table: claims_expense (NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_CLM_EXPNS)
+2026-04-07 17:57:59,657 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_code (column: LOB_CD)
+2026-04-07 17:58:02,474 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-07 17:58:02,474 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_description (column: LOB_SHRT_DESC)
+2026-04-07 17:58:04,848 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-07 17:58:04,848 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_chartfield (column: MBU_CF_CD)
+2026-04-07 17:58:05,840 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:05,840 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_cls_short_description (column: MBU_CLS_SHRT_DESC)
+2026-04-07 17:58:06,779 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 7 values
+2026-04-07 17:58:06,779 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: service_area_state (column: SRVCAREA_ST_SHRT_DESC)
+2026-04-07 17:58:07,848 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:07,848 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_high (column: HCC_CMRCL_MNGMNT_HIGH_SHRT_DESC)
+2026-04-07 17:58:09,100 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 1 values
+2026-04-07 17:58:09,100 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_medium (column: HCC_CMRCL_MNGMNT_MEDM_SHRT_DESC)
+2026-04-07 17:58:10,874 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 5 values
+2026-04-07 17:58:10,874 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_low (column: HCC_CMRCL_MNGMNT_LOW_SHRT_DESC)
+2026-04-07 17:58:11,934 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 6 values
+2026-04-07 17:58:11,934 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: rendering_provider_name (column: RNDRG_PROV_NM)
+2026-04-07 17:58:12,813 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:12,813 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: rendering_hospital_system (column: RNDRG_HOSP_SYS_NM)
+2026-04-07 17:58:13,839 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:13,839 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: facility_type (column: FCLTY_TYPE)
+2026-04-07 17:58:15,134 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:15,134 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: drg_code (column: FNL_DRG_CD)
+2026-04-07 17:58:15,556 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:15,556 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: drg_name (column: FNL_DRG_NM)
+2026-04-07 17:58:16,632 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:16,632 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: procedure_code (column: PROC_CD)
+2026-04-07 17:58:17,106 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:17,106 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: procedure_name (column: PROC_SHRT_NM)
+2026-04-07 17:58:17,518 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:17,519 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_code (column: PROD_CD)
+2026-04-07 17:58:17,905 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:17,905 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_description (column: PROD_SHRT_DESC)
+2026-04-07 17:58:18,706 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:18,706 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: primary_diagnosis_code (column: PRMRY_DSCHRG_DIAG_CD)
+2026-04-07 17:58:19,164 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:19,165 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: primary_diagnosis_name (column: PRMRY_DSCHRG_DIAG_NM)
+2026-04-07 17:58:19,610 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:19,610 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: pa_required_code (column: PA_RQRD_CD)
+2026-04-07 17:58:20,867 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 5 values
+2026-04-07 17:58:20,867 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: claim_number (column: CLM_NBR)
+2026-04-07 17:58:22,419 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:22,419 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:94 - Processing table: auth_membership (NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_AUTH_MBRSHP)
+2026-04-07 17:58:22,419 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_code (column: LOB_CD)
+2026-04-07 17:58:24,293 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-07 17:58:24,293 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_description (column: LOB_SHRT_DESC)
+2026-04-07 17:58:25,475 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-07 17:58:25,475 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_chartfield (column: MBU_CF_CD)
+2026-04-07 17:58:25,821 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:25,821 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_cls_short_description (column: MBU_CLS_SHRT_DESC)
+2026-04-07 17:58:26,887 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 8 values
+2026-04-07 17:58:26,888 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: service_area_state (column: SRVCAREA_ST_SHRT_DESC)
+2026-04-07 17:58:27,343 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:27,343 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_code (column: PROD_CD)
+2026-04-07 17:58:28,086 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:28,086 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_description (column: PROD_SHRT_DESC)
+2026-04-07 17:58:28,507 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:28,507 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: funding_chartfield (column: RSTTD_FUNDG_CF_CD)
+2026-04-07 17:58:29,545 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 9 values
+2026-04-07 17:58:29,546 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: funding_type_description (column: FUNDG_CF_TYPE_SHRT_DESC)
+2026-04-07 17:58:30,238 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-07 17:58:30,239 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: snap_month (column: SNAP_YEAR_MNTH_NBR)
+2026-04-07 17:58:31,168 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 1 values
+2026-04-07 17:58:31,168 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:124 - Updated 13 out of 31 dimensions
+2026-04-07 17:58:31,168 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:126 - Writing updated configuration to /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-07 17:58:31,192 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:133 - Successfully saved updated semantic view to /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-08 16:36:08,562 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:58 - Reading semantic view configuration from /Users/AH45807/project/deep-research/configs/ecap_semantic_view.yaml
+2026-04-08 16:36:08,591 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:70 - Connecting to Snowflake...
+2026-04-08 16:36:16,141 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:94 - Processing table: claims_expense (NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_CLM_EXPNS)
+2026-04-08 16:36:16,141 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_code (column: LOB_CD)
+2026-04-08 16:36:19,592 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-08 16:36:19,592 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_description (column: LOB_SHRT_DESC)
+2026-04-08 16:36:21,420 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-08 16:36:21,420 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_chartfield (column: MBU_CF_CD)
+2026-04-08 16:36:22,421 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:22,421 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_cls_short_description (column: MBU_CLS_SHRT_DESC)
+2026-04-08 16:36:24,327 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 7 values
+2026-04-08 16:36:24,328 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: service_area_state (column: SRVCAREA_ST_SHRT_DESC)
+2026-04-08 16:36:25,987 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 30 values
+2026-04-08 16:36:25,987 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_high (column: HCC_CMRCL_MNGMNT_HIGH_SHRT_DESC)
+2026-04-08 16:36:27,090 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 1 values
+2026-04-08 16:36:27,090 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_medium (column: HCC_CMRCL_MNGMNT_MEDM_SHRT_DESC)
+2026-04-08 16:36:28,221 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 5 values
+2026-04-08 16:36:28,222 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_low (column: HCC_CMRCL_MNGMNT_LOW_SHRT_DESC)
+2026-04-08 16:36:29,887 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 6 values
+2026-04-08 16:36:29,887 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: rendering_provider_name (column: RNDRG_PROV_NM)
+2026-04-08 16:36:30,779 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:30,780 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: rendering_hospital_system (column: RNDRG_HOSP_SYS_NM)
+2026-04-08 16:36:31,501 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:31,501 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: facility_type (column: FCLTY_TYPE)
+2026-04-08 16:36:33,375 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 42 values
+2026-04-08 16:36:33,376 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: drg_code (column: FNL_DRG_CD)
+2026-04-08 16:36:34,048 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:34,048 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: drg_name (column: FNL_DRG_NM)
+2026-04-08 16:36:34,488 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:34,488 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: procedure_code (column: PROC_CD)
+2026-04-08 16:36:35,248 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:35,248 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: procedure_name (column: PROC_SHRT_NM)
+2026-04-08 16:36:35,954 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:35,954 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_code (column: PROD_CD)
+2026-04-08 16:36:36,718 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 30 values
+2026-04-08 16:36:36,718 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_description (column: PROD_SHRT_DESC)
+2026-04-08 16:36:38,013 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 30 values
+2026-04-08 16:36:38,013 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: primary_diagnosis_code (column: PRMRY_DSCHRG_DIAG_CD)
+2026-04-08 16:36:38,731 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:38,732 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: primary_diagnosis_name (column: PRMRY_DSCHRG_DIAG_NM)
+2026-04-08 16:36:39,505 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:39,505 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: pa_required_code (column: PA_RQRD_CD)
+2026-04-08 16:36:40,430 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 5 values
+2026-04-08 16:36:40,430 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: claim_number (column: CLM_NBR)
+2026-04-08 16:36:41,231 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:41,231 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:94 - Processing table: auth_membership (NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_AUTH_MBRSHP)
+2026-04-08 16:36:41,231 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_code (column: LOB_CD)
+2026-04-08 16:36:42,319 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-08 16:36:42,319 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_description (column: LOB_SHRT_DESC)
+2026-04-08 16:36:43,515 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-08 16:36:43,515 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_chartfield (column: MBU_CF_CD)
+2026-04-08 16:36:43,974 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:43,974 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_cls_short_description (column: MBU_CLS_SHRT_DESC)
+2026-04-08 16:36:44,912 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 8 values
+2026-04-08 16:36:44,913 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: service_area_state (column: SRVCAREA_ST_SHRT_DESC)
+2026-04-08 16:36:46,317 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 37 values
+2026-04-08 16:36:46,317 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_code (column: PROD_CD)
+2026-04-08 16:36:47,264 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 30 values
+2026-04-08 16:36:47,264 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_description (column: PROD_SHRT_DESC)
+2026-04-08 16:36:48,026 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 30 values
+2026-04-08 16:36:48,026 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: funding_chartfield (column: RSTTD_FUNDG_CF_CD)
+2026-04-08 16:36:48,665 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 9 values
+2026-04-08 16:36:48,665 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: funding_type_description (column: FUNDG_CF_TYPE_SHRT_DESC)
+2026-04-08 16:36:49,273 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-08 16:36:49,273 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: snap_month (column: SNAP_YEAR_MNTH_NBR)
+2026-04-08 16:36:50,663 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 1 values
+2026-04-08 16:36:50,663 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:124 - Updated 20 out of 31 dimensions
+2026-04-08 16:36:50,664 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:126 - Writing updated configuration to /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-08 16:36:50,689 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:133 - Successfully saved updated semantic view to /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml

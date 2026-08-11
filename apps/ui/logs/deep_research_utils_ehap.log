@@ -1,0 +1,31 @@
+2026-04-12 04:01:33,627 - PID:58976 - TID:6244462592 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:02:58,333 - PID:58976 - TID:6244462592 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:02:58,333 - PID:58976 - TID:6244462592 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:02:58,476 - PID:58976 - TID:6244462592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:02:58,476 - PID:58976 - TID:6244462592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:01:58-04:00 EST (in 7200 seconds)
+2026-04-12 04:09:34,572 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:09:36,196 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:09:36,196 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:09:36,348 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:09:36,348 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:08:36-04:00 EST (in 7200 seconds)
+2026-04-12 04:29:13,356 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:29:13,357 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:29:13,512 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:29:13,513 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:28:13-04:00 EST (in 7200 seconds)
+2026-04-12 04:29:37,523 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:29:37,523 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:29:37,688 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:29:37,688 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:28:37-04:00 EST (in 7200 seconds)
+2026-04-12 04:31:09,517 - PID:60149 - TID:6265237504 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:31:09,517 - PID:60149 - TID:6265237504 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:31:09,620 - PID:60149 - TID:6265237504 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:31:09,733 - PID:60149 - TID:6265237504 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:31:09,734 - PID:60149 - TID:6265237504 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:30:09-04:00 EST (in 7200 seconds)
+2026-04-12 04:31:23,229 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:31:23,230 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:31:23,364 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:31:23,365 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:30:23-04:00 EST (in 7200 seconds)
+2026-04-12 14:31:45,127 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 14:31:45,128 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 14:31:45,282 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 14:31:45,282 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 16:30:45-04:00 EST (in 7200 seconds)

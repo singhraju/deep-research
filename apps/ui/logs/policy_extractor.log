@@ -1,0 +1,121 @@
+2026-04-12 04:01:33,623 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:170 - === Policy Extractor Logging Initialized ===
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:171 - Log directory: /Users/AH45807/project/deep-research/apps/ui/logs
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:172 - Max file size: 50.0MB
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:173 - Backup count: 10
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:174 - Process ID: 58976
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:175 - Component log levels:
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_store: WARNING
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_bulk_operations: WARNING
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.pipeline: INFO
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.api: INFO
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.rendering: INFO
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.url_extraction: INFO
+2026-04-12 04:01:33,624 - PID:58976 - TID:6244462592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.chunking: DEBUG
+2026-04-12 04:01:33,627 - PID:58976 - TID:6244462592 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:02:57,815 - PID:58976 - TID:6244462592 - deep_research_core.orchestrator - INFO - build_app:1012 - Building orchestrator app from YAML: /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-12 04:02:58,333 - PID:58976 - TID:6244462592 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:02:58,333 - PID:58976 - TID:6244462592 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:02:58,476 - PID:58976 - TID:6244462592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:02:58,476 - PID:58976 - TID:6244462592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:01:58-04:00 EST (in 7200 seconds)
+2026-04-12 04:09:34,568 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:170 - === Policy Extractor Logging Initialized ===
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:171 - Log directory: /Users/AH45807/project/deep-research/apps/ui/logs
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:172 - Max file size: 50.0MB
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:173 - Backup count: 10
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:174 - Process ID: 60149
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:175 - Component log levels:
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_store: WARNING
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_bulk_operations: WARNING
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.pipeline: INFO
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.api: INFO
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.rendering: INFO
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.url_extraction: INFO
+2026-04-12 04:09:34,569 - PID:60149 - TID:6197358592 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.chunking: DEBUG
+2026-04-12 04:09:34,572 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:09:35,668 - PID:60149 - TID:6197358592 - deep_research_core.orchestrator - INFO - build_app:1012 - Building orchestrator app from YAML: /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-12 04:09:36,196 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:09:36,196 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:09:36,348 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:09:36,348 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:08:36-04:00 EST (in 7200 seconds)
+2026-04-12 04:10:14,745 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: Find what changed in HCPCS H0010...
+2026-04-12 04:10:14,745 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'period': 'Rolling 3'}
+2026-04-12 04:10:14,746 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: Find what changed in HCPCS H0010...
+2026-04-12 04:10:23,705 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 04:10:23,705 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 04:10:25,576 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:10:25,576 - PID:60149 - TID:6197358592 - user_intent - WARNING - validate_intent_output:884 - filter field 'amount_type' not found in semantic model (dimensions/time_dimensions/facts)
+2026-04-12 04:10:25,576 - PID:60149 - TID:6197358592 - user_intent - WARNING - validate_intent_output:884 - filter field 'incurred_ending_month' not found in semantic model (dimensions/time_dimensions/facts)
+2026-04-12 04:10:25,577 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 2 warning(s) found
+2026-04-12 04:11:51,672 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:11:51,672 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'period': 'Rolling 3'}
+2026-04-12 04:11:51,672 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:11:58,011 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 04:11:58,011 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 04:12:01,272 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:12:01,273 - PID:60149 - TID:6197358592 - user_intent - WARNING - validate_intent_output:884 - filter field 'hcc' not found in semantic model (dimensions/time_dimensions/facts)
+2026-04-12 04:12:01,273 - PID:60149 - TID:6197358592 - user_intent - WARNING - validate_intent_output:884 - filter field 'amount_type' not found in semantic model (dimensions/time_dimensions/facts)
+2026-04-12 04:12:01,273 - PID:60149 - TID:6197358592 - user_intent - WARNING - validate_intent_output:884 - filter field 'incurred_ending_month' not found in semantic model (dimensions/time_dimensions/facts)
+2026-04-12 04:12:01,273 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 3 warning(s) found
+2026-04-12 04:24:41,043 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: "claims_expense.total_allowed"...
+2026-04-12 04:24:41,044 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'drill_metric': 'claims_expense.total_allowed', 'period': 'Rolling 3', 'rolling_window': '3_months'}
+2026-04-12 04:24:41,044 - PID:60149 - TID:6231584768 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: "claims_expense.total_allowed"...
+2026-04-12 04:24:43,388 - PID:60149 - TID:6231584768 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 04:24:43,388 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 04:24:45,571 - PID:60149 - TID:6231584768 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:24:45,571 - PID:60149 - TID:6231584768 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:29:06,209 - PID:60149 - TID:6231584768 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-12 04:29:13,275 - PID:60149 - TID:6231584768 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-12 04:29:13,275 - PID:60149 - TID:6231584768 - deep_research_core.orchestrator - INFO - build_app:1012 - Building orchestrator app from YAML: /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-12 04:29:13,356 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:29:13,357 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:29:13,512 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:29:13,513 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:28:13-04:00 EST (in 7200 seconds)
+2026-04-12 04:29:37,491 - PID:60149 - TID:6197358592 - deep_research_core.orchestrator - INFO - build_app:1012 - Building orchestrator app from YAML: /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-12 04:29:37,523 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:29:37,523 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:29:37,688 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:29:37,688 - PID:60149 - TID:6197358592 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:28:37-04:00 EST (in 7200 seconds)
+2026-04-12 04:30:37,071 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:30:37,071 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'drill_metric': 'claims_expense.total_allowed', 'period': 'Rolling 3', 'rolling_window': '3_months'}
+2026-04-12 04:30:37,071 - PID:60149 - TID:6231584768 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:30:46,266 - PID:60149 - TID:6231584768 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 04:30:46,266 - PID:60149 - TID:6231584768 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 04:30:48,111 - PID:60149 - TID:6231584768 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:30:48,111 - PID:60149 - TID:6231584768 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:31:09,485 - PID:60149 - TID:6265237504 - deep_research_core.orchestrator - INFO - build_app:1012 - Building orchestrator app from YAML: /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-12 04:31:09,517 - PID:60149 - TID:6265237504 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:31:09,517 - PID:60149 - TID:6265237504 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:31:09,620 - PID:60149 - TID:6265237504 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:31:09,733 - PID:60149 - TID:6265237504 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:31:09,734 - PID:60149 - TID:6265237504 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:30:09-04:00 EST (in 7200 seconds)
+2026-04-12 04:31:09,829 - PID:60149 - TID:6197358592 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-12 04:31:14,228 - PID:60149 - TID:6366195712 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-12 04:31:15,830 - PID:60149 - TID:6231584768 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-12 04:31:16,927 - PID:60149 - TID:6197358592 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-12 04:31:21,675 - PID:60149 - TID:6366195712 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-12 04:31:23,179 - PID:60149 - TID:6231584768 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-12 04:31:23,180 - PID:60149 - TID:6231584768 - deep_research_core.orchestrator - INFO - build_app:1012 - Building orchestrator app from YAML: /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-12 04:31:23,229 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 04:31:23,230 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 04:31:23,364 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 04:31:23,365 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 06:30:23-04:00 EST (in 7200 seconds)
+2026-04-12 04:31:28,887 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:31:28,888 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'drill_metric': 'claims_expense.total_allowed', 'period': 'Rolling 3', 'rolling_window': '3_months'}
+2026-04-12 04:31:28,888 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: Find what changed in HCPCS H0010?...
+2026-04-12 04:31:37,285 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 04:31:37,286 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 04:31:41,330 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:31:41,330 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 04:31:49,757 - PID:60149 - TID:6282063872 - policy_hypothesis_agent - INFO - generate_policy_hypotheses:770 - Policy hypothesis generation produced 0 hypothesis items.
+2026-04-12 04:31:50,364 - PID:60149 - TID:6298890240 - mandate_hypothesis_agent - INFO - generate_mandate_hypotheses:765 - Mandate hypothesis generation produced 0 hypothesis items.
+2026-04-12 14:31:45,090 - PID:60149 - TID:6231584768 - deep_research_core.orchestrator - INFO - build_app:1012 - Building orchestrator app from YAML: /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-12 14:31:45,127 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-12 14:31:45,128 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-12 14:31:45,282 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-12 14:31:45,282 - PID:60149 - TID:6231584768 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-12 16:30:45-04:00 EST (in 7200 seconds)
+2026-04-12 14:31:49,973 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1452 - Identifying filters and analysis mode for question: Find what changed in HCPCS H0010?...
+2026-04-12 14:31:49,975 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1454 - Context filters provided: {'drill_metric': 'claims_expense.total_allowed', 'period': 'Rolling 3', 'rolling_window': '3_months'}
+2026-04-12 14:31:49,975 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:930 - Resolving filters with LLM for question: Find what changed in HCPCS H0010?...
+2026-04-12 14:31:56,068 - PID:60149 - TID:6197358592 - user_intent - INFO - resolve_intent_with_llm:1007 - LLM filter extraction succeeded
+2026-04-12 14:31:56,068 - PID:60149 - TID:6197358592 - user_intent - INFO - identify_intent_and_filters:1473 - LLM-based filter extraction succeeded
+2026-04-12 14:31:59,571 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found
+2026-04-12 14:31:59,571 - PID:60149 - TID:6197358592 - user_intent - INFO - validate_intent_output:902 - Validation complete: 0 warning(s) found

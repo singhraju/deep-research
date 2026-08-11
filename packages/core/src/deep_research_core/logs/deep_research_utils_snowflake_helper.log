@@ -1,0 +1,15 @@
+2026-04-02 23:39:37,178 - PID:39577 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-02 23:39:44,333 - PID:39577 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-02 23:52:09,219 - PID:40123 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-02 23:52:16,664 - PID:40123 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-07 15:33:06,995 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-07 15:33:15,160 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-07 17:56:11,990 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:186 - Error creating Snowflake session: 251005: User is empty, but it must be provided unless authenticator is one of OAUTH_AUTHORIZATION_CODE, OAUTH, WORKLOAD_IDENTITY, OAUTH_CLIENT_CREDENTIALS, PAT_WITH_EXTERNAL_SESSION, PROGRAMMATIC_ACCESS_TOKEN, NO_AUTH.
+2026-04-07 17:57:54,276 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-07 17:57:59,657 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 2 additional sessions
+2026-04-07 17:58:31,455 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - close:313 - Main Snowflake session closed
+2026-04-08 16:34:01,371 - PID:55476 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-08 16:34:08,927 - PID:55476 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-08 16:36:11,221 - PID:55476 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-08 16:36:16,141 - PID:55476 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 2 additional sessions
+2026-04-08 16:36:51,028 - PID:55476 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - close:313 - Main Snowflake session closed

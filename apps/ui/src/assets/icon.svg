@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Deep Research">
+  <title>Deep Research</title>
+  <!-- Trend descending into a dip, then recovering -->
+  <polyline points="6,18 20,28 32,44 44,30 56,16"
+            fill="none" stroke="#1F3A68" stroke-width="2.8"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Arrowhead at the recovery end (the "fix") -->
+  <polyline points="50,14 56,16 54,22"
+            fill="none" stroke="#1F3A68" stroke-width="2.8"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Three agent dots converging on the dip -->
+  <circle cx="22" cy="55" r="3" fill="#3E8FC1"/>
+  <circle cx="32" cy="58" r="3" fill="#3E8FC1"/>
+  <circle cx="42" cy="55" r="3" fill="#3E8FC1"/>
+</svg>

@@ -1,0 +1,534 @@
+# Semantic View: ECAP (Enterprise Care Analytics Platform)
+# This file defines the logical tables, dimensions, facts, and relationships
+# for the ECAP data model used in spike detection and trend analysis.
+
+name: ecap_view
+description: ECAP semantic view for claims, authorizations, and membership analysis
+comments: |
+  This semantic view provides a unified view of ECAP data with:
+  - Claims expense table with clinical and financial dimensions
+  - Authorization and membership table for member-level analysis
+  - Support for multi-dimensional trend analysis and spike detection
+
+# Logical tables
+# Each table points to a physical base table in Snowflake
+
+tables:
+  # Primary claims/expense fact table
+  - name: claims_expense
+    description: Claims and expense data with clinical and financial details
+    base_table:
+      database: NON_CRTFD_AIFS
+      schema: DL_DV_TMBR
+      table: AH45807_CHAT_BOT_CLM_EXPNS
+
+    # Categorical/grouping columns
+    dimensions:
+      - name: lob_code
+        description: "LINE OF BUSINESS CODE is a unique code that represents the Line of Business. Ex: Commercial, Medicare, or Medicaid."
+        expr: LOB_CD
+        data_type: string
+        synonyms: ["lob", "line_of_business"]
+        sample_values: ["MCM006", "MCM004", "MCM003"]
+        is_enum: true
+      
+      - name: lob_description
+        description: LINE OF BUSINESS SHORT DESCRIPTION is the short description of the Line of Business Code.
+        expr: LOB_SHRT_DESC
+        data_type: string
+      
+      - name: mbu_chartfield
+        description: MARKETING BUSINESS UNIT CHARTFIELD CODE is a code which represents how products are marketed at Anthem.
+        expr: MBU_CF_CD
+        data_type: string
+        synonyms: ["mbu", "marketing_unit"]
+
+      - name: mbu_cls_short_description
+        description: MARKETING BUSINESS UNIT CLASS SHORT DESCRIPTION is the short description text for the individual code value.
+        expr: MBU_CLS_SHRT_DESC
+        data_type: string
+        synonyms: ["mbu_class_short_description", "marketing_unit_class_short_description"]
+      
+      - name: service_area_state
+        description: "SERVICE AREA STATE SHORT DESCRIPTION is the description of the Service Area State Code in the format of state abbreviation followed by the state spelled out. Examples: GA, TX, VA"
+        expr: SRVCAREA_ST_SHRT_DESC
+        data_type: string
+        synonyms: ["state", "service_state"]
+      
+      - name: hcc_high
+        description: Used to represent the short description for HCC High Code. HEALTH CARE CATEGORY CODE is a code assigned to expenses, revenue and membership and enables expenses and revenue to be categorized into meaningful report groupings. This categorization allows analysis of similar buckets of information to be grouped together in order to understand trends and generate reporting needs.
+        expr: HCC_CMRCL_MNGMNT_HIGH_SHRT_DESC
+        data_type: string
+        synonyms: ["hcc_high_desc", "health_category_high"]
+      
+      - name: hcc_medium
+        description: Used to represent the short description for HCC Medium Code. HEALTH CARE CATEGORY CODE is a code assigned to expenses, revenue and membership and enables expenses and revenue to be categorized into meaningful report groupings. This categorization allows analysis of similar buckets of information to be grouped together in order to understand trends and generate reporting needs.
+        expr: HCC_CMRCL_MNGMNT_MEDM_SHRT_DESC
+        data_type: string
+        synonyms: ["hcc_medium_desc", "health_category_medium"]
+      
+      - name: hcc_low
+        description: Used to represent the short description for HCC Low Code. HEALTH CARE CATEGORY CODE is a code assigned to expenses, revenue and membership and enables expenses and revenue to be categorized into meaningful report groupings. This categorization allows analysis of similar buckets of information to be grouped together in order to understand trends and generate reporting needs.
+        expr: HCC_CMRCL_MNGMNT_LOW_SHRT_DESC
+        data_type: string
+        synonyms: ["hcc_low_desc", "health_category_low"]
+      
+      - name: rendering_provider_name
+        description: Rendering Provider Name.
+        expr: RNDRG_PROV_NM
+        data_type: string
+        synonyms: ["provider_name", "provider"]
+      
+      - name: rendering_hospital_system
+        description: Hospital Name who the Rendering Provider is a part of.
+        expr: RNDRG_HOSP_SYS_NM
+        data_type: string
+        synonyms: ["hospital_system", "hospital"]
+      
+      - name: facility_type
+        description: PLACE OF SERVICE NAME is the name for the individual code value
+        expr: FCLTY_TYPE
+        data_type: string
+        synonyms: ["facility"]
+        sample_values: ["CRITICAL ACCESS","NURSING HOME", "MILITARY HOSPITAL"]
+      
+      - name: drg_code
+        description: DIAGNOSIS RELATED GROUP (DRG) CODE represents the specific 'Diagnosis Related Group' (DRG) associated with a Claim. A DRG is a national coding scheme which classifies an inpatient stay based on diagnosis, procedure, discharge status, age and sex.
+        expr: FNL_DRG_CD
+        data_type: string
+        synonyms: ["drg"]
+      
+      - name: drg_name
+        description: DIAGNOSIS RELATED GROUP NAME is the name for the individual code value. DIAGNOSIS RELATED GROUP (DRG) CODE represents the specific 'Diagnosis Related Group' (DRG) associated with a Claim. A DRG is a national coding scheme which classifies an inpatient stay based on diagnosis, procedure, discharge status, age and sex.
+        expr: FNL_DRG_NM
+        data_type: string
+        synonyms: ["drg_description"]
+      
+      - name: procedure_code
+        description: "PROCEDURE CODE is a code that defines a service that a Provider may deliver. It includes procedures and or other treatments (e.g., Durable Medical Equipment (DME) & supplies as well as diagnostic tests). Procedure codes are represented as ADA/CDT, CPT, HCPCS, ICD etc. Note: SSP uses both local and national codes. These codes are related to services such as lobotomy, office visit, throat culture, x-ray, room and board."
+        expr: PROC_CD
+        data_type: string
+        synonyms: ["proc_code", "cpt"]
+      
+      - name: procedure_name
+        description: "PROCEDURE SHORT DESCRIPTION is the short description text for the individual code value. PROCEDURE CODE is a code that defines a service that a Provider may deliver. It includes procedures and or other treatments (e.g., Durable Medical Equipment (DME) & supplies as well as diagnostic tests). Procedure codes are represented as ADA/CDT, CPT, HCPCS, ICD etc. Note: SSP uses both local and national codes. These codes are related to services such as lobotomy, office visit, throat culture, x-ray, room and board."
+        expr: PROC_SHRT_NM
+        data_type: string
+        synonyms: ["proc_name", "procedure_description"]
+      
+      - name: product_code
+        description: PRODUCT CODE is a unique code that represents the Products, which aggregates sub products into a product level.
+        expr: PROD_CD
+        data_type: string
+        synonyms: ["product"]
+      
+      - name: product_description
+        description: "PRODUCT SHORT DESCRIPTION of PRODUCT CODE is a unique code that represents the Products, which aggregates sub products into a product level. Examples: Medical, FGS Medical, ABD Dual Enrolled, PPO Medicare HMO, AD&D."
+        expr: PROD_SHRT_DESC
+        data_type: string
+        synonyms: ["product_desc"]
+      
+      - name: primary_diagnosis_code
+        description: DIAGNOSIS CODE represents an ICD CM Diagnosis Code identifying a condition being treated.
+        expr: PRMRY_DSCHRG_DIAG_CD
+        data_type: string
+        synonyms: ["diagnosis_code", "diag_code", "icd_code"]
+      
+      - name: primary_diagnosis_name
+        description: DIAGNOSIS SHORT NAME is the name for the individual code value which represents an ICD CM Diagnosis Code identifying a condition being treated.
+        expr: PRMRY_DSCHRG_DIAG_NM
+        data_type: string
+        synonyms: ["diagnosis_name", "diag_name"]
+      
+      - name: pa_required_code
+        description: PRIOR AUTHORIZATION REQUIRED CODE is an indicator that a prior authorization was required for the drug prescribed. Anything > 0 is considered required.
+        expr: PA_RQRD_CD
+        data_type: string
+        synonyms: ["pa_required", "auth_required"]
+        sample_values: ["Y", "N", "-1", "-2", "-3"]
+        is_enum: true
+      
+      - name: claim_number
+        description: CLAIM NUMBER is a unique number assigned to a claim, which is assigned internally by Anthem systems. Often referred to as the Document Control Number or 'DCN'.
+        expr: CLM_NBR
+        data_type: string
+        synonyms: ["dcn", "claim_id"]
+
+    # Date/time columns
+    time_dimensions:
+      - name: snap_month
+        description: SNAP YEAR MONTH NUMBER reflects the YYYYMM of the month end for which the data is produced.
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: number
+        synonyms: ["snap_date", "snapshot_month"]
+      
+      - name: incurred_month
+        description: It is the four digit Julian year and two digit month of the Analytic Incurred Date. Analytic Incurred Date represents the start of the service for an admit or visit.
+        expr: ANLYTC_INCRD_YEAR_MNTH_NBR
+        data_type: number
+        synonyms: ["incurred_date", "service_month"]
+
+    # Numeric/measure columns
+    facts:
+      - name: member_account_key
+        description: ENTERPRISE DIMENSIONAL MODEL MEMBER ACCOUNT KEY represents a surrogate identifier assigned to a Member Account table record.
+        expr: EDM_MBR_ACCT_KEY
+        data_type: number
+        synonyms: ["member_key", "member_id"]
+      
+      - name: authorization_key
+        description: Indicates if claim has any authorization request, null - no authorization request, anything > 0 is auth request.
+        expr: EDM_AUTHRZN_KEY
+        data_type: number
+        synonyms: ["auth_key"]
+      
+      - name: approved_auth_key
+        description: Indicates if the authorization was approved, null - auth request denied and anything > 0 is approved.
+        expr: APPROVED_AUTH_KEY
+        data_type: number
+        synonyms: ["approved_auth"]
+      
+      - name: admit_count
+        description: It represents a count of derived admits. For each unique Admit based on a unique Member Account Key, Rendering Provider Account Key, and consecutive days or overlapping days, count 1 admit.
+        expr: ADMIT_CNT
+        data_type: number
+        synonyms: ["admissions", "admit"]
+      
+      - name: paid_amount
+        description: It represents the Paid Amount plus Recovery Amount (Recovery amount is populated from source as a negative amount) not to go below zero (since this business rule is adding a negative number to Paid Amount).
+        expr: ANLYTC_PAID_AMT
+        data_type: number
+        synonyms: ["paid", "paid_amt"]
+      
+      - name: allowed_amount
+        description: It is the contracted reimbursable amount for covered medical services or supplies or amount reflecting local methodology for non-contracted providers plus the New York State Surcharge amount, beginning with the load of the May, 2016 data (SNAP_YEAR_MNTH_NBR = 201605). For data prior to May, 2016, ANALYTIC ALLOWED AMOUNT is the contracted reimbursable amount for covered medical services or supplies or amount reflecting local methodology for non-contracted providers.
+        expr: ANLYTC_ALWD_AMT
+        data_type: number
+        synonyms: ["allowed", "allowed_amt"]
+      
+      - name: billed_charge_amount
+        description: BILLED CHARGE AMOUNT is the amount submitted by the provider for reimbursement of health care services. This amount may also include non-covered services.
+        expr: BILLD_CHRG_AMT
+        data_type: number
+        synonyms: ["billed", "charges"]
+
+    # Metrics scoped to the claims_expense logical table
+    # NOTE: Metric names are fully qualified (claims_expense.<metric>) for unambiguous reference from hierarchy YAML
+    metrics:
+      - name: claims_expense.paid_ratio
+        description: Ratio of paid to allowed amount
+        expr: "SUM({claims_expense.paid_amount}) / NULLIF(SUM({claims_expense.allowed_amount}), 0)"
+      
+      - name: claims_expense.avg_allowed_per_admit
+        description: Average allowed amount per admission
+        expr: "SUM({claims_expense.allowed_amount}) / NULLIF(SUM({claims_expense.admit_count}), 0)"
+      
+      - name: claims_expense.avg_paid_per_admit
+        description: Average paid amount per admission
+        expr: "SUM({claims_expense.paid_amount}) / NULLIF(SUM({claims_expense.admit_count}), 0)"
+      
+      - name: claims_expense.auth_rate
+        description: Authorization rate (claims with auth / total claims)
+        expr: "SUM(CASE WHEN {claims_expense.authorization_key} IS NOT NULL THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0)"
+      
+      - name: claims_expense.auth_approval_rate
+        description: Authorization approval rate (approved / requested)
+        expr: "SUM(CASE WHEN {claims_expense.approved_auth_key} IS NOT NULL THEN 1 ELSE 0 END) / NULLIF(SUM(CASE WHEN {claims_expense.authorization_key} IS NOT NULL THEN 1 ELSE 0 END), 0)"
+      
+      - name: claims_expense.total_allowed
+        description: Total allowed amount
+        expr: "SUM({claims_expense.allowed_amount})"
+      
+      - name: claims_expense.total_paid
+        description: Total paid amount
+        expr: "SUM({claims_expense.paid_amount})"
+      
+      - name: claims_expense.total_admissions
+        description: Total admission count
+        expr: "SUM({claims_expense.admit_count})"
+      
+      - name: claims_expense.claim_count
+        description: Total count of claims
+        expr: "COUNT(DISTINCT {claims_expense.claim_number})"
+      
+      - name: claims_expense.avg_billed_per_claim
+        description: Average billed charge per claim
+        expr: "SUM({claims_expense.billed_charge_amount}) / NULLIF(COUNT(DISTINCT {claims_expense.claim_number}), 0})"
+
+  # Authorization and membership table
+  - name: auth_membership
+    description: Authorization and membership data
+    base_table:
+      database: NON_CRTFD_AIFS
+      schema: DL_DV_TMBR
+      table: AH45807_CHAT_BOT_AUTH_MBRSHP
+
+    # Categorical/grouping columns
+    dimensions:
+      - name: lob_code
+        description: "LINE OF BUSINESS CODE is a unique code that represents the Line of Business."
+        expr: LOB_CD
+        data_type: string
+        synonyms: ["lob", "line_of_business"]
+        sample_values: ["MCM006", "MCM004", "MCM003"]
+        is_enum: true
+      
+      - name: lob_description
+        description: LINE OF BUSINESS SHORT DESCRIPTION is the short description of the Line of Business Code.
+        expr: LOB_SHRT_DESC
+        data_type: string
+      
+      - name: mbu_chartfield
+        description: MARKETING BUSINESS UNIT CHARTFIELD CODE is a code which represents how products are marketed at Anthem.
+        expr: MBU_CF_CD
+        data_type: string
+        synonyms: ["mbu", "marketing_unit"]
+
+      - name: mbu_cls_short_description
+        description: MARKETING BUSINESS UNIT CLASS SHORT DESCRIPTION is the short description text for the individual code value.
+        expr: MBU_CLS_SHRT_DESC
+        data_type: string
+        synonyms: ["mbu_class_short_description", "marketing_unit_class_short_description"]
+      
+      - name: service_area_state
+        description: "SERVICE AREA STATE SHORT DESCRIPTION is the description of the Service Area State Code in the format of state abbreviation followed by the state spelled out. Examples: GA, TX, VA"
+        expr: SRVCAREA_ST_SHRT_DESC
+        data_type: string
+        synonyms: ["state", "service_state"]
+      
+      - name: product_code
+        description: PRODUCT CODE is a unique code that represents the Products, which aggregates sub products into a product level.
+        expr: PROD_CD
+        data_type: string
+        synonyms: ["product"]
+      
+      - name: product_description
+        description: "PRODUCT SHORT DESCRIPTION of PRODUCT CODE is a unique code that represents the Products, which aggregates sub products into a product level. Examples: Medical, FGS Medical, ABD Dual Enrolled, PPO Medicare HMO, AD&D."
+        expr: PROD_SHRT_DESC
+        data_type: string
+        synonyms: ["product_desc"]
+      
+      - name: funding_chartfield
+        description: "RESTATED FUNDING CHARTFIELD CODE is a code which represents how a Product's claims are funded for a Subgroup. The Funding Chartfield Code becomes restated when changes are made to reflect retroactively."
+        expr: RSTTD_FUNDG_CF_CD
+        data_type: string
+        synonyms: ["funding_code", "funding"]
+      
+      - name: funding_type_description
+        description: FUNDING CHARTFIELD TYPE SHORT DESCRIPTION is the short description text for the individual code value. RESTATED FUNDING CHARTFIELD CODE is a code which represents how a Product's claims are funded for a Subgroup. The Funding Chartfield Code becomes restated when changes are made to reflect retroactively.
+        expr: FUNDG_CF_TYPE_SHRT_DESC
+        data_type: string
+        synonyms: ["funding_type", "funding_desc"]
+
+      - name: snap_month
+        description: SNAP YEAR MONTH NUMBER reflects the YYYYMM of the month end for which the data is produced.
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: number
+        synonyms: ["snap_date", "snapshot_month"]
+
+    # Date/time columns
+    time_dimensions:      
+      - name: incurred_month
+        description: It is the four digit Julian year and two digit month of the Analytic Incurred Date. Analytic Incurred Date represents the start of the service for an admit or visit.
+        expr: INCRD_YEAR_MNTH_NBR
+        data_type: number
+        synonyms: ["incurred_date", "service_month"]
+
+    # Numeric/measure columns
+    facts:
+      - name: member_count
+        description: Count of members
+        expr: ACTL_MBR_CNT
+        data_type: number
+        synonyms: ["members", "member_months"]
+
+    # Metrics scoped to the auth_membership logical table
+    metrics:
+      - name: auth_membership.total_members
+        description: Total member count
+        expr: "SUM({auth_membership.member_count})"
+      
+      - name: auth_membership.avg_members
+        description: Average member count
+        expr: "AVG({auth_membership.member_count})"
+
+    # Commonly used filters over the logical table
+    filters:
+      - name: current_year
+        description: "Filter for current year data (2026)"
+        synonyms: [this_year, cy]
+        expr: "{auth_membership.incurred_month} >= 202601 AND {auth_membership.incurred_month} <= 202612"
+      
+      - name: prior_year
+        description: "Filter for prior year data (2025)"
+        synonyms: [last_year, py]
+        expr: "{auth_membership.incurred_month} >= 202501 AND {auth_membership.incurred_month} <= 202512"
+
+# Relationships between tables
+# Used for JOIN generation when levels reference columns from multiple tables
+
+relationships:
+  - name: claims_to_membership
+    description: Join claims to membership by LOB, MBU, state, product, and time period
+    left_table: claims_expense
+    right_table: auth_membership
+    relationship_columns:
+      - left_column: LOB_CD
+        right_column: LOB_CD
+      - left_column: MBU_CF_CD
+        right_column: MBU_CF_CD
+      - left_column: MBU_CLS_SHRT_DESC
+        right_column: MBU_CLS_SHRT_DESC
+      - left_column: SRVCAREA_ST_SHRT_DESC
+        right_column: SRVCAREA_ST_SHRT_DESC
+      - left_column: PROD_CD
+        right_column: PROD_CD
+      - left_column: SNAP_YEAR_MNTH_NBR
+        right_column: SNAP_YEAR_MNTH_NBR
+      - left_column: ANLYTC_INCRD_YEAR_MNTH_NBR
+        right_column: INCRD_YEAR_MNTH_NBR
+
+# Derived metrics combining data from multiple tables
+metrics:
+  - name: allowed_pmpm
+    description: Allowed amount per member per month (claims expense / membership)
+    expr: "SUM({claims_expense.allowed_amount}) / NULLIF(SUM({auth_membership.member_count}), 0)"
+  
+  - name: paid_pmpm
+    description: Paid amount per member per month (claims expense / membership)
+    expr: "SUM({claims_expense.paid_amount}) / NULLIF(SUM({auth_membership.member_count}), 0)"
+  
+  - name: admits_per_thousand
+    description: "Admissions per 1,000 members (Admits per k trend)"
+    expr: "(SUM({claims_expense.admit_count}) / NULLIF(SUM({auth_membership.member_count}), 0)) * 1000"
+    synonyms: ["admits_per_k", "admits_per_1k", "admission_rate"]
+  
+  - name: allowed_per_admit
+    description: "Allowed cost per admission (Cost per Admit trend)"
+    expr: "SUM({claims_expense.allowed_amount}) / NULLIF(SUM({claims_expense.admit_count}), 0)"
+    synonyms: ["cost_per_admit", "allowed_cost_per_admit"]
+
+# Common filters used across the semantic view
+filters:
+  - name: commercial_only
+    description: "Filter for Commercial line of business only"
+    synonyms: [commercial, comm]
+    expr: "{claims_expense.lob_description} = 'Commercial'"
+  
+  - name: medicare_only
+    description: "Filter for Medicare line of business only"
+    synonyms: [medicare, mcre]
+    expr: "{claims_expense.lob_description} = 'Medicare'"
+  
+  - name: medicaid_only
+    description: "Filter for Medicaid line of business only"
+    synonyms: [medicaid, mcad]
+    expr: "{claims_expense.lob_description} = 'Medicaid'"
+  
+  - name: recent_12_months
+    description: "Filter for most recent 12 months of data"
+    synonyms: [last_12_months, trailing_12_months, ttm]
+    expr: "{claims_expense.incurred_month} >= CAST(TO_CHAR(DATEADD(month, -12, CURRENT_DATE()), 'YYYYMM') AS NUMBER)"
+  
+  - name: high_cost_claims
+    description: "Filter for high-cost claims (allowed amount > $50,000)"
+    synonyms: [high_cost, expensive_claims]
+    expr: "{claims_expense.allowed_amount} > 50000"
+  
+  - name: inpatient_only
+    description: "Filter for inpatient facility type claims"
+    synonyms: [inpatient, ip]
+    expr: "{claims_expense.facility_type} = 'Inpatient'"
+  
+  - name: with_authorization
+    description: "Filter for claims that have an authorization"
+    synonyms: [auth_claims, authorized]
+    expr: "{claims_expense.authorization_key} IS NOT NULL"
+
+# Verified queries with example questions and SQL
+verified_queries:
+  - name: total_allowed_by_lob
+    question: "What is the total allowed amount by line of business?"
+    verified_by: "Data Analytics Team"
+    verified_at: 1708905600
+    use_as_onboarding_question: true
+    sql: |
+      SELECT 
+        ce.LOB_SHRT_DESC as line_of_business,
+        SUM(ce.ANLYTC_ALWD_AMT) as total_allowed
+      FROM NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_CLM_EXPNS ce
+      GROUP BY ce.LOB_SHRT_DESC
+      ORDER BY total_allowed DESC
+  
+  - name: pmpm_trend_by_state
+    question: "Show me the allowed PMPM trend by state for the last 6 months"
+    verified_by: "Data Analytics Team"
+    verified_at: 1708905600
+    use_as_onboarding_question: true
+    sql: |
+      SELECT 
+        ce.SRVCAREA_ST_SHRT_DESC as state,
+        ce.SNAP_YEAR_MNTH_NBR as month,
+        SUM(ce.ANLYTC_ALWD_AMT) / NULLIF(SUM(am.ACTL_MBR_CNT), 0) as allowed_pmpm
+      FROM NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_CLM_EXPNS ce
+      LEFT JOIN NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_AUTH_MBRSHP am
+        ON ce.LOB_CD = am.LOB_CD
+        AND ce.MBU_CF_CD = am.MBU_CF_CD
+        AND ce.MBU_CLS_SHRT_DESC = am.MBU_CLS_SHRT_DESC
+        AND ce.SRVCAREA_ST_SHRT_DESC = am.SRVCAREA_ST_SHRT_DESC
+        AND ce.PROD_CD = am.PROD_CD
+        AND ce.SNAP_YEAR_MNTH_NBR = am.SNAP_YEAR_MNTH_NBR
+        AND ce.ANLYTC_INCRD_YEAR_MNTH_NBR = am.INCRD_YEAR_MNTH_NBR
+      WHERE ce.ANLYTC_INCRD_YEAR_MNTH_NBR >= CAST(TO_CHAR(DATEADD(month, -6, CURRENT_DATE()), 'YYYYMM') AS NUMBER)
+        AND am.INCRD_YEAR_MNTH_NBR >= CAST(TO_CHAR(DATEADD(month, -6, CURRENT_DATE()), 'YYYYMM') AS NUMBER)
+      GROUP BY ce.SRVCAREA_ST_SHRT_DESC, ce.INCRD_YEAR_MNTH_NBR
+      ORDER BY state, month
+  
+  - name: top_drgs_by_cost
+    question: "What are the top 10 DRGs by total allowed amount?"
+    verified_by: "Data Analytics Team"
+    verified_at: 1708905600
+    use_as_onboarding_question: true
+    sql: |
+      SELECT 
+        ce.FNL_DRG_NM as drg_name,
+        ce.FNL_DRG_CD as drg_code,
+        SUM(ce.ANLYTC_ALWD_AMT) as total_allowed,
+        SUM(ce.ADMIT_CNT) as total_admits,
+        SUM(ce.ANLYTC_ALWD_AMT) / NULLIF(SUM(ce.ADMIT_CNT), 0) as avg_allowed_per_admit
+      FROM NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_CLM_EXPNS ce
+      WHERE ce.FNL_DRG_NM IS NOT NULL
+      GROUP BY ce.FNL_DRG_NM, ce.FNL_DRG_CD
+      ORDER BY total_allowed DESC
+      LIMIT 10
+  
+  - name: auth_approval_rate_by_product
+    question: "What is the authorization approval rate by product?"
+    verified_by: "Data Analytics Team"
+    verified_at: 1708905600
+    sql: |
+      SELECT 
+        ce.PROD_SHRT_DESC as product,
+        COUNT(DISTINCT ce.CLM_NBR) as total_claims,
+        SUM(CASE WHEN ce.EDM_AUTHRZN_KEY IS NOT NULL THEN 1 ELSE 0 END) as claims_with_auth,
+        SUM(CASE WHEN ce.APPROVED_AUTH_KEY IS NOT NULL THEN 1 ELSE 0 END) as approved_auth_claims,
+        SUM(CASE WHEN ce.APPROVED_AUTH_KEY IS NOT NULL THEN 1 ELSE 0 END) * 100.0 / 
+          NULLIF(SUM(CASE WHEN ce.EDM_AUTHRZN_KEY IS NOT NULL THEN 1 ELSE 0 END), 0) as approval_rate_pct
+      FROM NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_CLM_EXPNS ce
+      WHERE ce.EDM_AUTHRZN_KEY IS NOT NULL
+      GROUP BY ce.PROD_SHRT_DESC
+      ORDER BY approval_rate_pct DESC
+  
+  - name: member_count_trend
+    question: "Show me the member count trend over time"
+    verified_by: "Data Analytics Team"
+    verified_at: 1708905600
+    use_as_onboarding_question: true
+    sql: |
+      SELECT 
+        am.SNAP_YEAR_MNTH_NBR as month,
+        am.LOB_SHRT_DESC as line_of_business,
+        SUM(am.ACTL_MBR_CNT) as total_members
+      FROM NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_AUTH_MBRSHP am
+      GROUP BY am.SNAP_YEAR_MNTH_NBR, am.LOB_SHRT_DESC
+      ORDER BY month, line_of_business

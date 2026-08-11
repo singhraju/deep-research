@@ -1,0 +1,1489 @@
+name: pi_wgs_mad_view
+description: PI WGS MAD semantic view over Timber-eligible WGS claim lines for cost,
+  payment, and authorization analysis
+comments: 'This semantic view exposes the WGS MAD claim line table for multi-dimensional
+  analysis:
+
+  - Claim line financial dimensions and amounts (billed, allowed, paid, deductible,
+  copay, coinsurance)
+
+  - Provider, member, product, funding, and network dimensions
+
+  - Diagnosis, procedure, revenue, and UM dimensions
+
+  - Standard Timber filter is required for production reporting (tmb_edit_ind = ''Y'')
+
+  '
+tables:
+- name: wgs_mad
+  description: WGS MAD claim line data for cost, payment, network, and authorization
+    analysis
+  base_table:
+    database: NON_CRTFD_AIFS
+    schema: DL_PL_TMBR
+    table: GENAI_PIAD_MAD_WGS_FNCL_MBU
+  dimensions:
+  - name: claim_nbr
+    description: Claim nbr - each claim nbr can have one or many claim line numbers.
+    expr: gnchiios_hclm_dcn
+    data_type: string
+    synonyms:
+    - nbr
+  - name: claim_line_nbr
+    description: Claim Line Number
+    expr: ddc_dtl_lne_nbr
+    data_type: number
+    synonyms:
+    - nbr
+  - name: claim_sequence_nbr
+    description: Last status of the claim (decending sequence starting at 999, lowest
+      number is the latest version of the claim)
+    expr: gnchiios_hclm_seq_nbr
+    data_type: number
+    synonyms:
+    - sequence
+  - name: claim_adjustment_key
+    description: CLAIM ADJUSTMENT KEY is a surrogate identifier, which uniquely identifies
+      an Enterprise Data Warehouse Claim record.
+    expr: CLM_ADJSTMNT_KEY
+    data_type: number
+    synonyms:
+    - adjustment_key
+  - name: pro_rated_ind
+    description: This is 'Y' if the line is pro-rated as part of a summary claim,
+      'N' if it is not.
+    expr: CLM_ADJDCTN_LVL_CD
+    data_type: string
+    synonyms:
+    - pro_rated
+    is_enum: true
+    sample_values:
+    - N
+    - U
+    - Y
+  - name: claim_type
+    description: 'Claim Type: if user asks for CMS-1500 or professional claim, use
+      ddc_cd_clm_type in (''MA'', ''MM'', ''PA'', ''PM'', ''PC''); if user ask for
+      UB-04 or outpatient or facility claim, use ddc_cd_clm_type like ''O%''; only
+      when user specifically asks for inpatient claim use ddc_cd_clm_type like ''I%''.'
+    expr: ddc_cd_clm_type
+    data_type: string
+    synonyms:
+    - type
+    sample_values:
+    - IA
+    - IC
+    - MA
+    - MM
+    - OA
+    - OC
+    - PA
+    - PM
+    - SA
+    - SC
+  - name: line_of_business_desc
+    description: line of business description
+    expr: LOB_DESC
+    data_type: string
+    synonyms:
+    - line_of_business
+    is_enum: true
+    sample_values:
+    - Commercial
+    - DENTAL & VISION
+    - GBD GRS
+    - GBD Medicaid
+    - GBD Medicare
+    - Medicare Supplement
+    - Others
+  - name: funding_type
+    description: 'funding type: If user looks for FINR or full insured non refunding
+      , please use funding=''Non-Refunding''; if user looks for ASO, please use funding=''ASO'''
+    expr: funding
+    data_type: string
+    is_enum: true
+    sample_values:
+    - ASO
+    - Non-Refunding
+    - Refunding
+    - other
+  - name: health_service_code
+    description: also refers to procedure code, cpt code. CPT will always be 5 digits
+      format. If not, pad with leading 0. (e.g. 1234 should be 01234 )
+    expr: HLTH_SRVC_CD
+    data_type: string
+    synonyms:
+    - health_service
+  - name: procedure_modifier_code_1
+    description: Procedure Modifier 1 Code. Modifier will always be 2 digits numbers
+      or 2 upper case letters, or a combination of 1 uppercase letter with 1 digits.
+      (e.g. LT, G0)
+    expr: PROC_MDFR_1_CD
+    data_type: string
+    synonyms:
+    - procedure_modifier_1
+  - name: procedure_modifier_code_2
+    description: Procedure Modifier 2 Code. Modifier will always be 2 digits numbers
+      or 2 upper case letters, or a combination of 1 uppercase letter with 1 digits.
+      (e.g. LT, G0)
+    expr: PROC_MDFR_2_CD
+    data_type: string
+    synonyms:
+    - procedure_modifier_2
+  - name: procedure_modifier_code_3
+    description: Procedure Modifier 3 Code. Modifier will always be 2 digits numbers
+      or 2 upper case letters, or a combination of 1 uppercase letter with 1 digits.
+      (e.g. LT, G0)
+    expr: PROC_MDFR_3_CD
+    data_type: string
+    synonyms:
+    - procedure_modifier_3
+  - name: procedure_modifier_code_4
+    description: Procedure Modifier 4 Code. Modifier will always be 2 digits numbers
+      or 2 upper case letters, or a combination of 1 uppercase letter with 1 digits.
+      (e.g. LT, G0)
+    expr: PROC_MDFR_4_CD
+    data_type: string
+    synonyms:
+    - procedure_modifier_4
+  - name: place_of_service_code
+    description: Place of Service Code. Place of service code will always be 2 digits
+      format. If not, pad with leading 0. (e.g. 9 should be 09 )
+    expr: ddc_dtl_hcfa_pt_cde
+    data_type: string
+    synonyms:
+    - place_of_service
+  - name: claim_line_status_code
+    description: 'CLAIM LINE STATUS CODE is a code which defines the current status
+      of a Claim Line. Examples are: APRVD Approved (only adjudicated claim have this
+      status) DND Denied (only adjudicated claims have this status) PND Pending Adjudication
+      UNKWN Unknown'
+    expr: CLM_LINE_STTS_CD
+    data_type: string
+    synonyms:
+    - status
+    is_enum: true
+    sample_values:
+    - APRVD
+    - DND
+  - name: claim_line_revenue_code
+    description: 'Revenue code: should always have 4 digits. If see 3 or less digits,
+      please pad with leading 0. (e.g. 450 should be 0450 )'
+    expr: RVNU_CD
+    data_type: string
+    synonyms:
+    - revenue
+  - name: provider_pricing_state_zip
+    description: Provider Pricing State
+    expr: ddc_cd_pricng_zip_state
+    data_type: string
+  - name: participation_status_code
+    description: 'PARTICIPATION STATUS CODE: indicates the type of agreement the Provider
+      has with the Plan for a specified Line Of Business (LOB).'
+    expr: PARG_STTS_CD
+    data_type: string
+    synonyms:
+    - participation_status
+    sample_values:
+    - '01'
+    - '02'
+    - UNK
+  - name: in_network_code
+    description: 'IN NETWORK CODE: is a code which represents whether services were
+      performed by a provider that is in network for the member’s plan on that date
+      of service. For example: IN - In Network - Indicates that the provider is considered
+      In Network for member’s plan on the service date of the claim. OUT - Out of
+      Network - Indicates that the provider is considered Out of Network or Non-Participating
+      for member’s plan on the service date of the claim.'
+    expr: INN_CD
+    data_type: string
+    synonyms:
+    - in_network
+    is_enum: true
+    sample_values:
+    - IN
+    - OUT
+  - name: provider_name
+    description: provider name
+    expr: PROV_NAME
+    data_type: string
+  - name: rendering_provider_npi_id
+    description: 'Rendering Provider NPI ID: providers who serviced or rendered the
+      claim'
+    expr: RNDRG_PROV_NPI_ID
+    data_type: string
+    synonyms:
+    - rendering_provider_npi
+  - name: billing_provider_npi_id
+    description: 'Billing Provider NPI ID: providers who submitted or billed the claim'
+    expr: BILLG_PROV_NPI_ID
+    data_type: string
+    synonyms:
+    - billing_provider_npi
+  - name: billing_provider_tax_id
+    description: Billing Provider Tax Id, TIN (Tax Identification Number)
+    expr: ddc_cd_prvdr_tax_id
+    data_type: string
+    synonyms:
+    - billing_provider_tax
+  - name: rendering_provider_taxonomy_code
+    description: Rendering Provider Taxonomy Code
+    expr: RNDRG_PROV_TXNMY_CD
+    data_type: string
+    synonyms:
+    - rendering_provider_taxonomy
+  - name: rendering_provider_taxonomy_description
+    description: Rendering Provider Taxonomy Description
+    expr: rndrg_npi_txnmy_desc
+    data_type: string
+    synonyms:
+    - rendering_provider_taxonomy
+  - name: billing_provider_taxonomy_code
+    description: Billing Provider Taxonomy Code
+    expr: BILLG_PROV_TXNMY_CD
+    data_type: string
+    synonyms:
+    - billing_provider_taxonomy
+  - name: billing_provider_taxonomy_description
+    description: Billing Provider Taxonomy Description
+    expr: billg_npi_txnmy_desc
+    data_type: string
+    synonyms:
+    - billing_provider_taxonomy
+  - name: provider_speciality_code
+    description: Provider Specialty Code
+    expr: ddc_cd_prvdr_spclty_cde
+    data_type: string
+    synonyms:
+    - provider_speciality
+  - name: provider_speciality_code_description
+    description: Provider Specialty Code Description
+    expr: PROV_SPCLTY_CD_DESC
+    data_type: string
+    synonyms:
+    - provider_speciality
+  - name: header_diagnosis_code_1
+    description: Diagnosis Code 1 [a.k.a. Primary header level Dx Code], claim header
+      level
+    expr: ddc_cd_icda_cde_1
+    data_type: string
+    synonyms:
+    - header_diagnosis_1
+  - name: header_diagnosis_code_2
+    description: Diagnosis Code 2,claim header level
+    expr: ddc_cd_icda_cde_2
+    data_type: string
+    synonyms:
+    - header_diagnosis_2
+  - name: header_diagnosis_code_3
+    description: Diagnosis Code 3,claim header level
+    expr: ddc_cd_icda_cde_3
+    data_type: string
+    synonyms:
+    - header_diagnosis_3
+  - name: header_diagnosis_code_4
+    description: Diagnosis Code 4,claim header level
+    expr: ddc_cd_icda_cde_4
+    data_type: string
+    synonyms:
+    - header_diagnosis_4
+  - name: header_diagnosis_code_5
+    description: Diagnosis Code 5,claim header level
+    expr: ddc_cd_icda_cde_5
+    data_type: string
+    synonyms:
+    - header_diagnosis_5
+  - name: header_diagnosis_code_other_1
+    description: Diagnosis Code Other 1,claim header level
+    expr: ddc_cd_icda_cde_oth_1
+    data_type: string
+    synonyms:
+    - header_diagnosis_other_1
+  - name: header_diagnosis_code_other_2
+    description: Diagnosis Code Other 2,claim header level
+    expr: ddc_cd_icda_cde_oth_2
+    data_type: string
+    synonyms:
+    - header_diagnosis_other_2
+  - name: header_diagnosis_code_other_3
+    description: Diagnosis Code Other 3,claim header level
+    expr: ddc_cd_icda_cde_oth_3
+    data_type: string
+    synonyms:
+    - header_diagnosis_other_3
+  - name: header_diagnosis_code_other_4
+    description: Diagnosis Code Other 4,claim header level
+    expr: ddc_cd_icda_cde_oth_4
+    data_type: string
+    synonyms:
+    - header_diagnosis_other_4
+  - name: header_diagnosis_code_other_5
+    description: Diagnosis Code Other 5,claim header level
+    expr: ddc_cd_icda_cde_oth_5
+    data_type: string
+    synonyms:
+    - header_diagnosis_other_5
+  - name: header_diagnosis_code_other_6
+    description: Diagnosis Code Other 6,claim header level
+    expr: ddc_cd_icda_cde_oth_6
+    data_type: string
+    synonyms:
+    - header_diagnosis_other_6
+  - name: header_diagnosis_code_other_7
+    description: Diagnosis Code Other 7,claim header level
+    expr: ddc_cd_icda_cde_oth_7
+    data_type: string
+    synonyms:
+    - header_diagnosis_other_7
+  - name: member_age
+    description: 'member age: member age in years as of service date'
+    expr: ddc_cd_pat_age
+    data_type: number
+  - name: member_gender
+    description: Member Gender Code
+    expr: ddc_cd_pat_sex
+    data_type: string
+    is_enum: true
+    sample_values:
+    - ''
+    - F
+    - M
+    - U
+  - name: member_id
+    description: Member Identifier
+    expr: LOB_MBR_ID
+    data_type: string
+    synonyms:
+    - member
+  - name: member_subscriber_id
+    description: Subscriber ID (is tokenized)
+    expr: SRC_SBSCRBR_ID
+    data_type: string
+    synonyms:
+    - member_subscriber
+  - name: claim_its_host_code
+    description: Claim ITS Host Code (Inter-plan Teleprocessing System Host Code)
+    expr: CLM_ITS_CD
+    data_type: string
+    synonyms:
+    - its_host
+    is_enum: true
+    sample_values:
+    - HOME
+    - HOST
+    - OTHR
+  - name: claim_line_encounter_id
+    description: Claim Line Encounter Id
+    expr: CLM_LINE_ENCNTR_CD
+    data_type: string
+    synonyms:
+    - encounter
+    sample_values:
+    - G
+    - N
+    - O
+    - Y
+  - name: claim_edit_code
+    description: 'SOURCE CLAIM EDIT CODE: provides the additional information required
+      for next steps for the claim processor.'
+    expr: SRC_CLM_EDIT_CD
+    data_type: string
+    synonyms:
+    - edit
+  - name: source_claim_adjustment_reason_code
+    description: 'SOURCE ADJUSTMENT REASON CODE: Always contains Spaces on Payment
+      and MSA Deposit or Recovery Records, FORMAT: 99. This value is unaltered as
+      received by the sending system of record.'
+    expr: SRC_ADJSTMNT_RSN_CD
+    data_type: string
+    synonyms:
+    - source_adjustment_reason
+  - name: explanation_of_benefits_code
+    description: EXPLANATION OF BENEFITS (EOB) CODE represents codes that will drive
+      narrative to appear on the member's Explanation of Benefits Paid statement.
+    expr: EOB_CDE
+    data_type: string
+    synonyms:
+    - explanation_of_benefits
+  - name: type_of_bill_code
+    description: 'Type of Bill Code: 3 digit alphanumeric code found on facility claims'
+    expr: ddc_hosp_type_of_bill
+    data_type: string
+    synonyms:
+    - type_of_bill
+  - name: frequency_of_the_bill_code
+    description: FREQUENCY OF THE BILL CODE is a code which represents the third digit
+      of the Type of Bill Code.
+    expr: FRQNCY_OF_THE_BILL_CD
+    data_type: string
+    synonyms:
+    - frequency_of_the_bill
+    is_enum: true
+  - name: marketing_business_unit_level_1_description
+    description: MARKETING BUSINESS UNIT LEVEL 1 DESCRIPTION reflects the highest
+      level of hierarchy representing the customer segments and sizes.
+    expr: mbu_lvl_1_desc
+    data_type: string
+    synonyms:
+    - marketing_business_unit_level_1
+  - name: marketing_business_unit_chartfield_code
+    description: MARKETING BUSINESS UNIT CHARTFIELD CODE is a code which represents
+      how products are marketed at WellPoint.
+    expr: MARKET
+    data_type: string
+    synonyms:
+    - marketing_business_unit_chartfield
+  - name: rendering_state
+    description: Rendering provider State or rendering state
+    expr: ddc_nat_ea3_rend_state
+    data_type: string
+  - name: brand_description
+    description: BRAND DESCRIPTION describes the branding or marketing strategy of
+      the business.
+    expr: brnd_desc
+    data_type: string
+    synonyms:
+    - brand
+  - name: tmb_edit_ind
+    description: 'Timber eligible indicator: identify if claims are Timber eligible'
+    expr: EDIT_TMB_IND
+    data_type: string
+    synonyms:
+    - tmb_edit
+    is_enum: true
+    sample_values:
+    - N
+    - Y
+  - name: claim_line_reimburse_method_code
+    description: CLAIM LINE REIMBURSE METHOD CODE indicates what compensation process
+      used for pricing independent of any discount actually realized.
+    expr: CLM_LINE_REIMB_MTHD_CD
+    data_type: string
+    synonyms:
+    - reimburse_method
+  - name: src_pricing_reason_codes
+    description: 'PRICING REASON CODE: a code from corporate systems that indicates
+      action taken by corporate pricing, as it appears in the system of record.'
+    expr: ddc_dtl_pricng_rsn_cde
+    data_type: string
+    synonyms:
+    - src_pricing_reasons
+  - name: line_diagnosis_code_1
+    description: Primary line level Dx code, or line level diagnosis code 1
+    expr: LINE_DIAG1
+    data_type: string
+    synonyms:
+    - line_diagnosis_1
+  - name: line_diagnosis_code_2
+    description: line level diagnosis code 2
+    expr: LINE_DIAG2
+    data_type: string
+    synonyms:
+    - line_diagnosis_2
+  - name: line_diagnosis_code_3
+    description: line level diagnosis code 3
+    expr: LINE_DIAG3
+    data_type: string
+    synonyms:
+    - line_diagnosis_3
+  - name: line_diagnosis_code_4
+    description: line level diagnosis code 4
+    expr: LINE_DIAG4
+    data_type: string
+    synonyms:
+    - line_diagnosis_4
+  - name: line_diagnosis_code_5
+    description: line level diagnosis code 5
+    expr: LINE_DIAG5
+    data_type: string
+    synonyms:
+    - line_diagnosis_5
+  - name: provider_contract_id
+    description: PROVIDER CONTRACT IDENTIFIER is an identifier for a defined reimbursement
+      schedule for a given service rendered by a Provider Organization.This includes
+      professional Fee Schedule Identifiers as well as facility Contract Identifiers
+    expr: PN_ID
+    data_type: string
+    synonyms:
+    - provider_contract
+  - name: provider_contract_code_variance
+    description: 'Provider contract code variance : this is last portion of provider
+      contract identifier'
+    expr: ddc_dtl_prvdr_contr_varn
+    data_type: string
+    synonyms:
+    - provider_contract_variance
+  - name: fee_schedule_id
+    description: 'FEE SCHEDULE IDENTIFIER: an identifier for a defined reimbursement
+      schedule for a given service rendered by a Provider Organization'
+    expr: FEE_SCHED_ID
+    data_type: string
+    synonyms:
+    - fee_schedule
+  - name: negotiated_service_term_code
+    description: Negotiated Service Term Code
+    expr: ddc_dtl_nst_cde
+    data_type: string
+    synonyms:
+    - negotiated_service_term
+  - name: institutional_reimbursement_term_code
+    description: Intstitutional Reimbursement Term Code
+    expr: ddc_dtl_irf_cde
+    data_type: string
+    synonyms:
+    - institutional_reimbursement_term
+  - name: provider_contract_code
+    description: Provider contract code (first portion of PN_ID)
+    expr: ddc_dtl_prvdr_contr_cde
+    data_type: string
+    synonyms:
+    - provider_contract
+  - name: reason_for_visit_diagnosis_code_1
+    description: reason_for_visit_code_1
+    expr: ddc_cd_pat_rsn_vst_1
+    data_type: string
+    synonyms:
+    - reason_for_visit_diagnosis_1
+  - name: member_provider_network_id
+    description: Member Provider Network Id
+    expr: NTWK_ID
+    data_type: string
+    synonyms:
+    - member_provider_network
+  - name: group_id
+    description: Group ID or number
+    expr: SRC_GRP_NBR
+    data_type: string
+    synonyms:
+    - group
+  - name: product_chartfield_code
+    description: 'PRODUCT CHARTFIELD CODE: High Level Description of Product'
+    expr: PROD_CF_CD
+    data_type: string
+    synonyms:
+    - product_chartfield
+  - name: primary_carrier_responsible_code
+    description: To identify who has the primary carrier responsibility
+    expr: PRMRY_CARR_RSPNSBLY_CD
+    data_type: string
+    synonyms:
+    - primary_carrier_responsible
+    is_enum: true
+    sample_values:
+    - MDCR
+    - OTHIN
+    - WLP
+  - name: who_paid_as_prime
+    description: 'Who Paid as Prime at Line Level: if user is looking for Anthem is
+      the Primary Payer, use WHO_PAID_AS_PRIME=''ANTM'''
+    expr: WHO_PAID_AS_PRIME
+    data_type: string
+    is_enum: true
+    sample_values:
+    - ANTM
+    - OTHER
+  - name: benefit_payment_status_code
+    description: 'BENEFIT PAYMENT STATUS CODE: a code which indicates the in network
+      or out of network payment status of the claim. This reflects how the claim was
+      paid. For example: Y – In Network – The benefit payment status code is in network.
+      N – Out of Network - The benefit payment status code is out of network. O –
+      Non Network Other – The benefit payment status code is out of network.'
+    expr: BNFT_PAYMNT_STTS_CD
+    data_type: string
+    synonyms:
+    - benefit_payment_status
+    is_enum: true
+    sample_values:
+    - N
+    - Y
+  - name: membership_product_code
+    description: 'Membership Source System Product Identifier or PRODUCT IDENTIFIER:
+      uniquely identifies an offering provided by WellPoint to any interested Party.'
+    expr: ddc_dtl_mbr_prdt_cde
+    data_type: string
+    synonyms:
+    - membership_product
+  - name: national_drug_code_ndc
+    description: NDC (national drug code) number of corresponding drugs/biological
+    expr: ddc_nat_e00_ndc_code
+    data_type: string
+    synonyms:
+    - national_drug_ndc
+  - name: unit_of_measure
+    description: 'unit_of_measure, identify the unit of measure for the package size
+      of the solid, liquid, or gas, as dispensed. Examples: UN = Unit; ML = Milliliter,
+      ME = Milligram'
+    expr: ddc_nat_g00_ndc_units_qual
+    data_type: string
+  - name: benefit_package_id
+    description: BENEFIT PACKAGE IDENTIFIER is the Plan identifier for the specific
+      benefit package.
+    expr: BNFT_PKG_ID
+    data_type: number
+    synonyms:
+    - benefit_package
+  - name: auto_or_manual
+    description: 'auto or manual: indicate if a claim is auto or manually adjudicated'
+    expr: AUTO_OR_MANL
+    data_type: string
+    is_enum: true
+    sample_values:
+    - Auto
+    - Manual
+  - name: claim_bypass_code
+    description: 'claim_bypass_code: Concatenation of 5 BYPASS codes. These bypass
+      codes are used to bypass certain errors in image processing.'
+    expr: CLM_BYPASS_CDE
+    data_type: string
+    synonyms:
+    - bypass
+  - name: price_error
+    description: price_error
+    expr: DDC_DTL_PRICE_ERR
+    data_type: string
+  - name: writeoff_reason_type_code
+    description: writeoff_reason_type_code
+    expr: DDC_DTL_WRITEOFF_TYPE_CDE
+    data_type: string
+    synonyms:
+    - writeoff_reason_type
+  - name: deduct_reason_type_code
+    description: deduct_reason_type_code
+    expr: DDC_DTL_DEDUCT_TYPE_CDE
+    data_type: string
+    synonyms:
+    - deduct_reason_type
+  - name: other_reason_type_code
+    description: other_reason_type_code
+    expr: DDC_DTL_OTH_TYPE_CDE
+    data_type: string
+    synonyms:
+    - other_reason_type
+  - name: copay_reason_type_code
+    description: copay_reason_type_code
+    expr: DDC_DTL_COPAY_TYPE_CDE
+    data_type: string
+    synonyms:
+    - copay_reason_type
+  - name: reject_reason_type_code
+    description: reject_reason_type_code
+    expr: DDC_DTL_REJ_TYPE_CDE
+    data_type: string
+    synonyms:
+    - reject_reason_type
+  - name: proc_service_class_cd_1
+    description: procedure service class code (1) - code assigned to health procedure
+      codes that classifies similar services
+    expr: ddc_dtl_proc_svc_cls_1
+    data_type: string
+  - name: proc_service_class_cd_2
+    description: procedure service class code (2) - code assigned to health procedure
+      codes that classifies similar services
+    expr: ddc_dtl_proc_svc_cls_2
+    data_type: string
+  - name: proc_service_class_cd_3
+    description: procedure service class code (3) - code assigned to health procedure
+      codes that classifies similar services
+    expr: ddc_dtl_proc_svc_cls_3
+    data_type: string
+  - name: hospital_medicare_id
+    description: Hospital's Medicare Id
+    expr: SRC_MEDCR_ID
+    data_type: string
+    synonyms:
+    - hospital_medicare
+  - name: product_lvl2_description
+    description: PRODUCT LEVEL 2 DESCRIPTION reflects the second highest level of
+      hierarchy representing the company product offerings.
+    expr: prod_lvl_2_desc
+    data_type: string
+    synonyms:
+    - product_lvl2
+    sample_values:
+    - ACCIDENT
+    - CRITICAL ILLNESS
+    - FFS
+    - HMO
+    - HOSPITAL INDEMNITY
+    - MEDICAID
+    - OTHER
+    - POS
+    - PPO
+  - name: icd_pcs_1
+    description: ICD PCS 1 for Inpatient Claim
+    expr: ddc_hosp_icd_prcdr_cde_1
+    data_type: string
+  - name: icd_pcs_2
+    description: ICD PCS 2 for Inpatient Claim
+    expr: ddc_hosp_icd_prcdr_cde_2
+    data_type: string
+  - name: icd_pcs_3
+    description: ICD PCS 3 for Inpatient Claim
+    expr: ddc_hosp_icd_prcdr_cde_3
+    data_type: string
+  - name: icd_pcs_4
+    description: ICD PCS 4 for Inpatient Claim
+    expr: ddc_hosp_icd_prcdr_cde_4
+    data_type: string
+  - name: icd_pcs_5
+    description: ICD PCS 5 for Inpatient Claim
+    expr: ddc_hosp_icd_prcdr_cde_5
+    data_type: string
+  - name: provider_state_code
+    description: PROVIDER STATE CODE represents the State of the provider
+    expr: PROV_ST_CD
+    data_type: string
+    synonyms:
+    - provider_state
+  - name: prov_service_state
+    description: This field represents the service location State of the associated
+      service Provider (Medical Claims), as it exists in the system of record.
+    expr: SERV_PROV_STATE
+    data_type: string
+  - name: um_rule_id
+    description: Utilization Management Rule ID
+    expr: DDC_NAT_E00_RULE_ID
+    data_type: string
+    synonyms:
+    - um_rule
+  - name: um_case_nbr
+    description: Utilization Management Case Number
+    expr: DDC_NAT_E00_CAS_NBR
+    data_type: string
+    synonyms:
+    - um_case
+  - name: um_px_code
+    description: Utilization Management Procedure Code
+    expr: DDC_NAT_E00_PROC_CODE
+    data_type: string
+    synonyms:
+    - um_px
+  - name: um_diagnostic
+    description: Utilization Management Diagnostic Code
+    expr: DDC_NAT_E00_DIAG_CODE
+    data_type: string
+  - name: um_dischg_code
+    description: Utilization Management Discharge Code
+    expr: DDC_NAT_E00_DISCHARGE_CODE
+    data_type: string
+    synonyms:
+    - um_dischg
+  - name: um_reason_code
+    description: Utilization Management Reason Code
+    expr: DDC_NAT_E00_UM_RSN_CD
+    data_type: string
+    synonyms:
+    - um_reason
+  - name: subgroup_id
+    description: Subgroup Identifier
+    expr: DDC_CD_GRP_NBR
+    data_type: string
+    synonyms:
+    - subgroup
+  - name: copps_nst_indicator
+    description: Identifies if the claim line has a COPPS Negotiated Service Term
+      (NST) Code with ‘Y’, otherwise ‘N’
+    expr: COPPS_NST_IND
+    data_type: string
+    synonyms:
+    - copps_nsticator
+    is_enum: true
+    sample_values:
+    - N
+    - Y
+  - name: its_plan_prefix
+    description: This is a 3-character prefix to the certificate number that identifies
+      the ITS plan the patient is a member of.
+    expr: DDC_CD_ITS_PLAN_PREFIX
+    data_type: string
+  - name: source_claim_line_adjustment_code
+    description: SOURCE CLAIM LINE ADJUSTMENT CODE represents the response code returned
+      with the rule number that was used to adjust the claim - Vendor / WGS value
+      from Source
+    expr: SRC_CLM_LINE_ADJSTMNT_CD
+    data_type: string
+    synonyms:
+    - source_adjustment
+  - name: member_hcid
+    description: HCID is a member Health Care Identification Number. California SB168
+      senate bill enforces the privacy of the members certificate number, so Wellpoint
+      assigns HCIDs in place of the Social Security Number. Both the ID number and
+      HCID number will be reflected in the system when viewing a specific member.
+      Health Card Identifier (HCID) is a key that is used to communicate with a member.
+      The key is either generated by EMPI Business Services or is specified by an
+      employer group for the subscriber. In the case of dependents, this ID is equal
+      to the subscriber's HCID. (is tokenized)
+    expr: ddc_cd_hcid
+    data_type: string
+  - name: its_host_scff_original_number
+    description: ITS HOST SCCF Number represents the inter-plan document control number.
+      Inter-Plan Teleprocessing Services (ITS) is a Blue Cross/Blue Shield Association
+      electronic network used by all BC/BS gine/host plans. When members receive out
+      of network services .
+    expr: ddc_cd_its_orig_sccf_nbr_new
+    data_type: string
+    synonyms:
+    - its_host_scff_original
+  - name: member_code
+    description: Member Code
+    expr: ddc_cd_pat_mbr_cde
+    data_type: string
+    synonyms:
+    - member
+  - name: member_sequence_number
+    description: SOURCE MEMBER SEQUENCE NUMBER is a suffix used, in conjunction with
+      the Subscriber's identification number, to uniquely identify a specific Member's
+      relationship to the Subscriber.
+    expr: ddc_cd_pat_mbr_seq_nbr
+    data_type: number
+    synonyms:
+    - member_sequence
+  - name: src_provider_zip_code
+    description: SOURCE PROVIDER ZIP CODE represents the service location Zip Code
+      of the associated service Provider (Medical Claims), as submitted on the claim.
+    expr: SRC_PROV_ZIP_CD
+    data_type: string
+    synonyms:
+    - src_provider_zip
+  - name: group_name
+    description: Group Name
+    expr: DDC_CD_GRP_NME
+    data_type: string
+  - name: vendor_product_code
+    description: Source Vendor Product Code
+    expr: DDC_CD_NCN_NTWK_ID
+    data_type: string
+    synonyms:
+    - vendor_product
+  - name: hmo_site_identifier
+    description: Source HMO Site Identifier
+    expr: HMO_SITE_ID
+    data_type: string
+    synonyms:
+    - hmo_site
+  - name: provider_hmo_contract_code
+    description: Source Provider HMO Contract Code
+    expr: SRC_PROV_HMO_CNTRCT_CD
+    data_type: string
+    synonyms:
+    - provider_hmo_contract
+  - name: bill_classification_code
+    description: Facility Bill Classification Code
+    expr: BILL_CLSFCTN_CD
+    data_type: string
+    synonyms:
+    - bill_classification
+  - name: wellpoint_line_of_business_full_cde
+    description: WellPoint Line of Business Full Code
+    expr: COA_WLP_LOB
+    data_type: string
+  - name: wellpoint_exchange_indicator_code
+    description: WellPoint Exchange Indicator Code
+    expr: DDC_NAT_EA1_EXCHANGE_IND
+    data_type: string
+    synonyms:
+    - wellpoint_exchangeicator
+    is_enum: true
+    sample_values:
+    - ''
+    - OF
+    - PB
+    - PO
+    - PR
+  - name: marketing_business_unit_level_2_description
+    description: MARKETING BUSINESS UNIT LEVEL 2 DESCRIPTION reflects the second highest
+      level of hierarchy representing the customer segments and sizes.
+    expr: MBU_LVL_2_DESC
+    data_type: string
+    synonyms:
+    - marketing_business_unit_level_2
+  - name: marketing_business_unit_level_3_description
+    description: MARKETING BUSINESS UNIT LEVEL 3 DESCRIPTION reflects the third highest
+      level of hierarchy representing the customer segments and sizes.
+    expr: MBU_LVL_3_DESC
+    data_type: string
+    synonyms:
+    - marketing_business_unit_level_3
+  - name: provider_region
+    description: Provider Region
+    expr: PROV_REGION
+    data_type: string
+    sample_values:
+    - '-'
+    - CENTRAL
+    - EAST
+    - GEORGIA
+    - NEW YORK
+    - VIRGINIA
+    - WEST
+  - name: member_brand_state
+    description: Member Brand State Code
+    expr: MBR_BRND_STATE
+    data_type: string
+  - name: member_region
+    description: Member Region
+    expr: MBR_REGION
+    data_type: string
+    sample_values:
+    - '-'
+    - CENTRAL
+    - EAST
+    - GEORGIA
+    - NEW YORK
+    - VIRGINIA
+    - WEST
+  - name: product_chartfield_description
+    description: PRODUCT CHARTFIELD DESCRIPTION of PRODUCT CHARTFIELD CODE is a code
+      which represents how a Product is defined.
+    expr: PROD_CF_DESC
+    data_type: string
+    synonyms:
+    - product_chartfield
+  - name: product_level_4_description
+    description: PRODUCT LEVEL 4 DESCRIPTION reflects the fourth highest level of
+      hierarchy representing the company product offerings.
+    expr: PROD_LVL_4_DESC
+    data_type: string
+    synonyms:
+    - product_level_4
+  - name: funding_chartfield_code
+    description: Funding Chartfield Description
+    expr: FUNDG_CF_DESC
+    data_type: string
+    synonyms:
+    - funding_chartfield
+  - name: um_allowable_unit_occurences
+    description: UM allowable unit of occurrences -
+    expr: DDC_NAT_E00_ALLW_UNT_OCCUR
+    data_type: number
+  - name: um_unit_type_code
+    description: UM unit type code
+    expr: DDC_NAT_E00_UNT_TYP_CD
+    data_type: string
+    synonyms:
+    - um_unit_type
+    sample_values:
+    - ' '
+    - D
+    - H
+    - M
+    - U
+    - V
+  - name: um_allowable_unit_type_code
+    description: UM allowable unit type code
+    expr: DDC_NAT_E00_ALLW_UNT_TYP_CD
+    data_type: string
+    synonyms:
+    - um_allowable_unit_type
+    sample_values:
+    - ' '
+    - D
+    - H
+    - M
+    - U
+    - V
+  - name: um_status_code
+    description: UM Status Code
+    expr: DDC_NAT_E00_UM_STAT_CDE
+    data_type: string
+    synonyms:
+    - um_status
+    sample_values:
+    - ' '
+    - '01'
+    - '02'
+    - '04'
+  - name: um_denied_code
+    description: UM Denied Code
+    expr: DDC_NAT_E00_DND_CD
+    data_type: string
+    synonyms:
+    - um_denied
+    sample_values:
+    - ' '
+    - D
+    - N
+    - P
+  - name: source_rate_category
+    description: Source Rate Category Code
+    expr: SRC_RT_CTGRY_CD
+    data_type: string
+  - name: claim_line_adjustment_code
+    description: CLAIM LINE ADJUSTMENT CODE represents the response code returned
+      with the rule number that was used to adjust the claim - EDWard value
+    expr: CLM_LINE_ADJSTMNT_CD
+    data_type: string
+    synonyms:
+    - adjustment
+  - name: its_host_scff_adjudicated_number
+    description: ITS HOST SCCF Number represents the inter-plan document control number.
+      Inter-Plan Teleprocessing Services (ITS) is a Blue Cross/Blue Shield Association
+      electronic network used by all BC/BS gine/host plans. When members receive out
+      of network services .
+    expr: ddc_cd_its_adj_sccf_nbr_new
+    data_type: string
+    synonyms:
+    - its_host_scff_adjudicated
+  - name: wgs_jaa_claim_indicator
+    description: WGS JAA claim (Joint Administer Accounts) when ‘Y’.
+    expr: WGS_JAA_IND
+    data_type: string
+    synonyms:
+    - wgs_jaaicator
+    is_enum: true
+    sample_values:
+    - N
+    - Y
+  - name: claim_type_desc
+    description: Detailed Claim Type description
+    expr: CLAIM_TYPE_DESC
+    data_type: string
+    synonyms:
+    - type
+    sample_values:
+    - Ambulatory Surgery Center
+    - Facility Inpatient
+    - Facility Outpatient
+    - Home Health Care
+    - Other
+    - Professional
+    - Skilled Nursing Facility Inpatient
+    - Skilled Nursing Facility Outpatient
+  - name: ndc_label_number
+    description: NDC number of corresponding drugs/biological
+    expr: NDC_LBL_NM
+    data_type: string
+    synonyms:
+    - ndc_label
+  time_dimensions:
+  - name: paid_date
+    description: Claim Line Adjudication Date or paid date
+    expr: ddc_cd_clm_compl_dte
+    data_type: date
+    synonyms:
+    - paid
+  - name: claim_service_start_date
+    description: claim_service_start_date
+    expr: ddc_cd_svc_from_dte
+    data_type: date
+    synonyms:
+    - service_start_date
+    - claim_service_start
+  - name: claim_service_end_date
+    description: claim_service_end_date
+    expr: ddc_cd_svc_thru_dte
+    data_type: date
+    synonyms:
+    - service_end_date
+    - claim_service_end
+  - name: claim_line_service_start_date
+    description: Claim Line Service Start Date
+    expr: ddc_dtl_svc_from_dte
+    data_type: date
+    synonyms:
+    - service_start_date
+    - claim_line_service_start
+  - name: claim_line_service_end_date
+    description: Claim Line Service End Date
+    expr: ddc_dtl_svc_thru_dte
+    data_type: date
+    synonyms:
+    - service_end_date
+    - claim_line_service_end
+  - name: claim_received_date
+    description: Claim Received Date
+    expr: ddc_cd_recvd_dte
+    data_type: date
+    synonyms:
+    - received_date
+    - claim_received
+  - name: um_review_dt
+    description: Utilization Management Review Date
+    expr: DDC_NAT_E00_RVW_DTE
+    data_type: date
+  - name: um_start_date
+    description: Utilization Management Start Date
+    expr: DDC_NAT_E00_START_DTE
+    data_type: date
+    synonyms:
+    - um_start
+  - name: um_end_date
+    description: Utilization Management End Date
+    expr: DDC_NAT_E00_END_DTE
+    data_type: date
+    synonyms:
+    - um_end
+  - name: um_case_creation_date
+    description: Utilization Management Case Creation Date
+    expr: DDC_NAT_E00_CAS_CRT_DTE
+    data_type: date
+    synonyms:
+    - um_case_creation
+  facts:
+  - name: claim_line_billed_amount
+    description: claim line billed charge amount (Billed Amount)
+    expr: ddc_dtl_blld_amt
+    data_type: number
+    synonyms:
+    - billed_amount
+    - claim_line_billed
+  - name: claim_line_allowed_amount
+    description: claim line allowed amount (Allowed Amount), it is also Contracted
+      Reimbursable Amount for Covered Services
+    expr: ddc_dtl_elig_expsn_amt
+    data_type: number
+    synonyms:
+    - allowed_amount
+    - claim_line_allowed
+  - name: claim_line_payment_percent
+    description: CLAIM LINE PAYMENT PERCENT represents the value returned from the
+      vendor software for pay-percent rules. It indicates reduction or increase which
+      should be applied to allowed amount. For example this column contains information
+      from ClaimXten from McKesson.
+    expr: ddc_nat_f00_cxt_pay_percent
+    data_type: number
+    synonyms:
+    - payment_percent
+  - name: claim_line_pay_amount
+    description: claim line pay amount (Pay Amount)
+    expr: ddc_dtl_pay_amt
+    data_type: number
+    synonyms:
+    - pay_amount
+    - claim_line_pay
+  - name: claim_total_paid_amount
+    description: claim level paid, do not use this field in aggregate function in
+      general, unless user specifically mention the field name
+    expr: PAID_TOT
+    data_type: number
+    synonyms:
+    - total_paid_amount
+    - claim_total_paid
+  - name: claim_line_provider_discount_amount
+    description: Provider Discount Amount at claim line level
+    expr: ddc_dtl_prvdr_disc_amt
+    data_type: number
+    synonyms:
+    - provider_discount_amount
+    - claim_line_provider_discount
+  - name: claim_line_copay_amount
+    description: claim line level copay amount.
+    expr: CPAY_AMT
+    data_type: number
+    synonyms:
+    - copay_amount
+    - claim_line_copay
+  - name: claim_line_pay_type_amount
+    description: claim line pay type amount
+    expr: ddc_dtl_pay_type_amt
+    data_type: number
+    synonyms:
+    - pay_type_amount
+    - claim_line_pay_type
+  - name: claim_line_deductible_amount
+    description: claim line deductible amount
+    expr: ddc_dtl_deduct_type_amt
+    data_type: number
+    synonyms:
+    - deductible_amount
+    - claim_line_deductible
+  - name: billed_service_units
+    description: Billed Service Units
+    expr: BILLD_SRVC_UNIT_CNT
+    data_type: number
+  - name: paid_service_units
+    description: Paid Service Units
+    expr: PAID_SRVC_UNIT_CNT
+    data_type: number
+  - name: claim_line_ndc_units
+    description: claim line NDC unit(s) represents the volume or number of units either
+      administered and/or wastage.
+    expr: ddc_nat_g00_ndc_units
+    data_type: number
+    synonyms:
+    - ndc_units
+  - name: claim_line_reject_amount
+    description: 'Line Level: Individual claim line Reject amount (Reject Amount)
+      - Only fields with claim type of K are included (ddc_dtl_lne_type_cde = ''k'')'
+    expr: ddc_dtl_rej_type_amt
+    data_type: number
+    synonyms:
+    - reject_amount
+    - claim_line_reject
+  - name: claim_line_not_covered_amount
+    description: 'Line Level: Individual claim line Not Covered amount (Not Covered
+      Amount) - Only fields with claim type of K are included (ddc_dtl_lne_type_cde
+      = ''k'')'
+    expr: ddc_dtl_not_covd_amt
+    data_type: number
+    synonyms:
+    - not_covered_amount
+    - claim_line_not_covered
+  - name: cob_savings_amount
+    description: 'COORDINATION OF BENEFITS (COB) SAVINGS AMOUNT is the reduction in
+      the Plan''s payment amount to reflect the Plan as secondary payor. Line Level:
+      Individual claim line Coordination of Benefits; For Summary Adjudicated Claims,
+      contains prorated amounts]- Only fields with claim type of K are included (ddc_dtl_lne_type_cde
+      = ''k'')'
+    expr: COB_SVNGS_AMT
+    data_type: number
+    synonyms:
+    - cob_savings
+  - name: coinsurance_amount
+    description: 'COINSURANCE AMOUNT is the amount the insured individual pays, as
+      a set percentage of the cost of covered medical services, as an out-of-pocket
+      payment to the provider. This amount may include member sanctions/penalties
+      for out of network or any coinsurance form of insured non-compliance such as
+      lack of prior authorizations for not included in the Member Sanctions Penalties
+      Amount. Line Level: Individual claim line reduction for Co-Insurance; For Summary
+      Adjudicated Claims, contains prorated amounts]- Only fields with claim type
+      of K are included (ddc_dtl_lne_type_cde = ''k'')'
+    expr: COINSRN_AMT
+    data_type: number
+    synonyms:
+    - coinsurance
+  - name: interest_amount
+    description: 'INTEREST AMOUNT is based on the state laws of where the service
+      is rendered and is a result of a late payment to a provider organization. Claim
+      level: Total claim interest paid.'
+    expr: INTRST_AMT
+    data_type: number
+    synonyms:
+    - interest
+  metrics:
+  - name: wgs_mad.total_billed
+    description: Total billed amount across claim lines
+    expr: SUM({wgs_mad.claim_line_billed_amount})
+  - name: wgs_mad.total_allowed
+    description: Total allowed amount across claim lines
+    expr: SUM({wgs_mad.claim_line_allowed_amount})
+  - name: wgs_mad.total_paid
+    description: Total paid amount across claim lines
+    expr: SUM({wgs_mad.claim_line_pay_amount})
+  - name: wgs_mad.total_copay
+    description: Total copay amount
+    expr: SUM({wgs_mad.claim_line_copay_amount})
+  - name: wgs_mad.total_deductible
+    description: Total deductible amount
+    expr: SUM({wgs_mad.claim_line_deductible_amount})
+  - name: wgs_mad.total_coinsurance
+    description: Total coinsurance amount
+    expr: SUM({wgs_mad.coinsurance_amount})
+  - name: wgs_mad.total_provider_discount
+    description: Total provider discount amount
+    expr: SUM({wgs_mad.claim_line_provider_discount_amount})
+  - name: wgs_mad.total_billed_units
+    description: Total billed service units
+    expr: SUM({wgs_mad.billed_service_units})
+  - name: wgs_mad.total_paid_units
+    description: Total paid service units
+    expr: SUM({wgs_mad.paid_service_units})
+  - name: wgs_mad.claim_count
+    description: Distinct claim count
+    expr: COUNT(DISTINCT {wgs_mad.claim_nbr})
+  - name: wgs_mad.claim_line_count
+    description: Total claim line count
+    expr: COUNT(*)
+  - name: wgs_mad.avg_paid_per_claim
+    description: Average paid amount per claim
+    expr: SUM({wgs_mad.claim_line_pay_amount}) / NULLIF(COUNT(DISTINCT {wgs_mad.claim_nbr}),
+      0)
+  - name: wgs_mad.avg_paid_per_line
+    description: Average paid amount per claim line
+    expr: SUM({wgs_mad.claim_line_pay_amount}) / NULLIF(COUNT(*), 0)
+  - name: wgs_mad.avg_billed_per_claim
+    description: Average billed amount per claim
+    expr: SUM({wgs_mad.claim_line_billed_amount}) / NULLIF(COUNT(DISTINCT {wgs_mad.claim_nbr}),
+      0)
+  - name: wgs_mad.paid_to_allowed_ratio
+    description: Ratio of paid to allowed amount
+    expr: SUM({wgs_mad.claim_line_pay_amount}) / NULLIF(SUM({wgs_mad.claim_line_allowed_amount}),
+      0)
+  - name: wgs_mad.denial_rate
+    description: Share of claim lines with denied status
+    expr: SUM(CASE WHEN {wgs_mad.claim_line_status_code} = 'DND' THEN 1 ELSE 0 END)
+      / NULLIF(COUNT(*), 0)
+  - name: wgs_mad.approval_rate
+    description: Share of claim lines with approved status
+    expr: SUM(CASE WHEN {wgs_mad.claim_line_status_code} = 'APRVD' THEN 1 ELSE 0 END)
+      / NULLIF(COUNT(*), 0)
+  filters:
+  - name: timber_eligible
+    description: Standard Timber filter - only Timber-eligible claim lines
+    synonyms:
+    - timber
+    - standard_filter
+    expr: '{wgs_mad.tmb_edit_ind} = ''Y'''
+  - name: approved_lines_only
+    description: Filter for approved (adjudicated) claim lines
+    synonyms:
+    - approved
+    - aprvd
+    expr: '{wgs_mad.claim_line_status_code} = ''APRVD'''
+  - name: denied_lines_only
+    description: Filter for denied claim lines
+    synonyms:
+    - denied
+    - dnd
+    expr: '{wgs_mad.claim_line_status_code} = ''DND'''
+  - name: in_network_only
+    description: Filter for in-network claim lines
+    synonyms:
+    - in_network
+    - inn
+    expr: '{wgs_mad.in_network_code} = ''IN'''
+  - name: out_of_network_only
+    description: Filter for out-of-network claim lines
+    synonyms:
+    - oon
+    - out_of_network
+    expr: '{wgs_mad.in_network_code} = ''OUT'''
+  - name: professional_claims
+    description: Filter for professional / CMS-1500 claims
+    synonyms:
+    - cms_1500
+    - professional
+    - physician_claims
+    expr: '{wgs_mad.claim_type} IN (''MA'', ''MM'', ''PA'', ''PM'', ''PC'')'
+  - name: facility_outpatient_claims
+    description: Filter for facility / UB-04 / outpatient claims
+    synonyms:
+    - ub_04
+    - outpatient
+    - facility
+    expr: '{wgs_mad.claim_type} LIKE ''O%'''
+  - name: inpatient_claims
+    description: Filter for inpatient facility claims
+    synonyms:
+    - inpatient
+    expr: '{wgs_mad.claim_type} LIKE ''I%'''
+  - name: funding_aso
+    description: Filter for ASO-funded claims
+    synonyms:
+    - aso
+    expr: '{wgs_mad.funding_type} = ''ASO'''
+  - name: funding_non_refunding
+    description: Filter for fully insured non-refunding (FINR) claims
+    synonyms:
+    - finr
+    - non_refunding
+    expr: '{wgs_mad.funding_type} = ''Non-Refunding'''
+  - name: recent_12_months
+    description: Most recent 12 months by date of service
+    synonyms:
+    - last_12_months
+    - trailing_12_months
+    - ttm
+    expr: '{wgs_mad.claim_service_start_date} >= DATEADD(month, -12, CURRENT_DATE())'
+  - name: high_cost_lines
+    description: Claim lines with allowed amount > $50,000
+    synonyms:
+    - high_cost
+    - expensive_lines
+    expr: '{wgs_mad.claim_line_allowed_amount} > 50000'
+analysis_modes:
+- name: cost_change_investigation_over_time_window
+  description: 'Explains how a selected cost metric changed between two comparable
+    time periods. Its purpose is to identify: 1. what metric changed, 2. how much
+    it changed, 3. which dimensions contributed most to the change, 4. and which drill-down
+    path best localizes the change. This mode compares a prior period and a current
+    period over the same metric, under a user-defined scope. It ranks candidate dimensions
+    by contribution to the metric delta and generates SQL for iterative drill-down.'
+  drill_metric:
+  - wgs_mad.total_paid
+  explainer_metrics:
+  - wgs_mad.claim_count
+  - wgs_mad.claim_line_count
+  - wgs_mad.avg_paid_per_claim
+  - wgs_mad.paid_to_allowed_ratio
+  save_parquet: false
+  disable_summary_creation: true
+  generate_recommendations: false
+  interaction_matrix:
+    enabled: true
+    trigger_rules:
+      interaction_stage:
+        min_abs_net_delta: 1000
+        min_drill_path_depth: 2
+        run_when_repeated_delta_ratio: 0
+        run_when_low_volume: true
+      clinical_stage:
+        require_selected_operational_cells: true
+        min_selected_operational_positive_delta: 1000
+    categories:
+      operational:
+        dimensions:
+        - claim_type_desc
+        - funding_type
+        - product_lvl2_description
+        - who_paid_as_prime
+        - primary_carrier_responsible_code
+        - marketing_business_unit_level_1_description
+        - src_provider_zip_code
+        carry_through_dimensions:
+        - line_of_business_desc
+        - provider_state_code
+      clinical:
+        dimensions:
+        - provider_speciality_code_description
+        - health_service_code
+        - ndc_label_number
+        - type_of_bill_code
+    selection_rules:
+      operational:
+        min_positive_delta: 1000
+        min_share_of_positive_delta: 0.05
+        max_cumulative_share_of_positive_delta: 0.8
+        max_k: 5
+        always_include_min_share_of_net_delta: 0.4
+      clinical:
+        min_positive_delta: 500
+        min_share_of_positive_delta: 0.05
+        max_cumulative_share_of_positive_delta: 0.9
+        max_k: 10
+        include_offsets: true
+        max_offset_k: 3
+    preview_limits:
+      max_operational_cells: 5
+      max_clinical_cells: 10
+      max_recommendations: 5
+    artifact_limits:
+      max_rows_json_preview: 1000
+  period:
+    rolling_time_dimension: wgs_mad.claim_service_start_date
+    current_period:
+      start_time: null
+      end_time: null
+    previous_period:
+      start_time: null
+      end_time: null
+  drill_dimensions:
+  - line_of_business_desc
+  - funding_type
+  - product_lvl2_description
+  - claim_type_desc
+  - who_paid_as_prime
+  - primary_carrier_responsible_code
+  - provider_state_code
+  - marketing_business_unit_level_1_description
+  - src_provider_zip_code
+  - participation_status_code
+  - provider_speciality_code_description
+  - in_network_code
+  - billing_provider_tax_id
+  - health_service_code
+  - place_of_service_code
+  - claim_line_revenue_code
+  - claim_line_status_code
+  - type_of_bill_code
+  - ndc_label_number
+  - claim_its_host_code
+  - member_gender
+  exclude_if_filtered: true
+  stop_rules:
+    max_depth: 10
+    top_k_per_level: 5
+    min_abs_delta: 1000
+    min_row_count: 1
+    min_contribution_pct: 0.05
+    min_incremental_gain_pct: 0.05

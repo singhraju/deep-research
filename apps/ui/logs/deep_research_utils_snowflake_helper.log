@@ -1,0 +1,8 @@
+2026-04-12 04:29:06,209 - PID:60149 - TID:6231584768 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-12 04:29:13,275 - PID:60149 - TID:6231584768 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-12 04:31:09,829 - PID:60149 - TID:6197358592 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-12 04:31:14,228 - PID:60149 - TID:6366195712 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-12 04:31:15,830 - PID:60149 - TID:6231584768 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-12 04:31:16,927 - PID:60149 - TID:6197358592 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-12 04:31:21,675 - PID:60149 - TID:6366195712 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-12 04:31:23,179 - PID:60149 - TID:6231584768 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions

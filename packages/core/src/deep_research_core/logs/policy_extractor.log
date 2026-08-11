@@ -1,0 +1,249 @@
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:170 - === Policy Extractor Logging Initialized ===
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:171 - Log directory: /Users/AH45807/project/deep-research/packages/core/src/deep_research_core/logs
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:172 - Max file size: 50.0MB
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:173 - Backup count: 10
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:174 - Process ID: 39577
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:175 - Component log levels:
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_store: WARNING
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_bulk_operations: WARNING
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.pipeline: INFO
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.api: INFO
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.rendering: INFO
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.url_extraction: INFO
+2026-04-02 23:39:22,064 - PID:39577 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.chunking: DEBUG
+2026-04-02 23:39:22,068 - PID:39577 - TID:8578412672 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-02 23:39:37,178 - PID:39577 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-02 23:39:44,333 - PID:39577 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-02 23:39:51,041 - PID:39577 - TID:8578412672 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-02 23:48:54,740 - PID:39577 - TID:8578412672 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-02 23:48:54,891 - PID:39577 - TID:8578412672 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-02 23:48:54,891 - PID:39577 - TID:8578412672 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-03 01:47:54-04:00 EST (in 7200 seconds)
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:170 - === Policy Extractor Logging Initialized ===
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:171 - Log directory: /Users/AH45807/project/deep-research/packages/core/src/deep_research_core/logs
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:172 - Max file size: 50.0MB
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:173 - Backup count: 10
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:174 - Process ID: 40123
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:175 - Component log levels:
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_store: WARNING
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_bulk_operations: WARNING
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.pipeline: INFO
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.api: INFO
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.rendering: INFO
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.url_extraction: INFO
+2026-04-02 23:52:05,963 - PID:40123 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.chunking: DEBUG
+2026-04-02 23:52:05,967 - PID:40123 - TID:8578412672 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-02 23:52:09,219 - PID:40123 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-02 23:52:16,664 - PID:40123 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-02 23:52:16,739 - PID:40123 - TID:8578412672 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-02 23:52:17,447 - PID:40123 - TID:8578412672 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-02 23:52:17,585 - PID:40123 - TID:8578412672 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-02 23:52:17,586 - PID:40123 - TID:8578412672 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-03 01:51:17-04:00 EST (in 7200 seconds)
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:170 - === Policy Extractor Logging Initialized ===
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:171 - Log directory: /Users/AH45807/project/deep-research/packages/core/src/deep_research_core/logs
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:172 - Max file size: 50.0MB
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:173 - Backup count: 10
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:174 - Process ID: 50807
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:175 - Component log levels:
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_store: WARNING
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_bulk_operations: WARNING
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.pipeline: INFO
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.api: INFO
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.rendering: INFO
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.url_extraction: INFO
+2026-04-07 15:33:03,384 - PID:50807 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.chunking: DEBUG
+2026-04-07 15:33:03,388 - PID:50807 - TID:8578412672 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-07 15:33:06,995 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-07 15:33:15,160 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-07 15:33:19,023 - PID:50807 - TID:8578412672 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-07 15:33:21,357 - PID:50807 - TID:8578412672 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-07 15:33:21,513 - PID:50807 - TID:8578412672 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-07 15:33:21,514 - PID:50807 - TID:8578412672 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-07 17:32:21-04:00 EST (in 7200 seconds)
+2026-04-07 15:53:06,195 - PID:50807 - TID:8578412672 - deep_research_core.user_intent - INFO - identify_intent_and_filters:1052 - Identifying intent and filters for question: Investigate HCPCS code 92012...
+2026-04-07 15:53:06,197 - PID:50807 - TID:8578412672 - deep_research_core.user_intent - INFO - rule_based_intent_resolution:1022 - Resolving intent with rule-based logic for question: Investigate HCPCS code 92012...
+2026-04-07 15:53:06,197 - PID:50807 - TID:8578412672 - deep_research_core.user_intent - INFO - rule_based_intent_resolution:1039 - Rule-based resolution complete: intent=general_query, filters=0, group_by=0
+2026-04-07 15:56:40,620 - PID:50807 - TID:8578412672 - deep_research_core.user_intent - INFO - identify_intent_and_filters:1052 - Identifying intent and filters for question: Investigate HCPCS code 92012 in state VA...
+2026-04-07 15:56:40,621 - PID:50807 - TID:8578412672 - deep_research_core.user_intent - INFO - rule_based_intent_resolution:1022 - Resolving intent with rule-based logic for question: Investigate HCPCS code 92012 in state VA...
+2026-04-07 15:56:40,621 - PID:50807 - TID:8578412672 - deep_research_core.user_intent - INFO - rule_based_intent_resolution:1039 - Rule-based resolution complete: intent=general_query, filters=0, group_by=0
+2026-04-07 15:56:45,144 - PID:50807 - TID:8578412672 - deep_research_core.user_intent - INFO - identify_intent_and_filters:1052 - Identifying intent and filters for question: Investigate HCPCS code 92012 in state Virginia...
+2026-04-07 15:56:45,144 - PID:50807 - TID:8578412672 - deep_research_core.user_intent - INFO - rule_based_intent_resolution:1022 - Resolving intent with rule-based logic for question: Investigate HCPCS code 92012 in state Virginia...
+2026-04-07 15:56:45,144 - PID:50807 - TID:8578412672 - deep_research_core.user_intent - INFO - rule_based_intent_resolution:1039 - Rule-based resolution complete: intent=general_query, filters=0, group_by=0
+2026-04-07 17:56:11,927 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:58 - Reading semantic view configuration from /Users/AH45807/project/deep-research/configs/ecap_semantic_view.yaml
+2026-04-07 17:56:11,983 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:70 - Connecting to Snowflake...
+2026-04-07 17:56:11,990 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:186 - Error creating Snowflake session: 251005: User is empty, but it must be provided unless authenticator is one of OAUTH_AUTHORIZATION_CODE, OAUTH, WORKLOAD_IDENTITY, OAUTH_CLIENT_CREDENTIALS, PAT_WITH_EXTERNAL_SESSION, PROGRAMMATIC_ACCESS_TOKEN, NO_AUTH.
+2026-04-07 17:57:51,664 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:58 - Reading semantic view configuration from /Users/AH45807/project/deep-research/configs/ecap_semantic_view.yaml
+2026-04-07 17:57:51,690 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:70 - Connecting to Snowflake...
+2026-04-07 17:57:54,276 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-07 17:57:59,657 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 2 additional sessions
+2026-04-07 17:57:59,657 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:94 - Processing table: claims_expense (NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_CLM_EXPNS)
+2026-04-07 17:57:59,657 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_code (column: LOB_CD)
+2026-04-07 17:58:02,474 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-07 17:58:02,474 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_description (column: LOB_SHRT_DESC)
+2026-04-07 17:58:04,848 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-07 17:58:04,848 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_chartfield (column: MBU_CF_CD)
+2026-04-07 17:58:05,840 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:05,840 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_cls_short_description (column: MBU_CLS_SHRT_DESC)
+2026-04-07 17:58:06,779 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 7 values
+2026-04-07 17:58:06,779 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: service_area_state (column: SRVCAREA_ST_SHRT_DESC)
+2026-04-07 17:58:07,848 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:07,848 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_high (column: HCC_CMRCL_MNGMNT_HIGH_SHRT_DESC)
+2026-04-07 17:58:09,100 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 1 values
+2026-04-07 17:58:09,100 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_medium (column: HCC_CMRCL_MNGMNT_MEDM_SHRT_DESC)
+2026-04-07 17:58:10,874 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 5 values
+2026-04-07 17:58:10,874 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_low (column: HCC_CMRCL_MNGMNT_LOW_SHRT_DESC)
+2026-04-07 17:58:11,934 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 6 values
+2026-04-07 17:58:11,934 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: rendering_provider_name (column: RNDRG_PROV_NM)
+2026-04-07 17:58:12,813 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:12,813 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: rendering_hospital_system (column: RNDRG_HOSP_SYS_NM)
+2026-04-07 17:58:13,839 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:13,839 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: facility_type (column: FCLTY_TYPE)
+2026-04-07 17:58:15,134 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:15,134 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: drg_code (column: FNL_DRG_CD)
+2026-04-07 17:58:15,556 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:15,556 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: drg_name (column: FNL_DRG_NM)
+2026-04-07 17:58:16,632 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:16,632 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: procedure_code (column: PROC_CD)
+2026-04-07 17:58:17,106 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:17,106 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: procedure_name (column: PROC_SHRT_NM)
+2026-04-07 17:58:17,518 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:17,519 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_code (column: PROD_CD)
+2026-04-07 17:58:17,905 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:17,905 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_description (column: PROD_SHRT_DESC)
+2026-04-07 17:58:18,706 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:18,706 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: primary_diagnosis_code (column: PRMRY_DSCHRG_DIAG_CD)
+2026-04-07 17:58:19,164 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:19,165 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: primary_diagnosis_name (column: PRMRY_DSCHRG_DIAG_NM)
+2026-04-07 17:58:19,610 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:19,610 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: pa_required_code (column: PA_RQRD_CD)
+2026-04-07 17:58:20,867 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 5 values
+2026-04-07 17:58:20,867 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: claim_number (column: CLM_NBR)
+2026-04-07 17:58:22,419 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:22,419 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:94 - Processing table: auth_membership (NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_AUTH_MBRSHP)
+2026-04-07 17:58:22,419 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_code (column: LOB_CD)
+2026-04-07 17:58:24,293 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-07 17:58:24,293 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_description (column: LOB_SHRT_DESC)
+2026-04-07 17:58:25,475 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-07 17:58:25,475 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_chartfield (column: MBU_CF_CD)
+2026-04-07 17:58:25,821 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:25,821 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_cls_short_description (column: MBU_CLS_SHRT_DESC)
+2026-04-07 17:58:26,887 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 8 values
+2026-04-07 17:58:26,888 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: service_area_state (column: SRVCAREA_ST_SHRT_DESC)
+2026-04-07 17:58:27,343 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:27,343 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_code (column: PROD_CD)
+2026-04-07 17:58:28,086 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:28,086 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_description (column: PROD_SHRT_DESC)
+2026-04-07 17:58:28,507 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-07 17:58:28,507 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: funding_chartfield (column: RSTTD_FUNDG_CF_CD)
+2026-04-07 17:58:29,545 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 9 values
+2026-04-07 17:58:29,546 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: funding_type_description (column: FUNDG_CF_TYPE_SHRT_DESC)
+2026-04-07 17:58:30,238 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-07 17:58:30,239 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: snap_month (column: SNAP_YEAR_MNTH_NBR)
+2026-04-07 17:58:31,168 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 1 values
+2026-04-07 17:58:31,168 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:124 - Updated 13 out of 31 dimensions
+2026-04-07 17:58:31,168 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:126 - Writing updated configuration to /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-07 17:58:31,192 - PID:50807 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:133 - Successfully saved updated semantic view to /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-07 17:58:31,455 - PID:50807 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - close:313 - Main Snowflake session closed
+2026-04-08 16:33:57,676 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:170 - === Policy Extractor Logging Initialized ===
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:171 - Log directory: /Users/AH45807/project/deep-research/packages/core/src/deep_research_core/logs
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:172 - Max file size: 50.0MB
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:173 - Backup count: 10
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:174 - Process ID: 55476
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:175 - Component log levels:
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_store: WARNING
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.snowflake_bulk_operations: WARNING
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.pipeline: INFO
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.api: INFO
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.rendering: INFO
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.url_extraction: INFO
+2026-04-08 16:33:57,677 - PID:55476 - TID:8578412672 - policy_extractor.system - INFO - log_system_info:177 -   policy_extractor.chunking: DEBUG
+2026-04-08 16:33:57,682 - PID:55476 - TID:8578412672 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-08 16:34:01,371 - PID:55476 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-08 16:34:08,927 - PID:55476 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 3 additional sessions
+2026-04-08 16:34:09,018 - PID:55476 - TID:8578412672 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-08 16:34:09,741 - PID:55476 - TID:8578412672 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-08 16:34:09,881 - PID:55476 - TID:8578412672 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-08 16:34:09,884 - PID:55476 - TID:8578412672 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-08 18:33:09-04:00 EST (in 7200 seconds)
+2026-04-08 16:34:10,340 - PID:55476 - TID:8578412672 - deep_research_core.user_intent - INFO - build_app:1034 - Building intent resolution app from YAML: /Users/AH45807/Library/CloudStorage/OneDrive-ElevanceHealth/_Active_projects/deep_learning_poc/configs/semantic_view/ecap_semantic_view.yaml
+2026-04-08 16:34:10,364 - PID:55476 - TID:8578412672 - deep_research_utils.ehap - INFO - __init__:24 - base url: https://api.horizon.elevancehealth.com/v2
+2026-04-08 16:34:10,364 - PID:55476 - TID:8578412672 - deep_research_utils.ehap - INFO - _ensure_token:67 - Token expired or not present. Refreshing token...
+2026-04-08 16:34:10,499 - PID:55476 - TID:8578412672 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:51 - EHAP authentication successful with `VOlF2INQArWlEG4icdjyI7js5ICMuwfM`
+2026-04-08 16:34:10,499 - PID:55476 - TID:8578412672 - deep_research_utils.ehap - INFO - _authenticate_and_get_token:57 - Token will expire at 2026-04-08 18:33:10-04:00 EST (in 7200 seconds)
+2026-04-08 16:34:10,500 - PID:55476 - TID:8578412672 - deep_research_core.user_intent - INFO - build_app:1048 - LLM client built successfully
+2026-04-08 16:34:10,502 - PID:55476 - TID:8578412672 - deep_research_core.user_intent - INFO - build_app:1059 - Intent resolution app built and compiled successfully
+2026-04-08 16:34:10,502 - PID:55476 - TID:8578412672 - deep_research_core.user_intent - INFO - run:1062 - Running intent resolution for question: Find what changes in the state of VA?...
+2026-04-08 16:34:10,506 - PID:55476 - TID:8578412672 - deep_research_core.user_intent - INFO - identify_intent_and_filters:994 - Identifying intent and filters for question: Find what changes in the state of VA?...
+2026-04-08 16:34:10,506 - PID:55476 - TID:8578412672 - deep_research_core.user_intent - INFO - resolve_intent_with_llm:741 - Resolving intent with LLM for question: Find what changes in the state of VA?...
+2026-04-08 16:34:18,484 - PID:55476 - TID:8578412672 - deep_research_core.user_intent - INFO - resolve_intent_with_llm:792 - LLM intent resolution succeeded: intent=trend_analysis
+2026-04-08 16:34:18,484 - PID:55476 - TID:8578412672 - deep_research_core.user_intent - INFO - identify_intent_and_filters:1010 - LLM-based intent resolution succeeded
+2026-04-08 16:34:18,484 - PID:55476 - TID:8578412672 - deep_research_core.user_intent - INFO - run:1072 - Intent resolution complete: intent=trend_analysis
+2026-04-08 16:36:08,562 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:58 - Reading semantic view configuration from /Users/AH45807/project/deep-research/configs/ecap_semantic_view.yaml
+2026-04-08 16:36:08,591 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:70 - Connecting to Snowflake...
+2026-04-08 16:36:11,221 - PID:55476 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _create_session:184 - Snowflake session created successfully
+2026-04-08 16:36:16,141 - PID:55476 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - _initialize_connection_pool:342 - Initialized connection pool with 2 additional sessions
+2026-04-08 16:36:16,141 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:94 - Processing table: claims_expense (NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_CLM_EXPNS)
+2026-04-08 16:36:16,141 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_code (column: LOB_CD)
+2026-04-08 16:36:19,592 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-08 16:36:19,592 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_description (column: LOB_SHRT_DESC)
+2026-04-08 16:36:21,420 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-08 16:36:21,420 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_chartfield (column: MBU_CF_CD)
+2026-04-08 16:36:22,421 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:22,421 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_cls_short_description (column: MBU_CLS_SHRT_DESC)
+2026-04-08 16:36:24,327 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 7 values
+2026-04-08 16:36:24,328 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: service_area_state (column: SRVCAREA_ST_SHRT_DESC)
+2026-04-08 16:36:25,987 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 30 values
+2026-04-08 16:36:25,987 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_high (column: HCC_CMRCL_MNGMNT_HIGH_SHRT_DESC)
+2026-04-08 16:36:27,090 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 1 values
+2026-04-08 16:36:27,090 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_medium (column: HCC_CMRCL_MNGMNT_MEDM_SHRT_DESC)
+2026-04-08 16:36:28,221 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 5 values
+2026-04-08 16:36:28,222 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: hcc_low (column: HCC_CMRCL_MNGMNT_LOW_SHRT_DESC)
+2026-04-08 16:36:29,887 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 6 values
+2026-04-08 16:36:29,887 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: rendering_provider_name (column: RNDRG_PROV_NM)
+2026-04-08 16:36:30,779 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:30,780 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: rendering_hospital_system (column: RNDRG_HOSP_SYS_NM)
+2026-04-08 16:36:31,501 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:31,501 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: facility_type (column: FCLTY_TYPE)
+2026-04-08 16:36:33,375 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 42 values
+2026-04-08 16:36:33,376 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: drg_code (column: FNL_DRG_CD)
+2026-04-08 16:36:34,048 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:34,048 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: drg_name (column: FNL_DRG_NM)
+2026-04-08 16:36:34,488 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:34,488 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: procedure_code (column: PROC_CD)
+2026-04-08 16:36:35,248 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:35,248 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: procedure_name (column: PROC_SHRT_NM)
+2026-04-08 16:36:35,954 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:35,954 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_code (column: PROD_CD)
+2026-04-08 16:36:36,718 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 30 values
+2026-04-08 16:36:36,718 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_description (column: PROD_SHRT_DESC)
+2026-04-08 16:36:38,013 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 30 values
+2026-04-08 16:36:38,013 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: primary_diagnosis_code (column: PRMRY_DSCHRG_DIAG_CD)
+2026-04-08 16:36:38,731 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:38,732 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: primary_diagnosis_name (column: PRMRY_DSCHRG_DIAG_NM)
+2026-04-08 16:36:39,505 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:39,505 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: pa_required_code (column: PA_RQRD_CD)
+2026-04-08 16:36:40,430 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 5 values
+2026-04-08 16:36:40,430 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: claim_number (column: CLM_NBR)
+2026-04-08 16:36:41,231 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:41,231 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:94 - Processing table: auth_membership (NON_CRTFD_AIFS.DL_DV_TMBR.AH45807_CHAT_BOT_AUTH_MBRSHP)
+2026-04-08 16:36:41,231 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_code (column: LOB_CD)
+2026-04-08 16:36:42,319 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-08 16:36:42,319 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: lob_description (column: LOB_SHRT_DESC)
+2026-04-08 16:36:43,515 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-08 16:36:43,515 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_chartfield (column: MBU_CF_CD)
+2026-04-08 16:36:43,974 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:122 -     Skipped (too many unique values or error)
+2026-04-08 16:36:43,974 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: mbu_cls_short_description (column: MBU_CLS_SHRT_DESC)
+2026-04-08 16:36:44,912 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 8 values
+2026-04-08 16:36:44,913 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: service_area_state (column: SRVCAREA_ST_SHRT_DESC)
+2026-04-08 16:36:46,317 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 37 values
+2026-04-08 16:36:46,317 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_code (column: PROD_CD)
+2026-04-08 16:36:47,264 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 30 values
+2026-04-08 16:36:47,264 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: product_description (column: PROD_SHRT_DESC)
+2026-04-08 16:36:48,026 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 30 values
+2026-04-08 16:36:48,026 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: funding_chartfield (column: RSTTD_FUNDG_CF_CD)
+2026-04-08 16:36:48,665 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 9 values
+2026-04-08 16:36:48,665 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: funding_type_description (column: FUNDG_CF_TYPE_SHRT_DESC)
+2026-04-08 16:36:49,273 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 3 values
+2026-04-08 16:36:49,273 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:107 -   Checking dimension: snap_month (column: SNAP_YEAR_MNTH_NBR)
+2026-04-08 16:36:50,663 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:120 -     Updated sample_values with 1 values
+2026-04-08 16:36:50,663 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:124 - Updated 20 out of 31 dimensions
+2026-04-08 16:36:50,664 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:126 - Writing updated configuration to /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-08 16:36:50,689 - PID:55476 - TID:8578412672 - deep_research_utils.semantic_view - INFO - update_semantic_view_sample_values:133 - Successfully saved updated semantic view to /Users/AH45807/project/deep-research/configs/ecap_semantic_view_with_samples.yaml
+2026-04-08 16:36:51,028 - PID:55476 - TID:8578412672 - deep_research_utils.snowflake_helper - INFO - close:313 - Main Snowflake session closed

@@ -1,0 +1,2936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation Waterfall Analysis Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .file-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .file-input-wrapper label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 1.1em;
+            min-width: 200px;
+        }
+
+        input[type="file"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        input[type="file"]:hover {
+            border-color: #667eea;
+        }
+
+        input[type="file"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .dropdown-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .dropdown-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .dropdown-wrapper label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.95em;
+        }
+
+        select {
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: inherit;
+        }
+
+        select:hover {
+            border-color: #667eea;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        select:disabled {
+            background: #e9ecef;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .submit-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+        .metadata-box {
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0e8f8 100%);
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .metadata-box.active {
+            display: block;
+        }
+
+        .metadata-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .metadata-title::before {
+            content: "📋";
+        }
+
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .metadata-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .metadata-label {
+            font-size: 0.8em;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .metadata-value {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .anomaly-box {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .anomaly-box.active {
+            display: block;
+        }
+
+        .anomaly-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .anomaly-title::before {
+            content: "🔍";
+        }
+
+        .summary-box {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            display: none;
+        }
+
+        .summary-box.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .run-config-box {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .run-config-box.active {
+            display: block;
+        }
+
+        .run-config-section {
+            margin-bottom: 15px;
+        }
+
+        .run-config-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .run-config-title::before {
+            content: "⚙️";
+        }
+
+        .filter-tag {
+            display: inline-block;
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.9em;
+            color: #004085;
+        }
+
+        .filter-field {
+            font-weight: 600;
+        }
+
+        .period-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .period-badge {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #856404;
+        }
+
+        .summary-item {
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .summary-label {
+            font-size: 0.85em;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .summary-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #212529;
+        }
+
+        .summary-value.positive {
+            color: #28a745;
+        }
+
+        .summary-value.negative {
+            color: #dc3545;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .waterfall-container {
+            display: none;
+        }
+
+        .waterfall-container.active {
+            display: block;
+        }
+
+        .level-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .level-card:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .level-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .level-title {
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .level-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .level-context {
+            padding: 15px 25px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.95em;
+            color: #495057;
+            line-height: 1.6;
+        }
+
+        .level-context strong {
+            color: #212529;
+        }
+
+        .segments-container {
+            padding: 25px;
+        }
+
+        .segment-card {
+            background: #ffffff;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .segment-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .segment-card.positive {
+            border-left: 5px solid #28a745;
+        }
+
+        .segment-card.negative .segment-delta {
+            background: #fce8e8;
+            color: #dc3545;
+        }
+
+        .interaction-matrix-container {
+            margin-top: 40px;
+        }
+
+        .interaction-section {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .interaction-title {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .interaction-subtitle {
+            font-size: 0.95em;
+            color: #6c757d;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .interaction-summary {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #495057;
+        }
+
+        .kpi-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+        }
+
+        .kpi-tile {
+            background: white;
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .kpi-label {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .kpi-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #212529;
+        }
+
+        .kpi-value.positive {
+            color: #28a745;
+        }
+
+        .kpi-value.negative {
+            color: #dc3545;
+        }
+
+        .section-heading {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #495057;
+            margin: 25px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .interaction-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .interaction-table thead {
+            background: #f8f9fa;
+        }
+
+        .interaction-table th {
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .interaction-table th.numeric {
+            text-align: right;
+        }
+
+        .interaction-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .interaction-table td.numeric {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .interaction-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .interaction-label {
+            font-weight: 500;
+            color: #212529;
+        }
+
+        .delta-bar-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .delta-bar {
+            height: 20px;
+            background: #28a745;
+            border-radius: 3px;
+            min-width: 2px;
+        }
+
+        .delta-bar.negative {
+            background: #dc3545;
+        }
+
+        .signal-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .signal-volume {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .signal-unit_cost {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .signal-paid_ratio {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .signal-volume_plus_paid_ratio {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .signal-mixed {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .heatmap-container {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .heatmap-title {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .heatmap-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
+
+        .heatmap-table th,
+        .heatmap-table td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+
+        .heatmap-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .heatmap-cell {
+            font-weight: 600;
+        }
+
+        .heatmap-cell.positive {
+            background: rgba(40, 167, 69, 0.1);
+            color: #155724;
+        }
+
+        .heatmap-cell.strong-positive {
+            background: rgba(40, 167, 69, 0.3);
+            color: #155724;
+        }
+
+        .operational-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 1024px) {
+            .operational-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .collapsed-section {
+            margin-top: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+        }
+
+        .collapsed-header {
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #495057;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .collapsed-header:hover {
+            background: #e9ecef;
+        }
+
+        .collapsed-content {
+            display: none;
+            padding: 15px;
+        }
+
+        .collapsed-content.expanded {
+            display: block;
+        }
+
+        .cell-type-increase {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .cell-type-offset {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .recommendation-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .recommendation-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .recommendation-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .priority-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 700;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .confidence-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+
+        .confidence-High {
+            background: #d1f4e0;
+            color: #0f5132;
+        }
+
+        .confidence-Medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .confidence-Low {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .executive-summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .executive-summary-box h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        .executive-summary-box p {
+            margin: 10px 0;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .executive-summary-box strong {
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .exec-recommendation {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            border-left: 4px solid #667eea;
+            padding-left: 12px;
+        }
+
+        .research-consideration {
+            background: #e7f3ff;
+            border-left: 3px solid #0d6efd;
+            padding: 10px 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .research-consideration strong {
+            color: #0d6efd;
+        }
+
+        .cost-suggestion {
+            background: #d1f4e0;
+            border-left: 3px solid #198754;
+            padding: 10px 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .cost-suggestion strong {
+            color: #198754;
+        }
+
+        .why-section {
+            margin: 12px 0;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #495057;
+        }
+
+        .caveat-section {
+            margin: 12px 0;
+            padding: 10px 12px;
+            background: #fff3cd;
+            border-left: 3px solid #ffc107;
+            border-radius: 4px;
+            font-size: 0.85em;
+            line-height: 1.5;
+            color: #856404;
+        }
+
+        .caveat-section strong {
+            color: #664d03;
+        }
+
+        .evidence-toggle {
+            cursor: pointer;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.85em;
+            margin-top: 10px;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .evidence-toggle:hover {
+            color: #764ba2;
+        }
+
+        .evidence-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .evidence-content.expanded {
+            max-height: 1000px;
+        }
+
+        .evidence-section {
+            margin-top: 10px;
+            padding: 12px;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 0.85em;
+        }
+
+        .evidence-section h5 {
+            margin: 0 0 8px 0;
+            font-size: 0.9em;
+            color: #6c757d;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .evidence-list {
+            list-style: none;
+            padding: 0;
+            margin: 5px 0;
+        }
+
+        .evidence-list li {
+            padding: 4px 0;
+            color: #495057;
+        }
+
+        .evidence-list li:before {
+            content: "▸ ";
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .dimension-badge {
+            display: inline-block;
+            background: #e9ecef;
+            color: #495057;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin: 3px;
+        }
+
+        .review-area-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .review-area-unit_cost {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .review-area-data_validation {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .review-area-utilization {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .review-area-clinical_mix {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .review-area-offset_review {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .review-area-authorization {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .review-area-provider_network {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .review-area-Network {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .review-area-Mixed {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .review-area-Ops {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .review-area-Clinical {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .review-area-general {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .review-area-operational {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .review-area-policy {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .review-area-financial {
+            background: #d1f4e0;
+            color: #0f5132;
+        }
+
+        .recommendation-cells {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .cell-badge {
+            background: #6c757d;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+
+        .interaction-cells-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .interaction-cell {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .interaction-cell:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .interaction-cell.operational {
+            border-left: 4px solid #28a745;
+        }
+
+        .interaction-cell.clinical {
+            border-left: 4px solid #17a2b8;
+        }
+
+        .interaction-cell.offset {
+            border-left: 4px solid #dc3545;
+            opacity: 0.85;
+        }
+
+        .cell-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .cell-id {
+            font-size: 0.85em;
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .cell-delta {
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        .cell-delta.positive {
+            color: #28a745;
+        }
+
+        .cell-delta.negative {
+            color: #dc3545;
+        }
+
+        .cell-dimensions {
+            margin-bottom: 12px;
+        }
+
+        .dimension-item {
+            display: flex;
+            margin-bottom: 6px;
+            font-size: 0.95em;
+        }
+
+        .dimension-key {
+            font-weight: 600;
+            color: #495057;
+            margin-right: 8px;
+            min-width: 120px;
+        }
+
+        .dimension-value {
+            color: #212529;
+            flex: 1;
+        }
+
+        .cell-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            font-size: 0.9em;
+        }
+
+        .cell-metric-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cell-metric-label {
+            color: #6c757d;
+            font-size: 0.85em;
+            margin-bottom: 2px;
+        }
+
+        .cell-metric-value {
+            color: #212529;
+            font-weight: 600;
+        }
+
+        .recommendations-section {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .recommendations-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .recommendation-item {
+            background: white;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 3px solid #ffc107;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .recommendation-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-subtitle {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #495057;
+            margin: 20px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .segment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .segment-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .segment-delta {
+            font-size: 1.4em;
+            font-weight: 700;
+        }
+
+        .segment-delta.positive {
+            color: #28a745;
+        }
+
+        .segment-delta.negative {
+            color: #dc3545;
+        }
+
+        .segment-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .metric {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .metric-label {
+            font-size: 0.8em;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-fill.positive {
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+        }
+
+        .progress-fill.negative {
+            background: linear-gradient(90deg, #dc3545 0%, #e83e8c 100%);
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .no-data h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .no-data p {
+            font-size: 1.1em;
+        }
+
+        .executive-summary {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6f0 100%);
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .executive-summary h3 {
+            color: #212529;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .executive-summary h3::before {
+            content: "📊";
+            font-size: 1.2em;
+        }
+
+        .executive-summary p {
+            color: #495057;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        .waterfall-chart-container {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .waterfall-chart-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .waterfall-svg {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .waterfall-bar {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .waterfall-bar:hover {
+            opacity: 0.7;
+            stroke: #212529 !important;
+            stroke-width: 2 !important;
+            filter: brightness(1.1);
+        }
+
+        .waterfall-connector {
+            stroke: #adb5bd;
+            stroke-width: 2;
+            stroke-dasharray: 5, 5;
+        }
+
+        .waterfall-label {
+            font-size: 12px;
+            fill: #495057;
+            text-anchor: middle;
+        }
+
+        .waterfall-value-label {
+            font-size: 11px;
+            font-weight: 600;
+            fill: #212529;
+            text-anchor: middle;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .segment-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-box.active {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Correlation Waterfall Analysis</h1>
+            <p>Interactive visualization of metric decomposition and drill-down analysis</p>
+        </div>
+
+        <div class="controls">
+            <div class="file-input-wrapper">
+                <label for="jsonFile">Load Correlation Results JSON:</label>
+                <input type="file" id="jsonFile" accept=".json" />
+            </div>
+
+            <div class="metadata-box" id="metadataBox">
+                <div class="metadata-title">Analysis Metadata</div>
+                <div class="metadata-grid" id="metadataGrid"></div>
+            </div>
+
+            <div class="anomaly-box" id="anomalyBox">
+                <div class="anomaly-title">Choose Anomaly</div>
+                <div class="dropdown-container" id="dropdownContainer" style="display: grid;">
+                    <div class="dropdown-wrapper">
+                        <label for="stateSelect">Select State:</label>
+                        <select id="stateSelect" disabled>
+                            <option value="">-- Choose a state --</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-wrapper">
+                        <label for="providerSelect">Select Provider:</label>
+                        <select id="providerSelect" disabled>
+                            <option value="">-- Choose a provider --</option>
+                        </select>
+                    </div>
+                    <div class="dropdown-wrapper">
+                        <label for="drgSelect">Select DRG:</label>
+                        <select id="drgSelect" disabled>
+                            <option value="">-- Choose a DRG --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="submitContainer" style="text-align: center; margin-top: 20px;">
+                    <button class="submit-btn" id="submitBtn" disabled>View Claims Waterfall</button>
+                </div>
+            </div>
+
+            <div class="run-config-box" id="runConfigBox"></div>
+            <div class="summary-box" id="summaryBox"></div>
+        </div>
+
+        <div class="content">
+            <div class="no-data" id="noData">
+                <h2>👋 Welcome</h2>
+                <p>Load the correlation results JSON file and select a scenario to view the analysis</p>
+            </div>
+
+            <div class="waterfall-container" id="waterfallContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+        let allResults = null;
+
+        document.getElementById('jsonFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        allResults = JSON.parse(event.target.result);
+                        parseAndDisplayMetadata(file.name);
+                        populateDropdowns();
+                    } catch (error) {
+                        alert('Error parsing JSON file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        function parseAndDisplayMetadata(filename) {
+            // Pattern: correlation_results_<Analysis date>_<HCC>-<LOB>-<SNAP>-<TREND_PERIOD>-<TREND_END_MONTH>.json
+            // Example: correlation_results_20260518_IP_AUTH-Commercial-202604-R3-202601.json
+            
+            const pattern = /correlation_results_(\d{8})_([^-]+)-([^-]+)-([^-]+)-([^-]+)-([^.]+)\.json/;
+            const match = filename.match(pattern);
+            
+            if (!match) {
+                console.warn('Filename does not match expected pattern:', filename);
+                return;
+            }
+            
+            const metadata = {
+                'Analysis Date': formatAnalysisDate(match[1]),
+                'HCC': match[2],
+                'LOB': match[3],
+                'SNAP': formatSNAP(match[4]),
+                'Trend Period': match[5],
+                'Trend End Month': formatTrendEndMonth(match[6])
+            };
+            
+            displayMetadata(metadata);
+        }
+
+        function formatAnalysisDate(dateStr) {
+            // Convert YYYYMMDD to YYYY-MM-DD
+            if (dateStr && dateStr.length === 8) {
+                return `${dateStr.substring(0, 4)}-${dateStr.substring(4, 6)}-${dateStr.substring(6, 8)}`;
+            }
+            return dateStr;
+        }
+
+        function formatSNAP(snapStr) {
+            // Convert YYYYMM to YYYY-MM
+            if (snapStr && snapStr.length === 6) {
+                return `${snapStr.substring(0, 4)}-${snapStr.substring(4, 6)}`;
+            }
+            return snapStr;
+        }
+
+        function formatTrendEndMonth(monthStr) {
+            // Convert YYYYMM to YYYY-MM
+            if (monthStr && monthStr.length === 6) {
+                return `${monthStr.substring(0, 4)}-${monthStr.substring(4, 6)}`;
+            }
+            return monthStr;
+        }
+
+        function displayMetadata(metadata) {
+            const metadataGrid = document.getElementById('metadataGrid');
+            const metadataBox = document.getElementById('metadataBox');
+            
+            let html = '';
+            for (const [label, value] of Object.entries(metadata)) {
+                html += `
+                    <div class="metadata-item">
+                        <div class="metadata-label">${escapeHtml(label)}</div>
+                        <div class="metadata-value">${escapeHtml(value)}</div>
+                    </div>
+                `;
+            }
+            
+            metadataGrid.innerHTML = html;
+            metadataBox.classList.add('active');
+        }
+
+        function populateDropdowns() {
+            const stateSelect = document.getElementById('stateSelect');
+            const providerSelect = document.getElementById('providerSelect');
+            const drgSelect = document.getElementById('drgSelect');
+
+            // Clear existing options
+            stateSelect.innerHTML = '<option value="">-- Choose a state --</option>';
+            providerSelect.innerHTML = '<option value="">-- Choose a provider --</option>';
+            drgSelect.innerHTML = '<option value="">-- Choose a DRG --</option>';
+
+            // Populate states
+            if (allResults.states) {
+                Object.keys(allResults.states).sort().forEach(state => {
+                    const option = document.createElement('option');
+                    option.value = state;
+                    option.textContent = state;
+                    stateSelect.appendChild(option);
+                });
+                stateSelect.disabled = false;
+            }
+
+            // Populate providers
+            if (allResults.providers) {
+                Object.keys(allResults.providers).sort().forEach(provider => {
+                    const option = document.createElement('option');
+                    option.value = provider;
+                    option.textContent = provider;
+                    providerSelect.appendChild(option);
+                });
+                providerSelect.disabled = false;
+            }
+
+            // Populate DRGs
+            if (allResults.drgs) {
+                Object.keys(allResults.drgs).sort().forEach(drg => {
+                    const option = document.createElement('option');
+                    option.value = drg;
+                    option.textContent = drg;
+                    drgSelect.appendChild(option);
+                });
+                drgSelect.disabled = false;
+            }
+
+            // Show anomaly box with dropdowns and submit button
+            document.getElementById('anomalyBox').classList.add('active');
+
+            // Add change listeners (remove old ones first to prevent duplicates)
+            stateSelect.removeEventListener('change', handleStateChange);
+            providerSelect.removeEventListener('change', handleProviderChange);
+            drgSelect.removeEventListener('change', handleDrgChange);
+            
+            stateSelect.addEventListener('change', handleStateChange);
+            providerSelect.addEventListener('change', handleProviderChange);
+            drgSelect.addEventListener('change', handleDrgChange);
+        }
+
+        function handleStateChange() {
+            const stateValue = document.getElementById('stateSelect').value;
+            if (stateValue) {
+                // Reset other dropdowns
+                document.getElementById('providerSelect').value = '';
+                document.getElementById('drgSelect').value = '';
+            }
+            checkSubmitEnabled();
+        }
+
+        function handleProviderChange() {
+            const providerValue = document.getElementById('providerSelect').value;
+            if (providerValue) {
+                // Reset other dropdowns
+                document.getElementById('stateSelect').value = '';
+                document.getElementById('drgSelect').value = '';
+            }
+            checkSubmitEnabled();
+        }
+
+        function handleDrgChange() {
+            const drgValue = document.getElementById('drgSelect').value;
+            if (drgValue) {
+                // Reset other dropdowns
+                document.getElementById('stateSelect').value = '';
+                document.getElementById('providerSelect').value = '';
+            }
+            checkSubmitEnabled();
+        }
+
+        function checkSubmitEnabled() {
+            const stateValue = document.getElementById('stateSelect').value;
+            const providerValue = document.getElementById('providerSelect').value;
+            const drgValue = document.getElementById('drgSelect').value;
+
+            // Enable submit if at least one dropdown has a selection
+            const submitBtn = document.getElementById('submitBtn');
+            if (stateValue || providerValue || drgValue) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        }
+
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const stateValue = document.getElementById('stateSelect').value;
+            const providerValue = document.getElementById('providerSelect').value;
+            const drgValue = document.getElementById('drgSelect').value;
+
+            // Determine which result to load based on priority
+            let selectedResult = null;
+            let selectedType = null;
+
+            if (stateValue && allResults.states && allResults.states[stateValue]) {
+                selectedResult = allResults.states[stateValue];
+                selectedType = 'State: ' + stateValue;
+            } else if (providerValue && allResults.providers && allResults.providers[providerValue]) {
+                selectedResult = allResults.providers[providerValue];
+                selectedType = 'Provider: ' + providerValue;
+            } else if (drgValue && allResults.drgs && allResults.drgs[drgValue]) {
+                selectedResult = allResults.drgs[drgValue];
+                selectedType = 'DRG: ' + drgValue;
+            }
+
+            if (selectedResult) {
+                // Extract the output data from the result
+                currentData = selectedResult.output || selectedResult;
+                
+                // Merge top-level fields that are not in output (like recommended_action)
+                // Use top-level recommended_action if output doesn't have it or has empty array
+                if (selectedResult.recommended_action && 
+                    (!currentData.recommended_action || 
+                     (Array.isArray(currentData.recommended_action) && currentData.recommended_action.length === 0))) {
+                    currentData.recommended_action = selectedResult.recommended_action;
+                }
+                if (selectedResult.visual_component && !currentData.visual_component) {
+                    currentData.visual_component = selectedResult.visual_component;
+                }
+                
+                currentData._selectedType = selectedType;
+                renderVisualization();
+                
+                // Scroll to top to see the results
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                alert('No data found for the selected option.');
+            }
+        });
+
+
+        function formatCurrency(value) {
+            const absValue = Math.abs(value);
+            if (absValue >= 1000000) {
+                return '$' + (value / 1000000).toFixed(1) + 'M';
+            } else if (absValue >= 1000) {
+                return '$' + (value / 1000).toFixed(1) + 'K';
+            } else {
+                return '$' + value.toFixed(2);
+            }
+        }
+
+        function formatCurrencyWithSign(value) {
+            const sign = value >= 0 ? '+' : '';
+            const absValue = Math.abs(value);
+            if (absValue >= 1000000) {
+                return sign + '$' + (absValue / 1000000).toFixed(1) + 'M';
+            } else if (absValue >= 1000) {
+                return sign + '$' + (absValue / 1000).toFixed(1) + 'K';
+            } else {
+                return sign + '$' + absValue.toFixed(2);
+            }
+        }
+
+        function formatPercent(value) {
+            return (value * 100).toFixed(1) + '%';
+        }
+
+        function formatNumber(value) {
+            return value.toLocaleString();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function calculateMonthDifference(startYYYYMM, endYYYYMM) {
+            const startYear = Math.floor(startYYYYMM / 100);
+            const startMonth = startYYYYMM % 100;
+            const endYear = Math.floor(endYYYYMM / 100);
+            const endMonth = endYYYYMM % 100;
+            
+            return (endYear - startYear) * 12 + (endMonth - startMonth);
+        }
+
+        // Interaction matrix helper functions
+        function formatSignedMoney(value) {
+            if (value == null || isNaN(value)) return '—';
+            return formatCurrencyWithSign(value);
+        }
+
+        function formatCompactMoney(value) {
+            if (value == null || isNaN(value)) return '—';
+            const absValue = Math.abs(value);
+            if (absValue >= 1000000) {
+                return '$' + (absValue / 1000000).toFixed(1) + 'M';
+            } else if (absValue >= 1000) {
+                return '$' + Math.round(absValue / 1000) + 'K';
+            } else {
+                return '$' + Math.round(absValue);
+            }
+        }
+
+        function formatPctPoints(value) {
+            if (value == null || isNaN(value)) return '—';
+            const pts = value * 100;
+            const sign = pts >= 0 ? '+' : '';
+            return sign + pts.toFixed(1) + ' pts';
+        }
+
+        function formatSignedInteger(value) {
+            if (value == null || isNaN(value)) return '—';
+            const sign = value >= 0 ? '+' : '';
+            return sign + Math.round(value).toLocaleString();
+        }
+
+        function getMetricDelta(cell, metricName) {
+            const explainers = cell.explainer_metrics || {};
+            const metric = explainers[metricName];
+            return metric ? metric.delta : null;
+        }
+
+        function getMetricBaseline(cell, metricName) {
+            const explainers = cell.explainer_metrics || {};
+            const metric = explainers[metricName];
+            return metric ? metric.baseline : null;
+        }
+
+        function getPaLabel(value) {
+            if (!value || value === '<NULL>') return 'Unknown';
+            if (value === 'N') return 'No PA';
+            if (value === 'Y') return 'PA Required';
+            return value;
+        }
+
+        function toTitleCaseFacility(value) {
+            if (!value || value === '<NULL>') return 'Unknown';
+            if (value === 'ACUTE HOSPITAL') return 'Acute Hospital';
+            return value.split(' ').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ');
+        }
+
+        function truncateWithTooltip(value, maxLength) {
+            if (!value || value.length <= maxLength) return escapeHtml(value || '');
+            return `<span title="${escapeHtml(value)}">${escapeHtml(value.substring(0, maxLength))}...</span>`;
+        }
+
+        function buildOperationalLabel(cell) {
+            const dims = cell.dimension_values || {};
+            const parts = [];
+            
+            if (dims.service_area_state) parts.push(dims.service_area_state);
+            if (dims.product_description) parts.push(dims.product_description);
+            if (dims.facility_type) parts.push(toTitleCaseFacility(dims.facility_type));
+            if (dims.pa_required_code) parts.push(getPaLabel(dims.pa_required_code));
+            if (dims.lob_code && dims.lob_code !== '<NULL>') parts.push(dims.lob_code);
+            
+            return parts.filter(p => p && p !== 'Unknown').join(' · ');
+        }
+
+        function buildClinicalLabel(cell) {
+            const dims = cell.dimension_values || {};
+            const parts = [];
+            
+            if (dims.drg_name && dims.drg_name !== '<NULL>') parts.push(dims.drg_name);
+            if (dims.primary_diagnosis_name && dims.primary_diagnosis_name !== '<NULL>') parts.push(dims.primary_diagnosis_name);
+            if (dims.hcc_medium && dims.hcc_medium !== '<NULL>') parts.push(dims.hcc_medium);
+            
+            return parts.join(' · ');
+        }
+
+        function deriveSignal(cell) {
+            const admissionsDelta = getMetricDelta(cell, 'expense_detail.total_admissions') || 0;
+            const avgPaidPerAdmitDelta = getMetricDelta(cell, 'expense_detail.avg_paid_per_admit') || 0;
+            const paidRatioDelta = getMetricDelta(cell, 'expense_detail.paid_ratio') || 0;
+            const baselineAdmissions = getMetricBaseline(cell, 'expense_detail.total_admissions') || 1;
+
+            const admissionsMaterial = Math.abs(admissionsDelta) >= 50 || (Math.abs(admissionsDelta) / Math.max(baselineAdmissions, 1)) >= 0.05;
+            const avgPaidPerAdmitMaterial = Math.abs(avgPaidPerAdmitDelta) >= 500;
+            const paidRatioMaterial = Math.abs(paidRatioDelta) >= 0.01;
+
+            if (admissionsMaterial && paidRatioMaterial) return 'volume_plus_paid_ratio';
+            if (admissionsMaterial && !avgPaidPerAdmitMaterial && !paidRatioMaterial) return 'volume';
+            if (avgPaidPerAdmitMaterial && !admissionsMaterial) return 'unit_cost';
+            if (paidRatioMaterial && !admissionsMaterial) return 'paid_ratio';
+            return 'mixed';
+        }
+
+        function sumSelectedMetric(cells, field) {
+            return cells.reduce((sum, cell) => sum + (cell[field] || 0), 0);
+        }
+
+        function buildOperationalHeatmap(cells, rowDim = 'service_area_state', colDim = 'product_description') {
+            const grid = {};
+            const rowTotals = {};
+            const colTotals = {};
+            let grandTotal = 0;
+
+            cells.forEach(cell => {
+                const dims = cell.dimension_values || {};
+                const row = dims[rowDim] || 'Unknown';
+                const col = dims[colDim] || 'Unknown';
+                const delta = cell.delta_value || 0;
+
+                if (!grid[row]) grid[row] = {};
+                grid[row][col] = (grid[row][col] || 0) + delta;
+                rowTotals[row] = (rowTotals[row] || 0) + delta;
+                colTotals[col] = (colTotals[col] || 0) + delta;
+                grandTotal += delta;
+            });
+
+            return { grid, rowTotals, colTotals, grandTotal, rows: Object.keys(grid).sort(), cols: Object.keys(colTotals).sort() };
+        }
+
+        function getHeatmapTitle(cells) {
+            if (!cells || cells.length === 0) return 'Selected cells';
+            
+            const firstDims = cells[0].dimension_values || {};
+            let parts = [];
+            
+            // Check if all cells share pa_required_code
+            const allPa = cells.every(c => (c.dimension_values || {}).pa_required_code === firstDims.pa_required_code);
+            if (allPa && firstDims.pa_required_code === 'N') parts.push('No-prior-auth');
+            
+            // Check if all cells share facility_type
+            const allFacility = cells.every(c => (c.dimension_values || {}).facility_type === firstDims.facility_type);
+            if (allFacility && firstDims.facility_type === 'ACUTE HOSPITAL') parts.push('acute hospital');
+            
+            // Check if all cells share lob_code
+            const allLob = cells.every(c => (c.dimension_values || {}).lob_code === firstDims.lob_code);
+            const lobSuffix = allLob && firstDims.lob_code && firstDims.lob_code !== '<NULL>' ? ` (${firstDims.lob_code})` : '';
+            
+            return (parts.length > 0 ? parts.join(' ') + ' selected cells' : 'Selected cells') + lobSuffix;
+        }
+
+        function formatYYYYMM(yyyymm) {
+            const year = Math.floor(yyyymm / 100);
+            const month = yyyymm % 100;
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                               'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return `${monthNames[month - 1]} ${year}`;
+        }
+
+        function renderVisualization() {
+            if (!currentData) return;
+
+            document.getElementById('noData').style.display = 'none';
+            document.getElementById('runConfigBox').classList.add('active');
+            document.getElementById('summaryBox').classList.add('active');
+            document.getElementById('waterfallContainer').classList.add('active');
+
+            renderRunConfig();
+            renderSummary();
+            renderWaterfall();
+        }
+
+        function renderRunConfig() {
+            const runConfigBox = document.getElementById('runConfigBox');
+            const scenarioBadge = currentData._selectedType 
+                ? '<span style="background: #d4edda; color: #155724; padding: 4px 10px; border-radius: 12px; font-size: 0.8em; margin-left: 10px;">✓ ' + escapeHtml(currentData._selectedType) + '</span>' 
+                : '';
+            let html = `<div class="run-config-title">Analysis Configuration${scenarioBadge}</div>`;
+
+            if (currentData.raw_question) {
+                html += '<div class="run-config-section">';
+                html += '<div style="font-weight: 600; color: #495057; margin-bottom: 8px;">Research Question:</div>';
+                html += `<div style="padding: 10px; background: #f8f9fa; border-left: 3px solid #667eea; border-radius: 4px; font-style: italic; color: #495057;">
+                    "${escapeHtml(currentData.raw_question)}"
+                </div>`;
+                html += '</div>';
+            }
+
+            if (currentData.scope_filters && currentData.scope_filters.length > 0) {
+                html += '<div class="run-config-section">';
+                html += '<div style="font-weight: 600; color: #495057; margin-bottom: 8px;">Filters Applied:</div>';
+                
+                currentData.scope_filters.forEach(filter => {
+                    let valueDisplay = filter.value;
+                    if (Array.isArray(filter.value)) {
+                        if (filter.value.length > 3) {
+                            valueDisplay = filter.value.slice(0, 3).join(', ') + ` ... (${filter.value.length} total)`;
+                        } else {
+                            valueDisplay = filter.value.join(', ');
+                        }
+                    }
+                    const fieldEscaped = escapeHtml(filter.field);
+                    const valueEscaped = escapeHtml(String(valueDisplay));
+                    const operatorEscaped = escapeHtml(filter.operator);
+                    
+                    html += `
+                        <div class="filter-tag">
+                            <span class="filter-field">${fieldEscaped}</span> 
+                            ${operatorEscaped} 
+                            ${valueEscaped}
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
+
+            if (currentData.period_window) {
+                const pw = currentData.period_window;
+                const windowDuration = calculateMonthDifference(pw.start_time, pw.end_time) + 1;
+                
+                html += '<div class="run-config-section">';
+                html += '<div style="font-weight: 600; color: #495057; margin-bottom: 8px;">Time Period:</div>';
+                html += '<div class="period-info">';
+                html += `
+                    <div class="period-badge">
+                        <strong>Baseline:</strong> ${formatYYYYMM(pw.baseline_start_time)} - ${formatYYYYMM(pw.baseline_end_time)}
+                    </div>
+                    <div class="period-badge">
+                        <strong>Comparison:</strong> ${formatYYYYMM(pw.start_time)} - ${formatYYYYMM(pw.end_time)}
+                    </div>
+                    <div class="period-badge">
+                        <strong>Window Duration:</strong> ${windowDuration} months
+                    </div>
+                `;
+                html += '</div></div>';
+            }
+
+            runConfigBox.innerHTML = html;
+        }
+
+        function renderSummary() {
+            const summaryBox = document.getElementById('summaryBox');
+            const deltaValue = currentData.delta_value || 0;
+            const deltaClass = deltaValue >= 0 ? 'positive' : 'negative';
+            const deltaSign = deltaValue >= 0 ? '+' : '';
+            
+            // Use root_metric if metric_label doesn't exist
+            const metricLabel = currentData.metric_label || currentData.root_metric || 'N/A';
+            
+            // Format values if not pre-formatted
+            const baselineFormatted = currentData.baseline_value_formatted || formatCurrency(currentData.baseline_value || 0);
+            const comparisonFormatted = currentData.comparison_value_formatted || formatCurrency(currentData.comparison_value || 0);
+            const deltaFormatted = currentData.delta_value_formatted || formatCurrency(Math.abs(deltaValue));
+            
+            // Get period strategy
+            const periodStrategy = currentData.period_window?.comparison_strategy || 'N/A';
+
+            summaryBox.innerHTML = `
+                <div class="summary-item">
+                    <div class="summary-label">Root Metric</div>
+                    <div class="summary-value">${escapeHtml(metricLabel)}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Baseline Value</div>
+                    <div class="summary-value">${baselineFormatted}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Comparison Value</div>
+                    <div class="summary-value">${comparisonFormatted}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Delta</div>
+                    <div class="summary-value ${deltaClass}">${deltaSign}${deltaFormatted}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Delta %</div>
+                    <div class="summary-value ${deltaClass}">${deltaSign}${formatPercent(currentData.delta_pct || 0)}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Period</div>
+                    <div class="summary-value">${periodStrategy.replace(/_/g, ' ')}</div>
+                </div>
+            `;
+        }
+
+        function renderWaterfall() {
+            const container = document.getElementById('waterfallContainer');
+            let html = '';
+
+            if (currentData.executive_summary) {
+                html += `
+                    <div class="executive-summary">
+                        <h3>Executive Summary</h3>
+                        <p>${currentData.executive_summary}</p>
+                    </div>
+                `;
+            }
+
+            html += renderWaterfallChart();
+
+            html += renderInteractionMatrix();
+
+            container.innerHTML = html;
+        }
+
+        function renderWaterfallChart() {
+            const chartData = buildWaterfallData();
+            if (chartData.length === 0) return '';
+
+            const svgWidth = Math.max(1000, chartData.length * 120);
+            const svgHeight = 500;
+            const margin = { top: 40, right: 40, bottom: 120, left: 80 };
+            const chartWidth = svgWidth - margin.left - margin.right;
+            const chartHeight = svgHeight - margin.top - margin.bottom;
+
+            const allValues = chartData.flatMap(d => {
+                if (d.isTotal) return [d.cumulativeValue];
+                return [d.cumulativeValue, d.cumulativeValue - d.totalValue];
+            });
+            const maxValue = Math.max(...allValues);
+            const minValue = Math.min(...allValues);
+            const yScale = chartHeight / (maxValue - minValue);
+            const barWidth = Math.min(80, chartWidth / (chartData.length + 1));
+            const barSpacing = chartWidth / (chartData.length + 1);
+
+            const positiveColors = ['#28a745', '#20c997', '#17a2b8', '#48c9b0', '#52b788'];
+            const negativeColors = ['#dc3545', '#e83e8c', '#fd7e14', '#e74c3c', '#c0392b'];
+
+            const metricLabel = currentData.metric_label || currentData.root_metric || 'Metric';
+            
+            let svg = `
+                <div class="waterfall-chart-container">
+                    <div class="waterfall-chart-title">📈 Waterfall Chart: ${escapeHtml(metricLabel)}</div>
+                    <p style="text-align: center; color: #6c757d; font-size: 0.9em; margin-bottom: 15px;">
+                        Each level bar is stacked showing top contributors (up to 5). Hover over segments for details.
+                    </p>
+                    <svg class="waterfall-svg" viewBox="0 0 ${svgWidth} ${svgHeight}" style="max-height: 500px;">
+                        <defs>
+                            <linearGradient id="totalGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+            `;
+
+            chartData.forEach((item, index) => {
+                const x = margin.left + (index + 0.5) * barSpacing;
+                
+                if (item.isTotal) {
+                    const barHeight = Math.abs(item.value) * yScale;
+                    const baseY = margin.top + (maxValue - item.cumulativeValue) * yScale;
+                    const y = baseY;
+
+                    svg += `
+                        <rect class="waterfall-bar" 
+                            x="${x - barWidth/2}" 
+                            y="${y}" 
+                            width="${barWidth}" 
+                            height="${barHeight}" 
+                            fill="url(#totalGradient)"
+                            stroke="#fff"
+                            stroke-width="2"
+                            rx="4">
+                            <title>${item.label}: ${formatCurrency(item.actualValue || item.value)}</title>
+                        </rect>
+                    `;
+
+                    const labelY = svgHeight - margin.bottom + 15;
+                    const valueY = y - 10;
+                    svg += `
+                        <text class="waterfall-label" 
+                            x="${x}" 
+                            y="${labelY}" 
+                            transform="rotate(-45, ${x}, ${labelY})">
+                            ${item.label}
+                        </text>
+                        <text class="waterfall-value-label" 
+                            x="${x}" 
+                            y="${valueY}">
+                            ${formatCurrency(item.actualValue || item.value)}
+                        </text>
+                    `;
+                } else if (item.segments) {
+                    let cumulativeSegment = item.cumulativeValue - item.totalValue;
+                    const isPositive = item.totalValue >= 0;
+                    const colors = isPositive ? positiveColors : negativeColors;
+
+                    item.segments.forEach((segment, segIndex) => {
+                        const segmentHeight = Math.max(3, Math.abs(segment.delta_value) * yScale);
+                        const segmentY = margin.top + (maxValue - cumulativeSegment - (isPositive ? segment.delta_value : 0)) * yScale;
+                        
+                        cumulativeSegment += segment.delta_value;
+
+                        const color = colors[segIndex % colors.length];
+                        
+                        svg += `
+                            <rect class="waterfall-bar" 
+                                x="${x - barWidth/2}" 
+                                y="${segmentY}" 
+                                width="${barWidth}" 
+                                height="${segmentHeight}" 
+                                fill="${color}"
+                                stroke="#fff"
+                                stroke-width="1"
+                                rx="2">
+                                <title>${segment.escaped_value}: ${segment.formatted_delta}</title>
+                            </rect>
+                        `;
+                    });
+
+                    if (index < chartData.length - 1) {
+                        const nextX = margin.left + (index + 1.5) * barSpacing;
+                        const connectorY = margin.top + (maxValue - item.cumulativeValue) * yScale;
+                        svg += `
+                            <line class="waterfall-connector"
+                                x1="${x + barWidth/2}" 
+                                y1="${connectorY}" 
+                                x2="${nextX - barWidth/2}" 
+                                y2="${connectorY}">
+                            </line>
+                        `;
+                    }
+
+                    const labelY = svgHeight - margin.bottom + 15;
+                    const topY = margin.top + (maxValue - item.cumulativeValue) * yScale;
+                    const valueY = topY - 10;
+                    
+                    const displayLabel = item.label.length > 20 ? item.label.substring(0, 20) + '...' : item.label;
+                    svg += `
+                        <text class="waterfall-label" 
+                            x="${x}" 
+                            y="${labelY}" 
+                            transform="rotate(-45, ${x}, ${labelY})">
+                            ${displayLabel}
+                        </text>
+                        <text class="waterfall-value-label" 
+                            x="${x}" 
+                            y="${valueY}">
+                            ${formatCurrency(item.totalValue)}
+                        </text>
+                    `;
+                }
+            });
+
+            const zeroY = margin.top + maxValue * yScale;
+            svg += `
+                <line x1="${margin.left}" y1="${zeroY}" x2="${svgWidth - margin.right}" y2="${zeroY}" 
+                    stroke="#495057" stroke-width="1" stroke-dasharray="3,3" />
+            `;
+
+            svg += `</svg></div>`;
+            return svg;
+        }
+
+        function buildWaterfallData() {
+            if (!currentData || !currentData.drill_path) return [];
+
+            const data = [];
+            let cumulative = currentData.baseline_value;
+
+            data.push({
+                label: 'Baseline',
+                value: currentData.baseline_value,
+                actualValue: currentData.baseline_value,
+                cumulativeValue: cumulative,
+                isTotal: true
+            });
+
+            currentData.drill_path.forEach((level, index) => {
+                if (level.top_segments && level.top_segments.length > 0) {
+                    const segmentsToShow = level.top_segments.slice(0, 5);
+                    
+                    const segments = segmentsToShow.map(seg => {
+                        const deltaValue = seg.aligned_delta || seg.delta_value;
+                        return {
+                            value: seg.value,
+                            delta_value: deltaValue,
+                            formatted_delta: formatCurrencyWithSign(deltaValue),
+                            escaped_value: escapeHtml(seg.value)
+                        };
+                    });
+                    
+                    const totalDelta = segments.reduce((sum, seg) => sum + seg.delta_value, 0);
+                    cumulative += totalDelta;
+                    
+                    data.push({
+                        label: `Level ${level.level}: ${level.dimension}`,
+                        totalValue: totalDelta,
+                        cumulativeValue: cumulative,
+                        segments: segments,
+                        isTotal: false
+                    });
+                }
+            });
+
+            data.push({
+                label: 'Comparison',
+                value: currentData.comparison_value,
+                actualValue: currentData.comparison_value,
+                cumulativeValue: currentData.comparison_value,
+                isTotal: true
+            });
+
+            return data;
+        }
+
+        function renderInteractionMatrix() {
+            if (!currentData.interaction_matrix || Object.keys(currentData.interaction_matrix).length === 0) {
+                return `
+                    <div class="interaction-matrix-container">
+                        <div class="interaction-section" style="background: #fff3cd; border-color: #ffc107;">
+                            <div class="interaction-title">🔍 Detected Interactions</div>
+                            <div style="padding: 15px; background: white; border-radius: 6px; border-left: 4px solid #ffc107;">
+                                <p style="margin: 0; color: #856404; font-weight: 600;">⚠️ Interaction matrix was not enabled for this run.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const matrix = currentData.interaction_matrix;
+            const summary = matrix.summary || {};
+            
+            if (!summary.status || summary.status !== 'success') {
+                return renderInteractionMatrixEmpty(matrix);
+            }
+
+            const operationalCells = matrix.operational?.selected_cells || [];
+            const clinicalCells = matrix.clinical?.selected_cells || [];
+            const offsetCells = matrix.clinical?.offset_cells_preview || [];
+
+            if (operationalCells.length === 0) {
+                return renderInteractionMatrixEmpty(matrix);
+            }
+
+            let html = '<div class="interaction-matrix-container">';
+            html += '<div class="interaction-section">';
+            
+            // Title and subtitle
+            html += '<div class="interaction-title">🔍 Detected Interactions</div>';
+            html += '<div class="interaction-subtitle">Operational cross-product cells selected from the waterfall, followed by clinical detail within the selected operational pocket.</div>';
+
+            // Executive summary text
+            if (currentData.interaction_summary && currentData.interaction_summary.text) {
+                html += `<div class="interaction-summary">${escapeHtml(currentData.interaction_summary.text)}</div>`;
+            }
+
+            // 1. KPI Strip
+            html += renderKPIStrip(operationalCells, clinicalCells);
+
+            // 2. Operational section heading
+            html += '<div class="section-heading">Operational Concentration</div>';
+
+            // 3. Operational grid (table + heatmap side-by-side)
+            html += '<div class="operational-grid">';
+            html += renderOperationalTable(operationalCells);
+            html += renderOperationalHeatmap(operationalCells);
+            html += '</div>';
+
+            // 4. Clinical detail section
+            if (clinicalCells.length > 0 || offsetCells.length > 0) {
+                html += '<div class="section-heading">Clinical Detail Within Selected Operational Cells</div>';
+                html += renderClinicalTable(clinicalCells, offsetCells);
+            }
+
+            // 5. Recommendations (supports both new and old formats)
+            if (currentData.recommended_action || (currentData.recommendations && (currentData.recommendations.items || currentData.recommendations.recommendations || currentData.recommendations.summary))) {
+                html += '<div class="section-heading">Executive Recommendations</div>';
+                html += renderRecommendations(currentData.recommended_action || currentData.recommendations);
+            }
+
+            html += '</div></div>';
+            return html;
+        }
+
+        function renderKPIStrip(operationalCells, clinicalCells) {
+            const selectedOpDelta = sumSelectedMetric(operationalCells, 'delta_value');
+            const shareOfPositive = sumSelectedMetric(operationalCells, 'share_of_positive_delta');
+            const shareOfNet = sumSelectedMetric(operationalCells, 'share_of_net_delta');
+            const selectedClinicalDelta = clinicalCells.filter(c => c.delta_value > 0).reduce((sum, c) => sum + c.delta_value, 0);
+
+            let html = '<div class="kpi-strip">';
+            
+            html += '<div class="kpi-tile">';
+            html += '<div class="kpi-label">Selected Operational Δ Paid</div>';
+            html += `<div class="kpi-value ${selectedOpDelta >= 0 ? 'positive' : 'negative'}">${formatSignedMoney(selectedOpDelta)}</div>`;
+            html += '</div>';
+
+            html += '<div class="kpi-tile">';
+            html += '<div class="kpi-label">Share of +Δ</div>';
+            html += `<div class="kpi-value">${formatPercent(shareOfPositive)}</div>`;
+            html += '</div>';
+
+            html += '<div class="kpi-tile">';
+            html += '<div class="kpi-label">Share of Net Δ</div>';
+            html += `<div class="kpi-value">${formatPercent(shareOfNet)}</div>`;
+            html += '</div>';
+
+            html += '<div class="kpi-tile">';
+            html += '<div class="kpi-label">Selected Clinical Δ Paid</div>';
+            html += `<div class="kpi-value ${selectedClinicalDelta >= 0 ? 'positive' : 'negative'}">${formatSignedMoney(selectedClinicalDelta)}</div>`;
+            html += '</div>';
+
+            html += '</div>';
+            return html;
+        }
+
+        function renderOperationalTable(cells) {
+            const maxDelta = Math.max(...cells.map(c => Math.abs(c.delta_value)));
+            
+            let html = '<div style="overflow-x: auto;">';
+            html += '<table class="interaction-table">';
+            html += '<thead><tr>';
+            html += '<th>Rank</th>';
+            html += '<th>Interaction</th>';
+            html += '<th class="numeric">Δ Paid</th>';
+            html += '<th class="numeric">Share +Δ</th>';
+            html += '<th class="numeric">Share Net Δ</th>';
+            html += '<th class="numeric">Claims Δ</th>';
+            html += '<th class="numeric">Admits Δ</th>';
+            html += '<th class="numeric">Avg Paid/Admit Δ</th>';
+            html += '<th class="numeric">Paid Ratio Δ</th>';
+            html += '<th>Signal</th>';
+            html += '</tr></thead><tbody>';
+
+            cells.forEach((cell, idx) => {
+                const label = buildOperationalLabel(cell);
+                const delta = cell.delta_value || 0;
+                const barWidth = maxDelta > 0 ? (Math.abs(delta) / maxDelta) * 100 : 0;
+                const signal = deriveSignal(cell);
+
+                html += '<tr>';
+                html += `<td>${idx + 1}</td>`;
+                html += `<td><span class="interaction-label">${escapeHtml(label)}</span></td>`;
+                
+                // Delta with bar
+                html += '<td class="numeric">';
+                html += '<div class="delta-bar-container">';
+                html += `<span>${formatSignedMoney(delta)}</span>`;
+                html += `<div class="delta-bar ${delta < 0 ? 'negative' : ''}" style="width: ${barWidth}%;"></div>`;
+                html += '</div>';
+                html += '</td>';
+
+                html += `<td class="numeric">${formatPercent(cell.share_of_positive_delta || 0)}</td>`;
+                html += `<td class="numeric">${formatPercent(cell.share_of_net_delta || 0)}</td>`;
+                html += `<td class="numeric">${formatSignedInteger(getMetricDelta(cell, 'expense_detail.claim_count'))}</td>`;
+                html += `<td class="numeric">${formatSignedInteger(getMetricDelta(cell, 'expense_detail.total_admissions'))}</td>`;
+                html += `<td class="numeric">${formatSignedMoney(getMetricDelta(cell, 'expense_detail.avg_paid_per_admit'))}</td>`;
+                html += `<td class="numeric">${formatPctPoints(getMetricDelta(cell, 'expense_detail.paid_ratio'))}</td>`;
+                html += `<td><span class="signal-badge signal-${signal}">${signal.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</span></td>`;
+                html += '</tr>';
+            });
+
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        function renderOperationalHeatmap(cells) {
+            const heatmapData = buildOperationalHeatmap(cells, 'service_area_state', 'product_description');
+            const title = getHeatmapTitle(cells);
+            
+            if (heatmapData.rows.length === 0 || heatmapData.cols.length === 0) {
+                return '<div class="heatmap-container"><div class="heatmap-title">No heatmap data</div></div>';
+            }
+
+            const maxValue = Math.max(...Object.values(heatmapData.rowTotals), ...Object.values(heatmapData.colTotals));
+
+            let html = '<div class="heatmap-container">';
+            html += `<div class="heatmap-title">${escapeHtml(title)}</div>`;
+            html += '<table class="heatmap-table">';
+            
+            // Header
+            html += '<thead><tr><th>State</th>';
+            heatmapData.cols.forEach(col => {
+                html += `<th>${escapeHtml(col)}</th>`;
+            });
+            html += '<th><strong>Total</strong></th></tr></thead>';
+
+            // Rows
+            html += '<tbody>';
+            heatmapData.rows.forEach(row => {
+                html += '<tr>';
+                html += `<th>${escapeHtml(row)}</th>`;
+                heatmapData.cols.forEach(col => {
+                    const value = (heatmapData.grid[row] || {})[col] || 0;
+                    const intensity = maxValue > 0 ? Math.abs(value) / maxValue : 0;
+                    const cssClass = intensity > 0.5 ? 'strong-positive' : (value > 0 ? 'positive' : '');
+                    html += `<td class="heatmap-cell ${cssClass}">${value !== 0 ? formatCompactMoney(value) : '—'}</td>`;
+                });
+                html += `<td class="heatmap-cell"><strong>${formatCompactMoney(heatmapData.rowTotals[row] || 0)}</strong></td>`;
+                html += '</tr>';
+            });
+
+            // Totals row
+            html += '<tr><th><strong>Total</strong></th>';
+            heatmapData.cols.forEach(col => {
+                html += `<td class="heatmap-cell"><strong>${formatCompactMoney(heatmapData.colTotals[col] || 0)}</strong></td>`;
+            });
+            html += `<td class="heatmap-cell"><strong>${formatCompactMoney(heatmapData.grandTotal)}</strong></td>`;
+            html += '</tr>';
+
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        function renderClinicalTable(clinicalCells, offsetCells) {
+            let html = '<div style="overflow-x: auto;">';
+            html += '<table class="interaction-table">';
+            html += '<thead><tr>';
+            html += '<th>Type</th>';
+            html += '<th>Clinical Cell</th>';
+            html += '<th class="numeric">Δ Paid</th>';
+            html += '<th class="numeric">Share Net Δ</th>';
+            html += '<th class="numeric">Claims Δ</th>';
+            html += '<th class="numeric">Admits Δ</th>';
+            html += '<th class="numeric">Avg Paid/Admit Δ</th>';
+            html += '<th>Signal</th>';
+            html += '</tr></thead><tbody>';
+
+            // Positive clinical cells
+            clinicalCells.forEach(cell => {
+                const label = buildClinicalLabel(cell);
+                const signal = deriveSignal(cell);
+                
+                html += '<tr>';
+                html += '<td><span class="cell-type-increase">Increase</span></td>';
+                html += `<td>${truncateWithTooltip(label, 80)}</td>`;
+                html += `<td class="numeric">${formatSignedMoney(cell.delta_value || 0)}</td>`;
+                html += `<td class="numeric">${formatPercent(cell.share_of_net_delta || 0)}</td>`;
+                html += `<td class="numeric">${formatSignedInteger(getMetricDelta(cell, 'expense_detail.claim_count'))}</td>`;
+                html += `<td class="numeric">${formatSignedInteger(getMetricDelta(cell, 'expense_detail.total_admissions'))}</td>`;
+                html += `<td class="numeric">${formatSignedMoney(getMetricDelta(cell, 'expense_detail.avg_paid_per_admit'))}</td>`;
+                html += `<td><span class="signal-badge signal-${signal}">${signal.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</span></td>`;
+                html += '</tr>';
+            });
+
+            // Offset cells
+            offsetCells.forEach(cell => {
+                const label = buildClinicalLabel(cell);
+                const signal = deriveSignal(cell);
+                
+                html += '<tr>';
+                html += '<td><span class="cell-type-offset">Offset</span></td>';
+                html += `<td>${truncateWithTooltip(label, 80)}</td>`;
+                html += `<td class="numeric">${formatSignedMoney(cell.delta_value || 0)}</td>`;
+                html += `<td class="numeric">${formatPercent(cell.share_of_net_delta || 0)}</td>`;
+                html += `<td class="numeric">${formatSignedInteger(getMetricDelta(cell, 'expense_detail.claim_count'))}</td>`;
+                html += `<td class="numeric">${formatSignedInteger(getMetricDelta(cell, 'expense_detail.total_admissions'))}</td>`;
+                html += `<td class="numeric">${formatSignedMoney(getMetricDelta(cell, 'expense_detail.avg_paid_per_admit'))}</td>`;
+                html += `<td><span class="signal-badge signal-${signal}">${signal.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</span></td>`;
+                html += '</tr>';
+            });
+
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        function renderRecommendations(recData) {
+            let html = '';
+            
+            // Determine if this is the new format (array) or old format (object)
+            const isNewFormat = Array.isArray(recData);
+            
+            // Executive Summary Box (old format only)
+            if (!isNewFormat && recData.summary) {
+                const summary = recData.summary;
+                html += '<div class="executive-summary-box">';
+                html += '<h3>📊 Executive Summary</h3>';
+                
+                if (summary.overall_pattern) {
+                    html += `<p><strong>Overall Pattern:</strong> ${escapeHtml(summary.overall_pattern)}</p>`;
+                }
+                
+                if (summary.primary_next_action) {
+                    html += `<p><strong>Primary Next Action:</strong> ${escapeHtml(summary.primary_next_action)}</p>`;
+                }
+                
+                if (summary.do_not_overgeneralize) {
+                    html += `<p><strong>Important Context:</strong> ${escapeHtml(summary.do_not_overgeneralize)}</p>`;
+                }
+                
+                html += '</div>';
+            }
+
+            // Get recommendation items
+            const items = isNewFormat ? recData : (recData.items || recData.recommendations || []);
+            
+            if (items.length === 0) {
+                return html + '<div style="padding: 20px; text-align: center; color: #6c757d;">No recommendations available.</div>';
+            }
+
+            html += '<div class="recommendations-grid">';
+            
+            items.forEach((rec, idx) => {
+                // Parse legacy format if needed
+                let recItem;
+                try {
+                    recItem = typeof rec.text === 'string' ? JSON.parse(rec.text) : rec;
+                } catch (e) {
+                    recItem = rec;
+                }
+
+                // New format fields
+                const rank = recItem.rank || idx + 1;
+                const priority = recItem.priority || 'MEDIUM';
+                const category = recItem.category || 'General';
+                const description = recItem.description || '';
+                const evidence = recItem.evidence || [];
+                const storyAlignment = recItem.story_alignment || [];
+                const peerBenchmarking = recItem.peer_benchmarking || [];
+                
+                // Old format fallbacks
+                const execRec = description || recItem.executive_recommendation || recItem.action || recItem.text || '';
+                const reviewArea = category.toLowerCase().replace(/ /g, '_') || recItem.review_area || 'general';
+                const confidence = recItem.confidence || 'Medium';
+                const oldEvidence = recItem.evidence && typeof recItem.evidence === 'object' && !Array.isArray(recItem.evidence) ? recItem.evidence : null;
+
+                // Parse story_alignment for special sections
+                let whyText = '';
+                let researchConsideration = '';
+                let costSuggestion = '';
+                storyAlignment.forEach(line => {
+                    if (line.startsWith('Why:')) {
+                        whyText = line.substring(4).trim();
+                    } else if (line.startsWith('research_consideration:')) {
+                        researchConsideration = line.substring(23).trim();
+                    } else if (line.startsWith('cost_of_care_suggestion:')) {
+                        costSuggestion = line.substring(24).trim();
+                    }
+                });
+
+                // Fallback to old format
+                if (!whyText) whyText = recItem.why || recItem.rationale || '';
+                if (!researchConsideration) researchConsideration = recItem.research_consideration || '';
+                if (!costSuggestion) costSuggestion = recItem.cost_of_care_suggestion || '';
+
+                const reviewAreaLabel = category || reviewArea.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                const evidenceId = `evidence-${idx}`;
+
+                html += '<div class="recommendation-card">';
+                
+                // Header: Priority, Category/Review Area, Confidence (if old format)
+                html += '<div class="recommendation-header">';
+                html += `<span class="priority-badge">${priority}</span>`;
+                html += `<span class="review-area-badge review-area-${reviewArea}">${reviewAreaLabel}</span>`;
+                if (confidence && confidence !== 'Medium') {
+                    html += `<span class="confidence-badge confidence-${confidence}">${confidence}</span>`;
+                }
+                html += '</div>';
+
+                // Main recommendation text
+                html += `<div class="exec-recommendation">${escapeHtml(execRec)}</div>`;
+
+                // Research Consideration
+                if (researchConsideration) {
+                    html += `<div class="research-consideration"><strong>Research:</strong> ${escapeHtml(researchConsideration)}</div>`;
+                }
+
+                // Cost of Care Suggestion
+                if (costSuggestion) {
+                    html += `<div class="cost-suggestion"><strong>Cost Action:</strong> ${escapeHtml(costSuggestion)}</div>`;
+                }
+
+                // Why section
+                if (whyText) {
+                    html += `<div class="why-section">${escapeHtml(whyText)}</div>`;
+                }
+
+                // Caveat section (old format only)
+                if (recItem.caveat) {
+                    html += `<div class="caveat-section"><strong>⚠️ Caveat:</strong> ${escapeHtml(recItem.caveat)}</div>`;
+                }
+
+                // Evidence toggle - handle both new array format and old object format
+                const hasNewEvidence = Array.isArray(evidence) && evidence.length > 0;
+                const hasPeerBenchmarking = Array.isArray(peerBenchmarking) && peerBenchmarking.length > 0;
+                const hasOldEvidence = oldEvidence && (oldEvidence.drill_dimensions || oldEvidence.interaction_cell_ids || oldEvidence.offset_cell_ids || oldEvidence.key_metrics);
+                
+                if (hasNewEvidence || hasPeerBenchmarking || hasOldEvidence) {
+                    html += `<div class="evidence-toggle" onclick="toggleEvidence('${evidenceId}')">`;
+                    html += '<span>View Supporting Evidence</span> <span id="arrow-' + evidenceId + '">▼</span>';
+                    html += '</div>';
+                    
+                    html += `<div id="${evidenceId}" class="evidence-content">`;
+                    html += '<div class="evidence-section">';
+
+                    // New format: Evidence array
+                    if (hasNewEvidence) {
+                        html += '<h5>Evidence</h5>';
+                        html += '<ul class="evidence-list">';
+                        evidence.forEach(item => {
+                            html += `<li>${escapeHtml(item)}</li>`;
+                        });
+                        html += '</ul>';
+                    }
+
+                    // New format: Peer Benchmarking
+                    if (hasPeerBenchmarking) {
+                        html += '<h5 style="margin-top: 12px;">Peer Benchmarking</h5>';
+                        html += '<ul class="evidence-list">';
+                        peerBenchmarking.forEach(item => {
+                            html += `<li>${escapeHtml(item)}</li>`;
+                        });
+                        html += '</ul>';
+                    }
+
+                    // Old format: Structured evidence
+                    if (hasOldEvidence) {
+                        // Drill dimensions
+                        if (oldEvidence.drill_dimensions && oldEvidence.drill_dimensions.length > 0) {
+                            html += '<h5>Drill Path Evidence</h5>';
+                            html += '<div>';
+                            oldEvidence.drill_dimensions.forEach(dim => {
+                                html += `<span class="dimension-badge">${escapeHtml(dim)}</span>`;
+                            });
+                            html += '</div>';
+                        }
+
+                        // Interaction cells
+                        if (oldEvidence.interaction_cell_ids && oldEvidence.interaction_cell_ids.length > 0) {
+                            html += '<h5 style="margin-top: 12px;">Operational Cells</h5>';
+                            html += '<div class="recommendation-cells">';
+                            oldEvidence.interaction_cell_ids.forEach(cellId => {
+                                html += `<span class="cell-badge">${cellId.toUpperCase()}</span>`;
+                            });
+                            html += '</div>';
+                        }
+
+                        // Offset cells
+                        if (oldEvidence.offset_cell_ids && oldEvidence.offset_cell_ids.length > 0) {
+                            html += '<h5 style="margin-top: 12px;">Clinical Offset Cells</h5>';
+                            html += '<div class="recommendation-cells">';
+                            oldEvidence.offset_cell_ids.forEach(cellId => {
+                                html += `<span class="cell-badge">${cellId.toUpperCase()}</span>`;
+                            });
+                            html += '</div>';
+                        }
+
+                        // Key metrics
+                        if (oldEvidence.key_metrics && oldEvidence.key_metrics.length > 0) {
+                            html += '<h5 style="margin-top: 12px;">Key Metrics</h5>';
+                            html += '<ul class="evidence-list">';
+                            oldEvidence.key_metrics.forEach(metric => {
+                                html += `<li>${escapeHtml(metric)}</li>`;
+                            });
+                            html += '</ul>';
+                        }
+                    }
+
+                    html += '</div></div>';
+                }
+
+                html += '</div>';
+            });
+            
+            html += '</div>';
+            return html;
+        }
+
+        function toggleEvidence(evidenceId) {
+            const content = document.getElementById(evidenceId);
+            const arrow = document.getElementById('arrow-' + evidenceId);
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                arrow.textContent = '▼';
+            } else {
+                content.classList.add('expanded');
+                arrow.textContent = '▲';
+            }
+        }
+
+        function renderRawDetailsSection(operationalCells, clinicalCells, offsetCells) {
+            let html = '<div class="collapsed-section">';
+            html += '<div class="collapsed-header" onclick="toggleCollapsedSection(this)">View raw selected cells <span>▼</span></div>';
+            html += '<div class="collapsed-content">';
+            
+            // Operational cards
+            if (operationalCells.length > 0) {
+                html += '<h4 style="margin-top: 0;">Operational Cells</h4>';
+                html += '<div class="interaction-cells-grid">';
+                operationalCells.forEach(cell => {
+                    html += renderInteractionCell(cell, 'operational');
+                });
+                html += '</div>';
+            }
+
+            // Clinical cards
+            if (clinicalCells.length > 0) {
+                html += '<h4>Clinical Cells</h4>';
+                html += '<div class="interaction-cells-grid">';
+                clinicalCells.forEach(cell => {
+                    html += renderInteractionCell(cell, 'clinical');
+                });
+                html += '</div>';
+            }
+
+            // Offset cards
+            if (offsetCells.length > 0) {
+                html += '<h4>Clinical Offset Cells</h4>';
+                html += '<div class="interaction-cells-grid">';
+                offsetCells.forEach(cell => {
+                    html += renderInteractionCell(cell, 'offset');
+                });
+                html += '</div>';
+            }
+
+            html += '</div></div>';
+            return html;
+        }
+
+        function toggleCollapsedSection(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('span');
+            content.classList.toggle('expanded');
+            arrow.textContent = content.classList.contains('expanded') ? '▲' : '▼';
+        }
+
+        function renderInteractionMatrixEmpty(matrix) {
+            const summary = matrix.summary || {};
+            const interactionStage = summary.interaction_stage || {};
+            const clinicalStage = summary.clinical_stage || {};
+            const operational = matrix.operational || {};
+
+            let html = '<div class="interaction-matrix-container">';
+            html += '<div class="interaction-section" style="background: #e7f3ff; border-color: #17a2b8;">';
+            html += '<div class="interaction-title">🔍 Detected Interactions</div>';
+            
+            html += '<div style="padding: 15px; background: white; border-radius: 6px; border-left: 4px solid #17a2b8; margin-bottom: 15px;">';
+            html += '<p style="margin: 0; color: #0c5460; font-weight: 600;">ℹ️ Analysis Ran But Found No Significant Cells</p>';
+            html += '<p style="margin: 10px 0 0 0; color: #0c5460;">';
+            html += 'The interaction matrix analysis executed successfully, but no operational cells met the selection criteria. ';
+            html += 'This typically means the delta values were below the minimum thresholds or the share percentages were too small.';
+            html += '</p></div>';
+
+            if (interactionStage.passed !== undefined) {
+                html += '<div style="background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px; border: 1px solid #dee2e6;">';
+                html += '<div style="font-weight: 600; color: #495057; margin-bottom: 10px; font-size: 1.1em;">📊 Analysis Status</div>';
+                
+                html += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">';
+                
+                html += '<div style="padding: 10px; background: ' + (interactionStage.passed ? '#d4edda' : '#f8d7da') + '; border-radius: 6px;">';
+                html += '<div style="font-size: 0.85em; color: #6c757d; margin-bottom: 4px;">Interaction Stage</div>';
+                html += '<div style="font-weight: 600; color: ' + (interactionStage.passed ? '#155724' : '#721c24') + ';">'
+                html += (interactionStage.passed ? '✅ Passed' : '❌ Failed') + '</div>';
+                html += '</div>';
+                
+                html += '<div style="padding: 10px; background: #f8f9fa; border-radius: 6px;">';
+                html += '<div style="font-size: 0.85em; color: #6c757d; margin-bottom: 4px;">Drill Path Depth</div>';
+                html += '<div style="font-weight: 600; color: #212529;">' + (interactionStage.observed_drill_path_depth || 0) + ' levels</div>';
+                html += '</div>';
+                
+                html += '<div style="padding: 10px; background: #f8f9fa; border-radius: 6px;">';
+                html += '<div style="font-size: 0.85em; color: #6c757d; margin-bottom: 4px;">Min Delta Threshold</div>';
+                html += '<div style="font-weight: 600; color: #212529;">' + formatCurrency(interactionStage.min_abs_net_delta || 0) + '</div>';
+                html += '</div>';
+                
+                html += '<div style="padding: 10px; background: ' + (clinicalStage.passed ? '#d4edda' : '#f8d7da') + '; border-radius: 6px;">';
+                html += '<div style="font-size: 0.85em; color: #6c757d; margin-bottom: 4px;">Clinical Stage</div>';
+                html += '<div style="font-weight: 600; color: ' + (clinicalStage.passed ? '#155724' : '#721c24') + ';">'
+                html += (clinicalStage.passed ? '✅ Passed' : '❌ Not Run') + '</div>';
+                html += '</div>';
+                
+                html += '</div></div>';
+            }
+
+            if (operational.dimensions && operational.dimensions.length > 0) {
+                html += '<div style="background: white; border-radius: 8px; padding: 15px; border: 1px solid #dee2e6;">';
+                html += '<div style="font-weight: 600; color: #495057; margin-bottom: 10px; font-size: 1.1em;">🔧 Configuration</div>';
+                html += '<div style="margin-bottom: 10px;"><strong>Operational Dimensions:</strong></div>';
+                html += '<div style="display: flex; flex-wrap: wrap; gap: 8px;">';
+                operational.dimensions.forEach(dim => {
+                    html += '<span style="background: #e9ecef; padding: 6px 12px; border-radius: 6px; font-size: 0.9em;">' + escapeHtml(dim) + '</span>';
+                });
+                html += '</div>';
+                
+                if (operational.selected_cells && operational.selected_cells.length === 0) {
+                    html += '<div style="margin-top: 15px; padding: 10px; background: #fff3cd; border-left: 3px solid #ffc107; border-radius: 4px;">';
+                    html += '<div style="color: #856404;"><strong>💡 Tip:</strong> No cells met the selection criteria. This could be because:</div>';
+                    html += '<ul style="margin: 8px 0 0 20px; color: #856404;">';
+                    html += '<li>Delta values were below the minimum positive delta threshold</li>';
+                    html += '<li>Share of positive delta was too small</li>';
+                    html += '<li>All deltas were negative</li>';
+                    html += '</ul></div>';
+                }
+                html += '</div>';
+            }
+
+            html += '</div></div>';
+            return html;
+        }
+
+        function renderInteractionCell(cell, type) {
+            const deltaClass = cell.delta_value >= 0 ? 'positive' : 'negative';
+            const deltaSign = cell.delta_value >= 0 ? '+' : '';
+            
+            let html = `<div class="interaction-cell ${type}">`;
+            
+            html += '<div class="cell-header">';
+            html += `<div class="cell-id">${cell.cell_id.toUpperCase()}</div>`;
+            html += `<div class="cell-delta ${deltaClass}">${deltaSign}${formatCurrencyWithSign(cell.delta_value)}</div>`;
+            html += '</div>';
+
+            if (cell.dimension_values) {
+                html += '<div class="cell-dimensions">';
+                for (const [key, value] of Object.entries(cell.dimension_values)) {
+                    html += `
+                        <div class="dimension-item">
+                            <span class="dimension-key">${escapeHtml(key)}:</span>
+                            <span class="dimension-value">${escapeHtml(value)}</span>
+                        </div>
+                    `;
+                }
+                html += '</div>';
+            }
+
+            html += '<div class="cell-metrics">';
+            html += `
+                <div class="cell-metric-item">
+                    <span class="cell-metric-label">Baseline</span>
+                    <span class="cell-metric-value">${formatCurrencyWithSign(cell.baseline_value)}</span>
+                </div>
+                <div class="cell-metric-item">
+                    <span class="cell-metric-label">Comparison</span>
+                    <span class="cell-metric-value">${formatCurrencyWithSign(cell.comparison_value)}</span>
+                </div>
+                <div class="cell-metric-item">
+                    <span class="cell-metric-label">Share of +Δ</span>
+                    <span class="cell-metric-value">${formatPercent(cell.share_of_positive_delta)}</span>
+                </div>
+                <div class="cell-metric-item">
+                    <span class="cell-metric-label">Share of Net Δ</span>
+                    <span class="cell-metric-value">${formatPercent(cell.share_of_net_delta)}</span>
+                </div>
+            `;
+            html += '</div>';
+
+            html += '</div>';
+            return html;
+        }
+
+        function renderLevel(level, index) {
+            let html = `
+                <div class="level-card">
+                    <div class="level-header">
+                        <div class="level-title">Level ${level.level}: ${level.dimension_label}</div>
+                        <div class="level-badge">Dimension: ${level.dimension}</div>
+                    </div>
+            `;
+
+            if (level.parent_context && level.parent_context !== 'root') {
+                html += `
+                    <div class="level-context">
+                        <strong>Context:</strong> ${level.parent_context}
+                    </div>
+                `;
+            }
+
+            html += `<div class="segments-container">`;
+
+            if (level.top_segments && level.top_segments.length > 0) {
+                const segmentsToShow = level.top_segments.slice(0, 5);
+                
+                segmentsToShow.forEach((segment, segIndex) => {
+                    html += renderSegment(segment, segIndex + 1);
+                });
+            } else {
+                html += `<p style="text-align: center; color: #6c757d;">No top segments available for this level.</p>`;
+            }
+
+            html += `</div></div>`;
+
+            return html;
+        }
+
+        function renderSegment(segment, rank) {
+            const deltaClass = segment.delta_value >= 0 ? 'positive' : 'negative';
+            const deltaSign = segment.delta_value >= 0 ? '+' : '';
+            const contributionPct = Math.abs(segment.contribution_pct_total * 100);
+            const contributionParentPct = Math.abs(segment.contribution_pct_parent * 100);
+
+            return `
+                <div class="segment-card ${deltaClass}">
+                    <div class="segment-header">
+                        <div>
+                            <div style="font-size: 0.9em; color: #6c757d; margin-bottom: 5px;">Rank #${rank}</div>
+                            <div class="segment-name">${segment.value}</div>
+                        </div>
+                        <div class="segment-delta ${deltaClass}">
+                            ${deltaSign}${formatCurrency(segment.delta_value)}
+                        </div>
+                    </div>
+
+                    <div class="segment-metrics">
+                        <div class="metric">
+                            <div class="metric-label">Baseline Value</div>
+                            <div class="metric-value">${formatCurrency(segment.baseline_value)}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Comparison Value</div>
+                            <div class="metric-value">${formatCurrency(segment.comparison_value)}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Contribution to Total</div>
+                            <div class="metric-value">${formatPercent(segment.contribution_pct_total)}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Contribution to Parent</div>
+                            <div class="metric-value">${formatPercent(segment.contribution_pct_parent)}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Baseline Count</div>
+                            <div class="metric-value">${formatNumber(segment.raw_row_count_baseline)}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Comparison Count</div>
+                            <div class="metric-value">${formatNumber(segment.raw_row_count_comparison)}</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill ${deltaClass}" style="width: ${Math.min(contributionPct, 100)}%"></div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

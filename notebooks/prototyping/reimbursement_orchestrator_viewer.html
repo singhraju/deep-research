@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reimbursement Policy Orchestrator Viewer</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+min-height: 100vh;
+padding: 20px;
+color: #333;
+}
+.container {
+max-width: 1600px;
+margin: 0 auto;
+background: white;
+border-radius: 12px;
+box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+overflow: hidden;
+}
+.header {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+padding: 30px;
+text-align: center;
+}
+.header h1 {
+font-size: 2rem;
+margin-bottom: 10px;
+font-weight: 600;
+}
+.header p {
+font-size: 0.95rem;
+opacity: 0.95;
+}
+.controls {
+padding: 20px 30px;
+background: #f8f9fa;
+border-bottom: 1px solid #e9ecef;
+display: flex;
+gap: 15px;
+flex-wrap: wrap;
+align-items: center;
+}
+.file-input-wrapper {
+position: relative;
+overflow: hidden;
+display: inline-block;
+}
+.file-input-wrapper input[type=file] {
+position: absolute;
+left: -9999px;
+}
+.btn {
+padding: 10px 20px;
+border: none;
+border-radius: 6px;
+font-size: 0.9rem;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.3s ease;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+}
+.btn-primary {
+background: #667eea;
+color: white;
+}
+.btn-primary:hover {
+background: #5568d3;
+transform: translateY(-1px);
+box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+.search-box {
+flex: 1;
+min-width: 250px;
+}
+.search-box input {
+width: 100%;
+padding: 10px 15px;
+border: 2px solid #e9ecef;
+border-radius: 6px;
+font-size: 0.9rem;
+transition: border-color 0.3s ease;
+}
+.search-box input:focus {
+outline: none;
+border-color: #667eea;
+}
+.content {
+padding: 30px;
+}
+/* Pattern Card Styles */
+.pattern-card {
+border: 2px solid #e9ecef;
+border-radius: 12px;
+margin-bottom: 30px;
+overflow: hidden;
+transition: all 0.3s ease;
+}
+.pattern-card:hover {
+box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+.pattern-card.error {
+border-color: #dc3545;
+}
+.pattern-card.success {
+border-color: #28a745;
+}
+/* Pattern Header */
+.pattern-header {
+padding: 20px 25px;
+background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.pattern-card.error .pattern-header {
+background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+color: white;
+}
+.pattern-card.success .pattern-header {
+background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+color: white;
+}
+.pattern-title {
+font-size: 1.3rem;
+font-weight: 600;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.pattern-badge {
+display: inline-block;
+padding: 4px 12px;
+border-radius: 12px;
+font-size: 0.75rem;
+font-weight: 600;
+text-transform: uppercase;
+}
+.badge-error {
+background: #fff;
+color: #dc3545;
+}
+.badge-success {
+background: #fff;
+color: #28a745;
+}
+.badge-warning {
+background: #fff;
+color: #ffc107;
+}
+.toggle-icon {
+font-size: 1.5rem;
+transition: transform 0.3s ease;
+}
+.toggle-icon.open {
+transform: rotate(180deg);
+}
+/* Pattern Content */
+.pattern-content {
+padding: 25px;
+display: none;
+}
+.pattern-content.show {
+display: block;
+}
+/* Error Display */
+.error-message {
+background: #f8d7da;
+color: #721c24;
+padding: 20px;
+border-radius: 8px;
+margin-bottom: 20px;
+border-left: 4px solid #dc3545;
+}
+.error-message h3 {
+margin-bottom: 10px;
+font-size: 1.1rem;
+}
+.error-message code {
+display: block;
+margin-top: 10px;
+padding: 10px;
+background: rgba(0, 0, 0, 0.05);
+border-radius: 4px;
+font-family: 'Courier New', monospace;
+font-size: 0.85rem;
+overflow-x: auto;
+}
+/* Metadata Grid */
+.metadata-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 15px;
+margin-bottom: 25px;
+}
+.metadata-item {
+background: #f8f9fa;
+padding: 15px;
+border-radius: 8px;
+border-left: 4px solid #667eea;
+}
+.metadata-label {
+font-size: 0.75rem;
+color: #6c757d;
+text-transform: uppercase;
+font-weight: 600;
+margin-bottom: 5px;
+}
+.metadata-value {
+font-size: 1rem;
+font-weight: 600;
+color: #333;
+}
+/* Section Styles */
+.section {
+margin-bottom: 30px;
+}
+.section-title {
+font-size: 1.3rem;
+font-weight: 600;
+margin-bottom: 15px;
+color: #667eea;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.section-subtitle {
+font-size: 0.95rem;
+color: #6c757d;
+margin-bottom: 20px;
+line-height: 1.6;
+font-style: italic;
+}
+/* Table Styles */
+.table-wrapper {
+overflow-x: auto;
+border: 1px solid #e9ecef;
+border-radius: 8px;
+margin-bottom: 20px;
+}
+table {
+width: 100%;
+border-collapse: collapse;
+font-size: 0.85rem;
+}
+th {
+background: #667eea;
+color: white;
+padding: 12px;
+text-align: left;
+font-weight: 600;
+white-space: pre-line;
+}
+td {
+padding: 12px;
+border-bottom: 1px solid #e9ecef;
+vertical-align: top;
+}
+tr:hover {
+background: #f8f9fa;
+}
+.badge-cell {
+display: inline-block;
+padding: 4px 10px;
+border-radius: 12px;
+font-size: 0.75rem;
+font-weight: 600;
+background: #667eea;
+color: white;
+}
+/* Policy Card Styles */
+.policy-card {
+border: 1px solid #e9ecef;
+border-radius: 8px;
+margin-bottom: 15px;
+overflow: hidden;
+transition: all 0.3s ease;
+}
+.policy-card:hover {
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.policy-header-item {
+padding: 15px 20px;
+background: #f8f9fa;
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+gap: 15px;
+}
+.policy-info {
+flex: 1;
+}
+.policy-payer {
+font-size: 1rem;
+font-weight: 600;
+color: #333;
+margin-bottom: 5px;
+}
+.policy-title-text {
+font-size: 0.9rem;
+color: #6c757d;
+margin-bottom: 8px;
+}
+.policy-meta {
+font-size: 0.8rem;
+color: #6c757d;
+}
+.policy-link {
+padding: 8px 16px;
+background: #667eea;
+color: white;
+text-decoration: none;
+border-radius: 6px;
+font-size: 0.85rem;
+transition: all 0.3s ease;
+display: inline-block;
+}
+.policy-link:hover {
+background: #5568d3;
+transform: translateY(-1px);
+}
+.policy-tags {
+display: flex;
+gap: 8px;
+margin-top: 8px;
+flex-wrap: wrap;
+}
+.tag {
+background: #e7f3ff;
+color: #0066cc;
+padding: 4px 10px;
+border-radius: 12px;
+font-size: 0.75rem;
+font-weight: 500;
+}
+/* Validation Checks */
+.validation-checks {
+background: #f8f9fa;
+padding: 15px;
+border-radius: 8px;
+margin-bottom: 20px;
+}
+.check-item {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 8px;
+margin-bottom: 5px;
+}
+.check-icon {
+font-size: 1.2rem;
+}
+.check-passed {
+color: #28a745;
+}
+.check-failed {
+color: #dc3545;
+}
+/* Recommendation Card */
+.recommendation-card {
+background: #fff3cd;
+border: 2px solid #ffc107;
+border-radius: 8px;
+padding: 20px;
+margin-bottom: 20px;
+}
+.recommendation-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 15px;
+}
+.recommendation-rank {
+background: #ffc107;
+color: #000;
+padding: 6px 14px;
+border-radius: 20px;
+font-weight: 600;
+}
+.recommendation-priority {
+padding: 4px 12px;
+border-radius: 12px;
+font-size: 0.85rem;
+font-weight: 600;
+}
+.priority-high {
+background: #dc3545;
+color: white;
+}
+.priority-medium {
+background: #ffc107;
+color: #000;
+}
+.priority-low {
+background: #28a745;
+color: white;
+}
+.recommendation-description {
+font-size: 0.95rem;
+line-height: 1.6;
+color: #333;
+}
+/* Elevance Summary */
+.elevance-summary {
+background: #d1ecf1;
+border-left: 4px solid #0c5460;
+padding: 20px;
+border-radius: 8px;
+margin-bottom: 20px;
+}
+.elevance-summary h3 {
+color: #0c5460;
+margin-bottom: 10px;
+font-size: 1.1rem;
+}
+.elevance-summary p {
+color: #0c5460;
+line-height: 1.6;
+}
+/* Empty State */
+.empty-state {
+text-align: center;
+padding: 60px 20px;
+color: #6c757d;
+}
+.empty-state svg {
+width: 120px;
+height: 120px;
+margin-bottom: 20px;
+opacity: 0.5;
+}
+.empty-state h2 {
+margin-bottom: 10px;
+}
+/* Loading State */
+.loading {
+text-align: center;
+padding: 40px;
+color: #6c757d;
+}
+.spinner {
+border: 3px solid #f3f3f3;
+border-top: 3px solid #667eea;
+border-radius: 50%;
+width: 40px;
+height: 40px;
+animation: spin 1s linear infinite;
+margin: 0 auto 20px;
+}
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+/* Responsive */
+@media (max-width: 768px) {
+.pattern-title {
+font-size: 1rem;
+}
+.metadata-grid {
+grid-template-columns: 1fr;
+}
+.controls {
+flex-direction: column;
+align-items: stretch;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>🏥 Reimbursement Policy Orchestrator Viewer</h1>
+<p>View and analyze reimbursement policy results with orchestrator metadata</p>
+</div>
+<div class="controls">
+<div class="file-input-wrapper">
+<label for="fileInput" class="btn btn-primary">
+📁 Load JSON File
+</label>
+<input type="file" id="fileInput" accept=".json">
+</div>
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="🔍 Search patterns, payers, or error messages...">
+</div>
+</div>
+<div class="content" id="content">
+<div class="empty-state">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+<polyline points="13 2 13 9 20 9"></polyline>
+</svg>
+<h2>No Data Loaded</h2>
+<p>Upload a reimbursement policy JSON file to get started</p>
+</div>
+</div>
+</div>
+<script>
+let patternsData = [];
+// File input handler with improved JSON parsing
+document.getElementById('fileInput').addEventListener('change', function(e) {
+const file = e.target.files[0];
+if (file) {
+const reader = new FileReader();
+reader.onload = function(e) {
+let jsonData;
+try {
+jsonData = JSON.parse(e.target.result);
+let patterns;
+                        
+// Handle different JSON structures
+console.log('Parsing JSON with top-level keys:', Object.keys(jsonData));
+                        
+if (Array.isArray(jsonData)) {
+    console.log('Detected: Direct array');
+    patterns = jsonData;
+} else if (jsonData.patterns && Array.isArray(jsonData.patterns)) {
+    console.log('Detected: patterns array');
+    patterns = jsonData.patterns;
+} else if (jsonData.results && Array.isArray(jsonData.results)) {
+    console.log('Detected: results array');
+    patterns = jsonData.results;
+} else if (jsonData.states && typeof jsonData.states === 'object' && !Array.isArray(jsonData.states)) {
+    // Handle correlation agent data structure: { "states": { "NH": {...}, "CA": {...} } }
+    console.log('Detected: states object (correlation data)');
+    patterns = Object.entries(jsonData.states).map(([stateName, stateData]) => ({
+        ...stateData,
+        state_name: stateName,
+        agent: stateData.agent || 'correlation_agent'
+    }));
+} else if (jsonData.detail || jsonData.output || jsonData.status) {
+    // Handle single pattern object (error or success)
+    console.log('Detected: Single pattern object - wrapping in array');
+    patterns = [jsonData];
+} else if (typeof jsonData === 'object' && jsonData !== null) {
+    // Try to find an array property
+    console.log('Searching for array property in object...');
+    const arrayProp = Object.values(jsonData).find(val => Array.isArray(val));
+    if (arrayProp) {
+        console.log('Found array property');
+        patterns = arrayProp;
+    } else {
+        const availableKeys = Object.keys(jsonData).join(', ');
+        throw new Error(`JSON must contain an array of patterns, or a "states" object for correlation data. Found keys: ${availableKeys}`);
+    }
+} else {
+    throw new Error('Invalid JSON structure. Expected array or object with patterns array.');
+}
+                        
+patternsData = patterns;
+renderPatterns(patterns);
+} catch (error) {
+alert('Error parsing JSON file: ' + error.message);
+console.error('JSON parsing error:', error);
+console.error('JSON structure:', jsonData);
+console.error('Top-level keys:', Object.keys(jsonData || {}));
+}
+};
+reader.readAsText(file);
+}
+});
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', function(e) {
+const searchTerm = e.target.value.toLowerCase();
+const cards = document.querySelectorAll('.pattern-card');
+cards.forEach(card => {
+const text = card.textContent.toLowerCase();
+card.style.display = text.includes(searchTerm) ? 'block' : 'none';
+});
+});
+// Check for URL parameter
+const urlParams = new URLSearchParams(window.location.search);
+const jsonFile = urlParams.get('file');
+if (jsonFile) {
+loadJSONFromURL(jsonFile);
+}
+function loadJSONFromURL(filename) {
+document.getElementById('content').innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading data...</p></div>';
+fetch(filename)
+.then(response => response.json())
+.then(jsonData => {
+let patterns;
+                    
+// Handle different JSON structures
+console.log('Parsing JSON from URL with top-level keys:', Object.keys(jsonData));
+                    
+if (Array.isArray(jsonData)) {
+    console.log('Detected: Direct array');
+    patterns = jsonData;
+} else if (jsonData.patterns && Array.isArray(jsonData.patterns)) {
+    console.log('Detected: patterns array');
+    patterns = jsonData.patterns;
+} else if (jsonData.results && Array.isArray(jsonData.results)) {
+    console.log('Detected: results array');
+    patterns = jsonData.results;
+} else if (jsonData.states && typeof jsonData.states === 'object' && !Array.isArray(jsonData.states)) {
+    // Handle correlation agent data structure: { "states": { "NH": {...}, "CA": {...} } }
+    console.log('Detected: states object (correlation data)');
+    patterns = Object.entries(jsonData.states).map(([stateName, stateData]) => ({
+        ...stateData,
+        state_name: stateName,
+        agent: stateData.agent || 'correlation_agent'
+    }));
+} else if (jsonData.detail || jsonData.output || jsonData.status) {
+    // Handle single pattern object (error or success)
+    console.log('Detected: Single pattern object - wrapping in array');
+    patterns = [jsonData];
+} else if (typeof jsonData === 'object' && jsonData !== null) {
+    // Try to find an array property
+    console.log('Searching for array property in object...');
+    const arrayProp = Object.values(jsonData).find(val => Array.isArray(val));
+    if (arrayProp) {
+        console.log('Found array property');
+        patterns = arrayProp;
+    } else {
+        const availableKeys = Object.keys(jsonData).join(', ');
+        throw new Error(`JSON must contain an array of patterns, or a "states" object for correlation data. Found keys: ${availableKeys}`);
+    }
+} else {
+    throw new Error('Invalid JSON structure');
+}
+                    
+patternsData = patterns;
+renderPatterns(patterns);
+})
+.catch(error => {
+document.getElementById('content').innerHTML =
+`<div class="empty-state">
+<h2>Error Loading File</h2>
+<p>${error.message}</p>
+</div>`;
+});
+}
+function renderPatterns(patterns) {
+const content = document.getElementById('content');
+if (!patterns || patterns.length === 0) {
+content.innerHTML = `
+<div class="empty-state">
+<h2>No Patterns Found</h2>
+<p>The loaded file contains no pattern data</p>
+</div>`;
+return;
+}
+let html = '';
+patterns.forEach((pattern, index) => {
+// Check if it's an error or success pattern
+const isError = pattern.detail && pattern.detail.success === false;
+const isSuccess = pattern.status === 'success';
+const isFailed = pattern.status === 'failed';
+const isPartialSuccess = pattern.status === 'partial_success';
+
+if (isError) {
+html += renderErrorPattern(pattern, index);
+} else if (isSuccess || isFailed || isPartialSuccess) {
+html += renderSuccessPattern(pattern, index);
+} else {
+html += renderUnknownPattern(pattern, index);
+}
+});
+content.innerHTML = html;
+// Attach toggle handlers
+document.querySelectorAll('.pattern-header').forEach(header => {
+header.addEventListener('click', function() {
+const card = this.closest('.pattern-card');
+const content = card.querySelector('.pattern-content');
+const icon = this.querySelector('.toggle-icon');
+content.classList.toggle('show');
+icon.classList.toggle('open');
+});
+});
+}
+function renderErrorPattern(pattern, index) {
+const detail = pattern.detail;
+const errorType = detail.error_type || 'Error';
+const error = detail.error || 'Unknown error';
+const executionTime = detail.metadata?.execution_time || 0;
+const hasExecutionTime = executionTime > 0;
+// Try to extract pattern number from error message
+const patternMatch = error.match(/Pattern (\d+)/);
+const patternNum = patternMatch ? patternMatch[1] : index + 1;
+return `
+<div class="pattern-card error">
+<div class="pattern-header">
+<div class="pattern-title">
+<span>❌ Pattern ${patternNum}</span>
+<span class="pattern-badge badge-error">${errorType}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 15px;">
+${hasExecutionTime ? `<span style="font-size: 0.9rem;">⏱️ ${executionTime.toFixed(1)}s</span>` : ''}
+<span class="toggle-icon">▼</span>
+</div>
+</div>
+<div class="pattern-content">
+<div class="error-message">
+<h3>🚫 ${errorType}</h3>
+<p style="word-break: break-word;">${error}</p>
+</div>
+<div class="metadata-grid">
+<div class="metadata-item">
+<div class="metadata-label">Agent</div>
+<div class="metadata-value">${detail.agent_name || 'N/A'}</div>
+</div>
+${hasExecutionTime ? `
+<div class="metadata-item">
+<div class="metadata-label">Execution Time</div>
+<div class="metadata-value">${executionTime.toFixed(1)}s</div>
+</div>
+` : ''}
+<div class="metadata-item">
+<div class="metadata-label">Status</div>
+<div class="metadata-value" style="color: #dc3545;">Failed</div>
+</div>
+</div>
+</div>
+</div>
+`;
+}
+function renderSuccessPattern(pattern, index) {
+const output = pattern.output || {};
+const patternRank = output.pattern_rank || index + 1;
+const summaryTable = output.summary_table || {};
+const policies = output.reimbursement_policies || [];
+const recommendation = pattern.recommended_action && pattern.recommended_action.length > 0
+? pattern.recommended_action[0]
+: null;
+const elevanceSummary = output.elevance_executive_summary;
+const explanation = pattern.explanation || {};
+const validation = pattern.validation || {};
+const execution = pattern.execution || {};
+const statusBadge = pattern.status === 'success' ? 'badge-success' :
+pattern.status === 'partial_success' ? 'badge-warning' :
+'badge-error';
+const cardClass = pattern.status === 'success' ? 'success' :
+pattern.status === 'partial_success' ? 'success' :
+'error';
+const statusIcon = pattern.status === 'success' ? '✅' :
+pattern.status === 'partial_success' ? '⚠️' :
+'❌';
+let html = `
+<div class="pattern-card ${cardClass}">
+<div class="pattern-header">
+<div class="pattern-title">
+<span>${statusIcon} Pattern ${patternRank}</span>
+<span class="pattern-badge ${statusBadge}">${pattern.status}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 15px;">
+<span style="font-size: 0.9rem;">⏱️ ${((execution.duration_ms || 0) / 1000).toFixed(1)}s</span>
+<span style="font-size: 0.9rem;">📊 ${policies.length} policies</span>
+<span class="toggle-icon">▼</span>
+</div>
+</div>
+<div class="pattern-content">
+`;
+// Metadata Grid
+html += `
+<div class="metadata-grid">
+<div class="metadata-item">
+<div class="metadata-label">Pattern Rank</div>
+<div class="metadata-value">${patternRank}</div>
+</div>
+<div class="metadata-item">
+<div class="metadata-label">Job ID</div>
+<div class="metadata-value" style="font-size: 0.75rem;">${pattern.job_id || 'N/A'}</div>
+</div>
+<div class="metadata-item">
+<div class="metadata-label">Policies Processed</div>
+<div class="metadata-value">${output.policies_processed || 0}</div>
+</div>
+<div class="metadata-item">
+<div class="metadata-label">Success Rate</div>
+<div class="metadata-value">${output.policies_processed > 0 ? Math.round((output.policies_successful / output.policies_processed) * 100) : 0}%</div>
+</div>
+<div class="metadata-item">
+<div class="metadata-label">Execution Time</div>
+<div class="metadata-value">${((execution.duration_ms || 0) / 1000).toFixed(2)}s</div>
+</div>
+<div class="metadata-item">
+<div class="metadata-label">DRG Codes</div>
+<div class="metadata-value">${explanation.drg_codes_requested?.length || 0}</div>
+</div>
+</div>
+`;
+
+// Show errors prominently for failed patterns
+if (pattern.status === 'failed' && validation.errors && validation.errors.length > 0) {
+html += `
+<div class="error-message">
+<h3>🚫 Pattern Processing Failed</h3>
+${validation.errors.map(err => `<p>${err}</p>`).join('')}
+${validation.warnings && validation.warnings.length > 0 ? `
+<div style="margin-top: 15px;">
+<strong>Warnings:</strong>
+${validation.warnings.map(warn => `<p>⚠️ ${warn}</p>`).join('')}
+</div>
+` : ''}
+</div>
+`;
+}
+
+// Validation Checks
+if (validation.checks && validation.checks.length > 0) {
+html += `
+<div class="section">
+<div class="section-title">✓ Validation Checks</div>
+<div class="validation-checks">
+${validation.checks.map(check => `
+<div class="check-item">
+<span class="check-icon ${check.passed ? 'check-passed' : 'check-failed'}">
+${check.passed ? '✓' : '✗'}
+</span>
+<span>${check.message}</span>
+</div>
+`).join('')}
+</div>
+</div>
+`;
+}
+// Recommendation
+if (recommendation) {
+html += `
+<div class="section">
+<div class="section-title">💡 Recommendation</div>
+<div class="recommendation-card">
+<div class="recommendation-header">
+<span class="recommendation-rank">Rank ${recommendation.rank}</span>
+<span class="recommendation-priority priority-${recommendation.priority.toLowerCase()}">${recommendation.priority}</span>
+</div>
+<div class="recommendation-description">${recommendation.description}</div>
+</div>
+</div>
+`;
+}
+// Elevance Summary
+if (elevanceSummary) {
+html += `
+<div class="section">
+<div class="section-title">🏢 Elevance Executive Summary</div>
+<div class="elevance-summary">
+<p>${elevanceSummary}</p>
+</div>
+</div>
+`;
+}
+// Summary Table
+if (summaryTable.columns && summaryTable.rows && summaryTable.rows.length > 0) {
+html += `
+<div class="section">
+<div class="section-title">📊 ${summaryTable.title || 'Payer Policy Summary'}</div>
+${summaryTable.subtitle ? `<div class="section-subtitle">${summaryTable.subtitle}</div>` : ''}
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+${summaryTable.columns.map(col =>
+`<th>${col.label}</th>` 
+).join('')}
+</tr>
+</thead>
+<tbody>
+${summaryTable.rows.map(row => `
+<tr>
+${summaryTable.columns.map(col => {
+const value = row[col.id] || '-';
+if (col.type === 'badge' && value !== '-') {
+return `<td><span class="badge-cell">${value}</span></td>`;
+}
+return `<td>${value}</td>`;
+}).join('')}
+</tr>
+`).join('')}
+</tbody>
+</table>
+</div>
+</div>
+`;
+}
+// Individual Policies
+if (policies.length > 0) {
+html += `
+<div class="section">
+<div class="section-title">📋 Individual Policies (${policies.length})</div>
+${policies.map(policy => `
+<div class="policy-card">
+<div class="policy-header-item">
+<div class="policy-info">
+<div class="policy-payer">${policy.payer_name}</div>
+${policy.policy_title ? `<div class="policy-title-text">${policy.policy_title}</div>` : ''}
+<div class="policy-meta">
+📅 Effective: ${policy.effective_date || 'N/A'}
+${policy.tags && policy.tags.length > 0 ? `
+<div class="policy-tags">
+${policy.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+</div>
+` : ''}
+</div>
+</div>
+${policy.policy_url ? `
+<a href="${policy.policy_url}" target="_blank" class="policy-link">View Policy →</a>
+` : ''}
+</div>
+</div>
+`).join('')}
+</div>
+`;
+}
+html += `
+</div>
+</div>
+`;
+return html;
+}
+function renderUnknownPattern(pattern, index) {
+return `
+<div class="pattern-card">
+<div class="pattern-header">
+<div class="pattern-title">
+<span>❓ Pattern ${index + 1}</span>
+<span class="pattern-badge" style="background: #6c757d; color: white;">Unknown Format</span>
+</div>
+<span class="toggle-icon">▼</span>
+</div>
+<div class="pattern-content">
+<div class="error-message">
+<h3>⚠️ Unknown Pattern Format</h3>
+<p>This pattern doesn't match expected success or error formats.</p>
+<code>${JSON.stringify(pattern, null, 2)}</code>
+</div>
+</div>
+</div>
+`;
+}
+</script>
+</body>
+</html>

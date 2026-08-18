@@ -1,0 +1,187 @@
+<title>LangGraph for ETL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg:#f6f6fa; --surface:#ffffff; --surface-2:#f1f0f8; --ink:#1b1a2b; --ink-soft:#4a4763;
+    --ink-faint:#6f6c86; --line:#e4e2f0; --accent:#5b4fe0; --accent-soft:#ece9ff;
+    --good:#1f9d63; --good-soft:#e0f3e9; --warn:#c2701a; --warn-soft:#fbeedd;
+    --plate:#f8f8fc; --plate-line:#e6e4f2;
+    --shadow:0 1px 2px rgba(27,26,43,.05),0 10px 30px rgba(27,26,43,.06);
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#121120; --surface:#1b1a2a; --surface-2:#232236; --ink:#ecebf6; --ink-soft:#b6b3cd;
+    --ink-faint:#8a87a3; --line:#2c2a41; --accent:#9a8dff; --accent-soft:#262247;
+    --good:#5cd39a; --good-soft:#143021; --warn:#e0a35c; --warn-soft:#33291a;
+    --plate:#181726; --plate-line:#2c2a41;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.34);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#121120; --surface:#1b1a2a; --surface-2:#232236; --ink:#ecebf6; --ink-soft:#b6b3cd;
+    --ink-faint:#8a87a3; --line:#2c2a41; --accent:#9a8dff; --accent-soft:#262247;
+    --good:#5cd39a; --good-soft:#143021; --warn:#e0a35c; --warn-soft:#33291a;
+    --plate:#181726; --plate-line:#2c2a41;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.34);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:44px 22px 72px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+  h1{font-size:clamp(28px,5vw,40px);line-height:1.05;letter-spacing:-.025em;margin:0 0 12px;text-wrap:balance}
+  .lede{font-size:17px;color:var(--ink-soft);max-width:64ch;margin:0}
+  .lede b{color:var(--ink)}
+  code{font-family:var(--mono);font-size:.88em;background:var(--surface-2);padding:1px 5px;border-radius:5px;color:var(--ink)}
+
+  section{margin-top:40px}
+  h2{font-size:12.5px;font-family:var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  p{margin:0 0 12px}
+
+  /* flow diagram */
+  .plate{background:var(--plate);border:1px solid var(--plate-line);border-radius:16px;padding:22px 18px;box-shadow:var(--shadow)}
+  .flowlabel{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 12px}
+  .flowlabel.b{margin-top:26px}
+  .mono-block{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border:1px dashed var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;white-space:pre;line-height:1.5}
+  .chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+  .node{font-family:var(--mono);font-size:12px;font-weight:600;padding:7px 11px;border-radius:9px;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);white-space:nowrap}
+  .node.gate{background:var(--surface-2);color:var(--ink);border-color:var(--line)}
+  .node.skip{background:var(--warn-soft);color:var(--warn);border-color:color-mix(in srgb,var(--warn) 30%,transparent)}
+  .node.cv{background:var(--good-soft);color:var(--good);border-color:color-mix(in srgb,var(--good) 30%,transparent)}
+  .arw{color:var(--ink-faint);font-family:var(--mono)}
+  .branch{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin:8px 0 0 4px}
+  /* mermaid diagram — fixed light canvas so it reads in both themes */
+  .mermaidbox{background:#f8f8fc;border:1px solid #e6e4f2;border-radius:10px;padding:14px 10px;overflow-x:auto;margin-top:4px}
+  .mermaid{display:flex;justify-content:center;min-width:300px}
+  .mermaid svg{max-width:100%;height:auto}
+  /* comparison table */
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+  table.cmp{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--surface);min-width:560px}
+  table.cmp th,table.cmp td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.cmp thead th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);background:var(--surface-2)}
+  table.cmp thead th:nth-child(3){color:var(--accent)}
+  table.cmp tbody td{color:var(--ink-soft)}
+  table.cmp tbody td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+  table.cmp tr:last-child td{border-bottom:none}
+  table.cmp td.pro{color:var(--good)} table.cmp td.con{color:var(--warn)}
+  table.cmp td.pro::before{content:"+ ";font-family:var(--mono);font-weight:700}
+  table.cmp td.con::before{content:"– ";font-family:var(--mono);font-weight:700}
+
+  /* two-column compare */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:680px){.cols{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;box-shadow:var(--shadow)}
+  .card h3{margin:0 0 4px;font-size:16px;display:flex;align-items:center;gap:8px}
+  .card .tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:999px}
+  .card.trad .tag{background:var(--surface-2);color:var(--ink-faint)}
+  .card.lg .tag{background:var(--accent-soft);color:var(--accent)}
+  ul{margin:10px 0 0;padding:0;list-style:none}
+  li{position:relative;padding:5px 0 5px 22px;font-size:14px;color:var(--ink-soft)}
+  li::before{position:absolute;left:0;top:5px;font-family:var(--mono);font-weight:700}
+  li.pro::before{content:"+";color:var(--good)}
+  li.con::before{content:"–";color:var(--warn)}
+  li b{color:var(--ink);font-weight:600}
+
+  /* benefits grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:13px}
+  .ben{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px 16px;box-shadow:var(--shadow);position:relative}
+  .ben::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:3px;background:var(--accent)}
+  .ben h4{margin:0 0 4px;font-size:14px;padding-left:10px}
+  .ben p{margin:0;font-size:13px;color:var(--ink-soft);padding-left:10px}
+
+  .note{margin-top:16px;background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);border-radius:12px;padding:15px 17px;font-size:14px;color:var(--ink)}
+  .note b{color:var(--accent)}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--ink-faint)}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">apps/ETL · dr_etl_graph.py</p>
+    <h1>LangGraph for the ETL pipeline</h1>
+    <p class="lede"><b>LangGraph</b> is a small library for building a workflow as an explicit <b>graph</b> — named steps (nodes) connected by edges, passing a shared state along. We used it to re-express the DR ETL's per-combination agent flow. <b>Same agents, same Snowflake in/out, same result</b> — only the orchestration in the middle changed.</p>
+  </header>
+
+  <section>
+    <h2>The shift, in one picture</h2>
+    <div class="plate">
+      <p class="flowlabel">Before — one long imperative loop (logic buried in nesting)</p>
+      <div class="mono-block">for combination in combinations:
+    payload = build()
+    if not healthy: continue
+    correlation = call_correlation()
+    pattern = retry(call_pattern)
+    if 0 patterns:  defaults; skip reimbursement + recommendation
+    else:           for p in patterns: reimbursement(); recommendation()
+    policy = call_policy()          # always, but easy to miss
+    result = {...}                  # ~1,100 lines, hard to test a branch</div>
+
+      <p class="flowlabel b">After — the compiled graph (generated from the real StateGraph)</p>
+      <div class="mermaidbox">
+<pre class="mermaid">
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"ui-monospace, Menlo, monospace","fontSize":"13px","lineColor":"#8b88a6","primaryTextColor":"#26235c"},"flowchart":{"curve":"basis","nodeSpacing":26,"rankSpacing":30}}}%%
+graph TD
+  start([START]):::term --> prep[prepare_payload]:::step
+  prep --> corr{{correlation}}:::gate
+  corr -. "skip" .-> done([END]):::term
+  corr -- "continue" --> pat{{pattern}}:::gate
+  pat -. "skip" .-> done
+  pat -- "no_pattern" --> skp[skip_patterns]:::skip
+  pat -- "has_pattern" --> reim[reimbursement]:::bb
+  reim --> rec[recommendation]:::bb
+  skp --> pol[policy]:::cv
+  rec --> pol
+  pol --> asm[assemble]:::step
+  asm --> done
+  classDef term fill:#ede9fe,stroke:#7c6df0,color:#3a2f7a;
+  classDef step fill:#eef0ff,stroke:#5b4fe0,color:#26235c;
+  classDef gate fill:#e4e2fb,stroke:#5b4fe0,color:#26235c;
+  classDef skip fill:#f8e4c9,stroke:#c2701a,color:#5a3608;
+  classDef bb fill:#d9e6fa,stroke:#2563b8,color:#123258;
+  classDef cv fill:#cdeedb,stroke:#1f9d63,color:#0d4d2d;
+</pre>
+      </div>
+      <p class="branch">0 patterns → <b>skip_patterns</b> (skip reimbursement + recommendation) · ≥1 → reimbursement → recommendation · both converge on <b>policy</b> (always runs) · failed health check → <b>END</b>, status "skipped"</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Traditional ETL vs LangGraph</h2>
+    <div class="tablewrap">
+      <table class="cmp">
+        <thead><tr><th>Aspect</th><th>Traditional ETL</th><th>LangGraph</th></tr></thead>
+        <tbody>
+          <tr><td>Flow visibility</td><td class="con">Buried in nested loops</td><td class="pro">Explicit, renderable graph</td></tr>
+          <tr><td>Branching / routing</td><td class="con">Hidden if / else indentation</td><td class="pro">Declarative conditional edges</td></tr>
+          <tr><td>Test one branch</td><td class="con">Must run the whole thing</td><td class="pro">Node in isolation (stub agents)</td></tr>
+          <tr><td>State between steps</td><td>Ad-hoc local variables</td><td class="pro">Typed shared state</td></tr>
+          <tr><td>Checkpoint / resume</td><td class="con">Hand-rolled</td><td class="pro">Built in</td></tr>
+          <tr><td>Live progress</td><td class="con">Scrape the logs</td><td class="pro">Native streaming (▶ node ✓)</td></tr>
+          <tr><td>Add / reorder a step</td><td class="con">Edit a ~1,100-line function</td><td class="pro">Add a node + an edge</td></tr>
+          <tr><td>Dependencies</td><td class="pro">None extra</td><td class="con">Needs langgraph</td></tr>
+          <tr><td>Learning curve</td><td class="pro">Familiar</td><td class="con">Nodes / edges / state concepts</td></tr>
+          <tr><td>Performance</td><td>Baseline</td><td>Same — no speed gain</td></tr>
+          <tr><td>Best for</td><td>Short, linear transforms</td><td>Branching, retrying, inspectable flows</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Not a replacement for ETL — a replacement for the control flow.</b> Data loading and storage stay the same proven helpers; only the decision logic between them becomes a graph.</p>
+  </section>
+
+  <section>
+    <h2>Benefits — what we actually got</h2>
+    <div class="grid">
+      <div class="ben"><h4>See the logic</h4><p>The "skip when 0 patterns, but always run policy" rule is now explicit edges, not buried nesting.</p></div>
+      <div class="ben"><h4>Watch it live</h4><p><code>--stream</code> prints <code>▶ node ✓</code> per stage; a notebook view animates the active node.</p></div>
+      <div class="ben"><h4>Test each piece</h4><p>All branches verified in seconds with stubbed agents — no Snowflake, no live API.</p></div>
+      <div class="ben"><h4>Resumable</h4><p>Built-in checkpointing fits the pipeline's existing "resume a failed run".</p></div>
+      <div class="ben"><h4>Easy to evolve</h4><p>Add a node + an edge to change the flow — no rewriting a 1,100-line loop.</p></div>
+      <div class="ben"><h4>Consistent</h4><p>Matches the idiom already used in the main app's <code>orchestrator.py</code>.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>When to reach for it</h2>
+    <p style="color:var(--ink-soft);font-size:15px;max-width:64ch"><b style="color:var(--ink)">Use LangGraph</b> when the flow branches, retries, fans out, or needs to be inspected, resumed, or explained. <b style="color:var(--ink)">Keep it plain</b> when the job is a short, linear, one-shot transform. The DR ETL — agents, retries, a 0-vs-many-patterns branch, a step that must always run — sits squarely in the first camp.</p>
+  </section>
+
+  <footer>Same agents · same Snowflake in/out · same result_record — the orchestration became a graph.</footer>
+</div>

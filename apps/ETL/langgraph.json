@@ -1,0 +1,7 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "etl": "./dr_etl_graph.py:make_studio_graph"
+  },
+  "env": ".env"
+}

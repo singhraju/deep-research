@@ -1,0 +1,15 @@
+{
+  "assistant_id": "etl",
+  "input": {
+    "env": "pl",
+    "snap_year_mnth_nbr": 202604,
+    "trnd_tm_prd_end_mnth_nbr": 202604,
+    "trnd_tm_prd_cd": "R3",
+    "lob_shrt_desc": "Commercial_Local_Group",
+    "lob_cd": "GBD",
+    "statscl_mdl_cd": "IP AUTH",
+    "anomaly_json": {"top_contributors": {"states": [{"name": "CA"}]}},
+    "deep_dive_json": {"report": "trend up"},
+    "insights_lob_code": "GBD"
+  }
+}

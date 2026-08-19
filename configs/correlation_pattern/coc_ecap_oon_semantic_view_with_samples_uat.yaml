@@ -1,0 +1,925 @@
+name: coc_ecap_oon_claims_view
+description: COC ECAP Out-of-Network (OON) Claims semantic view for claims expense analysis
+comments: |
+  This semantic view provides a unified view of COC ECAP Out-of-Network claims data with:
+  - Detailed claim line information with clinical and financial dimensions
+  - IDR (Independent Dispute Resolution) tracking
+  - Parent claim relationships for reprocessed claims
+  - Network matching and provider participation details
+  - Support for multi-dimensional trend analysis and OON cost investigation
+
+tables:
+- name: expense_detail
+  description: Out-of-network claim detail data with clinical, financial, and network information
+  base_table:
+    database: U01_COC
+    schema: COC_DTI_ALLPHI
+    table: COC_ELVT_NTWK_ANMLY_BASE
+  dimensions:
+  - name: lob_code
+    description: LINE OF BUSINESS CODE is a unique code that represents the Line of Business.
+    expr: LOB_CD
+    data_type: string
+    synonyms:
+    - lob
+    - line_of_business
+    is_enum: true
+    sample_values:
+    - MCM003
+    - MCM004
+    - MCM006
+  - name: lob_description
+    description: LINE OF BUSINESS SHORT DESCRIPTION is the short description of the Line of Business Code.
+    expr: LOB_SHRT_DESC
+    data_type: string
+    sample_values:
+    - Commercial
+    - Medicaid
+    - Medicare
+  - name: mbu_chartfield
+    description: MARKETING BUSINESS UNIT CHARTFIELD CODE is a code which represents how products are marketed.
+    expr: MBU_CF_CD
+    data_type: string
+    synonyms:
+    - mbu
+    - marketing_unit
+  - name: service_area_state
+    description: SERVICE AREA STATE CODE is the code of the Service Area State.
+    expr: SRVCAREA_ST_CD
+    data_type: string
+    synonyms:
+    - state_code
+    - state
+    - service_area_state
+    sample_values:
+    - CA
+    - CO
+    - CT
+    - FL
+    - GA
+    - IN
+    - KY
+    - MD
+    - ME
+    - MO
+    - NH
+    - NV
+    - NY
+    - OH
+    - TX
+    - VA
+    - WI
+  - name: hcc_high
+    description: HCC COMMERCIAL MANAGEMENT HIGH SHORT DESCRIPTION for health care category high level.
+    expr: HCC_CMRCL_MNGMNT_HIGH_SHRT_DESC
+    data_type: string
+    synonyms:
+    - hcc_high_desc
+    - health_category_high
+    sample_values:
+    - IP
+    - OP ER
+    - OP Mgmt Oth
+  - name: hcc_medium
+    description: HCC COMMERCIAL MANAGEMENT MEDIUM SHORT DESCRIPTION for health care category medium level.
+    expr: HCC_CMRCL_MNGMNT_MEDM_SHRT_DESC
+    data_type: string
+    synonyms:
+    - hcc_medium_desc
+    - health_category_medium
+    sample_values:
+    - IP BH
+    - IP Med/Surg
+    - IP NICU
+    - IP OB Dlvry/Well NB
+    - NF
+    - OP ER
+    - OP Mgmt Oth Misc
+  - name: trend_high_group_hcc
+    description: TREND HIGH GROUP HCC SHORT DESCRIPTION for trending high group health care category.
+    expr: TRND_HIGH_GRP_HCC_SHRT_DESC
+    data_type: string
+    synonyms:
+    - trend_hcc_high
+  - name: rendering_provider_id
+    description: RENDERING PROVIDER ID is the unique identifier for the rendering provider.
+    expr: RNDRG_PROV_ID
+    data_type: string
+    synonyms:
+    - provider_id
+  - name: rendering_provider_name
+    description: Rendering Provider Name.
+    expr: RNDRG_PROV_NM
+    data_type: string
+    synonyms:
+    - provider_name
+    - provider
+  - name: billing_provider_id
+    description: BILLING PROVIDER ID is the unique identifier for the billing provider.
+    expr: BILLG_PROV_ID
+    data_type: string
+    synonyms:
+    - billing_prov_id
+  - name: billing_provider_npi
+    description: BILLING PROVIDER NPI (National Provider Identifier).
+    expr: BILLG_PROV_NPI
+    data_type: string
+    synonyms:
+    - billing_npi
+  - name: billing_provider_tax_id
+    description: BILLING PROVIDER TAX ID.
+    expr: BILLG_PROV_TAX_ID
+    data_type: string
+    synonyms:
+    - billing_tin
+  - name: rendering_provider_npi
+    description: RENDERING PROVIDER NPI (National Provider Identifier).
+    expr: NPI
+    data_type: string
+    synonyms:
+    - rendering_npi
+    - npi
+  - name: facility_type
+    description: FACILITY TYPE is the type of facility where services were provided.
+    expr: HLTHCR_FCLTY_TYPE_NM
+    data_type: string
+    synonyms:
+    - facility
+    sample_values:
+    - ACUTE HOSPITAL
+  - name: provider_taxonomy_type
+    description: PROVIDER TAXONOMY TYPE NAME describes the provider specialty or type.
+    expr: PROV_TXNMY_TYPE_NM
+    data_type: string
+    synonyms:
+    - provider_specialty
+    - taxonomy
+  - name: drg_code
+    description: DIAGNOSIS RELATED GROUP (DRG) CODE represents the specific DRG associated with a Claim.
+    expr: DRG_CD
+    data_type: string
+    synonyms:
+    - drg
+  - name: drg_name
+    description: DIAGNOSIS RELATED GROUP NAME is the name for the DRG code.
+    expr: DRG_NM
+    data_type: string
+    synonyms:
+    - drg_description
+  - name: procedure_code
+    description: PROCEDURE CODE is a code that defines a service that a Provider may deliver.
+    expr: PROC_CD
+    data_type: string
+    synonyms:
+    - proc_code
+    - cpt
+  - name: procedure_name
+    description: PROCEDURE NAME is the description for the procedure code.
+    expr: PROC_NM
+    data_type: string
+    synonyms:
+    - proc_name
+    - procedure_description
+    - cpt_description
+  - name: product_description
+    description: PRODUCT SHORT DESCRIPTION of the product code.
+    expr: PROD_SHRT_DESC
+    data_type: string
+    synonyms:
+    - product_desc
+    - product
+    sample_values:
+    - Commercial Behavioral Health
+    - Commercial Med Supp
+    - EPO
+    - FFS
+    - HMO
+    - POS
+    - PPO
+  - name: primary_diagnosis_code
+    description: DIAGNOSIS CODE represents an ICD CM Diagnosis Code.
+    expr: DIAG_CD
+    data_type: string
+    synonyms:
+    - diagnosis_code
+    - diag_code
+    - icd_code
+  - name: diagnosis_ccs_class
+    description: DIAGNOSIS CCS CLASS CODE for Clinical Classifications Software grouping.
+    expr: DIAG_CCS_CLS_CD
+    data_type: string
+    synonyms:
+    - ccs_code
+  - name: claim_number
+    description: CLAIM NUMBER is a unique number assigned to a claim.
+    expr: CLM_NBR
+    data_type: string
+    synonyms:
+    - dcn
+    - claim_id
+  - name: claim_line_number
+    description: CLAIM LINE NUMBER identifies the specific line within a claim.
+    expr: CLM_LINE_NBR
+    data_type: string
+    synonyms:
+    - line_number
+  - name: in_network_code
+    description: IN NETWORK CODE shows if the provider is in network.
+    expr: INN_CD
+    data_type: string
+    synonyms:
+    - in_network
+    - inn_code
+    is_enum: true
+    sample_values:
+    - OUT
+    - IN
+  - name: network_id
+    description: CLAIM NETWORK ID identifies the network.
+    expr: CLM_NTWK_ID
+    data_type: string
+    synonyms:
+    - network
+  - name: regional_network
+    description: REGIONAL NETWORK TEXT describes the regional network.
+    expr: RGNL_NTWK_TXT
+    data_type: string
+    synonyms:
+    - regional_network_id
+  - name: plan_state_code
+    description: PLAN STATE CODE indicates the state of the plan.
+    expr: PLAN_ST_CD
+    data_type: string
+    synonyms:
+    - plan_state
+  - name: claim_network_category
+    description: CLAIM PROVIDER NETWORK CATEGORY DESCRIPTION.
+    expr: CLM_PROV_NTWK_CTGRY_DESC
+    data_type: string
+    synonyms:
+    - network_category
+    sample_values:
+    - Group Network/Contract Exists Within DOS
+    - Group Network/Contract Exists
+  - name: business_segment_medium
+    description: BUSINESS SEGMENT MEDIUM CLASS SHORT DESCRIPTION.
+    expr: BSNS_SGMNT_MEDM_CLS_SHRT_DESC
+    data_type: string
+    synonyms:
+    - business_segment
+    sample_values:
+    - CMRCL INDIV-FINR
+    - Local GRP-FINR
+  - name: mbu_type
+    description: MBU TYPE SHORT DESCRIPTION.
+    expr: MBU_TYPE_SHRT_DESC
+    data_type: string
+    synonyms:
+    - marketing_unit_type
+    sample_values:
+    - Commercial Individual
+    - Local Group
+  - name: funding_chartfield
+    description: RESTATED FUNDING CHARTFIELD CODE is a code which represents how a Product's claims are funded.
+    expr: RSTTD_FUNDG_CF_CD
+    data_type: string
+    synonyms:
+    - funding_code
+    - funding
+    sample_values:
+    - '10'
+    - '1E'
+  - name: funding_type_description
+    description: FUNDING CHARTFIELD TYPE SHORT DESCRIPTION is the short description for funding type.
+    expr: FUNDG_CF_TYPE_SHRT_DESC
+    data_type: string
+    synonyms:
+    - funding_type
+    - funding_desc
+    sample_values:
+    - Alternate Funded
+    - Fully Insured
+  - name: delegation_class
+    description: DELEGATION CLASS NAME for claim delegation.
+    expr: DLGTN_CLS_NM
+    data_type: string
+    synonyms:
+    - delegation
+  - name: service_rendering_type
+    description: SERVICE RENDERING TYPE CODE.
+    expr: SRVC_RNDRG_TYPE_CD
+    data_type: string
+    synonyms:
+    - service_type
+    sample_values:
+    - HOSP
+    - PANCL
+  - name: claim_disposition_code
+    description: CLAIM DISPOSITION CODE indicates the final disposition status.
+    expr: CLM_DISP_CD
+    data_type: string
+    synonyms:
+    - disposition
+    - claim_status
+    is_enum: true
+    sample_values:
+    - ADJD
+    - ORGNL
+  - name: mxr_participant_code
+    description: MXR PARTICIPANT CODE.
+    expr: MXR_PAR_CD
+    data_type: string
+    synonyms:
+    - participant_code
+    is_enum: true
+    sample_values:
+    - Q
+    - D
+  - name: idr_type
+    description: IDR (Independent Dispute Resolution) TYPE NAME.
+    expr: IDR_TYPE_NM
+    data_type: string
+    synonyms:
+    - idr_dispute_type
+    sample_values:
+    - FEDERAL
+  # - name: idr_adjustment_reason
+  #   description: IDR ADJUSTMENT REASON CODE.
+  #   expr: IDR_ADJSTMNT_RSN_CD
+  #   data_type: string
+  #   synonyms:
+  #   - idr_reason
+  - name: idr_adjustment_description
+    description: IDR ADJUSTMENT DESCRIPTION.
+    expr: IDR_ADJSTMNT_DESC
+    data_type: string
+    synonyms:
+    - idr_description
+  - name: parent_claim_number
+    description: PARENT CLAIM NUMBER for reprocessed claims.
+    expr: PAR_CLM_NBR
+    data_type: string
+    synonyms:
+    - parent_dcn
+  - name: parent_claim_line_number
+    description: PARENT CLAIM LINE NUMBER.
+    expr: PAR_CLM_LINE_NBR
+    data_type: string
+    synonyms:
+    - parent_line
+  - name: parent_claim_network_id
+    description: PARENT CLAIM NETWORK ID.
+    expr: PAR_CLM_NTWK_ID
+    data_type: string
+    synonyms:
+    - parent_network
+  - name: parent_claim_product
+    description: PARENT CLAIM PRODUCT SHORT DESCRIPTION.
+    expr: PAR_CLM_PROD_SHRT_DESC
+    data_type: string
+    synonyms:
+    - parent_product
+  - name: parent_claim_category
+    description: PARENT CLAIM CATEGORY TEXT.
+    expr: PAR_CLM_CTGRY_TXT
+    data_type: string
+    synonyms:
+    - parent_category
+    sample_values:
+    - TAX
+  - name: mxr_network_provider_status
+    description: MXR NETWORK PROVIDER STATUS TEXT.
+    expr: MXR_NTWK_PROV_STTS_TXT
+    data_type: string
+    synonyms:
+    - provider_status
+  - name: network_claim_category
+    description: NETWORK CLAIM CATEGORY TEXT.
+    expr: NTWK_CLM_CTGRY_TXT
+    data_type: string
+    synonyms:
+    - claim_category
+    sample_values:
+    - PAR_MATCH_SAME_PRODUCT
+    - PAR_NO_MATCH
+  - name: network_claim_sub_category
+    description: NETWORK CLAIM SUB CATEGORY TEXT.
+    expr: NTWK_CLM_SUB_CTGRY_TXT
+    data_type: string
+    synonyms:
+    - claim_sub_category
+  - name: hcc_code
+    description: HCC CODE.
+    expr: HCC_CD
+    data_type: string
+    synonyms:
+    - hcc
+  time_dimensions:
+  - name: snap_month
+    description: SNAP YEAR MONTH NUMBER reflects the YYYYMM of the month end for which the data is produced.
+    expr: SNAP_YEAR_MNTH_NBR
+    data_type: number
+    synonyms:
+    - snap_date
+    - snapshot_month
+  - name: incurred_month
+    description: It is the four digit Julian year and two digit month of the Incurred Date.
+    expr: INCRD_YEAR_MNTH_NBR
+    data_type: number
+    synonyms:
+    - incurred_date
+    - service_month
+  - name: adjudication_date
+    description: ADJUDICATION DATE when the claim was adjudicated.
+    expr: ADJDCTN_DT
+    data_type: date
+    synonyms:
+    - adjud_date
+  - name: service_start_date
+    description: CLAIM LINE SERVICE START DATE.
+    expr: CLM_LINE_SRVC_STRT_DT
+    data_type: date
+    synonyms:
+    - service_from
+    - from_date
+  - name: service_end_date
+    description: CLAIM LINE SERVICE END DATE.
+    expr: CLM_LINE_SRVC_END_DT
+    data_type: date
+    synonyms:
+    - service_to
+    - to_date
+  - name: parent_claim_adjudication_date
+    description: PARENT CLAIM ADJUDICATION DATE.
+    expr: PAR_CLM_ADJDCTN_DT
+    data_type: date
+    synonyms:
+    - parent_adjud_date
+  - name: parent_claim_service_start_date
+    description: PARENT CLAIM LINE SERVICE START DATE.
+    expr: PAR_CLM_LINE_SRVC_STRT_DT
+    data_type: date
+    synonyms:
+    - parent_service_from
+  - name: parent_claim_service_end_date
+    description: PARENT CLAIM LINE SERVICE END DATE.
+    expr: PAR_CLM_LINE_SRVC_END_DT
+    data_type: date
+    synonyms:
+    - parent_service_to
+  facts:
+  - name: paid_amount
+    description: Paid amount for the claim line.
+    expr: PAID_AMT
+    data_type: number
+    synonyms:
+    - paid
+    - paid_amt
+  - name: allowed_amount
+    description: Allowed amount for covered medical services or supplies.
+    expr: ALWD_AMT
+    data_type: number
+    synonyms:
+    - allowed
+    - allowed_amt
+  - name: parent_claim_paid_amount
+    description: PARENT CLAIM ANALYTICAL PAID AMOUNT.
+    expr: PAR_CLM_ANLYTCL_PAID_AMT
+    data_type: number
+    synonyms:
+    - parent_paid
+  - name: claim_source_code
+    description: CLAIM SOURCE CODE.
+    expr: CLM_SOR_CD
+    data_type: string
+    synonyms:
+    - source_code
+  - name: edm_claim_key
+    description: EDM CLAIM KEY is the unique identifier for the claim.
+    expr: EDM_CLM_KEY
+    data_type: number
+    synonyms:
+    - claim_key
+  - name: edm_member_account_key
+    description: EDM MEMBER ACCOUNT KEY is the unique identifier for the member.
+    expr: EDM_MBR_ACCT_KEY
+    data_type: number
+    synonyms:
+    - member_key
+  - name: rendering_edm_provider_account_key
+    description: RENDERING EDM PROVIDER ACCOUNT KEY.
+    expr: RNDRG_EDM_PROV_ACCT_KEY
+    data_type: number
+    synonyms:
+    - rendering_provider_key
+  - name: drg_key
+    description: DRG KEY.
+    expr: DRG_KEY
+    data_type: number
+  - name: drg_version_number
+    description: DRG VERSION NUMBER.
+    expr: DRG_VRSN_NBR
+    data_type: number
+  - name: edm_procedure_key
+    description: EDM PROCEDURE KEY.
+    expr: EDM_PROC_KEY
+    data_type: number
+  - name: idr_adjustment_key
+    description: IDR ADJUSTMENT KEY.
+    expr: IDR_ADJSTMNT_KEY
+    data_type: number
+  - name: parent_claim_edm_claim_key
+    description: PARENT CLAIM EDM CLAIM KEY.
+    expr: PAR_CLM_EDM_CLM_KEY
+    data_type: number
+  - name: restated_product_key
+    description: RESTATED PRODUCT KEY.
+    expr: RSTTD_PROD_KEY
+    data_type: number
+  - name: restated_mbu_chartfield_key
+    description: RESTATED MBU CHARTFIELD KEY.
+    expr: RSTTD_MBU_CF_KEY
+    data_type: number
+  - name: restated_business_segment_key
+    description: RESTATED BUSINESS SEGMENT KEY.
+    expr: RSTTD_BSNS_SGMNT_KEY
+    data_type: number
+  - name: restated_funding_chartfield_key
+    description: RESTATED FUNDING CHARTFIELD KEY.
+    expr: RSTTD_FUNDG_CF_KEY
+    data_type: number
+  - name: parent_claim_product_key
+    description: PARENT CLAIM PRODUCT KEY.
+    expr: PAR_CLM_PROD_KEY
+    data_type: number
+  - name: mxr_network_id
+    description: MXR NETWORK ID.
+    expr: MXR_NTWK_ID
+    data_type: string
+  - name: parent_claim_mxr_network_id
+    description: PARENT CLAIM MXR NETWORK ID.
+    expr: PAR_CLM_MXR_NTWK_ID
+    data_type: string
+  - name: processing_contract_code
+    description: PROCESSING CONTRACT CODE.
+    expr: PRCG_CNTRCT_CD
+    data_type: string
+  - name: parent_claim_billing_provider_npi
+    description: PARENT CLAIM BILLING PROVIDER NPI.
+    expr: PAR_CLM_BILLG_PROV_NPI
+    data_type: string
+  - name: parent_claim_provider_tax_id
+    description: PARENT CLAIM PROVIDER TAX ID.
+    expr: PAR_CLM_PROV_TAX_ID
+    data_type: string
+  - name: parent_claim_rendering_npi
+    description: PARENT CLAIM RENDERING NPI.
+    expr: PAR_CLM_RNDRG_NPI
+    data_type: string
+  - name: parent_claim_plan_state_code
+    description: PARENT CLAIM PLAN STATE CODE.
+    expr: PAR_CLM_PLAN_ST_CD
+    data_type: string
+  - name: source_billing_provider_id
+    description: SOURCE BILLING PROVIDER ID.
+    expr: SRC_BILLG_PROV_ID
+    data_type: string
+  - name: provider_id
+    description: PROVIDER ID.
+    expr: PROV_ID
+    data_type: string
+  - name: rendering_provider_account_key
+    description: RENDERING PROVIDER ACCOUNT KEY.
+    expr: RNDRG_PROV_ACCT_KEY
+    data_type: number
+  metrics:
+  - name: expense_detail.total_allowed
+    description: Total allowed amount for OON claims
+    expr: SUM({expense_detail.allowed_amount})
+  - name: expense_detail.total_paid
+    description: Total paid amount for OON claims
+    expr: SUM({expense_detail.paid_amount})
+  - name: expense_detail.claim_line_count
+    description: Total count of claim lines
+    expr: COUNT(*)
+  - name: expense_detail.claim_count
+    description: Total count of unique claims
+    expr: COUNT(DISTINCT {expense_detail.claim_number})
+  - name: expense_detail.avg_allowed_per_claim
+    description: Average allowed amount per claim
+    expr: SUM({expense_detail.allowed_amount}) / NULLIF(COUNT(DISTINCT {expense_detail.claim_number}), 0)
+  - name: expense_detail.avg_paid_per_claim
+    description: Average paid amount per claim
+    expr: SUM({expense_detail.paid_amount}) / NULLIF(COUNT(DISTINCT {expense_detail.claim_number}), 0)
+  - name: expense_detail.paid_ratio
+    description: Ratio of paid to allowed amount
+    expr: SUM({expense_detail.paid_amount}) / NULLIF(SUM({expense_detail.allowed_amount}), 0)
+  - name: expense_detail.idr_claim_count
+    description: Count of claims with IDR involvement
+    expr: COUNT(DISTINCT CASE WHEN {expense_detail.idr_adjustment_key} IS NOT NULL AND {expense_detail.idr_adjustment_key} != -2 THEN {expense_detail.claim_number} END)
+  - name: expense_detail.idr_rate
+    description: Percentage of claims with IDR involvement
+    expr: COUNT(DISTINCT CASE WHEN {expense_detail.idr_adjustment_key} IS NOT NULL AND {expense_detail.idr_adjustment_key} != -2 THEN {expense_detail.claim_number} END) / NULLIF(COUNT(DISTINCT {expense_detail.claim_number}), 0)
+- name: membership
+  description: Membership data for member counts and PMPM calculations
+  base_table:
+    database: U01_COC
+    schema: COC_DTI_STG
+    table: WORK_ELEVATE_COC_MBR_DETAIL
+  dimensions:
+  - name: lob_code
+    description: LINE OF BUSINESS CODE is a unique code that represents the Line of Business.
+    expr: LOB_CD
+    data_type: string
+    synonyms:
+    - lob
+    - line_of_business
+    is_enum: true
+    sample_values:
+    - MCM003
+    - MCM004
+    - MCM006
+  - name: lob_description
+    description: LINE OF BUSINESS SHORT DESCRIPTION is the short description of the Line of Business Code.
+    expr: LOB_SHRT_DESC
+    data_type: string
+    sample_values:
+    - Commercial
+    - Medicaid
+    - Medicare
+  - name: mbu_chartfield
+    description: MARKETING BUSINESS UNIT CHARTFIELD CODE is a code which represents how products are marketed.
+    expr: MBU_CF_CD
+    data_type: string
+    synonyms:
+    - mbu
+    - marketing_unit
+  - name: service_area_state
+    description: SERVICE AREA STATE SHORT DESCRIPTION is the description of the Service Area State Code.
+    expr: SRVCAREA_ST_SHRT_DESC
+    data_type: string
+    synonyms:
+    - state
+    - service_state
+    sample_values:
+    - CA
+    - CO
+    - CT
+    - FL
+    - GA
+    - IN
+    - KY
+    - MD
+    - ME
+    - MO
+    - NH
+    - NV
+    - NY
+    - OH
+    - TX
+    - VA
+    - WI
+  - name: product_description
+    description: PRODUCT SHORT DESCRIPTION of the product code.
+    expr: PROD_SHRT_DESC
+    data_type: string
+    synonyms:
+    - product_desc
+    - product
+    sample_values:
+    - Commercial Med Supp
+    - EPO
+    - FFS
+    - HMO
+    - POS
+    - PPO
+  - name: funding_chartfield
+    description: RESTATED FUNDING CHARTFIELD CODE is a code which represents how a Product's claims are funded.
+    expr: RSTTD_FUNDG_CF_CD
+    data_type: string
+    synonyms:
+    - funding_code
+    - funding
+    sample_values:
+    - '10'
+    - '14'
+    - 1E
+    - 1P
+    - '20'
+  - name: funding_type_description
+    description: FUNDING CHARTFIELD TYPE SHORT DESCRIPTION is the short description for funding type.
+    expr: FUNDG_CF_TYPE_SHRT_DESC
+    data_type: string
+    synonyms:
+    - funding_type
+    - funding_desc
+    sample_values:
+    - Alternate Funded
+    - Fully Insured
+    - Funding Default
+  - name: mpr_indicator
+    description: MPR INDICATOR.
+    expr: MPR_IND
+    data_type: string
+    synonyms:
+    - mpr_ind
+    is_enum: true
+    sample_values:
+    - N
+    - Y
+  - name: snap_month
+    description: SNAP YEAR MONTH NUMBER reflects the YYYYMM of the month end for which the data is produced.
+    expr: SNAP_YEAR_MNTH_NBR
+    data_type: number
+    synonyms:
+    - snap_date
+    - snapshot_month
+    sample_values:
+    - '202604'
+  time_dimensions:
+  - name: incurred_month
+    description: It is the four digit Julian year and two digit month of the Analytic Incurred Date.
+    expr: INCRD_YEAR_MNTH_NBR
+    data_type: number
+    synonyms:
+    - incurred_date
+    - service_month
+  facts:
+  - name: member_count
+    description: Count of members
+    expr: ACTL_MBR_CNT
+    data_type: number
+    synonyms:
+    - members
+    - member_months
+  metrics:
+  - name: membership.total_members
+    description: Total member count
+    expr: SUM({membership.member_count})
+  - name: membership.avg_members
+    description: Average member count
+    expr: AVG({membership.member_count})
+
+relationships:
+- name: oon_to_membership
+  description: Join OON claims to membership by LOB, MBU, state, product, and time period
+  left_table: expense_detail
+  right_table: membership
+  relationship_columns:
+  - left_column: LOB_CD
+    right_column: LOB_CD
+  - left_column: MBU_CF_CD
+    right_column: MBU_CF_CD
+  - left_column: SRVCAREA_ST_CD
+    right_column: SRVCAREA_ST_SHRT_DESC
+  - left_column: PROD_SHRT_DESC
+    right_column: PROD_SHRT_DESC
+  - left_column: SNAP_YEAR_MNTH_NBR
+    right_column: SNAP_YEAR_MNTH_NBR
+  - left_column: INCRD_YEAR_MNTH_NBR
+    right_column: INCRD_YEAR_MNTH_NBR
+
+metrics:
+- name: paid_pmpm
+  description: Paid amount per member per month (OON claims / membership)
+  expr: SUM({expense_detail.paid_amount}) / NULLIF(SUM({membership.member_count}), 0)
+- name: allowed_pmpm
+  description: Allowed amount per member per month (OON claims / membership)
+  expr: SUM({expense_detail.allowed_amount}) / NULLIF(SUM({membership.member_count}), 0)
+
+filters:
+- name: commercial_only
+  description: Filter for Commercial line of business only
+  synonyms:
+  - commercial
+  - comm
+  expr: '{expense_detail.lob_description} = ''Commercial'''
+- name: with_idr
+  description: Filter for claims with IDR involvement
+  synonyms:
+  - idr_claims
+  - dispute_resolution
+  expr: '{expense_detail.idr_adjustment_key} IS NOT NULL AND {expense_detail.idr_adjustment_key} != -2'
+- name: federal_idr
+  description: Filter for Federal IDR claims
+  synonyms:
+  - federal_disputes
+  expr: '{expense_detail.idr_type} = ''FEDERAL'''
+- name: reprocessed_claims
+  description: Filter for reprocessed claims (with parent claim)
+  synonyms:
+  - reprocessed
+  - adjusted_claims
+  expr: '{expense_detail.parent_claim_number} IS NOT NULL'
+- name: high_cost_claims
+  description: Filter for high-cost claims (allowed amount > $50,000)
+  synonyms:
+  - high_cost
+  - expensive_claims
+  expr: '{expense_detail.allowed_amount} > 50000'
+- name: recent_12_months
+  description: Filter for most recent 12 months of data
+  synonyms:
+  - last_12_months
+  - trailing_12_months
+  - ttm
+  expr: '{expense_detail.incurred_month} >= CAST(TO_CHAR(DATEADD(month, -12, CURRENT_DATE()), ''YYYYMM'') AS NUMBER)'
+
+analysis_modes:
+- name: cost_change_investigation_over_time_window
+  description: |
+    Explains how a selected cost metric changed between two comparable time periods for OON claims.
+    Its purpose is to identify:
+    1. what metric changed
+    2. how much it changed
+    3. which dimensions contributed most to the change
+    4. and which drill-down path best localizes the change
+
+    This mode compares a prior period and a current period over the same metric, under a user-defined scope
+    (for example state, HCC category, provider, facility type, or other filters). It ranks candidate dimensions
+    by contribution to the metric delta and generates SQL for iterative drill-down.
+
+    This mode answers "where did the change happen?" and "which segments explain most of the change?"
+    It does not prove clinical or contractual root cause.
+  drill_metric:
+  - expense_detail.total_paid
+  explainer_metrics:
+  - expense_detail.claim_count
+  - expense_detail.avg_paid_per_claim
+  - expense_detail.paid_ratio
+  - paid_pmpm
+  save_parquet: false
+  disable_summary_creation: true
+  generate_recommendations: false
+  interaction_matrix:
+    enabled: true
+    trigger_rules:
+      interaction_stage:
+        min_abs_net_delta: 1000
+        min_drill_path_depth: 2
+        run_when_repeated_delta_ratio: 0.95
+        run_when_low_volume: true
+      clinical_stage:
+        require_selected_operational_cells: true
+        min_selected_operational_positive_delta: 1000
+    categories:
+      operational:
+        dimensions:
+        - product_description
+        - facility_type
+        # - idr_type
+        carry_through_dimensions:
+        - service_area_state
+        - lob_description
+      clinical:
+        dimensions:
+        - hcc_medium
+        - drg_name
+        - primary_diagnosis_code
+        - procedure_name
+    selection_rules:
+      operational:
+        min_positive_delta: 1000
+        min_share_of_positive_delta: 0.05
+        max_cumulative_share_of_positive_delta: 0.80
+        max_k: 5
+        always_include_min_share_of_net_delta: 0.40
+      clinical:
+        min_positive_delta: 500
+        min_share_of_positive_delta: 0.05
+        max_cumulative_share_of_positive_delta: 0.90
+        max_k: 10
+        include_offsets: true
+        max_offset_k: 3
+    preview_limits:
+      max_operational_cells: 5
+      max_clinical_cells: 10
+      max_recommendations: 5
+    artifact_limits:
+      max_rows_json_preview: 1000
+  period:
+    rolling_time_dimension: expense_detail.incurred_month
+    current_period:
+      start_time: null
+      end_time: null
+    previous_period:
+      start_time: null
+      end_time: null
+  drill_dimensions:
+  - service_area_state
+  - hcc_medium
+  - facility_type
+  - rendering_provider_name
+  - drg_name
+  - primary_diagnosis_code
+  - procedure_name
+  - product_description
+  # - idr_type
+  exclude_if_filtered: true
+  stop_rules:
+    max_depth: 10
+    top_k_per_level: 5
+    min_abs_delta: 1000
+    min_row_count: 1
+    min_contribution_pct: 0.05
+    min_incremental_gain_pct: 0.05

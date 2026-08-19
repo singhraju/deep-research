@@ -1,0 +1,402 @@
+{
+  "summary_table": {
+    "title": "Payer Policy Summary",
+    "subtitle": "Policy Analysis for CPT codes [\"ECMO or Tracheostomy with Mechanical Ventilation >96 Hours or Principal Diagnosis Except Face, Mouth and Neck with Major O.R. Procedures\", \"Heart Transplant or Implant of Heart Assist System with MCC\", \"Tracheostomy with Mechanical Ventilation >96 Hours or Principal Diagnosis Except Face, Mouth and Neck without Major O.R. Procedures\", \"Major Small and Large Bowel Procedures with MCC\"]",
+    "columns": [
+      {
+        "id": "payer_org",
+        "label": "Payer Organization",
+        "type": "text"
+      },
+      {
+        "id": "site_of_service",
+        "label": "Site of Service",
+        "type": "text"
+      },
+      {
+        "id": "bundling_logic",
+        "label": "Bundling Rules",
+        "type": "text"
+      },
+      {
+        "id": "code_interactions",
+        "label": "Code Interactions",
+        "type": "text"
+      },
+      {
+        "id": "modifier_usage",
+        "label": "Modifier Usage",
+        "type": "text"
+      },
+      {
+        "id": "denial_conditions",
+        "label": "Denial Conditions",
+        "type": "text"
+      },
+      {
+        "id": "unit_pricing_logic",
+        "label": "Unit Pricing",
+        "type": "text"
+      },
+      {
+        "id": "documentation_requirements",
+        "label": "Documentation Requirements",
+        "type": "text"
+      },
+      {
+        "id": "evidence_summary",
+        "label": "Evidence Summary",
+        "type": "text"
+      },
+      {
+        "id": "policy_effective_date",
+        "label": "Policy Effective Date",
+        "type": "date"
+      }
+    ],
+    "rows": [
+      {
+        "payer_org": "United Health",
+        "policy_effective_date": "04/01/2026",
+        "site_of_service": "Applies only to CMS-1500 professional incident-to office/clinic services, not hospital, SNF, or ASC facility fees.",
+        "bundling_logic": "No code-specific rule; routine perioperative/hospital services bundled, except split postop care and 1/day ventilator/CPAP.",
+        "code_interactions": "No code edits; split global billing requires matching CPT and date, routine ancillary charges bundled.",
+        "modifier_usage": "General policy applies: 54 pays 80%, 55 20% for 10/90-day globals, 56 unpaid.",
+        "denial_conditions": "Denials/nonpayment for nonqualifying incident-to or modifier 54/55 claims and separately billed routine integral services.",
+        "unit_pricing_logic": "UnitedHealthcare: No time/unit limits; global surgery split 54/55/56 at 80/20/0%, capped; ventilator/CPAP 1/day.",
+        "documentation_requirements": "Require accurate claims and documentation supporting inpatient, postoperative transfer, incident-to, and billed services.",
+        "evidence_summary": "UnitedHealth uses general inpatient/transplant bundling, not incident-to or code-specific split-surgery rules; ventilator billable daily."
+      },
+      {
+        "payer_org": "Regence_BCBS",
+        "policy_effective_date": "12/01/2025",
+        "site_of_service": "-",
+        "bundling_logic": "-",
+        "code_interactions": "-",
+        "modifier_usage": "-",
+        "denial_conditions": "-",
+        "unit_pricing_logic": "-",
+        "documentation_requirements": "-",
+        "evidence_summary": "Policy addresses DMEPOS reimbursement, not this inpatient DRG."
+      },
+      {
+        "payer_org": "Molina",
+        "policy_effective_date": "04/01/2025",
+        "site_of_service": "Molina restricts separate ancillary billing on inpatient DRG claims; Ohio ventilator program codes 0410/0419 unspecified.",
+        "bundling_logic": "Routine inpatient, surgical, and critical care services are bundled, nonreimbursable, and excluded from outliers.",
+        "code_interactions": "Facility stay services bundled; lab panels only, meds nonpayable, higher OR amount allowed, RC 0419/0410.",
+        "modifier_usage": "-",
+        "denial_conditions": "Denies unbundled routine inpatient, ICU/OR, respiratory charges, duplicate billing, and unsupported ventilator-program claims.",
+        "unit_pricing_logic": "Room/board includes routine care; OR uses one method; enhanced nursing requires Ohio ventilator compliance.",
+        "documentation_requirements": "Provide supporting itemized records, standard HIPAA coding, discharge DME home proof, and ventilator details.",
+        "evidence_summary": "Routine ICU/OR/respiratory/trach, transplant, and bowel surgery services bundled; only NF ventilator 0419/0410 claims."
+      },
+      {
+        "payer_org": "Cigna",
+        "policy_effective_date": "08/12/2023",
+        "site_of_service": "Primarily facility-based inpatient/surgical claims; some codes unlisted, unrestricted, or only emergency department E/M addressed.",
+        "bundling_logic": "Cigna bundles routine facility, surgical, nursing, perfusion, and respiratory services; no DRG-specific exceptions identified.",
+        "code_interactions": "Cigna denies incidental injections, UB-04 E&M, perfusionists, status-X/PC-TC services; pays highest respiratory charge.",
+        "modifier_usage": "No modifier guidance; TC denied for separate neuro monitoring, and modifiers don't override ED E/M.",
+        "denial_conditions": "MS-DRG not addressed; deny separate routine/incidental surgical billing and duplicate operating room time/procedure charges.",
+        "unit_pricing_logic": "Cigna reimburses 36X surgery by time only, no extra OR; ventilator/CPAP/BiPAP capped at 24/day.",
+        "documentation_requirements": "Requires physician-ordered, documented extra nursing, home discharge DME proof, and encounter-specific ED E/M notes.",
+        "evidence_summary": "Cigna bundles routine operative, monitoring, ventilation, and tracheostomy services into global surgical payment."
+      },
+      {
+        "payer_org": "Highmark_BCBS",
+        "policy_effective_date": "12/01/2018",
+        "site_of_service": "Inpatient hospital settings, especially operating/procedure rooms, critical care, respiratory care, and postoperative units.",
+        "bundling_logic": "Routine inpatient, operating room, critical care, ventilation, and related services are bundled, not separately reimbursable.",
+        "code_interactions": "Highmark BCBS bundles ECMO, OR, ventilation, monitoring, supplies, and S2900; no separate reimbursement.",
+        "modifier_usage": "-",
+        "denial_conditions": "Routine ancillary items, monitoring, anesthesia, equipment, and S2900 aren’t separately reimbursable; otherwise no specific rule.",
+        "unit_pricing_logic": "OR reimbursement is procedure- or entry-to-exit time-based; bundled routine ventilation/tracheostomy services aren’t separately payable.",
+        "documentation_requirements": "Require complete legible documentation, HIPAA-approved coding, correct coding compliance, and OR nurse notes when time-based.",
+        "evidence_summary": "Routine OR, transplant, ventilation, trach, and bowel surgery services are bundled, not separately reimbursed."
+      },
+      {
+        "payer_org": "Premera Blue Cross",
+        "policy_effective_date": "04/06/2026",
+        "site_of_service": "Inpatient facility UB-04/837I billing includes OR/ICU/postop, bundling same-day outpatient/observation with room and board.",
+        "bundling_logic": "Premera bundles routine surgical and inpatient ancillary services into global, room-and-board, or primary payments.",
+        "code_interactions": "Ancillary support and same-day outpatient/observation services are bundled; only one venipuncture per day allowed.",
+        "modifier_usage": "No modifier rule stated for this DRG description. Policy modifier rules apply to professional CPT procedure billing only.",
+        "denial_conditions": "Separate reimbursement denied for global-package or routine inpatient integral services lacking supported modifiers/documentation.",
+        "unit_pricing_logic": "Ancillary time/unit charges are bundled; only one venipuncture (36415) per day reimbursable.",
+        "documentation_requirements": "No code-specific documentation requirement stated. For applicable CPTs, records must support modifier use, related versus unrelated services, repeat procedures, staged procedures, or return to the operating room.",
+        "evidence_summary": "Only professional CPT global surgery addressed; routine inpatient ancillaries are bundled into related payments."
+      }
+    ]
+  },
+  "individual_policies": [
+    {
+      "payer_name": "United Health",
+      "policy_title": "UnitedHealthcare Medicare Advantage Reimbursement Policy CMS 1500 Policy Number 2026R9004A Incident to Services Policy, Professional",
+      "tags": [
+        "Medicare Advantage"
+      ],
+      "effective_date": "03/01/2026",
+      "evidence": "If billed under this incident-to policy, denial may occur because the service is not an office-based incident-to service, is furnished in a hospital/SNF setting, or is not commonly furnished in a physician office.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/medadv-reimbursement/MEDADV-Incident-to-Services-Policy.pdf"
+    },
+    {
+      "payer_name": "Regence_BCBS",
+      "policy_title": "DME Purchase and Rental Limitations and Reimbursement - Medicare Advantage",
+      "tags": [
+        "Medicare Advantage"
+      ],
+      "effective_date": "12/01/2025",
+      "evidence": "Policy addresses DMEPOS reimbursement, not this inpatient DRG.",
+      "policy_url": "https://www.regence.com/provider/library/policies-guidelines/reimbursement-policy/dme-purchase-rental-limitations-reimbursement-medicare-advantage"
+    },
+    {
+      "payer_name": "Molina",
+      "policy_title": "Hospital Routine Supplies & Services Reimbursement",
+      "tags": [],
+      "effective_date": "06/15/2023",
+      "evidence": "Denial may occur for unbundled routine ICU or OR charges, separate billing for oxygen, ventilator management, respiratory therapy, tracheostomy care, staff services, reusable equipment, contaminated or opened-but-unused supplies, nonstandard coding, or billing both OR time units and procedure codes.",
+      "policy_url": "https://www.molinahealthcare.com/-/media/Molina/PublicWebsite/PDF/Providers/common/PIA-Payment-Policies/Molina-PI-Policy-Website/2025-Policies/508-Approved/HospitalRoutineSuppliesServicesReimbursement_R.ashx"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "Split Surgical Package Policy, Professional",
+      "tags": [
+        "Medicare Advantage"
+      ],
+      "effective_date": "06/01/2023",
+      "evidence": "Likely denial or nonpayment scenarios include zero-day postoperative period procedures, different CPT code or date of service between modifier 54 and 55 claims, postoperative physician in the same group as the surgeon, missing transfer-of-care agreement, no postoperative service rendered before modifier 55 billing, or inappropriate use for assistant surgery/ASC fees.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/medadv-reimbursement/MEDADV-Split-Surgical-Package-Policy.pdf"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "Hospital Inclusive Charges Policy, Facility",
+      "tags": [
+        "Medicaid"
+      ],
+      "effective_date": "04/01/2026",
+      "evidence": "Separate billing for routine ICU/room-and-board items, supplies, nursing, respiratory care, tracheostomy supplies/care, ventilator/CPAP setup or checks, suctioning, weaning, extubation, or OR components; ventilator/CPAP management billed for more than 1 unit per day.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/medicaid-comm-plan-reimbursement/UHCCP-Hospital-Inclusive-Charges-Policy-Facility.pdf"
+    },
+    {
+      "payer_name": "Cigna",
+      "policy_title": "Global Surgical Package and Related Modifiers (24, 54, 55, 56, 57, 58, 76, 77, 78, and 79)",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": "10/30/2018",
+      "evidence": "Requested MS-DRG is not addressed in this policy; the policy applies to physician global surgical package modifiers.",
+      "policy_url": "https://static.cigna.com/assets/chcp/secure/pdf/resourceLibrary/clinReimPolsModifiers/R23_Global_Surgical_Package_and_Related_Modifiers.pdf"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "Split Surgical Package Policy, Professional",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": "07/21/2025",
+      "evidence": "Non-CPT/DRG description not addressed by this professional reimbursement policy; modifier 56 submitted for separate preoperative payment; modifier 54/55 billed with different CPT codes or surgery dates; postoperative care furnished within the same group; missing transfer-of-care documentation; receiving physician billed modifier 55 before rendering at least one postoperative service.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/comm-reimbursement/COMM-Split-Surgical-Package-Policy.pdf"
+    },
+    {
+      "payer_name": "Highmark_BCBS",
+      "policy_title": "Facility Routine Supplies and Services",
+      "tags": [
+        "Commercial/Medicare Advantage"
+      ],
+      "effective_date": "12/01/2018",
+      "evidence": "Separate billing for routine supplies/services, facility personnel, ECMO-related administration items, ventilator-related maintenance items, tracheostomy care, telemetry, OR-integral items, reusable equipment, or capital equipment.",
+      "policy_url": "https://providers.highmark.com/claims/reimbursement-resources/reimbursement-policies/rp-040"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "UnitedHealthcare Medicare Advantage Reimbursement Policy CMS 1500 Policy Number 2026R9013A Global Days Policy, Professional",
+      "tags": [
+        "Medicare Advantage"
+      ],
+      "effective_date": "04/01/2026",
+      "evidence": "Separate payment may be denied when services are included in the global package, when required modifiers are absent or unsupported, or when an inpatient DRG-style description is used outside this professional CPT global-days policy.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/medadv-reimbursement/MEDADV-Global-Days-Policy.pdf"
+    },
+    {
+      "payer_name": "Cigna",
+      "policy_title": "Facility Services, Supplies and Equipment",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": "10/01/2010",
+      "evidence": "Separate billing for routine tracheostomy care, bedside monitoring, ventilator set-up, internal transport, portable fees, STAT/set-up fees, routine supplies/equipment, or unsupported incremental nursing. Inpatient operating room charges are denied if billed as both time and procedure units.",
+      "policy_url": "https://static.cigna.com/assets/chcp/secure/pdf/resourceLibrary/clinReimPolsModifiers/R12_Facility_Routine_Services_Supplies_and_Equipment.pdf"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "Global Days Policy, Professional",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": "01/01/2026",
+      "evidence": "No code-specific rule in policy; requested item is outside this professional global-days policy scope.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/comm-reimbursement/COMM-Global-Days-Policy.pdf"
+    },
+    {
+      "payer_name": "Highmark_BCBS",
+      "policy_title": "Global Surgery and Subsequent Services",
+      "tags": [
+        "Commercial/Medicare Advantage"
+      ],
+      "effective_date": "11/01/2018",
+      "evidence": "No code-specific adjudication rule found; this description is not identified in the policy.",
+      "policy_url": "https://providers.highmark.com/claims/reimbursement-resources/reimbursement-policies/rp-042"
+    },
+    {
+      "payer_name": "Cigna",
+      "policy_title": "Ambulance Services",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": "07/15/2010",
+      "evidence": "Requested inpatient DRG not addressed; policy covers ambulance transport only.",
+      "policy_url": "https://static.cigna.com/assets/chcp/secure/pdf/resourceLibrary/clinReimPolsModifiers/R18_Ambulance_Services.pdf"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "Hospital Inclusive Charges Policy, Facility",
+      "tags": [
+        "Medicare Advantage"
+      ],
+      "effective_date": "12/01/2025",
+      "evidence": "Separate billing of routine supplies, equipment, nursing care, surgical room services, or routine tracheostomy/ventilator components; unbundled charges already included in room and board or procedure reimbursement; ventilator or CPAP management billed for more than one unit per day; inaccurate claim coding.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/medadv-reimbursement/MEDADV-Hospital-Inclusive-Charges-Policy-Facility.pdf"
+    },
+    {
+      "payer_name": "Cigna",
+      "policy_title": "Procedure and Place of Service",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": "08/12/2023",
+      "evidence": "Policy denies listed CPT/HCPCS procedures when billed with an inappropriate place of service; this requested DRG-style code is not addressed.",
+      "policy_url": "https://static.cigna.com/assets/chcp/secure/pdf/resourceLibrary/clinReimPolsModifiers/R43_Procedure_and_Place_of_Service.pdf"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "Split Surgical Package Policy, Professional",
+      "tags": [
+        "Medicaid"
+      ],
+      "effective_date": "10/08/2025",
+      "evidence": "Likely not applicable because this is not a CPT code in the policy. For applicable CPT surgery, denials/nonpayment may occur for separate modifier 56 billing, same-group postoperative billing, missing/mismatched CPT code or surgery date, lack of transfer-of-care agreement, or improper use of modifier 54 for assistant surgery/ASC facility fees.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/medicaid-comm-plan-reimbursement/UHCCP-Split-Surgical-Package-Policy.pdf"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "UnitedHealthcare Medicare Advantage Reimbursement Policy CMS 1500 2026R9002A Durable Medical Equipment Charges in a Skilled Nursing Facility Policy, Professional",
+      "tags": [
+        "Medicare Advantage"
+      ],
+      "effective_date": "03/01/2026",
+      "evidence": "No code-specific denial rule stated. Policy notes DMEPOS categories PO, OS, SD, and SU are subject to denial in POS 31; CR, FS, IN, OX, and TE are subject to denial in POS 31 or 32.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/medadv-reimbursement/MEDADV-DME-Charges-Skilled-Nursing-Facility-Policy.pdf"
+    },
+    {
+      "payer_name": "Premera Blue Cross",
+      "policy_title": "Global Surgery",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": null,
+      "evidence": "Separate reimbursement may be denied when services are included in a CPT global package, are related postoperative care, or lack required modifier support and documentation.",
+      "policy_url": "https://www.premera.com/paymentpolicies/cmi_162302.pdf"
+    },
+    {
+      "payer_name": "Premera Blue Cross",
+      "policy_title": "Contract Exclusions/Disallowed Charges – Inpatient and Outpatient Facility Services",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": "04/06/2026",
+      "evidence": "Denied when separately billed facility charges are integral to inpatient ECMO/tracheostomy care, major OR services, ventilator support, room and board, or routine nursing/respiratory/pharmacy/radiology/lab functions; after-hours or call-back charges are also non-reimbursable where 24-hour coverage exists.",
+      "policy_url": "https://www.premera.com/paymentpolicies/cmi_115624.pdf"
+    },
+    {
+      "payer_name": "Molina",
+      "policy_title": "NF Ventilator Pre-Payment Medical Necessity Review",
+      "tags": [
+        "Medicaid"
+      ],
+      "effective_date": "04/01/2025",
+      "evidence": "Claim may be denied or require medical records if ventilator dependent or ventilator weaning guidance is not met, or if records fail to verify compliance with Ohio Medicaid nursing facility ventilator program requirements.",
+      "policy_url": "https://www.molinahealthcare.com/-/media/Molina/PublicWebsite/PDF/Providers/common/PIA-Payment-Policies/Molina-PI-Policy-Website/2025-Policies/508-Approved/NF-Vent-Payment-Medical-Necessity-Review-Policy-for-Medicaid-Line-of-Business.ashx"
+    },
+    {
+      "payer_name": "Cigna",
+      "policy_title": "MHCPCS Healthcare Common Procedure Coding System (HCPCS) National Level II Modifiers",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": "10/22/2018",
+      "evidence": "Code not addressed; policy only covers HCPCS Level II modifier reimbursement.",
+      "policy_url": "https://static.cigna.com/assets/chcp/secure/pdf/resourceLibrary/clinReimPolsModifiers/HCPCS_Level_II_Modifiers.pdf"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "Durable Medical Equipment, Orthotics and Prosthetics Policy, Professional",
+      "tags": [
+        "Medicare Advantage"
+      ],
+      "effective_date": "06/01/2025",
+      "evidence": "Outside scope if billed as an inpatient DRG or hospital service under this professional DMEPOS policy. DMEPOS may deny for missing rental or purchase modifier, duplicate same-month rental, non-home POS, or facility purchase billing.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/medadv-reimbursement/MEDADV-DME-Orthotics-and-Prosthetics-Multiple-Frequency-Policy.pdf"
+    },
+    {
+      "payer_name": "Cigna",
+      "policy_title": "Respiratory Services and Supplies",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": "07/15/2010",
+      "evidence": "No code-specific denial rule stated. Related respiratory service denials occur when services are billed as both a daily charge and hourly units on the same date, when combined ventilator/CPAP/BiPAP units exceed 24 per day beyond the highest-priced service, or when integral services are billed separately.",
+      "policy_url": "https://static.cigna.com/assets/chcp/secure/pdf/resourceLibrary/clinReimPolsModifiers/R15_Respiratory_Services_and_Supplies.pdf"
+    },
+    {
+      "payer_name": "Cigna",
+      "policy_title": "Reimbursement Policy: R36 Emergency Room Services",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": "08/14/2021",
+      "evidence": "No code-specific denial conditions described; policy discusses ED E/M level adjustments based on diagnosis/resource use.",
+      "policy_url": "https://static.cigna.com/assets/chcp/secure/pdf/resourceLibrary/clinReimPolsModifiers/R36_Emergency_Room_Services.pdf"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "Global Days Policy, Professional",
+      "tags": [
+        "Medicaid"
+      ],
+      "effective_date": "02/08/2026",
+      "evidence": "Separate reimbursement may be denied for routine pre/postoperative care, complications not requiring OR return, or subsequent unmodified procedures/E/M by the same specialty and TIN during the global period. This description is not specifically listed in the policy.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/medicaid-comm-plan-reimbursement/UHCCP-Global-Days-Policy-(R0005).pdf"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "Hospital Inclusive Charges Policy, Facility",
+      "tags": [
+        "Commercial"
+      ],
+      "effective_date": "03/09/2026",
+      "evidence": "Separate billing of routine respiratory or nursing services, tracheostomy care or supplies, perfusion equipment, postoperative recovery services in critical care settings, routine floor-stock items, or more than one ventilator/CPAP management unit per day.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/comm-reimbursement/COMM-Hospital-Inclusive-Review-Policy-Facility.pdf"
+    },
+    {
+      "payer_name": "United Health",
+      "policy_title": "Global Days Policy, Professional for Louisiana",
+      "tags": [
+        "Medicaid"
+      ],
+      "effective_date": "02/14/2024",
+      "evidence": "No code-specific denial rule. Denial may occur if billed outside CMS-1500 scope, included in a global package, or missing an appropriate modifier.",
+      "policy_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/policies/medicaid-comm-plan-reimbursement/la/LA-Global-Days-Policy.pdf"
+    }
+  ]
+}

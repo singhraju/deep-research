@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendation Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .file-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .file-input-wrapper label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 1.1em;
+            min-width: 220px;
+        }
+
+        input[type="file"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        input[type="file"]:hover {
+            border-color: #667eea;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-controls label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        select {
+            padding: 8px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+
+        .metadata-box {
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0e8f8 100%);
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .metadata-box.active {
+            display: block;
+        }
+
+        .metadata-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .metadata-title::before {
+            content: "📋";
+        }
+
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .metadata-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .metadata-label {
+            font-size: 0.8em;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .metadata-value {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .quality-dashboard {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe8f0 100%);
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .quality-dashboard.active {
+            display: block;
+        }
+
+        .quality-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quality-title::before {
+            content: "⭐";
+        }
+
+        .quality-section {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .quality-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .quality-section-title {
+            font-size: 1em;
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quality-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .quality-metric {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .quality-metric-label {
+            font-size: 0.85em;
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .quality-metric-value {
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .quality-metric-value.excellent {
+            color: #28a745;
+        }
+
+        .quality-metric-value.good {
+            color: #17a2b8;
+        }
+
+        .quality-metric-value.warning {
+            color: #ffc107;
+        }
+
+        .quality-metric-value.poor {
+            color: #dc3545;
+        }
+
+        .overall-score {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .overall-score-value {
+            font-size: 3em;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .overall-score-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .no-data h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .recommendations-container {
+            display: none;
+        }
+
+        .recommendations-container.active {
+            display: block;
+        }
+
+        .recommendation-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .recommendation-card:hover {
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .rec-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .rec-rank {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.5em;
+            font-weight: 700;
+            padding: 15px 20px;
+            border-radius: 8px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .priority-badge {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .priority-HIGH {
+            background: #dc3545;
+            color: white;
+        }
+
+        .priority-MEDIUM {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .priority-LOW {
+            background: #28a745;
+            color: white;
+        }
+
+        .category-badge {
+            padding: 6px 12px;
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 6px;
+            font-size: 0.85em;
+            color: #004085;
+            font-weight: 600;
+        }
+
+        .rec-body {
+            display: grid;
+            gap: 20px;
+        }
+
+        .rec-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .rec-section-title {
+            font-size: 0.85em;
+            font-weight: 700;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .word-count-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .word-count-ok {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .word-count-exceed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .rec-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .rec-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .rec-list li {
+            padding: 8px 0 8px 20px;
+            position: relative;
+            color: #495057;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+
+        .rec-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 5px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .story-alignment-item {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .story-alignment-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .business-rule-highlight {
+            font-weight: 700;
+            color: #856404;
+            background: #fff9e6;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .citation-link {
+            display: block;
+            padding: 10px 12px;
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 6px;
+            color: #004085;
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+            font-size: 0.9em;
+        }
+
+        .citation-link:hover {
+            background: #d0e7ff;
+            border-color: #667eea;
+            transform: translateX(3px);
+        }
+
+        .citation-link:last-child {
+            margin-bottom: 0;
+        }
+
+        .citation-icon {
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .rec-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .quality-metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💡 Recommendation Viewer</h1>
+            <p>Explore policy recommendations with quality metrics and validation insights</p>
+        </div>
+
+        <div class="controls">
+            <div class="file-input-wrapper">
+                <label for="jsonFile">Load Recommendation JSON:</label>
+                <input type="file" id="jsonFile" accept=".json" />
+                <button id="saveRenderedBtn" disabled style="padding: 12px 20px; border: 2px solid #dee2e6; border-radius: 8px; background: #667eea; color: white; cursor: pointer; font-size: 1em; opacity: 0.5; margin-left: 15px;">💾 Save Rendered HTML</button>
+            </div>
+
+            <div class="filter-controls" id="filterControls" style="display: none;">
+                <label for="priorityFilter">Filter by Priority:</label>
+                <select id="priorityFilter">
+                    <option value="ALL">All Priorities</option>
+                    <option value="HIGH">High Only</option>
+                    <option value="MEDIUM">Medium Only</option>
+                    <option value="LOW">Low Only</option>
+                </select>
+            </div>
+
+            <div class="metadata-box" id="metadataBox">
+                <div class="metadata-title">Analysis Metadata</div>
+                <div class="metadata-grid" id="metadataGrid"></div>
+            </div>
+
+            <div class="quality-dashboard" id="qualityDashboard">
+                <div class="quality-title">Quality Metrics Dashboard</div>
+                <div id="qualityContent"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="no-data" id="noData">
+                <h2>👋 Welcome</h2>
+                <p>Load a recommendation JSON file to view the analysis</p>
+            </div>
+
+            <div class="recommendations-container" id="recommendationsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+        let allRecommendations = [];
+
+        document.getElementById('jsonFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        let parsedData = JSON.parse(event.target.result);
+                        
+                        // Handle new format: { success: true, result: { metadata, recommendations } }
+                        if (parsedData.success !== undefined && parsedData.result) {
+                            currentData = parsedData.result;
+                        } 
+                        // Handle old format: { metadata, recommendations }
+                        else {
+                            currentData = parsedData;
+                        }
+                        
+                        displayMetadata();
+                        displayQualityMetrics();
+                        renderRecommendations();
+                        document.getElementById('filterControls').style.display = 'flex';
+                        // Enable save button
+                        const saveBtn = document.getElementById('saveRenderedBtn');
+                        saveBtn.disabled = false;
+                        saveBtn.style.opacity = '1';
+                    } catch (error) {
+                        alert('Error parsing JSON file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // Save Rendered HTML button handler
+        document.getElementById('saveRenderedBtn').addEventListener('click', function() {
+            if (!currentData) {
+                alert('Please load a JSON file first.');
+                return;
+            }
+            saveRenderedHTML();
+        });
+
+        document.getElementById('priorityFilter').addEventListener('change', function() {
+            renderRecommendations();
+        });
+
+        function displayMetadata() {
+            const metadata = currentData?.metadata || {};
+            const recommendations = currentData?.recommendations || [];
+            
+            const metadataDisplay = {
+                'Timestamp': metadata.timestamp || 'N/A',
+                'Input Patterns': metadata.input_patterns || 0,
+                'Decision Tree Used': metadata.decision_tree_used ? 'Yes' : 'No',
+                'LLM Model': metadata.llm_model || 'N/A',
+                'Total Recommendations': recommendations.length,
+                'Retry Attempts': metadata.attempt_log ? metadata.attempt_log.length : 0
+            };
+
+            const metadataGrid = document.getElementById('metadataGrid');
+            const metadataBox = document.getElementById('metadataBox');
+            
+            let html = '';
+            for (const [label, value] of Object.entries(metadataDisplay)) {
+                html += `
+                    <div class="metadata-item">
+                        <div class="metadata-label">${escapeHtml(label)}</div>
+                        <div class="metadata-value">${escapeHtml(String(value))}</div>
+                    </div>
+                `;
+            }
+            
+            metadataGrid.innerHTML = html;
+            metadataBox.classList.add('active');
+        }
+
+        function displayQualityMetrics() {
+            const metrics = currentData?.quality_metrics;
+            const dashboard = document.getElementById('qualityDashboard');
+            const content = document.getElementById('qualityContent');
+            
+            if (!metrics || Object.keys(metrics).length === 0) {
+                return;
+            }
+
+            let html = '';
+
+            // Overall Score
+            if (metrics.word_count_compliance || metrics.story_alignment_quality || metrics.specificity || metrics.citations) {
+                const scores = [];
+                if (metrics.word_count_compliance) {
+                    const wc = metrics.word_count_compliance;
+                    scores.push((wc.description_pass_rate + wc.evidence_pass_rate + wc.story_alignment_pass_rate + wc.peer_benchmarking_pass_rate) / 4);
+                }
+                if (metrics.story_alignment_quality) {
+                    scores.push(metrics.story_alignment_quality.average_quality_score || 0);
+                }
+                if (metrics.specificity) {
+                    scores.push(metrics.specificity.average_specificity_score || 0);
+                }
+                if (metrics.citations) {
+                    scores.push((metrics.citations.has_policy_urls_rate + metrics.citations.avoids_business_rules_rate) / 2);
+                }
+                
+                const overallScore = scores.reduce((a, b) => a + b, 0) / scores.length;
+                
+                html += `
+                    <div class="overall-score">
+                        <div class="overall-score-label">Overall Quality Score</div>
+                        <div class="overall-score-value">${(overallScore * 100).toFixed(0)}%</div>
+                    </div>
+                `;
+            }
+
+            // Word Count Compliance
+            if (metrics.word_count_compliance) {
+                const wc = metrics.word_count_compliance;
+                html += `
+                    <div class="quality-section">
+                        <div class="quality-section-title">📏 Word Count Compliance</div>
+                        <div class="quality-metrics-grid">
+                            ${renderQualityMetric('Description', wc.description_pass_rate)}
+                            ${renderQualityMetric('Evidence', wc.evidence_pass_rate)}
+                            ${renderQualityMetric('Story Alignment', wc.story_alignment_pass_rate)}
+                            ${renderQualityMetric('Peer Benchmarking', wc.peer_benchmarking_pass_rate)}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Story Alignment Quality
+            if (metrics.story_alignment_quality) {
+                const sa = metrics.story_alignment_quality;
+                html += `
+                    <div class="quality-section">
+                        <div class="quality-section-title">📖 Story Alignment Quality</div>
+                        <div class="quality-metrics-grid">
+                            ${renderQualityMetric('Overall Quality', sa.average_quality_score)}
+                            ${renderQualityMetric('Has Business Rule', sa.has_business_rule_rate)}
+                            ${renderQualityMetric('Rule Fit Explanation', sa.has_rule_fit_explanation_rate)}
+                            ${renderQualityMetric('Situation Explained', sa.has_situation_rate)}
+                            ${renderQualityMetric('Action Relevance', sa.has_action_rate)}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Specificity
+            if (metrics.specificity) {
+                const sp = metrics.specificity;
+                html += `
+                    <div class="quality-section">
+                        <div class="quality-section-title">🎯 Specificity Analysis</div>
+                        <div class="quality-metrics-grid">
+                            ${renderQualityMetric('Average Score', sp.average_specificity_score)}
+                            ${renderQualityMetric('Above Threshold', sp.above_threshold_rate)}
+                            ${renderQualityMetric('Has Identifiers', sp.has_identifiers_rate)}
+                            ${renderQualityMetric('Avoids Generic', sp.avoids_generic_rate)}
+                            ${renderQualityMetric('Uses Action Verbs', sp.uses_action_verbs_rate)}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Citations
+            if (metrics.citations) {
+                const ct = metrics.citations;
+                html += `
+                    <div class="quality-section">
+                        <div class="quality-section-title">📎 Citation Validation</div>
+                        <div class="quality-metrics-grid">
+                            ${renderQualityMetric('Has Policy URLs', ct.has_policy_urls_rate)}
+                            ${renderQualityMetric('Avoids Business Rules', ct.avoids_business_rules_rate)}
+                        </div>
+                    </div>
+                `;
+            }
+
+            content.innerHTML = html;
+            dashboard.classList.add('active');
+        }
+
+        function renderQualityMetric(label, value) {
+            const percentage = Math.round(value * 100);
+            let colorClass = 'poor';
+            if (percentage >= 90) colorClass = 'excellent';
+            else if (percentage >= 75) colorClass = 'good';
+            else if (percentage >= 50) colorClass = 'warning';
+
+            return `
+                <div class="quality-metric">
+                    <div class="quality-metric-label">${escapeHtml(label)}</div>
+                    <div class="quality-metric-value ${colorClass}">${percentage}%</div>
+                </div>
+            `;
+        }
+
+        function renderRecommendations() {
+            allRecommendations = currentData?.recommendations || [];
+            const container = document.getElementById('recommendationsContainer');
+            const noData = document.getElementById('noData');
+            
+            if (allRecommendations.length === 0) {
+                noData.innerHTML = '<h2>⚠️ No Recommendations Found</h2><p>The file does not contain any recommendations to display.</p>';
+                return;
+            }
+
+            // Apply filter
+            const priorityFilter = document.getElementById('priorityFilter').value;
+            const filteredRecs = priorityFilter === 'ALL' 
+                ? allRecommendations 
+                : allRecommendations.filter(r => r.priority === priorityFilter);
+
+            if (filteredRecs.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #6c757d;"><h3>No recommendations match the current filter</h3></div>';
+                container.classList.add('active');
+                noData.style.display = 'none';
+                return;
+            }
+            
+            noData.style.display = 'none';
+            container.classList.add('active');
+            
+            let html = '';
+            filteredRecs.forEach((rec) => {
+                html += renderRecommendationCard(rec);
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function renderRecommendationCard(rec) {
+            const rank = rec.rank || '?';
+            const priority = rec.priority || 'MEDIUM';
+            const category = rec.category || 'Policy';
+            const description = rec.description || '';
+            const evidence = rec.evidence || [];
+            const storyAlignment = rec.story_alignment || [];
+            const peerBenchmarking = rec.peer_benchmarking || [];
+            const citations = rec.citation || [];
+
+            // Calculate word counts
+            const descWords = countWords(description);
+            const maxDescWords = currentData?.metadata?.ui_constraints?.max_description_words || 100;
+
+            let html = `
+                <div class="recommendation-card">
+                    <div class="rec-header">
+                        <div class="rec-rank">#${rank}</div>
+                        <span class="priority-badge priority-${priority}">${priority}</span>
+                        <span class="category-badge">${escapeHtml(category)}</span>
+                    </div>
+                    
+                    <div class="rec-body">
+            `;
+
+            // Description
+            html += `
+                <div class="rec-section">
+                    <div class="rec-section-title">
+                        📝 Recommendation
+                        <span class="word-count-badge ${descWords <= maxDescWords ? 'word-count-ok' : 'word-count-exceed'}">
+                            ${descWords}/${maxDescWords} words
+                        </span>
+                    </div>
+                    <div class="rec-description">${escapeHtml(description)}</div>
+                </div>
+            `;
+
+            // Evidence
+            if (evidence.length > 0) {
+                const maxEvidenceWords = currentData?.metadata?.ui_constraints?.max_evidence_words || 15;
+                html += `
+                    <div class="rec-section">
+                        <div class="rec-section-title">🔍 Evidence</div>
+                        <ul class="rec-list">
+                `;
+                evidence.forEach(item => {
+                    const words = countWords(item);
+                    html += `
+                        <li>
+                            ${escapeHtml(item)}
+                            <span class="word-count-badge ${words <= maxEvidenceWords ? 'word-count-ok' : 'word-count-exceed'}">
+                                ${words}/${maxEvidenceWords}w
+                            </span>
+                        </li>
+                    `;
+                });
+                html += `</ul></div>`;
+            }
+
+            // Story Alignment
+            if (storyAlignment.length > 0) {
+                const maxStoryWords = currentData?.metadata?.ui_constraints?.max_story_alignment_words || 30;
+                html += `
+                    <div class="rec-section">
+                        <div class="rec-section-title">📖 Story Alignment (Business Rules)</div>
+                `;
+                storyAlignment.forEach(item => {
+                    const words = countWords(item);
+                    const highlightedItem = highlightBusinessRules(item);
+                    html += `
+                        <div class="story-alignment-item">
+                            ${highlightedItem}
+                            <span class="word-count-badge ${words <= maxStoryWords ? 'word-count-ok' : 'word-count-exceed'}">
+                                ${words}/${maxStoryWords}w
+                            </span>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+
+            // Peer Benchmarking
+            if (peerBenchmarking.length > 0) {
+                const maxPeerWords = currentData?.metadata?.ui_constraints?.max_peer_benchmarking_words || 25;
+                html += `
+                    <div class="rec-section">
+                        <div class="rec-section-title">📊 Peer Benchmarking</div>
+                        <ul class="rec-list">
+                `;
+                peerBenchmarking.forEach(item => {
+                    const words = countWords(item);
+                    html += `
+                        <li>
+                            ${escapeHtml(item)}
+                            <span class="word-count-badge ${words <= maxPeerWords ? 'word-count-ok' : 'word-count-exceed'}">
+                                ${words}/${maxPeerWords}w
+                            </span>
+                        </li>
+                    `;
+                });
+                html += `</ul></div>`;
+            }
+
+            // Citations
+            if (citations.length > 0) {
+                html += `
+                    <div class="rec-section">
+                        <div class="rec-section-title">📎 Policy Citations</div>
+                `;
+                citations.forEach(citation => {
+                    html += renderCitation(citation);
+                });
+                html += `</div>`;
+            }
+
+            html += `</div></div>`;
+            return html;
+        }
+
+        function renderCitation(citation) {
+            // Try to extract URL from citation
+            const urlMatch = citation.match(/(https?:\/\/[^\s]+)/);
+            if (urlMatch) {
+                const url = urlMatch[1];
+                const text = citation.replace(url, '').trim();
+                return `
+                    <a href="${escapeHtml(url)}" target="_blank" class="citation-link">
+                        <span class="citation-icon">🔗</span>${escapeHtml(text || url)}
+                    </a>
+                `;
+            } else {
+                return `
+                    <div class="citation-link" style="cursor: default;">
+                        <span class="citation-icon">📄</span>${escapeHtml(citation)}
+                    </div>
+                `;
+            }
+        }
+
+        function highlightBusinessRules(text) {
+            // Highlight "Business Rule" and trend references
+            let highlighted = escapeHtml(text);
+            highlighted = highlighted.replace(
+                /(Business Rule [^:]+(?:Trend \d+)?)/gi,
+                '<span class="business-rule-highlight">$1</span>'
+            );
+            return highlighted;
+        }
+
+        function countWords(text) {
+            if (!text) return 0;
+            return text.trim().split(/\s+/).length;
+        }
+
+        function escapeHtml(text) {
+            if (text == null) return '';
+            const div = document.createElement('div');
+            div.textContent = String(text);
+            return div.innerHTML;
+        }
+
+        function saveRenderedHTML() {
+            try {
+                // Get the original filename
+                const originalFilename = document.getElementById('jsonFile').files[0]?.name || 'recommendation_results.json';
+                
+                // Read the current page HTML
+                const currentHTML = document.documentElement.outerHTML;
+                
+                // Find the script section
+                const scriptStartMarker = 'let currentData = null;';
+                const scriptStartIndex = currentHTML.indexOf(scriptStartMarker);
+                
+                if (scriptStartIndex === -1) {
+                    alert('Error: Could not find script section to modify.');
+                    return;
+                }
+                
+                // Find the next line after variable declarations
+                const allRecsMarker = 'let allRecommendations = [];';
+                const allRecsIndex = currentHTML.indexOf(allRecsMarker, scriptStartIndex);
+                
+                if (allRecsIndex === -1) {
+                    alert('Error: Could not find allRecommendations variable.');
+                    return;
+                }
+                
+                // Replace "let currentData = null;" and "let allRecommendations = [];" with embedded data
+                const beforeCurrentData = currentHTML.substring(0, scriptStartIndex);
+                const afterAllRecs = currentHTML.substring(allRecsIndex + allRecsMarker.length);
+                
+                // Create the embedded data initialization
+                const embeddedDataInit = `let currentData = ${JSON.stringify(currentData)};
+        let allRecommendations = [];
+        
+        // Auto-populate on page load with embedded data
+        window.addEventListener('DOMContentLoaded', function() {
+            if (currentData) {
+                console.log('Auto-loading embedded data...');
+                displayMetadata();
+                displayQualityMetrics();
+                renderRecommendations();
+                document.getElementById('filterControls').style.display = 'flex';
+                const saveBtn = document.getElementById('saveRenderedBtn');
+                saveBtn.textContent = '✓ Data Embedded';
+                saveBtn.title = 'Data is already embedded. Use Ctrl+S to save this file.';
+                saveBtn.style.opacity = '1';
+                document.getElementById('jsonFile').disabled = true;
+            }
+        });`;
+                
+                // Build the new HTML
+                const newHTML = beforeCurrentData + embeddedDataInit + afterAllRecs;
+                
+                // Create blob and download
+                const blob = new Blob([newHTML], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                
+                // Create download filename based on original JSON filename
+                let downloadFilename = 'recommendation_rendered.html';
+                if (originalFilename) {
+                    const baseName = originalFilename.replace(/\.json$/i, '');
+                    downloadFilename = `${baseName}_rendered.html`;
+                }
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = downloadFilename;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                
+                // Cleanup
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+                
+                alert(`✓ Rendered HTML saved!\n\nThe file "${downloadFilename}" has been downloaded.`);
+                
+            } catch (error) {
+                console.error('Error saving rendered HTML:', error);
+                alert('Error saving file: ' + error.message + '\n\nCheck the browser console for details.');
+            }
+        }
+    </script>
+</body>
+</html>

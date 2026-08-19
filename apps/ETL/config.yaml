@@ -1,0 +1,185 @@
+# Deep Research ETL Pipeline Configuration
+# Environment mapping: dv/ts -> dev, pl -> uat, pr -> prod
+
+# Development Configuration (dv, ts)
+dev:
+  snowflake:
+    account: "carelon-eda-nonprod.privatelink"
+    database: "D01_COC"
+    schema: "COC_DTI_STG"
+    warehouse: "D01_COC_DTI_LOAD_WH"
+    role_suffix: "_PRIVS"
+    vault:
+      service_id: "srccocdtidd"
+      role_name: "snowdb-idiscovery-slvr"
+      namespace: "eda-snowflakedb"
+      path: "eda_nonprod/static-creds/aedl_devops-srccocdtidd"
+      url: "https://vault.acr.awsdns.internal.das"
+      verify_ssl: true
+      cert_path: "root_chain.pem"
+  
+  s3:
+    bucket: "piai-idiscovery-slv-gbd-s3-bucket-data-phi-us-east-1"
+    region: "us-east-1"
+    base_path: "deep_rsrch/dataz/outbound"
+  
+  table_mapping:
+    gbd: "D01_COC.COC_DTI_STG.COC_CMN_DATA_INSGHT_STG"
+    nogbd: "D01_COC.COC_DTI_STG_NOGBD.COC_CMN_DATA_INSGHT_STG"
+  
+  target_table:
+    gbd:
+      org: "D01_COC.COC_DTI_STG.COC_CMN_DEEP_RSRCH_INSGHT_STG"
+      bkp: "D01_COC.COC_DTI_STG.WORK_COC_CMN_DEEP_RSRCH_INSGHT_BKP"
+    nogbd:
+      org: "D01_COC.COC_DTI_STG_NOGBD.COC_CMN_DEEP_RSRCH_INSGHT_STG"
+      bkp: "D01_COC.COC_DTI_STG_NOGBD.WORK_COC_CMN_DEEP_RSRCH_INSGHT_BKP"
+  
+  agent_api:
+    base_url: "http://127.0.0.1:8000"
+    timeout: 300
+  
+  database:
+    truncate_table: false
+    save_to_db: false
+    use_backup_table: false  # Set to true to use _BKP tables for testing
+  
+  job_tracking:
+    enabled: false  # Enable/disable job tracking system (for multi-user testing)
+
+# UAT Configuration (pl)
+uat:
+  snowflake:
+    account: "carelon-eda-preprod.privatelink"
+    database: "U01_COC"
+    schema: "COC_DTI_STG"
+    warehouse: "U01_COC_DTI_LOAD_WH"
+    role_suffix: "_PRIVS"
+    vault:
+      service_id: "srccocdtidu"
+      role_name: "snowdb-idiscovery-gld"
+      namespace: "eda-snowflakedb"
+      path: "eda_preprod/static-creds/aedl_devops-srccocdtidu"
+      url: "https://vault.acr.awsdns.internal.das"
+      verify_ssl: true
+      cert_path: "root_chain.pem"
+  
+  s3:
+    bucket: "piai-idiscovery-gld-gbd-s3-bucket-data-phi-us-east-1"
+    region: "us-east-1"
+    base_path: "deep_rsrch/dataz/outbound"
+  
+  table_mapping:
+    gbd: "U01_COC.COC_DTI_STG.COC_CMN_DATA_INSGHT_STG"
+    nogbd: "U01_COC.COC_DTI_STG_NOGBD.COC_CMN_DATA_INSGHT_STG"
+  
+  target_table:
+    gbd:
+      org: "U01_COC.COC_DTI_STG.COC_CMN_DEEP_RSRCH_INSGHT_STG"
+      bkp: "U01_COC.COC_DTI_STG.WORK_COC_CMN_DEEP_RSRCH_INSGHT_BKP"
+    nogbd:
+      org: "U01_COC.COC_DTI_STG_NOGBD.COC_CMN_DEEP_RSRCH_INSGHT_STG"
+      bkp: "U01_COC.COC_DTI_STG_NOGBD.WORK_COC_CMN_DEEP_RSRCH_INSGHT_BKP"
+  
+  agent_api:
+    base_url: "https://idiscovery-deep-research-api-uat.istio.carelon.com"
+    timeout: 300
+  
+  database:
+    truncate_table: false
+    save_to_db: true
+    use_backup_table: true  # Set to true to use _BKP tables for testing
+  
+  job_tracking:
+    enabled: false  # Enable/disable job tracking system (for multi-user testing)
+
+# Production Configuration (pr)
+prod:
+  snowflake:
+    account: "carelon-edaprod1.privatelink"
+    database: "P01_COC"
+    schema: "COC_DTI_STG"
+    warehouse: "P01_COC_DTI_LOAD_WH"
+    role_suffix: "_PRIVS"
+    vault:
+      service_id: "srccocdtidp"
+      role_name: "snowdb-idiscovery-prod"
+      namespace: "eda-snowflakedb"
+      path: "edaprod/static-creds/aedl_devops-srccocdtidp"
+      url: "https://vault.acr.awsdns.internal.das"
+      verify_ssl: true
+      cert_path: "root_chain.pem"
+  
+  s3:
+    bucket: "piai-idiscovery-plat-gbd-s3-bucket-data-phi-us-east-1"
+    region: "us-east-1"
+    base_path: "deep_rsrch/dataz/outbound"
+  
+  table_mapping:
+    gbd: "P01_COC.COC_DTI_STG.COC_CMN_DATA_INSGHT_STG"
+    nogbd: "P01_COC.COC_DTI_STG_NOGBD.COC_CMN_DATA_INSGHT_STG"
+  
+  target_table:
+    gbd:
+      org: "P01_COC.COC_DTI_STG.COC_CMN_DEEP_RSRCH_INSGHT_STG"
+      bkp: "P01_COC.COC_DTI_STG.WORK_COC_CMN_DEEP_RSRCH_INSGHT_BKP"
+    nogbd:
+      org: "P01_COC.COC_DTI_STG_NOGBD.COC_CMN_DEEP_RSRCH_INSGHT_STG"
+      bkp: "P01_COC.COC_DTI_STG_NOGBD.WORK_COC_CMN_DEEP_RSRCH_INSGHT_BKP"
+  
+  agent_api:
+    base_url: "http://idiscovery-deep-research-api.nginx.plat-dig-sharedservdigital2.awsdns.internal.das"
+    timeout: 300
+  
+  database:
+    truncate_table: false
+    save_to_db: true
+    use_backup_table: false  # Set to true to use _BKP tables for testing
+  
+  job_tracking:
+    enabled: false  # Enable/disable job tracking system (for multi-user testing)
+
+# Pipeline Settings
+pipeline:
+  default_lob: "gbd"
+  default_statscl_mdl_cd: "IP AUTH"
+  csv_file: "SampleData-dev-deep-research.csv"
+  
+  # Local development mode
+  local: false  # Set to true for local development
+  local_lob: "offshore"  # Options: "offshore" or other values
+  
+  # S3 logging settings
+  s3_logging:
+    enabled: true
+    timestamp_format: "%Y%m%d_%H%M"
+    folder_types:
+      - "payload"
+      - "agents_results"
+      - "final_result"
+  
+  # Semantic YAML configuration paths for correlation and pattern agents
+  semantic_config:
+    # OON model configurations
+    oon:
+      dev: "configs/correlation_pattern/coc_ecap_oon_semantic_view_with_samples_dev.yaml"
+      uat: "configs/correlation_pattern/coc_ecap_oon_semantic_view_with_samples_uat.yaml"
+      prod: "configs/correlation_pattern/coc_ecap_oon_semantic_view_with_samples_prod.yaml"
+      local: "configs/correlation_pattern/coc_ecap_oon_semantic_view_with_samples_local.yaml"
+      local_offshore: "configs/correlation_pattern/coc_ecap_oon_semantic_view_with_samples_local_offshore.yaml"
+
+    # OP OTH BH model configurations
+    op_oth_bh:
+      dev: "configs/correlation_pattern/coc_ecap_op_oth_bh_sematic_view_with_samples_dev.yaml"
+      uat: "configs/correlation_pattern/coc_ecap_op_oth_bh_sematic_view_with_samples_uat.yaml"
+      prod: "configs/correlation_pattern/coc_ecap_op_oth_bh_sematic_view_with_samples_prod.yaml"
+      local: "configs/correlation_pattern/coc_ecap_op_oth_bh_sematic_view_with_samples_local.yaml"
+      local_offshore: "configs/correlation_pattern/coc_ecap_op_oth_bh_sematic_view_with_samples_local_offshore.yaml"
+
+    # IP AUTH and other models configurations
+    default:
+      dev: "configs/correlation_pattern/coc_ecap_ip_auth_sematic_view_with_samples_dev.yaml"
+      uat: "configs/correlation_pattern/coc_ecap_ip_auth_sematic_view_with_samples_uat.yaml"
+      prod: "configs/correlation_pattern/coc_ecap_ip_auth_sematic_view_with_samples_prod.yaml"
+      local: "configs/correlation_pattern/coc_ecap_ip_auth_sematic_view_with_samples_local.yaml"
+      local_offshore: "configs/correlation_pattern/coc_ecap_ip_auth_sematic_view_with_samples_local_offshore.yaml"

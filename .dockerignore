@@ -1,0 +1,125 @@
+# =============================================================================
+# Docker Build Context Exclusions
+# =============================================================================
+# Exclude files and directories that should not be copied into Docker image
+# This reduces build context size and improves build performance
+# =============================================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.windsurf/
+.devin/
+.codeiumignore
+
+# Version Control
+.git/
+.gitignore
+.gitattributes
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+bitbucket-pipelines.yml
+
+# Documentation (not needed in runtime)
+docs/
+*.md
+!README.md
+
+# Tests (not needed in production)
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# Logs and Runtime Data
+logs/
+*.log
+correlation_runs/
+
+# Environment Files
+.env
+.env.*
+!.env.sample
+!.env.example
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Package Manager
+uv.lock
+.uv/
+
+# Jupyter Notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Data Files (exclude large data files)
+*.csv
+*.xlsx
+*.parquet
+*.db
+*.sqlite
+
+# Old/Legacy Files
+app.py
+simple_app.py
+requirements.txt
+data_generator.py
+data_types.py
+ui_components.py
+utils.py
+visualizations.py
+spike_detector.py
+generate_spike_drilldown_images.py
+visualize_spike.py
+coc_trend_sample.xlsx
+sample_data.json
+spike_classification_report.txt
+spike_classifications_detailed.csv
+elevance_topbar_hadr.png
+
+# Subdirectories to exclude
+idiscovery-chat-service/
+util/
+images/
+
+# Keep only what's needed
+!apps/
+!packages/
+!configs/
+!pyproject.toml
+!cacert.pem
+!root_chain.pem
+!flexible_snowflake_connector-1.0.0-py3-none-any.whl

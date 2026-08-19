@@ -1,0 +1,714 @@
+name: coc_ecap_op_oth_bh_view
+description: COC ECAP OP OTH BH semantic view for claims expense and membership
+  analysis
+comments: 'This semantic view provides a unified view of COC ECAP data with:
+
+  - Expense detail table with clinical and financial dimensions
+
+  - Membership table for member-level analysis
+
+  - Support for multi-dimensional trend analysis and authorization tracking
+
+  - DRG dimensions disabled for OP OTH BH analysis
+
+  '
+tables:
+- name: expense_detail
+  description: Expense detail data with clinical and financial information
+  base_table:
+    database: U01_COC
+    schema: COC_DTI_STG
+    table: WORK_ELEVATE_COC_CLAIM_DETAIL
+  dimensions:
+  - name: lob_code
+    description: LINE OF BUSINESS CODE is a unique code that represents the Line of
+      Business.
+    expr: LOB_CD
+    data_type: string
+    synonyms:
+    - lob
+    - line_of_business
+    is_enum: true
+    sample_values:
+    - MCM003
+    - MCM004
+    - MCM006
+  - name: lob_description
+    description: LINE OF BUSINESS SHORT DESCRIPTION is the short description of the
+      Line of Business Code.
+    expr: LOB_SHRT_DESC
+    data_type: string
+    sample_values:
+    - Commercial
+    - Medicaid
+    - Medicare
+  - name: mbu_chartfield
+    description: MARKETING BUSINESS UNIT CHARTFIELD CODE is a code which represents
+      how products are marketed.
+    expr: MBU_CF_CD
+    data_type: string
+    synonyms:
+    - mbu
+    - marketing_unit
+  - name: service_area_state
+    description: SERVICE AREA STATE SHORT DESCRIPTION is the description of the Service
+      Area State Code.
+    expr: SRVCAREA_ST_SHRT_DESC
+    data_type: string
+    synonyms:
+    - state
+    - service_state
+    sample_values:
+    - CA
+    - CO
+    - CT
+    - FL
+    - GA
+    - IN
+    - KY
+    - MD
+    - ME
+    - MO
+    - NH
+    - NV
+    - NY
+    - OH
+    - TX
+    - VA
+    - WI
+  - name: state_name
+    description: STATE NAME is the full name of the state.
+    expr: ST_NM
+    data_type: string
+    synonyms:
+    - state_full_name
+    sample_values:
+    - California
+    - Colorado
+    - Connecticut
+    - Florida
+    - Georgia
+    - Indiana
+    - Kentucky
+    - Maine
+    - Maryland
+    - Missouri
+    - Nevada
+    - New Hampshire
+    - New York
+    - Ohio
+    - Texas
+    - Virginia
+    - Wisconsin
+  - name: hcc_high
+    description: HCC COMMERCIAL MANAGEMENT HIGH SHORT DESCRIPTION for health care
+      category high level.
+    expr: HCC_CMRCL_MNGMNT_HIGH_SHRT_DESC
+    data_type: string
+    synonyms:
+    - hcc_high_desc
+    - health_category_high
+    sample_values:
+    - OP
+  - name: hcc_medium
+    description: HCC COMMERCIAL MANAGEMENT MEDIUM SHORT DESCRIPTION for health care
+      category medium level.
+    expr: HCC_CMRCL_MNGMNT_MEDM_SHRT_DESC
+    data_type: string
+    synonyms:
+    - hcc_medium_desc
+    - health_category_medium
+    sample_values:
+    - OP OTH BH
+  - name: hcc_low
+    description: HCC COMMERCIAL MANAGEMENT LOW SHORT DESCRIPTION for health care category
+      low level.
+    expr: HCC_CMRCL_MNGMNT_LOW_SHRT_DESC
+    data_type: string
+    synonyms:
+    - hcc_low_desc
+    - health_category_low
+    sample_values:
+    - OP OTH BH
+  - name: provider_id
+    description: PROVIDER ID is the unique identifier for the provider.
+    expr: PROV_ID
+    data_type: string
+    synonyms:
+    - prov_id
+  - name: rendering_provider_name
+    description: Rendering Provider Name.
+    expr: RNDRG_PROV_NM
+    data_type: string
+    synonyms:
+    - provider_name
+    - provider
+  - name: rendering_hospital_system
+    description: Hospital Name who the Rendering Provider is a part of.
+    expr: RNDRG_HOSP_SYS_NM
+    data_type: string
+    synonyms:
+    - hospital_system
+    - hospital
+  - name: facility_type
+    description: FACILITY TYPE is the type of facility where services were provided.
+    expr: FCLTY_TYPE
+    data_type: string
+    synonyms:
+    - facility
+  - name: procedure_code
+    description: PROCEDURE CODE is a code that defines a service that a Provider may
+      deliver.
+    expr: PROC_CD
+    data_type: string
+    synonyms:
+    - proc_code
+    - cpt
+  - name: procedure_name
+    description: PROCEDURE SHORT NAME is the short description for the procedure code.
+    expr: PROC_SHRT_NM
+    data_type: string
+    synonyms:
+    - proc_name
+    - procedure_description
+    - cpt
+  - name: product_code
+    description: PRODUCT CODE is a unique code that represents the Products.
+    expr: PROD_CD
+    data_type: string
+    synonyms:
+    - product
+    sample_values:
+    - PM0172
+    - PM0173
+    - PM0176
+    - PM0218
+    - PM0330
+    - PM3561
+    - PM4559
+  - name: product_description
+    description: PRODUCT SHORT DESCRIPTION of the product code.
+    expr: PROD_SHRT_DESC
+    data_type: string
+    synonyms:
+    - product_desc
+    sample_values:
+    - Commercial Behavioral Health
+    - Commercial Med Supp
+    - EPO
+    - FFS
+    - HMO
+    - POS
+    - PPO
+  - name: primary_diagnosis_code
+    description: PRIMARY DISCHARGE DIAGNOSIS CODE represents an ICD CM Diagnosis Code.
+    expr: PRMRY_DSCHRG_DIAG_CD
+    data_type: string
+    synonyms:
+    - diagnosis_code
+    - diag_code
+    - icd_code
+  - name: primary_diagnosis_name
+    description: PRIMARY DISCHARGE DIAGNOSIS NAME is the name for the diagnosis code.
+    expr: PRMRY_DSCHRG_DIAG_NM
+    data_type: string
+    synonyms:
+    - diagnosis_name
+    - diag_name
+  - name: pa_required_code
+    description: PRIOR AUTHORIZATION REQUIRED CODE is an indicator that a prior authorization
+      was required.
+    expr: PA_RQRD_CD
+    data_type: string
+    synonyms:
+    - pa_required
+    - auth_required
+    is_enum: true
+    sample_values:
+    - '-1'
+    - '-2'
+    - '-3'
+    - N
+    - Y
+  - name: claim_number
+    description: CLAIM NUMBER is a unique number assigned to a claim.
+    expr: CLM_NBR
+    data_type: string
+    synonyms:
+    - dcn
+    - claim_id
+  - name: in_network_indicator
+    description: IN NETWORK INDICATOR shows if the provider is in network.
+    expr: INN_IND
+    data_type: string
+    synonyms:
+    - in_network
+    - inn_ind
+    is_enum: true
+    sample_values:
+    - N
+    - Y
+  - name: er_admit_indicator
+    description: ER ADMIT INDICATOR shows if the admission was through emergency room.
+    expr: ER_ADMT_IND
+    data_type: string
+    synonyms:
+    - er_admit
+    - emergency_admit
+    is_enum: true
+    sample_values:
+    - N
+    - Y
+  time_dimensions:
+  - name: snap_month
+    description: SNAP YEAR MONTH NUMBER reflects the YYYYMM of the month end for which
+      the data is produced.
+    expr: SNAP_YEAR_MNTH_NBR
+    data_type: number
+    synonyms:
+    - snap_date
+    - snapshot_month
+  - name: incurred_month
+    description: It is the four digit Julian year and two digit month of the Analytic
+      Incurred Date.
+    expr: ANLYTC_INCRD_YEAR_MNTH_NBR
+    data_type: number
+    synonyms:
+    - incurred_date
+    - service_month
+  facts:
+  - name: lob_partition_id
+    description: LOB PARTITION ID for partitioning.
+    expr: LOB_PARTN_ID
+    data_type: number
+  - name: authorization_key
+    description: EDM AUTHORIZATION KEY indicates if claim has any authorization request.
+    expr: EDM_AUTHRZN_KEY
+    data_type: number
+    synonyms:
+    - auth_key
+  - name: admit_count
+    description: Count of derived admits.
+    expr: ADMIT_CNT
+    data_type: number
+    synonyms:
+    - admissions
+    - admit
+  - name: paid_amount
+    description: Paid amount for the claim.
+    expr: ANLYTC_PAID_AMT
+    data_type: number
+    synonyms:
+    - paid
+    - paid_amt
+  - name: allowed_amount
+    description: Allowed amount for covered medical services or supplies.
+    expr: ANLYTC_ALWD_AMT
+    data_type: number
+    synonyms:
+    - allowed
+    - allowed_amt
+  - name: billed_charge_amount
+    description: BILLED CHARGE AMOUNT is the amount submitted by the provider for
+      reimbursement.
+    expr: BILLD_CHRG_AMT
+    data_type: number
+    synonyms:
+    - billed
+    - charges
+  - name: claim_admit_key
+    description: ANALYTIC CLAIM ADMIT KEY is the key for claim admission.
+    expr: ANLYTC_CLM_ADMT_KEY
+    data_type: number
+  metrics:
+  - name: expense_detail.total_allowed
+    description: Total allowed amount
+    expr: SUM({expense_detail.allowed_amount})
+  - name: expense_detail.total_paid
+    description: Total paid amount
+    expr: SUM({expense_detail.paid_amount})
+  - name: expense_detail.total_admissions
+    description: Total admission count
+    expr: SUM({expense_detail.admit_count})
+  - name: expense_detail.claim_count
+    description: Total count of claims
+    expr: COUNT(DISTINCT {expense_detail.claim_number})
+  - name: expense_detail.avg_billed_per_claim
+    description: Average billed charge per claim
+    expr: SUM({expense_detail.billed_charge_amount}) / NULLIF(COUNT(DISTINCT {expense_detail.claim_number}),
+      0)
+  - name: expense_detail.auth_rate
+    description: Authorization rate (claims with auth / total claims)
+    expr: SUM(CASE WHEN {expense_detail.authorization_key} > 0 THEN 1 ELSE 0 END)
+      / NULLIF(COUNT(*), 0)
+  - name: expense_detail.paid_ratio
+    description: Ratio of paid to allowed amount
+    expr: SUM({expense_detail.paid_amount}) / NULLIF(SUM({expense_detail.allowed_amount}),
+      0)
+  - name: expense_detail.avg_allowed_per_admit
+    description: Average allowed amount per admission
+    expr: SUM({expense_detail.allowed_amount}) / NULLIF(SUM({expense_detail.admit_count}),
+      0)
+  - name: expense_detail.avg_paid_per_admit
+    description: Average paid amount per admission
+    expr: SUM({expense_detail.paid_amount}) / NULLIF(SUM({expense_detail.admit_count}),
+      0)
+- name: membership
+  description: Membership data for member counts and authorization tracking
+  base_table:
+    database: U01_COC
+    schema: COC_DTI_STG
+    table: WORK_ELEVATE_COC_MBR_DETAIL
+  dimensions:
+  - name: lob_code
+    description: LINE OF BUSINESS CODE is a unique code that represents the Line of
+      Business.
+    expr: LOB_CD
+    data_type: string
+    synonyms:
+    - lob
+    - line_of_business
+    is_enum: true
+    sample_values:
+    - MCM003
+    - MCM004
+    - MCM006
+  - name: lob_description
+    description: LINE OF BUSINESS SHORT DESCRIPTION is the short description of the
+      Line of Business Code.
+    expr: LOB_SHRT_DESC
+    data_type: string
+    sample_values:
+    - Commercial
+    - Medicaid
+    - Medicare
+  - name: mbu_chartfield
+    description: MARKETING BUSINESS UNIT CHARTFIELD CODE is a code which represents
+      how products are marketed.
+    expr: MBU_CF_CD
+    data_type: string
+    synonyms:
+    - mbu
+    - marketing_unit
+  - name: service_area_state
+    description: SERVICE AREA STATE SHORT DESCRIPTION is the description of the Service
+      Area State Code.
+    expr: SRVCAREA_ST_SHRT_DESC
+    data_type: string
+    synonyms:
+    - state
+    - service_state
+    sample_values:
+    - CA
+    - CO
+    - CT
+    - FL
+    - GA
+    - IN
+    - KY
+    - MD
+    - ME
+    - MO
+    - NH
+    - NV
+    - NY
+    - OH
+    - TX
+    - VA
+    - WA
+    - WI
+    - XX
+  - name: state_name
+    description: STATE NAME is the full name of the state.
+    expr: ST_NM
+    data_type: string
+    synonyms:
+    - state_full_name
+    sample_values:
+    - California
+    - Colorado
+    - Connecticut
+    - Florida
+    - Georgia
+    - Indiana
+    - Kentucky
+    - Maine
+    - Maryland
+    - Missouri
+    - Nevada
+    - New Hampshire
+    - New York
+    - Ohio
+    - State Not Mapped
+    - Texas
+    - Virginia
+    - Washington
+    - Wisconsin
+  - name: product_code
+    description: PRODUCT CODE is a unique code that represents the Products.
+    expr: PROD_CD
+    data_type: string
+    synonyms:
+    - product
+    sample_values:
+    - PM0172
+    - PM0173
+    - PM0176
+    - PM0330
+    - PM3561
+    - PM4559
+  - name: product_description
+    description: PRODUCT SHORT DESCRIPTION of the product code.
+    expr: PROD_SHRT_DESC
+    data_type: string
+    synonyms:
+    - product_desc
+    sample_values:
+    - Commercial Med Supp
+    - EPO
+    - FFS
+    - HMO
+    - POS
+    - PPO
+  - name: funding_chartfield
+    description: RESTATED FUNDING CHARTFIELD CODE is a code which represents how a
+      Product's claims are funded.
+    expr: RSTTD_FUNDG_CF_CD
+    data_type: string
+    synonyms:
+    - funding_code
+    - funding
+    sample_values:
+    - '10'
+    - '14'
+    - 1E
+    - 1P
+    - '20'
+    - '26'
+    - '75'
+    - '90'
+    - DD
+  - name: funding_type_description
+    description: FUNDING CHARTFIELD TYPE SHORT DESCRIPTION is the short description
+      for funding type.
+    expr: FUNDG_CF_TYPE_SHRT_DESC
+    data_type: string
+    synonyms:
+    - funding_type
+    - funding_desc
+    sample_values:
+    - Alternate Funded
+    - Fully Insured
+    - Funding Default
+  - name: mpr_indicator
+    description: MPR INDICATOR.
+    expr: MPR_IND
+    data_type: string
+    synonyms:
+    - mpr_ind
+    is_enum: true
+    sample_values:
+    - N
+    - Y
+  - name: snap_month
+    description: SNAP YEAR MONTH NUMBER reflects the YYYYMM of the month end for which
+      the data is produced.
+    expr: SNAP_YEAR_MNTH_NBR
+    data_type: number
+    synonyms:
+    - snap_date
+    - snapshot_month
+    sample_values:
+    - '202604'
+  time_dimensions:
+  - name: incurred_month
+    description: It is the four digit Julian year and two digit month of the Analytic
+      Incurred Date.
+    expr: INCRD_YEAR_MNTH_NBR
+    data_type: number
+    synonyms:
+    - incurred_date
+    - service_month
+  facts:
+  - name: member_count
+    description: Count of members
+    expr: ACTL_MBR_CNT
+    data_type: number
+    synonyms:
+    - members
+    - member_months
+  metrics:
+  - name: membership.total_members
+    description: Total member count
+    expr: SUM({membership.member_count})
+  - name: membership.avg_members
+    description: Average member count
+    expr: AVG({membership.member_count})
+relationships:
+- name: expense_to_membership
+  description: Join expense to membership by LOB and time period
+  left_table: expense_detail
+  right_table: membership
+  relationship_columns:
+  - left_column: LOB_CD
+    right_column: LOB_CD
+  - left_column: MBU_CF_CD
+    right_column: MBU_CF_CD
+  - left_column: SRVCAREA_ST_SHRT_DESC
+    right_column: SRVCAREA_ST_SHRT_DESC
+  - left_column: PROD_CD
+    right_column: PROD_CD
+  - left_column: SNAP_YEAR_MNTH_NBR
+    right_column: SNAP_YEAR_MNTH_NBR
+  - left_column: ANLYTC_INCRD_YEAR_MNTH_NBR
+    right_column: INCRD_YEAR_MNTH_NBR
+metrics:
+- name: allowed_pmpm
+  description: Allowed amount per member per month (expense / membership)
+  expr: SUM({expense_detail.allowed_amount}) / NULLIF(SUM({membership.member_count}),
+    0)
+- name: paid_pmpm
+  description: Paid amount per member per month (expense / membership)
+  expr: SUM({expense_detail.paid_amount}) / NULLIF(SUM({membership.member_count}),
+    0)
+- name: admits_per_thousand
+  description: Admissions per 1,000 members
+  expr: (SUM({expense_detail.admit_count}) / NULLIF(SUM({membership.member_count}),
+    0)) * 1000
+  synonyms:
+  - admits_per_k
+  - admits_per_1k
+  - admission_rate
+filters:
+- name: commercial_only
+  description: Filter for Commercial line of business only
+  synonyms:
+  - commercial
+  - comm
+  expr: '{expense_detail.lob_description} = ''Commercial'''
+- name: with_authorization
+  description: Filter for claims that have an authorization
+  synonyms:
+  - auth_claims
+  - authorized
+  expr: '{expense_detail.authorization_key} > 0'
+- name: in_network_only
+  description: Filter for in-network claims only
+  synonyms:
+  - in_network
+  - inn
+  expr: '{expense_detail.in_network_indicator} = ''Y'''
+- name: er_admits_only
+  description: Filter for ER admission claims only
+  synonyms:
+  - er_admits
+  - emergency_admits
+  expr: '{expense_detail.er_admit_indicator} = ''Y'''
+- name: high_cost_claims
+  description: Filter for high-cost claims (allowed amount > $50,000)
+  synonyms:
+  - high_cost
+  - expensive_claims
+  expr: '{expense_detail.allowed_amount} > 50000'
+- name: recent_12_months
+  description: Filter for most recent 12 months of data
+  synonyms:
+  - last_12_months
+  - trailing_12_months
+  - ttm
+  expr: '{expense_detail.incurred_month} >= CAST(TO_CHAR(DATEADD(month, -12, CURRENT_DATE()),
+    ''YYYYMM'') AS NUMBER)'
+analysis_modes:
+- name: cost_change_investigation_over_time_window
+  description: 'Explains how a selected cost metric changed between two comparable
+    time periods. Its purpose is to identify: 1. what metric changed, 2. how much
+    it changed, 3. which dimensions contributed most to the change, 4. and which drill-down
+    path best localizes the change.
+
+    This mode compares a prior period and a current period over the same metric, under
+    a user-defined scope (for example CPT code, state, line of business, product,
+    facility type, or other filters). It ranks candidate dimensions by contribution
+    to the metric delta and generates SQL for iterative drill-down.
+
+    This mode answers "where did the change happen?" and "which segments explain most
+    of the change?" It does not prove clinical or contractual root cause.'
+  drill_metric:
+  - expense_detail.total_paid
+  explainer_metrics:
+  - expense_detail.claim_count
+  - expense_detail.total_admissions
+  - expense_detail.avg_paid_per_admit
+  - paid_pmpm
+  save_parquet: false
+  disable_summary_creation: true
+  generate_recommendations: false
+  interaction_matrix:
+    enabled: true
+    trigger_rules:
+      interaction_stage:
+        min_abs_net_delta: 1000
+        min_drill_path_depth: 2
+        run_when_repeated_delta_ratio: 0.95
+        run_when_low_volume: true
+      clinical_stage:
+        require_selected_operational_cells: true
+        min_selected_operational_positive_delta: 1000
+    categories:
+      operational:
+        dimensions:
+        - pa_required_code
+        - product_description
+        - facility_type
+        carry_through_dimensions:
+        - service_area_state
+        - lob_description
+      clinical:
+        dimensions:
+        - primary_diagnosis_name
+        - hcc_medium
+    selection_rules:
+      operational:
+        min_positive_delta: 1000
+        min_share_of_positive_delta: 0.05
+        max_cumulative_share_of_positive_delta: 0.80
+        max_k: 5
+        always_include_min_share_of_net_delta: 0.40
+      clinical:
+        min_positive_delta: 500
+        min_share_of_positive_delta: 0.05
+        max_cumulative_share_of_positive_delta: 0.90
+        max_k: 10
+        include_offsets: true
+        max_offset_k: 3
+    preview_limits:
+      max_operational_cells: 5
+      max_clinical_cells: 10
+      max_recommendations: 5
+    artifact_limits:
+      max_rows_json_preview: 1000
+  period:
+    rolling_time_dimension: expense_detail.incurred_month
+    current_period:
+      start_time: null
+      end_time: null
+    previous_period:
+      start_time: null
+      end_time: null
+  drill_dimensions:
+  - service_area_state
+  - hcc_medium
+  - rendering_provider_name
+  - facility_type
+  - product_description
+  - primary_diagnosis_name
+  - pa_required_code
+  - er_admit_indicator
+  exclude_if_filtered: true
+  stop_rules:
+    max_depth: 10
+    top_k_per_level: 5
+    min_abs_delta: 1000
+    min_row_count: 1
+    min_contribution_pct: 0.05
+    min_incremental_gain_pct: 0.05
+

@@ -1,0 +1,2364 @@
+name: COC_ECAP_CHAT
+tables:
+  - name: DDIM_APEAL_STTS_CUBE
+    base_table:
+      database: D01_COC
+      schema: COC_NOPHI
+      table: DDIM_APEAL_STTS_CUBE
+    dimensions:
+      - name: APEAL_STTS_CD
+        expr: APEAL_STTS_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: APEAL_STTS_DESC
+        expr: APEAL_STTS_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: APEAL_STTS_GRP_CD
+        expr: APEAL_STTS_GRP_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: APEAL_STTS_GRP_DESC
+        expr: APEAL_STTS_GRP_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: APEAL_STTS_GRP_NM
+        expr: APEAL_STTS_GRP_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: APEAL_STTS_NM
+        expr: APEAL_STTS_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: EDL_EXTRNL_LOAD_CD
+        expr: EDL_EXTRNL_LOAD_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_LOB_CD
+        expr: EDL_LOB_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_RUN_ID
+        expr: EDL_RUN_ID
+        data_type: VARCHAR(255) COLLATE 'utf8'
+      - name: EDL_SCRTY_LVL_CD
+        expr: EDL_SCRTY_LVL_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_SOR_CD
+        expr: EDL_SOR_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: SNAP_YEAR_MNTH_NBR
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+    time_dimensions:
+      - name: EDL_CREAT_DTM
+        expr: EDL_CREAT_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_INCRMNTL_LOAD_DTM
+        expr: EDL_INCRMNTL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_LOAD_DTM
+        expr: EDL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: KF_TMS
+        expr: KF_TMS
+        data_type: TIMESTAMP_NTZ(9)
+    unique_keys:
+      - columns:
+          - APEAL_STTS_CD
+          - SNAP_YEAR_MNTH_NBR
+  - name: DDIM_AUTHRZN_RVW_STTS_RSN_CUBE
+    base_table:
+      database: D01_COC
+      schema: COC_NOPHI
+      table: DDIM_AUTHRZN_RVW_STTS_RSN_CUBE
+    dimensions:
+      - name: AUTHRZN_RVW_STTS_RSN_CD
+        expr: AUTHRZN_RVW_STTS_RSN_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: AUTHRZN_RVW_STTS_RSN_DESC
+        expr: AUTHRZN_RVW_STTS_RSN_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: AUTHRZN_RVW_STTS_RSN_GRP_CD
+        expr: AUTHRZN_RVW_STTS_RSN_GRP_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: AUTHRZN_RVW_STTS_RSN_GRP_DESC
+        expr: AUTHRZN_RVW_STTS_RSN_GRP_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: AUTHRZN_RVW_STTS_RSN_GRP_NM
+        expr: AUTHRZN_RVW_STTS_RSN_GRP_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: AUTHRZN_RVW_STTS_RSN_NM
+        expr: AUTHRZN_RVW_STTS_RSN_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: EDL_EXTRNL_LOAD_CD
+        expr: EDL_EXTRNL_LOAD_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_LOB_CD
+        expr: EDL_LOB_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_RUN_ID
+        expr: EDL_RUN_ID
+        data_type: VARCHAR(255) COLLATE 'utf8'
+      - name: EDL_SCRTY_LVL_CD
+        expr: EDL_SCRTY_LVL_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_SOR_CD
+        expr: EDL_SOR_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: SNAP_YEAR_MNTH_NBR
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+    time_dimensions:
+      - name: EDL_CREAT_DTM
+        expr: EDL_CREAT_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_INCRMNTL_LOAD_DTM
+        expr: EDL_INCRMNTL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_LOAD_DTM
+        expr: EDL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: KF_TMS
+        expr: KF_TMS
+        data_type: TIMESTAMP_NTZ(9)
+    unique_keys:
+      - columns:
+          - AUTHRZN_RVW_STTS_RSN_CD
+  - name: DDIM_BNFT_PLAN_CUBE
+    description: The table contains records of benefit plans and their associated product classifications. Each record represents a snapshot of a benefit plan at a point in time, capturing details about the plan's line of business, product hierarchy (including product line, segment, and sub-segment), membership aggregation, and benefit class categorizations such as metal tier and certification type.
+    base_table:
+      database: D01_COC
+      schema: COC_NOPHI
+      table: DDIM_BNFT_PLAN_CUBE
+    dimensions:
+      - name: BNFT_CLS_CD
+        description: The benefit class code.
+        expr: BNFT_CLS_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: BNFT_CLS_SHRT_DESC
+        description: Short description of the benefit class.
+        expr: BNFT_CLS_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: BNFT_PLAN_CD
+        description: The benefit plan code.
+        expr: BNFT_PLAN_CD
+        data_type: VARCHAR(12) COLLATE 'utf8'
+      - name: BNFT_PLAN_NM
+        description: The name of the benefit plan.
+        expr: BNFT_PLAN_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: CDHP_SHRT_DESC
+        description: Short description of a Consumer-Directed Health Plan (CDHP).
+        expr: CDHP_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: CERTFN_SHRT_DESC
+        description: A short description of the certification.
+        expr: CERTFN_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: DTL_PROD_SHRT_DESC
+        description: Short description of the detailed product.
+        expr: DTL_PROD_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCR_SHRT_DESC
+        description: Short description of the Healthcare Reform (HCR) benefit plan.
+        expr: HCR_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: LOB_CD
+        description: The line of business code.
+        expr: LOB_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: LOB_SHRT_DESC
+        description: Short description of the line of business (LOB).
+        expr: LOB_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MBRSHP_AGRGT_CD
+        description: A code representing the membership aggregate category.
+        expr: MBRSHP_AGRGT_CD
+        data_type: VARCHAR(4) COLLATE 'utf8'
+      - name: MBRSHP_AGRGT_NM
+        description: The aggregate membership name associated with a benefit plan.
+        expr: MBRSHP_AGRGT_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: METL_SHRT_DESC
+        description: Short description of the metal tier level associated with a benefit plan.
+        expr: METL_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: PROD_LINE_SHRT_DESC
+        description: Short description of the product line.
+        expr: PROD_LINE_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: PROD_SGMNT_CD
+        description: A short code identifying the product segment.
+        expr: PROD_SGMNT_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: PROD_SGMNT_SHRT_DESC
+        description: Short description of the product segment.
+        expr: PROD_SGMNT_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: PROD_SHRT_DESC
+        description: The short description of the product.
+        expr: PROD_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: PROD_SUB_SGMNT_CD
+        description: A code identifying the product sub-segment classification.
+        expr: PROD_SUB_SGMNT_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: PROD_SUB_SGMNT_SHRT_DESC
+        description: Short description of the product sub-segment.
+        expr: PROD_SUB_SGMNT_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: SUB_PROD_CD
+        description: The sub-product code identifying a specific subdivision or variant within a broader product category.
+        expr: SUB_PROD_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: SUB_PROD_SHRT_DESC
+        description: Short description of the sub-product.
+        expr: SUB_PROD_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+    facts:
+      - name: AUDT_JOB_CNTRL_ID
+        description: The unique identifier for the audit job control process associated with the record.
+        expr: AUDT_JOB_CNTRL_ID
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: BNFT_PLAN_KEY
+        description: Surrogate key uniquely identifying a benefit plan record in the dimension table.
+        expr: BNFT_PLAN_KEY
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: SNAP_YEAR_MNTH_NBR
+        description: The year and month number associated with a snapshot, typically formatted as YYYYMM.
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+  - name: DDIM_DIAG_CUBE
+    base_table:
+      database: D01_COC
+      schema: COC_NOPHI
+      table: DDIM_DIAG_CUBE
+    dimensions:
+      - name: DIAG_CCS_CLS_CD
+        expr: DIAG_CCS_CLS_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: DIAG_CCS_CLS_NM
+        expr: DIAG_CCS_CLS_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: DIAG_CCS_GRP_CD
+        expr: DIAG_CCS_GRP_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: DIAG_CCS_GRP_NM
+        expr: DIAG_CCS_GRP_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: DIAG_CD
+        expr: DIAG_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: DIAG_CLS_NM
+        expr: DIAG_CLS_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: DIAG_DESC
+        expr: DIAG_DESC
+        data_type: VARCHAR(2000) COLLATE 'utf8'
+      - name: DIAG_GRP_NM
+        expr: DIAG_GRP_NM
+        data_type: VARCHAR(165) COLLATE 'utf8'
+      - name: DIAG_LONG_NM
+        expr: DIAG_LONG_NM
+        data_type: VARCHAR(255) COLLATE 'utf8'
+      - name: DIAG_SHRT_NM
+        expr: DIAG_SHRT_NM
+        data_type: VARCHAR(60) COLLATE 'utf8'
+      - name: DIAG_SUBCLS_NM
+        expr: DIAG_SUBCLS_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: DIAG_SUBGRP_NM
+        expr: DIAG_SUBGRP_NM
+        data_type: VARCHAR(165) COLLATE 'utf8'
+      - name: EDM_DATA_GRP_NBR
+        expr: EDM_DATA_GRP_NBR
+        data_type: NUMBER(38,0)
+      - name: EDM_DIAG_KEY
+        expr: EDM_DIAG_KEY
+        data_type: NUMBER(38,0)
+      - name: FLU_IND
+        expr: FLU_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: ICD_VRSN_CD
+        expr: ICD_VRSN_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: ICD_VRSN_NM
+        expr: ICD_VRSN_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: LOB_PARTN_ID
+        expr: LOB_PARTN_ID
+        data_type: NUMBER(38,0)
+      - name: PERD_IND
+        expr: PERD_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: RPTG_DIAG_CD
+        expr: RPTG_DIAG_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: SNAP_YEAR_MNTH_NBR
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+  - name: DDIM_DRG_CUBE
+    base_table:
+      database: T01_COC
+      schema: COC_NOPHI
+      table: DDIM_DRG_CUBE
+    dimensions:
+      - name: AUDT_JOB_CNTRL_ID
+        expr: AUDT_JOB_CNTRL_ID
+        data_type: NUMBER(38,0)
+      - name: DRG_CD
+        expr: DRG_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: DRG_EXST_IND
+        expr: DRG_EXST_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: DRG_NM
+        expr: DRG_NM
+        data_type: VARCHAR(200) COLLATE 'utf8'
+      - name: DRG_TYPE_CD
+        expr: DRG_TYPE_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: DRG_VRSN_NBR
+        expr: DRG_VRSN_NBR
+        data_type: NUMBER(38,0)
+      - name: EDM_DRG_KEY
+        expr: EDM_DRG_KEY
+        data_type: NUMBER(38,0)
+      - name: MJR_DIAG_CTGRY_CD
+        expr: MJR_DIAG_CTGRY_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: MJR_DIAG_CTGRY_NM
+        expr: MJR_DIAG_CTGRY_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MNR_DRG_CTGRY_CD
+        expr: MNR_DRG_CTGRY_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: MNR_DRG_CTGRY_NM
+        expr: MNR_DRG_CTGRY_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: SNAP_YEAR_MNTH_NBR
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+      - name: SVOI_CD
+        expr: SVOI_CD
+        data_type: VARCHAR(2) COLLATE 'utf8'
+      - name: SVOI_NM
+        expr: SVOI_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+    time_dimensions:
+      - name: DRG_EFCTV_DT
+        expr: DRG_EFCTV_DT
+        data_type: DATE
+    facts:
+      - name: DRG_AMLOS_NBR
+        expr: DRG_AMLOS_NBR
+        data_type: NUMBER(5,2)
+        access_modifier: public_access
+      - name: DRG_GMLOS_NBR
+        expr: DRG_GMLOS_NBR
+        data_type: NUMBER(5,2)
+        access_modifier: public_access
+      - name: DRG_WT_NBR
+        expr: DRG_WT_NBR
+        data_type: NUMBER(18,6)
+        access_modifier: public_access
+      - name: ESTMTD_MEDCR_REIMBMNT_AMT
+        expr: ESTMTD_MEDCR_REIMBMNT_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+  - name: DDIM_HCC_CUBE
+    base_table:
+      database: D01_COC
+      schema: COC_NOPHI
+      table: DDIM_HCC_CUBE
+    dimensions:
+      - name: AUDT_JOB_CNTRL_ID
+        expr: AUDT_JOB_CNTRL_ID
+        data_type: NUMBER(38,0)
+      - name: EDM_DATA_GRP_NBR
+        expr: EDM_DATA_GRP_NBR
+        data_type: NUMBER(38,0)
+      - name: HCC_CD
+        expr: HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_CMRCL_MNGMNT_HIGH_CD
+        expr: HCC_CMRCL_MNGMNT_HIGH_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_CMRCL_MNGMNT_HIGH_LONG_DESC
+        expr: HCC_CMRCL_MNGMNT_HIGH_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_CMRCL_MNGMNT_HIGH_SHRT_DESC
+        expr: HCC_CMRCL_MNGMNT_HIGH_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_CMRCL_MNGMNT_LOW_CD
+        expr: HCC_CMRCL_MNGMNT_LOW_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_CMRCL_MNGMNT_LOW_LONG_DESC
+        expr: HCC_CMRCL_MNGMNT_LOW_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_CMRCL_MNGMNT_LOW_SHRT_DESC
+        expr: HCC_CMRCL_MNGMNT_LOW_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_CMRCL_MNGMNT_MEDM_CD
+        expr: HCC_CMRCL_MNGMNT_MEDM_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_CMRCL_MNGMNT_MEDM_LONG_DESC
+        expr: HCC_CMRCL_MNGMNT_MEDM_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_CMRCL_MNGMNT_MEDM_SHRT_DESC
+        expr: HCC_CMRCL_MNGMNT_MEDM_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_KEY
+        expr: HCC_KEY
+        data_type: NUMBER(38,0)
+      - name: HCC_LONG_DESC
+        expr: HCC_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_BH_HIGH_CD
+        expr: HCC_MDCD_BH_HIGH_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_BH_HIGH_LONG_DESC
+        expr: HCC_MDCD_BH_HIGH_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_BH_HIGH_SHRT_DESC
+        expr: HCC_MDCD_BH_HIGH_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_BH_LOW_CD
+        expr: HCC_MDCD_BH_LOW_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_BH_LOW_LONG_DESC
+        expr: HCC_MDCD_BH_LOW_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_BH_LOW_SHRT_DESC
+        expr: HCC_MDCD_BH_LOW_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_LTSS_HIGH_CD
+        expr: HCC_MDCD_LTSS_HIGH_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_LTSS_HIGH_LONG_DESC
+        expr: HCC_MDCD_LTSS_HIGH_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_LTSS_HIGH_SHRT_DESC
+        expr: HCC_MDCD_LTSS_HIGH_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_LTSS_LOW_CD
+        expr: HCC_MDCD_LTSS_LOW_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_LTSS_LOW_LONG_DESC
+        expr: HCC_MDCD_LTSS_LOW_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_LTSS_LOW_SHRT_DESC
+        expr: HCC_MDCD_LTSS_LOW_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_LTSS_MEDM_CD
+        expr: HCC_MDCD_LTSS_MEDM_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_LTSS_MEDM_LONG_DESC
+        expr: HCC_MDCD_LTSS_MEDM_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_LTSS_MEDM_SHRT_DESC
+        expr: HCC_MDCD_LTSS_MEDM_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_MNGMNT_HIGH_CD
+        expr: HCC_MDCD_MNGMNT_HIGH_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_MNGMNT_HIGH_LONG_DESC
+        expr: HCC_MDCD_MNGMNT_HIGH_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_MNGMNT_HIGH_SHRT_DESC
+        expr: HCC_MDCD_MNGMNT_HIGH_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_MNGMNT_LOW_CD
+        expr: HCC_MDCD_MNGMNT_LOW_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_MNGMNT_LOW_LONG_DESC
+        expr: HCC_MDCD_MNGMNT_LOW_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_MNGMNT_LOW_SHRT_DESC
+        expr: HCC_MDCD_MNGMNT_LOW_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_PROJN_CD
+        expr: HCC_MDCD_PROJN_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_PROJN_LONG_DESC
+        expr: HCC_MDCD_PROJN_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_PROJN_SHRT_DESC
+        expr: HCC_MDCD_PROJN_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_RUN_RT_HIGH_CD
+        expr: HCC_MDCD_RUN_RT_HIGH_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_RUN_RT_HIGH_LONG_DESC
+        expr: HCC_MDCD_RUN_RT_HIGH_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_RUN_RT_HIGH_SHRT_DESC
+        expr: HCC_MDCD_RUN_RT_HIGH_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_RUN_RT_LOW_CD
+        expr: HCC_MDCD_RUN_RT_LOW_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_RUN_RT_LOW_LONG_DESC
+        expr: HCC_MDCD_RUN_RT_LOW_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_RUN_RT_LOW_SHRT_DESC
+        expr: HCC_MDCD_RUN_RT_LOW_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_SMRY_CD
+        expr: HCC_MDCD_SMRY_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_SMRY_LONG_DESC
+        expr: HCC_MDCD_SMRY_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_SMRY_SHRT_DESC
+        expr: HCC_MDCD_SMRY_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_TRND_HIGH_CD
+        expr: HCC_MDCD_TRND_HIGH_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_TRND_HIGH_LONG_DESC
+        expr: HCC_MDCD_TRND_HIGH_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_TRND_HIGH_SHRT_DESC
+        expr: HCC_MDCD_TRND_HIGH_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MDCD_TRND_LOW_CD
+        expr: HCC_MDCD_TRND_LOW_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MDCD_TRND_LOW_LONG_DESC
+        expr: HCC_MDCD_TRND_LOW_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MDCD_TRND_LOW_SHRT_DESC
+        expr: HCC_MDCD_TRND_LOW_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_CD
+        expr: HCC_MEDCR_BID_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_HIGH_CD
+        expr: HCC_MEDCR_BID_HIGH_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_HIGH_LONG_DESC
+        expr: HCC_MEDCR_BID_HIGH_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_HIGH_SHRT_DESC
+        expr: HCC_MEDCR_BID_HIGH_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_LONG_DESC
+        expr: HCC_MEDCR_BID_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_LOW_CD
+        expr: HCC_MEDCR_BID_LOW_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_LOW_LONG_DESC
+        expr: HCC_MEDCR_BID_LOW_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_LOW_SHRT_DESC
+        expr: HCC_MEDCR_BID_LOW_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_MEDM_CD
+        expr: HCC_MEDCR_BID_MEDM_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_MEDM_LONG_DESC
+        expr: HCC_MEDCR_BID_MEDM_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_MEDM_SHRT_DESC
+        expr: HCC_MEDCR_BID_MEDM_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_MEDCR_BID_SHRT_DESC
+        expr: HCC_MEDCR_BID_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_SHRT_DESC
+        expr: HCC_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_TYPE_CD
+        expr: HCC_TYPE_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: HCC_TYPE_NM
+        expr: HCC_TYPE_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: SNAP_YEAR_MNTH_NBR
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+      - name: TRND_HIGH_CLS_HCC_CD
+        expr: TRND_HIGH_CLS_HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: TRND_HIGH_CLS_HCC_SHRT_DESC
+        expr: TRND_HIGH_CLS_HCC_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: TRND_HIGH_GRP_HCC_CD
+        expr: TRND_HIGH_GRP_HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: TRND_HIGH_GRP_HCC_LONG_DESC
+        expr: TRND_HIGH_GRP_HCC_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: TRND_HIGH_GRP_HCC_SHRT_DESC
+        expr: TRND_HIGH_GRP_HCC_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: TRND_LOW_CLS_HCC_CD
+        expr: TRND_LOW_CLS_HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: TRND_LOW_CLS_HCC_SHRT_DESC
+        expr: TRND_LOW_CLS_HCC_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: TRND_LOW_GRP_HCC_CD
+        expr: TRND_LOW_GRP_HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: TRND_LOW_GRP_HCC_SHRT_DESC
+        expr: TRND_LOW_GRP_HCC_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: TRND_MEDM_CLS_HCC_CD
+        expr: TRND_MEDM_CLS_HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: TRND_MEDM_CLS_HCC_SHRT_DESC
+        expr: TRND_MEDM_CLS_HCC_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: TRND_MEDM_GRP_HCC_CD
+        expr: TRND_MEDM_GRP_HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: TRND_MEDM_GRP_HCC_SHRT_DESC
+        expr: TRND_MEDM_GRP_HCC_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: TRND_SMRY_HCC_CD
+        expr: TRND_SMRY_HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: TRND_SMRY_HCC_SHRT_DESC
+        expr: TRND_SMRY_HCC_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+  - name: DDIM_MBU_CF
+    description: The table contains records of business unit cost center classifications and their associated attributes. Each record captures dimensional details including brand type, product line, service area state, and line of business, along with their corresponding codes and descriptions at varying levels of detail.
+    base_table:
+      database: D01_COC
+      schema: COC_NOPHI
+      table: DDIM_MBU_CF
+    dimensions:
+      - name: LOB_CD
+        description: A short code identifying the line of business.
+        expr: LOB_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: LOB_LONG_DESC
+        description: The long-form description of the line of business.
+        expr: LOB_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: LOB_SHRT_DESC
+        description: Short description of the line of business.
+        expr: LOB_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MBU_BRND_TYPE_CD
+        description: A short code identifying the brand type of the member business unit.
+        expr: MBU_BRND_TYPE_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: MBU_BRND_TYPE_LONG_DESC
+        description: The long-form description of the member business unit brand type.
+        expr: MBU_BRND_TYPE_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MBU_BRND_TYPE_SHRT_DESC
+        description: The short description of the member business unit brand type.
+        expr: MBU_BRND_TYPE_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MBU_CF_CD
+        description: A six-character code identifying a member business unit cost function.
+        expr: MBU_CF_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: MBU_CF_NM
+        description: The name of the member business unit cost center.
+        expr: MBU_CF_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MBU_CLS_CD
+        description: The classification code assigned to the member unit (MBU).
+        expr: MBU_CLS_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: MBU_CLS_LONG_DESC
+        description: The long descriptive name or label for a member business unit classification.
+        expr: MBU_CLS_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MBU_CLS_SHRT_DESC
+        description: The short description of the member unit classification.
+        expr: MBU_CLS_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MBU_SUB_CLS_CD
+        description: The sub-classification code for the Member Business Unit (MBU).
+        expr: MBU_SUB_CLS_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: MBU_SUB_CLS_LONG_DESC
+        description: The long descriptive name of the member business unit sub-classification.
+        expr: MBU_SUB_CLS_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MBU_SUB_CLS_SHRT_DESC
+        description: The short description of the member business unit sub-classification.
+        expr: MBU_SUB_CLS_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MBU_TYPE_CD
+        description: A short code identifying the type of member business unit.
+        expr: MBU_TYPE_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: MBU_TYPE_LONG_DESC
+        description: The full-length descriptive label for the member business unit type.
+        expr: MBU_TYPE_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MBU_TYPE_SHRT_DESC
+        description: Short description of the member business unit type.
+        expr: MBU_TYPE_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: PROD_LINE_CD
+        description: A short code identifying the product line.
+        expr: PROD_LINE_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: PROD_LINE_LONG_DESC
+        description: The full-length descriptive name of a product line.
+        expr: PROD_LINE_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: PROD_LINE_SHRT_DESC
+        description: The short description of the product line.
+        expr: PROD_LINE_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: SRVCAREA_ST_CD
+        description: The two-letter state code associated with the service area.
+        expr: SRVCAREA_ST_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: SRVCAREA_ST_LONG_DESC
+        description: The full descriptive name of the service area state.
+        expr: SRVCAREA_ST_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: SRVCAREA_ST_SHRT_DESC
+        description: The short description of the service area state.
+        expr: SRVCAREA_ST_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+    facts:
+      - name: AUDT_JOB_CNTRL_ID
+        description: The unique identifier for the audit job control record associated with the row.
+        expr: AUDT_JOB_CNTRL_ID
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: EDM_DATA_GRP_NBR
+        description: The Enterprise Data Management (EDM) data group number.
+        expr: EDM_DATA_GRP_NBR
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+      - name: SNAP_YEAR_MNTH_NBR
+        description: The year and month number associated with the snapshot period.
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+        access_modifier: public_access
+  - name: DDIM_PROV_CUBE
+    base_table:
+      database: T01_COC
+      schema: COC_NOPHI
+      table: DDIM_PROV_CUBE
+    dimensions:
+      - name: EDL_EXTRNL_LOAD_CD
+        expr: EDL_EXTRNL_LOAD_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_LOB_CD
+        expr: EDL_LOB_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_RUN_ID
+        expr: EDL_RUN_ID
+        data_type: VARCHAR(255) COLLATE 'utf8'
+      - name: EDL_SCRTY_LVL_CD
+        expr: EDL_SCRTY_LVL_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_SOR_CD
+        expr: EDL_SOR_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: NPI
+        expr: NPI
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: PARNT_PROV_ACCT_ID
+        expr: PARNT_PROV_ACCT_ID
+        data_type: NUMBER(38,0)
+      - name: PARNT_PROV_NM
+        expr: PARNT_PROV_NM
+        data_type: VARCHAR(165) COLLATE 'utf8'
+      - name: PARNT_PROV_ST_CD
+        expr: PARNT_PROV_ST_CD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: PARNT_PROV_ST_NM
+        expr: PARNT_PROV_ST_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: PARNT_PROV_TIER_NBR
+        expr: PARNT_PROV_TIER_NBR
+        data_type: NUMBER(38,0)
+      - name: PROV_ACCT_ID
+        expr: PROV_ACCT_ID
+        data_type: NUMBER(38,0)
+      - name: PROV_BH_IND
+        expr: PROV_BH_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: PROV_COHRT_NM
+        expr: PROV_COHRT_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: PROV_KEY
+        expr: PROV_KEY
+        data_type: NUMBER(38,0)
+      - name: PROV_ST_CD
+        expr: PROV_ST_CD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: PROV_ST_NM
+        expr: PROV_ST_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: PROV_TIER_NBR
+        expr: PROV_TIER_NBR
+        data_type: NUMBER(38,0)
+      - name: PROV_TYPE_NM
+        expr: PROV_TYPE_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: TAX_ID
+        expr: TAX_ID
+        data_type: VARCHAR(15)
+      - name: TAX_ID_CERTFD_IND
+        expr: TAX_ID_CERTFD_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: TAX_NM
+        expr: TAX_NM
+        data_type: VARCHAR(165) COLLATE 'utf8'
+    time_dimensions:
+      - name: EDL_CREAT_DTM
+        expr: EDL_CREAT_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_INCRMNTL_LOAD_DTM
+        expr: EDL_INCRMNTL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_LOAD_DTM
+        expr: EDL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: KF_TMS
+        expr: KF_TMS
+        data_type: TIMESTAMP_NTZ(9)
+      - name: PROV_EFCTV_DT
+        expr: PROV_EFCTV_DT
+        data_type: DATE
+      - name: PROV_TRMNTN_DT
+        expr: PROV_TRMNTN_DT
+        data_type: DATE
+    primary_key:
+      columns:
+        - PROV_KEY
+  - name: DDIM_RENTY_ENHNCD_CUBE
+    base_table:
+      database: T01_COC
+      schema: COC_NOPHI
+      table: DDIM_RENTY_ENHNCD_CUBE
+    dimensions:
+      - name: DLGTN_CLS_CD
+        expr: DLGTN_CLS_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: DLGTN_CLS_DESC
+        expr: DLGTN_CLS_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: DLGTN_CLS_NM
+        expr: DLGTN_CLS_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: DLGTN_GRP_CD
+        expr: DLGTN_GRP_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: DLGTN_GRP_DESC
+        expr: DLGTN_GRP_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: DLGTN_GRP_NM
+        expr: DLGTN_GRP_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: DLGTN_RENTY_PGM_CD
+        expr: DLGTN_RENTY_PGM_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: DLGTN_RENTY_PGM_DESC
+        expr: DLGTN_RENTY_PGM_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: DLGTN_RENTY_PGM_NM
+        expr: DLGTN_RENTY_PGM_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: DLGTN_TYPE_CD
+        expr: DLGTN_TYPE_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: DLGTN_TYPE_DESC
+        expr: DLGTN_TYPE_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: DLGTN_TYPE_NM
+        expr: DLGTN_TYPE_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: EDL_EXTRNL_LOAD_CD
+        expr: EDL_EXTRNL_LOAD_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_LOB_CD
+        expr: EDL_LOB_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_RUN_ID
+        expr: EDL_RUN_ID
+        data_type: VARCHAR(255) COLLATE 'utf8'
+      - name: EDL_SCRTY_LVL_CD
+        expr: EDL_SCRTY_LVL_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_SOR_CD
+        expr: EDL_SOR_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: MC_RENTY_PGM_CD
+        expr: MC_RENTY_PGM_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: MC_RENTY_PGM_DESC
+        expr: MC_RENTY_PGM_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MC_RENTY_PGM_NM
+        expr: MC_RENTY_PGM_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MC_TYPE_CD
+        expr: MC_TYPE_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: MC_TYPE_DESC
+        expr: MC_TYPE_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MC_TYPE_NM
+        expr: MC_TYPE_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: RENTY_KEY
+        expr: RENTY_KEY
+        data_type: NUMBER(38,0)
+      - name: SNAP_YEAR_MNTH_NBR
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+      - name: TRND_GRP_CD
+        expr: TRND_GRP_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: TRND_GRP_DESC
+        expr: TRND_GRP_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: TRND_GRP_NM
+        expr: TRND_GRP_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: TRND_RENTY_PGM_CD
+        expr: TRND_RENTY_PGM_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: TRND_RENTY_PGM_DESC
+        expr: TRND_RENTY_PGM_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: TRND_RENTY_PGM_NM
+        expr: TRND_RENTY_PGM_NM
+        data_type: VARCHAR(50) COLLATE 'utf8'
+    time_dimensions:
+      - name: EDL_CREAT_DTM
+        expr: EDL_CREAT_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_INCRMNTL_LOAD_DTM
+        expr: EDL_INCRMNTL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_LOAD_DTM
+        expr: EDL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: KF_TMS
+        expr: KF_TMS
+        data_type: TIMESTAMP_NTZ(9)
+  - name: DDIM_SRVCAREA_CUBE
+    base_table:
+      database: T01_COC
+      schema: COC_NOPHI
+      table: DDIM_SRVCAREA_CUBE
+    dimensions:
+      - name: AUDT_JOB_CNTRL_ID
+        expr: AUDT_JOB_CNTRL_ID
+        data_type: NUMBER(38,0)
+      - name: CMRCL_RATG_RGN_CD
+        expr: CMRCL_RATG_RGN_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: CMRCL_RATG_RGN_LONG_DESC
+        expr: CMRCL_RATG_RGN_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: CMRCL_RATG_RGN_SHRT_DESC
+        expr: CMRCL_RATG_RGN_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: CMRCL_RGN_CD
+        expr: CMRCL_RGN_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: CMRCL_RGN_LONG_DESC
+        expr: CMRCL_RGN_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: CMRCL_RGN_SHRT_DESC
+        expr: CMRCL_RGN_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: EDM_DATA_GRP_NBR
+        expr: EDM_DATA_GRP_NBR
+        data_type: NUMBER(38,0)
+      - name: MDCD_HLTH_PLAN_CD
+        expr: MDCD_HLTH_PLAN_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: MDCD_HLTH_PLAN_LONG_DESC
+        expr: MDCD_HLTH_PLAN_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MDCD_HLTH_PLAN_MNGMNT_AREA_CD
+        expr: MDCD_HLTH_PLAN_MNGMNT_AREA_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: MDCD_HLTH_PLAN_MNGMNT_AREA_LONG_DESC
+        expr: MDCD_HLTH_PLAN_MNGMNT_AREA_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MDCD_HLTH_PLAN_MNGMNT_AREA_SHRT_DESC
+        expr: MDCD_HLTH_PLAN_MNGMNT_AREA_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MDCD_HLTH_PLAN_SHRT_DESC
+        expr: MDCD_HLTH_PLAN_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MDCD_MRKT_CD
+        expr: MDCD_MRKT_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: MDCD_MRKT_LONG_DESC
+        expr: MDCD_MRKT_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MDCD_MRKT_SHRT_DESC
+        expr: MDCD_MRKT_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MDCD_RGN_CD
+        expr: MDCD_RGN_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: MDCD_RGN_LONG_DESC
+        expr: MDCD_RGN_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MDCD_RGN_SHRT_DESC
+        expr: MDCD_RGN_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MDCD_SRVC_RGN_CD
+        expr: MDCD_SRVC_RGN_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: MDCD_SRVC_RGN_LONG_DESC
+        expr: MDCD_SRVC_RGN_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MDCD_SRVC_RGN_SHRT_DESC
+        expr: MDCD_SRVC_RGN_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MDCD_SRVC_SUB_RGN_CD
+        expr: MDCD_SRVC_SUB_RGN_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: MDCD_SRVC_SUB_RGN_LONG_DESC
+        expr: MDCD_SRVC_SUB_RGN_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MDCD_SRVC_SUB_RGN_SHRT_DESC
+        expr: MDCD_SRVC_SUB_RGN_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: MEDCR_RGN_CD
+        expr: MEDCR_RGN_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: MEDCR_RGN_LONG_DESC
+        expr: MEDCR_RGN_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: MEDCR_RGN_SHRT_DESC
+        expr: MEDCR_RGN_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: SNAP_YEAR_MNTH_NBR
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+      - name: SRVCAREA_CD
+        expr: SRVCAREA_CD
+        data_type: VARCHAR(9) COLLATE 'utf8'
+      - name: SRVCAREA_KEY
+        expr: SRVCAREA_KEY
+        data_type: NUMBER(38,0)
+      - name: SRVCAREA_NM
+        expr: SRVCAREA_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: SRVCAREA_ST_CD
+        expr: SRVCAREA_ST_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: SRVCAREA_ST_LONG_DESC
+        expr: SRVCAREA_ST_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: SRVCAREA_ST_SHRT_DESC
+        expr: SRVCAREA_ST_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+  - name: DIM_AUTHRZN_CUBE
+    base_table:
+      database: D01_COC
+      schema: COC_NOPHI
+      table: DIM_AUTHRZN_CUBE
+    dimensions:
+      - name: AUTHRZN_KEY
+        expr: AUTHRZN_KEY
+        data_type: NUMBER(38,0)
+      - name: AUTHRZN_NBR
+        expr: AUTHRZN_NBR
+        data_type: VARCHAR(25) COLLATE 'utf8'
+      - name: AUTHRZN_SOR_CD
+        expr: AUTHRZN_SOR_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: AUTHRZN_SOR_NM
+        expr: AUTHRZN_SOR_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+    primary_key:
+      columns:
+        - AUTHRZN_KEY
+  - name: DIM_AUTHRZN_STTS_CUBE
+    base_table:
+      database: D01_COC
+      schema: COC_NOPHI
+      table: DIM_AUTHRZN_STTS_CUBE
+    dimensions:
+      - name: AUTHRZN_STTS_CD
+        expr: AUTHRZN_STTS_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: AUTHRZN_STTS_DESC
+        expr: AUTHRZN_STTS_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: AUTHRZN_STTS_NM
+        expr: AUTHRZN_STTS_NM
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: EDL_EXTRNL_LOAD_CD
+        expr: EDL_EXTRNL_LOAD_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_LOB_CD
+        expr: EDL_LOB_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_RUN_ID
+        expr: EDL_RUN_ID
+        data_type: VARCHAR(255) COLLATE 'utf8'
+      - name: EDL_SCRTY_LVL_CD
+        expr: EDL_SCRTY_LVL_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_SOR_CD
+        expr: EDL_SOR_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+    time_dimensions:
+      - name: EDL_CREAT_DTM
+        expr: EDL_CREAT_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_INCRMNTL_LOAD_DTM
+        expr: EDL_INCRMNTL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_LOAD_DTM
+        expr: EDL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: KF_TMS
+        expr: KF_TMS
+        data_type: TIMESTAMP_NTZ(9)
+    unique_keys:
+      - columns:
+          - AUTHRZN_STTS_CD
+  - name: DIM_HCC_MSTR
+    base_table:
+      database: T01_COC
+      schema: COC_NOPHI
+      table: DIM_HCC_MSTR
+    dimensions:
+      - name: ADMT_CNT_IND
+        expr: ADMT_CNT_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: AUDT_JOB_CNTRL_ID
+        expr: AUDT_JOB_CNTRL_ID
+        data_type: NUMBER(38,0)
+      - name: BDGT_RPT_SIGN_CHNG_IND
+        expr: BDGT_RPT_SIGN_CHNG_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: DAY_CNT_IND
+        expr: DAY_CNT_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: DAYS_SPLY_NBR_IND
+        expr: DAYS_SPLY_NBR_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: EDM_DATA_GRP_NBR
+        expr: EDM_DATA_GRP_NBR
+        data_type: NUMBER(38,0)
+      - name: GRAIN_IND
+        expr: GRAIN_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: HCC_CD
+        expr: HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_KEY
+        expr: HCC_KEY
+        data_type: NUMBER(38,0)
+      - name: HCC_LONG_DESC
+        expr: HCC_LONG_DESC
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: HCC_SHRT_DESC
+        expr: HCC_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: HCC_TYPE_CD
+        expr: HCC_TYPE_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: MBRSHP_HCC_CD
+        expr: MBRSHP_HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: PRMRY_MSR_CD
+        expr: PRMRY_MSR_CD
+        data_type: VARCHAR(4) COLLATE 'utf8'
+      - name: PROC_CNT_IND
+        expr: PROC_CNT_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: PROJN_IND
+        expr: PROJN_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: SCRPT_CNT_IND
+        expr: SCRPT_CNT_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: SRVC_CNT_IND
+        expr: SRVC_CNT_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: TRND_IND
+        expr: TRND_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: UNIT_CNT_IND
+        expr: UNIT_CNT_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: VST_CNT_IND
+        expr: VST_CNT_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+    primary_key:
+      columns:
+        - HCC_KEY
+  - name: FACT_APEAL_CUBE
+    base_table:
+      database: T01_COC
+      schema: COC_NOPHI
+      table: FACT_APEAL_CUBE
+    dimensions:
+      - name: APEAL_DCSN_CD
+        expr: APEAL_DCSN_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: APEAL_DCSN_RTNLE_CD
+        expr: APEAL_DCSN_RTNLE_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: APEAL_DCSN_YEAR_MNTH_NBR
+        expr: APEAL_DCSN_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+      - name: APEAL_RQST_CD
+        expr: APEAL_RQST_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: APEAL_SOR_CD
+        expr: APEAL_SOR_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: APEAL_STTS_CD
+        expr: APEAL_STTS_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: CASE_ID
+        expr: CASE_ID
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: CLM_SOR_CD
+        expr: CLM_SOR_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: CLNCL_SOR_CD
+        expr: CLNCL_SOR_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: DCSN_TRNRND_DAY_DURTN_CNT
+        expr: DCSN_TRNRND_DAY_DURTN_CNT
+        data_type: NUMBER(38,0)
+      - name: EDL_EXTRNL_LOAD_CD
+        expr: EDL_EXTRNL_LOAD_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_LOB_CD
+        expr: EDL_LOB_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_RUN_ID
+        expr: EDL_RUN_ID
+        data_type: VARCHAR(255) COLLATE 'utf8'
+      - name: EDL_SCRTY_LVL_CD
+        expr: EDL_SCRTY_LVL_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_SOR_CD
+        expr: EDL_SOR_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDM_APEAL_KEY
+        expr: EDM_APEAL_KEY
+        data_type: NUMBER(38,0)
+      - name: EDM_AUTHRZN_KEY
+        expr: EDM_AUTHRZN_KEY
+        data_type: NUMBER(38,0)
+      - name: OPEN_AGE_DAY_DURTN_CNT
+        expr: OPEN_AGE_DAY_DURTN_CNT
+        data_type: NUMBER(38,0)
+      - name: RSLVD_TRNRND_DAY_DURTN_CNT
+        expr: RSLVD_TRNRND_DAY_DURTN_CNT
+        data_type: NUMBER(38,0)
+      - name: SNAP_YEAR_MNTH_NBR
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+    time_dimensions:
+      - name: APEAL_CREAT_DT
+        expr: APEAL_CREAT_DT
+        data_type: DATE
+      - name: APEAL_DCSN_DT
+        expr: APEAL_DCSN_DT
+        data_type: DATE
+      - name: APEAL_RSLVD_DT
+        expr: APEAL_RSLVD_DT
+        data_type: DATE
+      - name: EDL_CREAT_DTM
+        expr: EDL_CREAT_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_INCRMNTL_LOAD_DTM
+        expr: EDL_INCRMNTL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_LOAD_DTM
+        expr: EDL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: KF_TMS
+        expr: KF_TMS
+        data_type: TIMESTAMP_NTZ(9)
+  - name: FACT_AUTHRZN_CUBE
+    base_table:
+      database: D01_COC
+      schema: COC_NOPHI
+      table: FACT_AUTHRZN_CUBE
+    dimensions:
+      - name: AUTHRZN_INPAT_RQST_TYPE_CD
+        expr: AUTHRZN_INPAT_RQST_TYPE_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: AUTHRZN_LINE_ID
+        expr: AUTHRZN_LINE_ID
+        data_type: VARCHAR(50) COLLATE 'utf8'
+      - name: AUTHRZN_RQST_ID
+        expr: AUTHRZN_RQST_ID
+        data_type: VARCHAR(15) COLLATE 'utf8'
+      - name: AUTHRZN_RVW_DCSN_STTS_CD
+        expr: AUTHRZN_RVW_DCSN_STTS_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: AUTHRZN_RVW_STTS_RSN_CD
+        expr: AUTHRZN_RVW_STTS_RSN_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: AUTHRZN_RVW_TYPE_CD
+        expr: AUTHRZN_RVW_TYPE_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: AUTHRZN_STTS_CD
+        expr: AUTHRZN_STTS_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_EXTRNL_LOAD_CD
+        expr: EDL_EXTRNL_LOAD_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_LOB_CD
+        expr: EDL_LOB_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_RUN_ID
+        expr: EDL_RUN_ID
+        data_type: VARCHAR(255) COLLATE 'utf8'
+      - name: EDL_SCRTY_LVL_CD
+        expr: EDL_SCRTY_LVL_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDL_SOR_CD
+        expr: EDL_SOR_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: EDM_AUTHRZN_KEY
+        expr: EDM_AUTHRZN_KEY
+        data_type: NUMBER(38,0)
+      - name: SNAP_YEAR_MNTH_NBR
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+    time_dimensions:
+      - name: EDL_CREAT_DTM
+        expr: EDL_CREAT_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_INCRMNTL_LOAD_DTM
+        expr: EDL_INCRMNTL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: EDL_LOAD_DTM
+        expr: EDL_LOAD_DTM
+        data_type: TIMESTAMP_NTZ(9)
+      - name: KF_TMS
+        expr: KF_TMS
+        data_type: TIMESTAMP_NTZ(9)
+  - name: FACT_CLM_LINE_COC_CUBE
+    base_table:
+      database: T01_COC
+      schema: COC_NOPHI
+      table: FACT_CLM_LINE_COC_CUBE
+    dimensions:
+      - name: ADJDCTN_YEAR_MNTH_NBR
+        expr: ADJDCTN_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+      - name: ADMSN_TYPE_CD
+        expr: ADMSN_TYPE_CD
+        data_type: VARCHAR(2) COLLATE 'utf8'
+      - name: ADMTG_EDM_DIAG_KEY
+        expr: ADMTG_EDM_DIAG_KEY
+        data_type: NUMBER(38,0)
+      - name: ALWD_CASE_AMT_CD
+        expr: ALWD_CASE_AMT_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: ALWD_PCTAG_OF_CMS_IND
+        expr: ALWD_PCTAG_OF_CMS_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: ANLYTC_ADMT_CNT
+        expr: ANLYTC_ADMT_CNT
+        data_type: NUMBER(38,0)
+      - name: ANLYTC_CLM_ADMT_KEY
+        expr: ANLYTC_CLM_ADMT_KEY
+        data_type: NUMBER(38,0)
+      - name: ANLYTC_CLM_CASE_KEY
+        expr: ANLYTC_CLM_CASE_KEY
+        data_type: NUMBER(38,0)
+      - name: ANLYTC_CLM_LINE_VST_KEY
+        expr: ANLYTC_CLM_LINE_VST_KEY
+        data_type: NUMBER(38,0)
+      - name: ANLYTC_ENCNTR_KEY
+        expr: ANLYTC_ENCNTR_KEY
+        data_type: NUMBER(38,0)
+      - name: ANLYTC_INCRD_YEAR_MNTH_NBR
+        expr: ANLYTC_INCRD_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+      - name: ANLYTC_PAID_DAY_CNT
+        expr: ANLYTC_PAID_DAY_CNT
+        data_type: NUMBER(9,0)
+      - name: ANLYTC_PHRMCY_SCRPT_KEY
+        expr: ANLYTC_PHRMCY_SCRPT_KEY
+        data_type: NUMBER(38,0)
+      - name: ANLYTC_PROC_CNT
+        expr: ANLYTC_PROC_CNT
+        data_type: NUMBER(38,0)
+      - name: ANLYTC_SRVC_CNT
+        expr: ANLYTC_SRVC_CNT
+        data_type: NUMBER(38,0)
+      - name: ANLYTC_VST_CNT
+        expr: ANLYTC_VST_CNT
+        data_type: NUMBER(38,0)
+      - name: AUTHRZN_IND
+        expr: AUTHRZN_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: AUTHRZN_OVRD_EXPLNTN_CD
+        expr: AUTHRZN_OVRD_EXPLNTN_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: BILL_CLSFCTN_CD
+        expr: BILL_CLSFCTN_CD
+        data_type: VARCHAR(2) COLLATE 'utf8'
+      - name: BILLD_CHRG_CASE_AMT_CD
+        expr: BILLD_CHRG_CASE_AMT_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: BILLG_EDM_PROV_ACCT_KEY
+        expr: BILLG_EDM_PROV_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: BILLG_PROV_NPI
+        expr: BILLG_PROV_NPI
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: BILLG_PROV_TAX_ID
+        expr: BILLG_PROV_TAX_ID
+        data_type: VARCHAR(16)
+      - name: BILLG_PROV_ZIP_CD
+        expr: BILLG_PROV_ZIP_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: BSIS_COST_DTRMN_CD
+        expr: BSIS_COST_DTRMN_CD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: CI3_GRP_CD
+        expr: CI3_GRP_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: CLM_ADJSTMNT_NBR
+        expr: CLM_ADJSTMNT_NBR
+        data_type: NUMBER(4,0)
+      - name: CLM_CNDTN_CD
+        expr: CLM_CNDTN_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: CLM_DISP_CD
+        expr: CLM_DISP_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: CLM_ID
+        expr: CLM_ID
+        data_type: VARCHAR(150) COLLATE 'utf8'
+      - name: CLM_LINE_BILLD_DAYS_CNT
+        expr: CLM_LINE_BILLD_DAYS_CNT
+        data_type: NUMBER(9,0)
+      - name: CLM_LINE_NBR
+        expr: CLM_LINE_NBR
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: CLM_LINE_REIMB_MTHD_CD
+        expr: CLM_LINE_REIMB_MTHD_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: CLM_NBR
+        expr: CLM_NBR
+        data_type: VARCHAR(24) COLLATE 'utf8'
+      - name: CLM_SOR_CD
+        expr: CLM_SOR_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: CMPND_CD
+        expr: CMPND_CD
+        data_type: VARCHAR(4) COLLATE 'utf8'
+      - name: COB_CD
+        expr: COB_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: COVID_CD
+        expr: COVID_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: CPTTN_IND
+        expr: CPTTN_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: DAW_CD
+        expr: DAW_CD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: DAYS_SPLY_NBR
+        expr: DAYS_SPLY_NBR
+        data_type: NUMBER(5,0)
+      - name: DCV_STTS_CD
+        expr: DCV_STTS_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: DOFR_ARNGMNT_TYPE_CD
+        expr: DOFR_ARNGMNT_TYPE_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: DOFR_CNTRCT_ARNGMNT_ID
+        expr: DOFR_CNTRCT_ARNGMNT_ID
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: DOFR_CPTTD_LEAKG_TYPE_CD
+        expr: DOFR_CPTTD_LEAKG_TYPE_CD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: DOFR_SRVC_CTGRY_CD
+        expr: DOFR_SRVC_CTGRY_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: DRG_CD
+        expr: DRG_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: DSCHRG_STTS_CD
+        expr: DSCHRG_STTS_CD
+        data_type: VARCHAR(2) COLLATE 'utf8'
+      - name: DSPNSD_BRND_GNRC_CD
+        expr: DSPNSD_BRND_GNRC_CD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: DUAL_ENRLMNT_IND
+        expr: DUAL_ENRLMNT_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: EDM_AUTHRZN_KEY
+        expr: EDM_AUTHRZN_KEY
+        data_type: NUMBER(38,0)
+      - name: EDM_CLM_KEY
+        expr: EDM_CLM_KEY
+        data_type: NUMBER(38,0)
+      - name: EDM_MBR_ACCT_KEY
+        expr: EDM_MBR_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: EDM_PROC_KEY
+        expr: EDM_PROC_KEY
+        data_type: NUMBER(38,0)
+      - name: ETG_CD
+        expr: ETG_CD
+        data_type: VARCHAR(9) COLLATE 'utf8'
+      - name: EXPRNC_COHRT_CD
+        expr: EXPRNC_COHRT_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: FILLED_REFILS_NBR
+        expr: FILLED_REFILS_NBR
+        data_type: NUMBER(4,0)
+      - name: FNL_EDM_DRG_KEY
+        expr: FNL_EDM_DRG_KEY
+        data_type: NUMBER(38,0)
+      - name: FRMLRY_ADJDCTD_KEY
+        expr: FRMLRY_ADJDCTD_KEY
+        data_type: NUMBER(38,0)
+      - name: FRMLRY_CD
+        expr: FRMLRY_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: GL_POST_YEAR_MNTH_NBR
+        expr: GL_POST_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+      - name: GNDR_CD
+        expr: GNDR_CD
+        data_type: VARCHAR(134217728)
+      - name: HCC_CASE_TYPE_CD
+        expr: HCC_CASE_TYPE_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: HCC_CD
+        expr: HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_CLM_TYPE_CD
+        expr: HCC_CLM_TYPE_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: HCC_DRG_GRP_CD
+        expr: HCC_DRG_GRP_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: HCC_KEY
+        expr: HCC_KEY
+        data_type: NUMBER(38,0)
+      - name: HCC_PLOS_GRP_CD
+        expr: HCC_PLOS_GRP_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: HCC_PROC_MDFR_GRP_CD
+        expr: HCC_PROC_MDFR_GRP_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: HCC_PROV_TXNMY_GRP_CD
+        expr: HCC_PROV_TXNMY_GRP_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: HCC_SRVC_CD
+        expr: HCC_SRVC_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: HRA_FUND_ARNGMNT_CD
+        expr: HRA_FUND_ARNGMNT_CD
+        data_type: VARCHAR(2) COLLATE 'utf8'
+      - name: INN_CD
+        expr: INN_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: INN_IND
+        expr: INN_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: ITRTN_NBR
+        expr: ITRTN_NBR
+        data_type: NUMBER(38,0)
+      - name: KICK_COHRT_CD
+        expr: KICK_COHRT_CD
+        data_type: VARCHAR(4) COLLATE 'utf8'
+      - name: LICS_LVL_CD
+        expr: LICS_LVL_CD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: LOB_PARTN_ID
+        expr: LOB_PARTN_ID
+        data_type: NUMBER(38,0)
+      - name: MAIL_ORDR_CD
+        expr: MAIL_ORDR_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: MAX_RVSN_IND
+        expr: MAX_RVSN_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: MBR_DURTN_CD
+        expr: MBR_DURTN_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: MBR_PARTN_MBU_CD
+        expr: MBR_PARTN_MBU_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: MBR_RSDNC_ZIP_CD
+        expr: MBR_RSDNC_ZIP_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: MCID_EDM_MBR_ACCT_KEY
+        expr: MCID_EDM_MBR_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: MDCL_CVRG_ONLY_IND
+        expr: MDCL_CVRG_ONLY_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: MPR_IND
+        expr: MPR_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: NDC
+        expr: NDC
+        data_type: VARCHAR(11) COLLATE 'utf8'
+      - name: ONCLGY_TRTMNT_CD
+        expr: ONCLGY_TRTMNT_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: OPPS_KEY
+        expr: OPPS_KEY
+        data_type: NUMBER(38,0)
+      - name: OTHR_CVRG_CD
+        expr: OTHR_CVRG_CD
+        data_type: VARCHAR(4) COLLATE 'utf8'
+      - name: PA_RQRD_CD
+        expr: PA_RQRD_CD
+        data_type: VARCHAR(2) COLLATE 'utf8'
+      - name: PAID_CASE_AMT_CD
+        expr: PAID_CASE_AMT_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: PAID_LOS_CD
+        expr: PAID_LOS_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: PARG_STTS_CD
+        expr: PARG_STTS_CD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: PBM_CHNL_CD
+        expr: PBM_CHNL_CD
+        data_type: VARCHAR(4) COLLATE 'utf8'
+      - name: PCP_EDM_PROV_ACCT_KEY
+        expr: PCP_EDM_PROV_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: PCP_GRP_EDM_PROV_ACCT_KEY
+        expr: PCP_GRP_EDM_PROV_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: PCP_IPA_EDM_PROV_ACCT_KEY
+        expr: PCP_IPA_EDM_PROV_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: PCP_PROV_TAX_ID
+        expr: PCP_PROV_TAX_ID
+        data_type: VARCHAR(9)
+      - name: PLOS_CD
+        expr: PLOS_CD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: PREM_COHRT_CD
+        expr: PREM_COHRT_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: PRMRY_CARR_RSPNSBLY_CD
+        expr: PRMRY_CARR_RSPNSBLY_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: PRMRY_DSCHRG_EDM_DIAG_KEY
+        expr: PRMRY_DSCHRG_EDM_DIAG_KEY
+        data_type: NUMBER(38,0)
+      - name: PRMRY_EDM_PROC_KEY
+        expr: PRMRY_EDM_PROC_KEY
+        data_type: NUMBER(38,0)
+      - name: PROC_MDFR_1_CD
+        expr: PROC_MDFR_1_CD
+        data_type: VARCHAR(2) COLLATE 'utf8'
+      - name: PROC_MDFR_2_CD
+        expr: PROC_MDFR_2_CD
+        data_type: VARCHAR(2) COLLATE 'utf8'
+      - name: PROC_MDFR_3_CD
+        expr: PROC_MDFR_3_CD
+        data_type: VARCHAR(2) COLLATE 'utf8'
+      - name: PROC_MDFR_4_CD
+        expr: PROC_MDFR_4_CD
+        data_type: VARCHAR(2) COLLATE 'utf8'
+      - name: PRSCRBG_EDM_PROV_ACCT_KEY
+        expr: PRSCRBG_EDM_PROV_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: PRVNTBL_ONCLGY_ADMT_CD
+        expr: PRVNTBL_ONCLGY_ADMT_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: REFIL_IND
+        expr: REFIL_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: REFILS_AUTHRZD_NBR
+        expr: REFILS_AUTHRZD_NBR
+        data_type: NUMBER(4,0)
+      - name: RENTY_CD
+        expr: RENTY_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: RENTY_KEY
+        expr: RENTY_KEY
+        data_type: NUMBER(38,0)
+      - name: RNDRG_EDM_PROV_ACCT_KEY
+        expr: RNDRG_EDM_PROV_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: RNDRG_GRP_EDM_PROV_ACCT_KEY
+        expr: RNDRG_GRP_EDM_PROV_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: RNDRG_IPA_EDM_PROV_ACCT_KEY
+        expr: RNDRG_IPA_EDM_PROV_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: RNDRG_PROV_TAX_ID
+        expr: RNDRG_PROV_TAX_ID
+        data_type: VARCHAR(9)
+      - name: RNDRG_RPTG_PROV_ZIP_CD
+        expr: RNDRG_RPTG_PROV_ZIP_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: RSTTD_BNFT_PLAN_CD
+        expr: RSTTD_BNFT_PLAN_CD
+        data_type: VARCHAR(12) COLLATE 'utf8'
+      - name: RSTTD_BNFT_PLAN_KEY
+        expr: RSTTD_BNFT_PLAN_KEY
+        data_type: NUMBER(38,0)
+      - name: RSTTD_BSNS_SGMNT_CD
+        expr: RSTTD_BSNS_SGMNT_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: RSTTD_BSNS_SGMNT_KEY
+        expr: RSTTD_BSNS_SGMNT_KEY
+        data_type: NUMBER(38,0)
+      - name: RSTTD_CMPNY_CF_CD
+        expr: RSTTD_CMPNY_CF_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: RSTTD_EDM_CLNT_GRP_SUBGRP_ACCT_KEY
+        expr: RSTTD_EDM_CLNT_GRP_SUBGRP_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: RSTTD_FUNDG_CF_CD
+        expr: RSTTD_FUNDG_CF_CD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: RSTTD_FUNDG_CF_KEY
+        expr: RSTTD_FUNDG_CF_KEY
+        data_type: NUMBER(38,0)
+      - name: RSTTD_MBU_CF_CD
+        expr: RSTTD_MBU_CF_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: RSTTD_MBU_CF_KEY
+        expr: RSTTD_MBU_CF_KEY
+        data_type: NUMBER(38,0)
+      - name: RSTTD_NTWK_KEY
+        expr: RSTTD_NTWK_KEY
+        data_type: NUMBER(38,0)
+      - name: RSTTD_PROD_CF_CD
+        expr: RSTTD_PROD_CF_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: RSTTD_PROD_KEY
+        expr: RSTTD_PROD_KEY
+        data_type: NUMBER(38,0)
+      - name: RSTTD_SRVCAREA_CD
+        expr: RSTTD_SRVCAREA_CD
+        data_type: VARCHAR(9) COLLATE 'utf8'
+      - name: RSTTD_SRVCAREA_KEY
+        expr: RSTTD_SRVCAREA_KEY
+        data_type: NUMBER(38,0)
+      - name: RVNU_CD
+        expr: RVNU_CD
+        data_type: VARCHAR(4) COLLATE 'utf8'
+      - name: RVW_IND
+        expr: RVW_IND
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: RX_NBR
+        expr: RX_NBR
+        data_type: VARCHAR(20) COLLATE 'utf8'
+      - name: SCRPT_CNT
+        expr: SCRPT_CNT
+        data_type: NUMBER(38,0)
+      - name: SRVC_DNL_RSN_CD
+        expr: SRVC_DNL_RSN_CD
+        data_type: VARCHAR(15) COLLATE 'utf8'
+      - name: SRVC_SETG_CD
+        expr: SRVC_SETG_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: STNDRD_AGE_MNTH_CD
+        expr: STNDRD_AGE_MNTH_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: SVOI_CD
+        expr: SVOI_CD
+        data_type: VARCHAR(2) COLLATE 'utf8'
+      - name: TLHLTH_SRVC_IND
+        expr: TLHLTH_SRVC_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: TRND_CD
+        expr: TRND_CD
+        data_type: VARCHAR(4) COLLATE 'utf8'
+      - name: TYPE_OF_BILL_CD
+        expr: TYPE_OF_BILL_CD
+        data_type: VARCHAR(4) COLLATE 'utf8'
+      - name: VBC_MBR_ASGNMNT_CD
+        expr: VBC_MBR_ASGNMNT_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: VBC_MDPNL_ID
+        expr: VBC_MDPNL_ID
+        data_type: VARCHAR(32) COLLATE 'utf8'
+      - name: VBC_NPI
+        expr: VBC_NPI
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: VBC_PG_ID
+        expr: VBC_PG_ID
+        data_type: VARCHAR(9) COLLATE 'utf8'
+      - name: VBC_PGM_ID
+        expr: VBC_PGM_ID
+        data_type: VARCHAR(32) COLLATE 'utf8'
+      - name: VBC_PGM_SPCLTY_TYPE_CD
+        expr: VBC_PGM_SPCLTY_TYPE_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: VBC_PROV_ORG_TAX_ID
+        expr: VBC_PROV_ORG_TAX_ID
+        data_type: VARCHAR(9)
+      - name: VBC_PSL_CD
+        expr: VBC_PSL_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: VBC_RISK_CD
+        expr: VBC_RISK_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: VBC_SGMNT_CD
+        expr: VBC_SGMNT_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: WCRE_IND
+        expr: WCRE_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+    time_dimensions:
+      - name: ADJDCTN_DT
+        expr: ADJDCTN_DT
+        data_type: DATE
+      - name: ANLYTC_INCRD_STRT_DT
+        expr: ANLYTC_INCRD_STRT_DT
+        data_type: DATE
+      - name: ANLYTC_PAID_DT
+        expr: ANLYTC_PAID_DT
+        data_type: DATE
+      - name: CLM_LINE_SRVC_END_DT
+        expr: CLM_LINE_SRVC_END_DT
+        data_type: DATE
+      - name: CLM_LINE_SRVC_STRT_DT
+        expr: CLM_LINE_SRVC_STRT_DT
+        data_type: DATE
+      - name: GL_POST_DT
+        expr: GL_POST_DT
+        data_type: DATE
+      - name: MBR_DURTN_EFCTV_DT
+        expr: MBR_DURTN_EFCTV_DT
+        data_type: DATE
+      - name: MBR_DURTN_TRMNTN_DT
+        expr: MBR_DURTN_TRMNTN_DT
+        data_type: DATE
+    facts:
+      - name: ADMNSTRN_FEE_AMT
+        expr: ADMNSTRN_FEE_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: ANLYTC_ALWD_AMT
+        expr: ANLYTC_ALWD_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: ANLYTC_PAID_AMT
+        expr: ANLYTC_PAID_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: APRVD_FEE_AMT
+        expr: APRVD_FEE_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: APRVD_INGRED_AMT
+        expr: APRVD_INGRED_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: BILLBL_ADMNSTRTV_FEE_AMT
+        expr: BILLBL_ADMNSTRTV_FEE_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: BILLD_CHRG_AMT
+        expr: BILLD_CHRG_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: BILLD_SRVC_UNIT_CNT
+        expr: BILLD_SRVC_UNIT_CNT
+        data_type: NUMBER(18,3)
+        access_modifier: public_access
+      - name: CALCD_DRUG_DSCNT_AMT
+        expr: CALCD_DRUG_DSCNT_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: CLM_LINE_CDHP_PAYT_AMT
+        expr: CLM_LINE_CDHP_PAYT_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: CMS_REIMBMNT_AMT
+        expr: CMS_REIMBMNT_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: COB_SVNGS_AMT
+        expr: COB_SVNGS_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: COINSRN_AMT
+        expr: COINSRN_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: CPAY_AMT
+        expr: CPAY_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: DDCTBL_AMT
+        expr: DDCTBL_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: DRG_WT_NBR
+        expr: DRG_WT_NBR
+        data_type: NUMBER(18,6)
+        access_modifier: public_access
+      - name: DRUG_AWP_AMT
+        expr: DRUG_AWP_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: DSPNSG_FEE_AMT
+        expr: DSPNSG_FEE_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: FFS_EQVLNT_AMT
+        expr: FFS_EQVLNT_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: GROS_DRUG_COST_ABV_OOP_AMT
+        expr: GROS_DRUG_COST_ABV_OOP_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: INTRST_AMT
+        expr: INTRST_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: LICS_AMT
+        expr: LICS_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: MBR_COST_SHR_AMT
+        expr: MBR_COST_SHR_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: MBR_SNCTNS_PNLTY_AMT
+        expr: MBR_SNCTNS_PNLTY_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: OPPS_RLTV_WT_FCTR
+        expr: OPPS_RLTV_WT_FCTR
+        data_type: NUMBER(18,6)
+        access_modifier: public_access
+      - name: ORGNL_ALWD_AMT
+        expr: ORGNL_ALWD_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: ORGNL_BILLD_CHRG_AMT
+        expr: ORGNL_BILLD_CHRG_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: ORGNL_PAID_AMT
+        expr: ORGNL_PAID_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: PAID_AMT
+        expr: PAID_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: PAID_NET_PASS_THRU_PAID_AMT
+        expr: PAID_NET_PASS_THRU_PAID_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: PAID_SRVC_UNIT_CNT
+        expr: PAID_SRVC_UNIT_CNT
+        data_type: NUMBER(18,3)
+        access_modifier: public_access
+      - name: PASS_THRU_PAID_AMT
+        expr: PASS_THRU_PAID_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: PAT_PAID_AMT
+        expr: PAT_PAID_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: PAT_PAID_DFRNTL_AMT
+        expr: PAT_PAID_DFRNTL_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: RCVRY_AMT
+        expr: RCVRY_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: SALES_TAX_AMT
+        expr: SALES_TAX_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: TROOP_APLYD_AMT
+        expr: TROOP_APLYD_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: UCR_AMT
+        expr: UCR_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+      - name: VCN_ADMNSTRN_AMT
+        expr: VCN_ADMNSTRN_AMT
+        data_type: NUMBER(18,2)
+        access_modifier: public_access
+  - name: FACT_RSTTD_MBRSHP_COC_CUBE
+    base_table:
+      database: D01_COC
+      schema: COC_NOPHI
+      table: FACT_RSTTD_MBRSHP_COC_CUBE
+    dimensions:
+      - name: AFNTY_IND
+        expr: AFNTY_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: ANLYTC_HOST_IND
+        expr: ANLYTC_HOST_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: AUDT_JOB_CNTRL_ID
+        expr: AUDT_JOB_CNTRL_ID
+        data_type: NUMBER(38,0)
+      - name: BNFT_PLAN_CD
+        expr: BNFT_PLAN_CD
+        data_type: VARCHAR(12) COLLATE 'utf8'
+      - name: BNFT_PLAN_KEY
+        expr: BNFT_PLAN_KEY
+        data_type: NUMBER(38,0)
+      - name: CI3_GRP_CD
+        expr: CI3_GRP_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: COB_CD
+        expr: COB_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: COBRA_CD
+        expr: COBRA_CD
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: DUAL_ENRLMNT_IND
+        expr: DUAL_ENRLMNT_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: EDM_CLNT_GRP_SUBGRP_ACCT_KEY
+        expr: EDM_CLNT_GRP_SUBGRP_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: EDM_MBR_ACCT_KEY
+        expr: EDM_MBR_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: EDM_RSTTD_FNCL_MBRSHP_KEY
+        expr: EDM_RSTTD_FNCL_MBRSHP_KEY
+        data_type: NUMBER(38,0)
+      - name: EXPRNC_COHRT_CD
+        expr: EXPRNC_COHRT_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: GNDR_CD
+        expr: GNDR_CD
+        data_type: VARCHAR(134217728)
+      - name: HCC_CD
+        expr: HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: HCC_KEY
+        expr: HCC_KEY
+        data_type: NUMBER(38,0)
+      - name: INCRD_YEAR_MNTH_NBR
+        expr: INCRD_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+      - name: ITRTN_NBR
+        expr: ITRTN_NBR
+        data_type: NUMBER(38,0)
+      - name: LOB_PARTN_ID
+        expr: LOB_PARTN_ID
+        data_type: NUMBER(38,0)
+      - name: MBR_DURTN_CD
+        expr: MBR_DURTN_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: MBR_PARTN_MBU_CD
+        expr: MBR_PARTN_MBU_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: MBR_RSDNC_ZIP_CD
+        expr: MBR_RSDNC_ZIP_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: MBRSHP_DAY_CNT
+        expr: MBRSHP_DAY_CNT
+        data_type: NUMBER(38,0)
+      - name: MCID_EDM_MBR_ACCT_KEY
+        expr: MCID_EDM_MBR_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: MDCL_CVRG_ONLY_IND
+        expr: MDCL_CVRG_ONLY_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: MPR_IND
+        expr: MPR_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: NTWK_KEY
+        expr: NTWK_KEY
+        data_type: NUMBER(38,0)
+      - name: PCP_EDM_PROV_ACCT_KEY
+        expr: PCP_EDM_PROV_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: PCP_GRP_EDM_PROV_ACCT_KEY
+        expr: PCP_GRP_EDM_PROV_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: PCP_IPA_EDM_PROV_ACCT_KEY
+        expr: PCP_IPA_EDM_PROV_ACCT_KEY
+        data_type: NUMBER(38,0)
+      - name: PCP_PROV_TAX_ID
+        expr: PCP_PROV_TAX_ID
+        data_type: VARCHAR(9)
+      - name: PREM_COHRT_CD
+        expr: PREM_COHRT_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: PROD_KEY
+        expr: PROD_KEY
+        data_type: NUMBER(38,0)
+      - name: RENTY_CD
+        expr: RENTY_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: RENTY_KEY
+        expr: RENTY_KEY
+        data_type: NUMBER(38,0)
+      - name: RFR_IND
+        expr: RFR_IND
+        data_type: VARCHAR(1) COLLATE 'utf8'
+      - name: RSTTD_BSNS_SGMNT_CD
+        expr: RSTTD_BSNS_SGMNT_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+      - name: RSTTD_BSNS_SGMNT_KEY
+        expr: RSTTD_BSNS_SGMNT_KEY
+        data_type: NUMBER(38,0)
+      - name: RSTTD_CMPNY_CF_CD
+        expr: RSTTD_CMPNY_CF_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: RSTTD_FUNDG_CF_CD
+        expr: RSTTD_FUNDG_CF_CD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+      - name: RSTTD_FUNDG_CF_KEY
+        expr: RSTTD_FUNDG_CF_KEY
+        data_type: NUMBER(38,0)
+      - name: RSTTD_MBU_CF_CD
+        expr: RSTTD_MBU_CF_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: RSTTD_MBU_CF_KEY
+        expr: RSTTD_MBU_CF_KEY
+        data_type: NUMBER(38,0)
+      - name: RSTTD_PROD_CF_CD
+        expr: RSTTD_PROD_CF_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: SRVCAREA_CD
+        expr: SRVCAREA_CD
+        data_type: VARCHAR(9) COLLATE 'utf8'
+      - name: SRVCAREA_KEY
+        expr: SRVCAREA_KEY
+        data_type: NUMBER(38,0)
+      - name: STNDRD_AGE_MNTH_CD
+        expr: STNDRD_AGE_MNTH_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: TRND_CD
+        expr: TRND_CD
+        data_type: VARCHAR(4) COLLATE 'utf8'
+      - name: VBC_MBR_ASGNMNT_CD
+        expr: VBC_MBR_ASGNMNT_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: VBC_MDPNL_ID
+        expr: VBC_MDPNL_ID
+        data_type: VARCHAR(32) COLLATE 'utf8'
+      - name: VBC_NPI
+        expr: VBC_NPI
+        data_type: VARCHAR(10) COLLATE 'utf8'
+      - name: VBC_PG_ID
+        expr: VBC_PG_ID
+        data_type: VARCHAR(9) COLLATE 'utf8'
+      - name: VBC_PGM_ID
+        expr: VBC_PGM_ID
+        data_type: VARCHAR(32) COLLATE 'utf8'
+      - name: VBC_PGM_SPCLTY_TYPE_CD
+        expr: VBC_PGM_SPCLTY_TYPE_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+      - name: VBC_PROV_ORG_TAX_ID
+        expr: VBC_PROV_ORG_TAX_ID
+        data_type: VARCHAR(9)
+      - name: VBC_PSL_CD
+        expr: VBC_PSL_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+      - name: VBC_RISK_CD
+        expr: VBC_RISK_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+      - name: VBC_SGMNT_CD
+        expr: VBC_SGMNT_CD
+        data_type: VARCHAR(5) COLLATE 'utf8'
+    time_dimensions:
+      - name: MBR_DURTN_EFCTV_DT
+        expr: MBR_DURTN_EFCTV_DT
+        data_type: DATE
+      - name: MBR_DURTN_TRMNTN_DT
+        expr: MBR_DURTN_TRMNTN_DT
+        data_type: DATE
+    facts:
+      - name: PRORTD_MBR_MNTH_CNT
+        expr: PRORTD_MBR_MNTH_CNT
+        data_type: NUMBER(18,8)
+        access_modifier: public_access
+  - name: COC_IP_AUTH_DATA_INSGHT_STG
+    description: The table contains records of insurance prior authorization data, capturing approval statuses, appeal outcomes, and medical necessity review requirements. Each record includes details about line of business, risk entity groupings, HCC medical groupings, and trending metrics across defined time periods and trend slices.
+    base_table:
+      database: D01_COC
+      schema: COC_DTI_STG
+      table: COC_IP_AUTH_DATA_INSGHT_STG
+    dimensions:
+      - name: APPEAL_STATUS
+        description: The status of an appeal.
+        expr: APPEAL_STATUS
+        data_type: VARCHAR(15) COLLATE 'utf8'
+        sample_values:
+          - ALL
+          - OVERTURNED
+          - RESOLVED UPHELD
+      - name: AUTH_REVIEW_STTS_RSN_GRP
+        description: The grouped categorization of the reason associated with an authorization review status.
+        expr: AUTH_REVIEW_STTS_RSN_GRP
+        data_type: VARCHAR(50) COLLATE 'utf8'
+        sample_values:
+          - ALL
+          - MEDICAL
+          - ADMINISTRATIVE
+      - name: AUTH_STATUS
+        description: The authorization status of an inpatient request or claim.
+        expr: AUTH_STATUS
+        data_type: VARCHAR(150) COLLATE 'utf8'
+        sample_values:
+          - ALL
+          - Not Approved
+      - name: IS_APPEALD
+        description: Indicates whether an inpatient authorization has been appealed.
+        expr: IS_APPEALD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+        sample_values:
+          - 'N'
+          - ALL
+      - name: LOB_CD
+        description: Line of business code.
+        expr: LOB_CD
+        data_type: VARCHAR(6) COLLATE 'utf8'
+        sample_values:
+          - MCM006
+          - MCM004
+          - MCM003
+      - name: LOB_SHRT_DESC
+        description: Short description of the line of business associated with the record.
+        expr: LOB_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+        sample_values:
+          - Medicaid
+          - Commercial
+          - Medicare
+      - name: MEDICAL_NSCCTY_RVW_RQRD
+        description: Indicates whether a medical necessity review is required.
+        expr: MEDICAL_NSCCTY_RVW_RQRD
+        data_type: VARCHAR(3) COLLATE 'utf8'
+        sample_values:
+          - 'Y'
+          - ALL
+          - 'N'
+      - name: RISK_ENTITY_CD
+        description: A code identifying the risk entity.
+        expr: RISK_ENTITY_CD
+        data_type: VARCHAR(7) COLLATE 'utf8'
+        sample_values:
+          - ALL
+      - name: RISK_ENTITY_GRP
+        description: The grouping or category used to classify risk entities.
+        expr: RISK_ENTITY_GRP
+        data_type: VARCHAR(50) COLLATE 'utf8'
+        sample_values:
+          - ALL
+      - name: TRND_MEDM_GRP_HCC_CD
+        description: Hierarchical Condition Category code associated with a trending medium group.
+        expr: TRND_MEDM_GRP_HCC_CD
+        data_type: VARCHAR(8) COLLATE 'utf8'
+        sample_values:
+          - ALL
+          - HCC00476
+          - HCC00007
+      - name: TRND_MEDM_GRP_HCC_SHRT_DESC
+        description: Short description of the trend medium group Hierarchical Condition Category.
+        expr: TRND_MEDM_GRP_HCC_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+        sample_values:
+          - NF
+          - ALL
+          - IP Med/Surg
+      - name: TRND_MTRC_CD
+        description: Trend metric codes used to categorize and identify different types of authorization and cost performance measurements.
+        expr: TRND_MTRC_CD
+        data_type: VARCHAR(19) COLLATE 'utf8'
+        sample_values:
+          - Auth per K
+          - Admits per K
+          - Auth Count
+      - name: TRND_SLICE_CD
+        description: A code identifying the trend slice dimension used for analytical segmentation.
+        expr: TRND_SLICE_CD
+        data_type: VARCHAR(15) COLLATE 'utf8'
+        sample_values:
+          - DRG
+          - ST
+          - RNDRG_PROV
+      - name: TRND_SLICE_LNG_DESC
+        description: Long description of the trend slice used for grouping or categorizing inpatient authorization data insights.
+        expr: TRND_SLICE_LNG_DESC
+        data_type: VARCHAR(200) COLLATE 'utf8'
+        sample_values:
+          - UNITYPOINT HEALTH - IOWA METHODIST MEDICAL CENTER
+          - CO
+          - Chemotherapy without Acute Leukemia as Secondary Diagnosis with CC
+      - name: TRND_SLICE_SHRT_DESC
+        description: Short description of the trend slice, representing a geographic or categorical segment used for data analysis.
+        expr: TRND_SLICE_SHRT_DESC
+        data_type: VARCHAR(50) COLLATE 'utf8'
+        sample_values:
+          - '050060'
+          - '999'
+          - CO
+      - name: TRND_TM_PRD_CD
+        description: The trend time period code used to categorize data across different time intervals.
+        expr: TRND_TM_PRD_CD
+        data_type: VARCHAR(15) COLLATE 'utf8'
+        sample_values:
+          - YTD
+          - R6
+          - R12
+    facts:
+      - name: SNAP_YEAR_MNTH_NBR
+        description: The year and month snapshot number associated with the record.
+        expr: SNAP_YEAR_MNTH_NBR
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '202603'
+      - name: TRND_MTRC_VAL
+        description: The trend metric value associated with an insight record.
+        expr: TRND_MTRC_VAL
+        data_type: NUMBER(38,8)
+        sample_values:
+          - '0.00000000'
+          - '4.44000000'
+          - '1.16400000'
+      - name: TRND_TM_PRD_END_MNTH_NBR
+        description: The ending month number of the trending time period.
+        expr: TRND_TM_PRD_END_MNTH_NBR
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '202512'
+relationships:
+  - name: FACT_APEAL_CUBE_TO_DDIM_APEAL_STTS_CUBE
+    left_table: FACT_APEAL_CUBE
+    right_table: DDIM_APEAL_STTS_CUBE
+    relationship_columns:
+      - left_column: APEAL_STTS_CD
+        right_column: APEAL_STTS_CD
+      - left_column: SNAP_YEAR_MNTH_NBR
+        right_column: SNAP_YEAR_MNTH_NBR
+  - name: FACT_AUTHRZN_CUBE_TO_DDIM_AUTHRZN_RVW_STTS_RSN_CUBE
+    left_table: FACT_AUTHRZN_CUBE
+    right_table: DDIM_AUTHRZN_RVW_STTS_RSN_CUBE
+    relationship_columns:
+      - left_column: AUTHRZN_RVW_STTS_RSN_CD
+        right_column: AUTHRZN_RVW_STTS_RSN_CD
+  - name: FACT_AUTHRZN_CUBE_TO_DIM_AUTHRZN_STTS_CUBE
+    left_table: FACT_AUTHRZN_CUBE
+    right_table: DIM_AUTHRZN_STTS_CUBE
+    relationship_columns:
+      - left_column: AUTHRZN_STTS_CD
+        right_column: AUTHRZN_STTS_CD

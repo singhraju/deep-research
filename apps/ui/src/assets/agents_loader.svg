@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" role="img" aria-label="Agents investigating">
+  <title>Deep Research — agents investigating</title>
+
+  <defs>
+    <!-- Shared path: descend into the dip, then recover up-right. -->
+    <path id="trendPath" d="M 8,22 L 30,34 L 60,62 L 90,38 L 112,16"/>
+  </defs>
+
+  <!-- Static trend line (the dip + recovery) -->
+  <use href="#trendPath"
+       fill="none" stroke="#1F3A68" stroke-width="2.6"
+       stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Arrowhead on the recovery end -->
+  <polyline points="104,14 112,16 110,24"
+            fill="none" stroke="#1F3A68" stroke-width="2.6"
+            stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Three agent dots travelling along the trend, staggered so they always
+       appear evenly spaced; opacity fades at the seams so the loop is seamless. -->
+  <g fill="#3E8FC1">
+    <circle r="4">
+      <animateMotion dur="3s" repeatCount="indefinite" begin="0s">
+        <mpath href="#trendPath"/>
+      </animateMotion>
+      <animate attributeName="opacity"
+               values="0;1;1;1;0"
+               keyTimes="0;0.08;0.5;0.92;1"
+               dur="3s" begin="0s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="4">
+      <animateMotion dur="3s" repeatCount="indefinite" begin="-1s">
+        <mpath href="#trendPath"/>
+      </animateMotion>
+      <animate attributeName="opacity"
+               values="0;1;1;1;0"
+               keyTimes="0;0.08;0.5;0.92;1"
+               dur="3s" begin="-1s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="4">
+      <animateMotion dur="3s" repeatCount="indefinite" begin="-2s">
+        <mpath href="#trendPath"/>
+      </animateMotion>
+      <animate attributeName="opacity"
+               values="0;1;1;1;0"
+               keyTimes="0;0.08;0.5;0.92;1"
+               dur="3s" begin="-2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

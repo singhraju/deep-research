@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reimbursement Policy Viewer - Single Pattern</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .controls {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: #6c757d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .policy-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .policy-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .policy-header {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .policy-header:hover {
+            background: #e9ecef;
+        }
+
+        .policy-title-section {
+            flex: 1;
+        }
+
+        .policy-payer {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .policy-name {
+            font-size: 0.85rem;
+            color: #495057;
+        }
+
+        .policy-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .tag-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .tag-info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .tag-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .effective-date {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .expand-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            color: #667eea;
+        }
+
+        .policy-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .policy-content.expanded {
+            max-height: 2000px;
+        }
+
+        .policy-details {
+            padding: 20px;
+            background: white;
+        }
+
+        .detail-row {
+            margin-bottom: 15px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+
+        .detail-value {
+            color: #6c757d;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .detail-list {
+            list-style-position: inside;
+            color: #6c757d;
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        .policy-link {
+            color: #667eea;
+            text-decoration: none;
+            word-break: break-all;
+            font-size: 0.8rem;
+        }
+
+        .policy-link:hover {
+            text-decoration: underline;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-card {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-card-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+
+        .info-card-value {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            font-size: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 40px;
+            color: #6c757d;
+        }
+
+        .empty-state svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .recommendation-card {
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 15px;
+        }
+
+        .recommendation-header {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .recommendation-rank {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .recommendation-priority {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+
+        .priority-high {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .priority-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .priority-low {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .recommendation-category {
+            padding: 4px 12px;
+            border-radius: 4px;
+            background: #e7e7e7;
+            color: #495057;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .recommendation-description {
+            color: #495057;
+            line-height: 1.8;
+            font-size: 0.9rem;
+            white-space: pre-line;
+        }
+        
+        .recommendation-description br {
+            display: block;
+            margin-bottom: 0.5em;
+            content: "";
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .policy-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 0.75rem;
+            }
+
+            .stat-card {
+                min-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Reimbursement Policy Viewer</h1>
+            <p>Interactive viewer for single pattern analysis</p>
+        </div>
+
+        <div class="controls">
+            <div class="file-input-wrapper">
+                <label for="fileInput" class="btn btn-primary">
+                    Load JSON File
+                </label>
+                <input type="file" id="fileInput" accept=".json" />
+            </div>
+            <span id="fileName" style="color: #6c757d; font-size: 0.9rem;"></span>
+        </div>
+
+        <div class="content" id="mainContent">
+            <div class="empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <h2>No Data Loaded</h2>
+                <p>Please load a JSON file to view reimbursement policy data</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('fileName').textContent = `Loaded: ${file.name}`;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        currentData = JSON.parse(event.target.result);
+                        renderContent(currentData);
+                    } catch (error) {
+                        alert('Error parsing JSON file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        function renderContent(data) {
+            const content = document.getElementById('mainContent');
+            
+            if (!data || !data.output) {
+                content.innerHTML = '<div class="empty-state"><h2>Invalid Data Format</h2><p>Expected a reimbursement response with an "output" field</p></div>';
+                return;
+            }
+
+            const output = data.output;
+            const recommendations = data.recommended_action || [];
+            const validation = data.validation || {};
+            const execution = data.execution || {};
+
+            let html = '';
+
+            html += '<div class="stats">';
+            html += `<div class="stat-card">
+                        <div class="stat-number">${output.pattern_rank || 'N/A'}</div>
+                        <div class="stat-label">Pattern Rank</div>
+                    </div>`;
+            html += `<div class="stat-card">
+                        <div class="stat-number">${output.policies_processed || 0}</div>
+                        <div class="stat-label">Policies Processed</div>
+                    </div>`;
+            html += `<div class="stat-card">
+                        <div class="stat-number">${recommendations.length}</div>
+                        <div class="stat-label">Recommendations</div>
+                    </div>`;
+            html += `<div class="stat-card">
+                        <div class="stat-number">${validation.is_valid ? 'Valid' : 'Invalid'}</div>
+                        <div class="stat-label">Validation Status</div>
+                    </div>`;
+            html += '</div>';
+
+            html += '<div class="info-grid">';
+            html += `<div class="info-card">
+                        <div class="info-card-title">Job ID</div>
+                        <div class="info-card-value">${data.job_id || 'N/A'}</div>
+                    </div>`;
+            html += `<div class="info-card">
+                        <div class="info-card-title">Conversation ID</div>
+                        <div class="info-card-value">${data.conversation_id || 'N/A'}</div>
+                    </div>`;
+            html += `<div class="info-card">
+                        <div class="info-card-title">Status</div>
+                        <div class="info-card-value">${data.status || 'N/A'}</div>
+                    </div>`;
+            if (execution.duration_ms) {
+                html += `<div class="info-card">
+                            <div class="info-card-title">Execution Duration</div>
+                            <div class="info-card-value">${(execution.duration_ms / 1000).toFixed(2)}s</div>
+                        </div>`;
+            }
+            html += '</div>';
+
+            if (output.summary_table) {
+                const table = output.summary_table;
+                html += '<div class="section">';
+                html += `<div class="section-title">${table.title || 'Policy Summary'}</div>`;
+                if (table.subtitle) {
+                    html += `<div class="section-subtitle">${table.subtitle}</div>`;
+                }
+                
+                const visibleColumns = table.columns.filter(
+                    col => !['appeals_process', 'policy_effective_date'].includes(col.id)
+                );
+                
+                html += '<div class="table-wrapper"><table><thead><tr>';
+                visibleColumns.forEach(col => {
+                    html += `<th>${col.label}</th>`;
+                });
+                html += '</tr></thead><tbody>';
+                const sortedRows = [...table.rows].sort((a, b) => {
+                    const aIsElevance = (a.payer_org || '').startsWith('Elevance Health');
+                    const bIsElevance = (b.payer_org || '').startsWith('Elevance Health');
+                    if (aIsElevance === bIsElevance) return 0;
+                    return aIsElevance ? -1 : 1;
+                });
+                
+                sortedRows.forEach(row => {
+                    html += '<tr>';
+                    visibleColumns.forEach(col => {
+                        let value = row[col.id] || '-';
+                        if (col.id === 'payer_org') {
+                            value = value.replace(/^Elevance Health.*$/, 'Elevance Health').trim();
+                        }
+                        if (col.type === 'badge') {
+                            html += `<td><span class="tag tag-info">${value}</span></td>`;
+                        } else if (col.id === 'payer_org') {
+                            html += `<td style="font-weight: 600; color: #495057;">${value}</td>`;
+                        } else {
+                            html += `<td>${value}</td>`;
+                        }
+                    });
+                    html += '</tr>';
+                });
+                
+                html += '</tbody></table></div></div>';
+            }
+
+            if (recommendations.length > 0) {
+                html += '<div class="section">';
+                html += '<div class="section-title">Recommended Actions</div>';
+                
+                recommendations.forEach(rec => {
+                    const priorityClass = rec.priority ? `priority-${rec.priority.toLowerCase()}` : 'priority-medium';
+                    const description = (rec.description || 'No description available').replace(/\\n/g, '<br>');
+                    html += `<div class="recommendation-card">
+                                <div class="recommendation-header">
+                                    <span class="recommendation-rank">${rec.rank || '?'}</span>
+                                    <span class="recommendation-priority ${priorityClass}">${rec.priority || 'MEDIUM'}</span>
+                                    <span class="recommendation-category">${rec.category || 'General'}</span>
+                                </div>
+                                <div class="recommendation-description">${description}</div>
+                            </div>`;
+                });
+                
+                html += '</div>';
+            }
+
+            if (output.reimbursement_policies && output.reimbursement_policies.length > 0) {
+                html += '<div class="section">';
+                html += '<div class="section-title">Individual Policies</div>';
+                
+                output.reimbursement_policies.forEach((policy, index) => {
+                    html += `<div class="policy-card">
+                                <div class="policy-header" onclick="togglePolicy(${index})">
+                                    <div class="policy-title-section">
+                                        <div class="policy-payer">${policy.payer_name || 'Unknown Payer'}</div>
+                                        <div class="policy-name">${policy.policy_title || 'Untitled Policy'}</div>
+                                    </div>
+                                    <div class="policy-meta">
+                                        ${policy.effective_date ? `<span class="effective-date">Effective: ${policy.effective_date}</span>` : ''}
+                                        <span class="expand-icon" id="icon-${index}">▼</span>
+                                    </div>
+                                </div>
+                                <div class="policy-content" id="content-${index}">
+                                    <div class="policy-details">`;
+                    
+                    if (policy.evidence) {
+                        html += `<div class="detail-row">
+                                    <div class="detail-label">Evidence</div>
+                                    <div class="detail-value">${policy.evidence}</div>
+                                </div>`;
+                    }
+                    
+                    if (policy.policy_url) {
+                        html += `<div class="detail-row">
+                                    <div class="detail-label">Policy URL</div>
+                                    <a href="${policy.policy_url}" target="_blank" class="policy-link">${policy.policy_url}</a>
+                                </div>`;
+                    }
+                    
+                    if (policy.edit_rule_facts) {
+                        const facts = policy.edit_rule_facts;
+                        
+                        if (facts.target_codes && facts.target_codes.length > 0) {
+                            html += `<div class="detail-row">
+                                        <div class="detail-label">Target Codes</div>
+                                        <ul class="detail-list">
+                                            ${facts.target_codes.map(code => `<li>${code}</li>`).join('')}
+                                        </ul>
+                                    </div>`;
+                        }
+                        
+                        if (facts.action_types && facts.action_types.length > 0) {
+                            html += `<div class="detail-row">
+                                        <div class="detail-label">Action Types</div>
+                                        <div class="detail-value">
+                                            ${facts.action_types.map(action => `<span class="tag tag-info">${action}</span>`).join(' ')}
+                                        </div>
+                                    </div>`;
+                        }
+                        
+                        if (facts.pairing_conditions && facts.pairing_conditions.length > 0) {
+                            html += `<div class="detail-row">
+                                        <div class="detail-label">Pairing Conditions</div>
+                                        <ul class="detail-list">
+                                            ${facts.pairing_conditions.map(cond => `<li>${cond}</li>`).join('')}
+                                        </ul>
+                                    </div>`;
+                        }
+                        
+                        if (facts.required_modifiers && facts.required_modifiers.length > 0) {
+                            html += `<div class="detail-row">
+                                        <div class="detail-label">Required Modifiers</div>
+                                        <div class="detail-value">
+                                            ${facts.required_modifiers.map(mod => `<span class="tag tag-warning">${mod}</span>`).join(' ')}
+                                        </div>
+                                    </div>`;
+                        }
+                        
+                        if (facts.program_scope && facts.program_scope.length > 0) {
+                            html += `<div class="detail-row">
+                                        <div class="detail-label">Program Scope</div>
+                                        <div class="detail-value">${facts.program_scope.join(', ')}</div>
+                                    </div>`;
+                        }
+                    }
+                    
+                    html += '</div></div></div>';
+                });
+                
+                html += '</div>';
+            }
+
+            if (data.explanation) {
+                const exp = data.explanation;
+                html += '<div class="section">';
+                html += '<div class="section-title">Explanation</div>';
+                html += '<div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">';
+                
+                if (exp.summary) {
+                    html += `<div class="detail-row">
+                                <div class="detail-label">Summary</div>
+                                <div class="detail-value">${exp.summary}</div>
+                            </div>`;
+                }
+                
+                if (exp.extraction_method) {
+                    html += `<div class="detail-row">
+                                <div class="detail-label">Extraction Method</div>
+                                <div class="detail-value">${exp.extraction_method}</div>
+                            </div>`;
+                }
+                
+                if (exp.data_sources && exp.data_sources.length > 0) {
+                    html += `<div class="detail-row">
+                                <div class="detail-label">Data Sources</div>
+                                <ul class="detail-list">
+                                    ${exp.data_sources.map(source => `<li>${source}</li>`).join('')}
+                                </ul>
+                            </div>`;
+                }
+                
+                html += '</div></div>';
+            }
+
+            content.innerHTML = html;
+        }
+
+        function togglePolicy(index) {
+            const content = document.getElementById(`content-${index}`);
+            const icon = document.getElementById(`icon-${index}`);
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+</body>
+</html>

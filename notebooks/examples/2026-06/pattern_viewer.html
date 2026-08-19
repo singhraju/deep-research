@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattern Analysis Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .file-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .file-input-wrapper label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 1.1em;
+            min-width: 200px;
+        }
+
+        input[type="file"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        input[type="file"]:hover {
+            border-color: #667eea;
+        }
+
+        input[type="file"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .metadata-box {
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0e8f8 100%);
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .metadata-box.active {
+            display: block;
+        }
+
+        .metadata-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .metadata-title::before {
+            content: "📋";
+        }
+
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .metadata-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .metadata-label {
+            font-size: 0.8em;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .metadata-value {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #212529;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .no-data h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .no-data p {
+            font-size: 1.1em;
+        }
+
+        .patterns-container {
+            display: none;
+        }
+
+        .patterns-container.active {
+            display: block;
+        }
+
+        .patterns-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .patterns-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .patterns-table th {
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1em;
+            letter-spacing: 0.5px;
+        }
+
+        .patterns-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+
+        .patterns-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .patterns-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .pattern-name-cell {
+            font-weight: 600;
+            color: #212529;
+            font-size: 1.05em;
+            line-height: 1.4;
+        }
+
+        .entities-cell {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .entity-section {
+            margin-bottom: 12px;
+        }
+
+        .entity-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .entity-label {
+            font-weight: 600;
+            color: #6c757d;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .entity-values {
+            color: #212529;
+        }
+
+        .entity-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #004085;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 120px;
+        }
+
+        .recommendation-cell {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .rec-description {
+            color: #212529;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .rec-rationale {
+            color: #6c757d;
+            font-size: 0.9em;
+            font-style: italic;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            border-left: 3px solid #e9ecef;
+        }
+
+        .rec-bullets {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 0 0;
+        }
+
+        .rec-bullets li {
+            padding: 4px 0 4px 20px;
+            position: relative;
+            color: #495057;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .rec-bullets li:before {
+            content: "▸";
+            position: absolute;
+            left: 5px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .empty-cell {
+            color: #adb5bd;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+
+        .drill-path {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 3px solid #667eea;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #212529;
+            transition: all 0.2s ease;
+        }
+
+        .drill-path:hover {
+            background: linear-gradient(135deg, #e7f3ff 0%, #d0e7ff 100%);
+            border-left-color: #4a5fd8;
+            transform: translateX(3px);
+        }
+
+        .path-impact {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 2px 8px;
+            background: #28a745;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .patterns-table {
+                font-size: 0.9em;
+            }
+
+            .patterns-table th,
+            .patterns-table td {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .metadata-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .patterns-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Pattern Analysis Viewer</h1>
+            <p>Explore cross-entity correlation patterns and recommended actions</p>
+        </div>
+
+        <div class="controls">
+            <div class="file-input-wrapper">
+                <label for="jsonFile">Load Pattern Results JSON:</label>
+                <input type="file" id="jsonFile" accept=".json" />
+                <button id="saveRenderedBtn" disabled style="padding: 12px 20px; border: 2px solid #dee2e6; border-radius: 8px; background: #667eea; color: white; cursor: pointer; font-size: 1em; opacity: 0.5; margin-left: 15px;">💾 Save Rendered HTML</button>
+            </div>
+
+            <div class="metadata-box" id="metadataBox">
+                <div class="metadata-title">Analysis Metadata</div>
+                <div class="metadata-grid" id="metadataGrid"></div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="no-data" id="noData">
+                <h2>👋 Welcome</h2>
+                <p>Load a pattern results JSON file to view the analysis</p>
+            </div>
+
+            <div class="patterns-container" id="patternsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+
+        document.getElementById('jsonFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        currentData = JSON.parse(event.target.result);
+                        parseAndDisplayMetadata(file.name);
+                        renderPatterns();
+                        // Enable save button
+                        const saveBtn = document.getElementById('saveRenderedBtn');
+                        saveBtn.disabled = false;
+                        saveBtn.style.opacity = '1';
+                    } catch (error) {
+                        alert('Error parsing JSON file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // Save Rendered HTML button handler
+        document.getElementById('saveRenderedBtn').addEventListener('click', function() {
+            if (!currentData) {
+                alert('Please load a JSON file first.');
+                return;
+            }
+            saveRenderedHTML();
+        });
+
+        function parseAndDisplayMetadata(filename) {
+            // Pattern: pattern_results_<Analysis date>_<HCC>-<LOB>-<SNAP>-<TREND_PERIOD>-<TREND_END_MONTH>.json
+            // Example: pattern_results_20260518_IP_AUTH-Commercial-202604-R3-202601.json
+            
+            const pattern = /pattern_results_(\d{8})_([^-]+)-([^-]+)-([^-]+)-([^-]+)-([^.]+)\.json/;
+            const match = filename.match(pattern);
+            
+            const metadata = {};
+            
+            if (match) {
+                metadata['Analysis Date'] = formatAnalysisDate(match[1]);
+                metadata['HCC'] = match[2];
+                metadata['LOB'] = match[3];
+                metadata['SNAP'] = formatSNAP(match[4]);
+                metadata['Trend Period'] = match[5];
+                metadata['Trend End Month'] = formatTrendEndMonth(match[6]);
+            }
+            
+            // Add Total Patterns count
+            const patterns = currentData?.output?.business_patterns || [];
+            metadata['Total Patterns'] = patterns.length.toString();
+            
+            displayMetadata(metadata);
+        }
+
+        function formatAnalysisDate(dateStr) {
+            if (dateStr && dateStr.length === 8) {
+                return `${dateStr.substring(0, 4)}-${dateStr.substring(4, 6)}-${dateStr.substring(6, 8)}`;
+            }
+            return dateStr;
+        }
+
+        function formatSNAP(snapStr) {
+            if (snapStr && snapStr.length === 6) {
+                return `${snapStr.substring(0, 4)}-${snapStr.substring(4, 6)}`;
+            }
+            return snapStr;
+        }
+
+        function formatTrendEndMonth(monthStr) {
+            if (monthStr && monthStr.length === 6) {
+                return `${monthStr.substring(0, 4)}-${monthStr.substring(4, 6)}`;
+            }
+            return monthStr;
+        }
+
+        function displayMetadata(metadata) {
+            const metadataGrid = document.getElementById('metadataGrid');
+            const metadataBox = document.getElementById('metadataBox');
+            
+            let html = '';
+            for (const [label, value] of Object.entries(metadata)) {
+                html += `
+                    <div class="metadata-item">
+                        <div class="metadata-label">${escapeHtml(label)}</div>
+                        <div class="metadata-value">${escapeHtml(value)}</div>
+                    </div>
+                `;
+            }
+            
+            metadataGrid.innerHTML = html;
+            metadataBox.classList.add('active');
+        }
+
+
+        function renderPatterns() {
+            const patterns = currentData?.output?.business_patterns || [];
+            const container = document.getElementById('patternsContainer');
+            const noData = document.getElementById('noData');
+            
+            if (patterns.length === 0) {
+                noData.innerHTML = '<h2>⚠️ No Patterns Found</h2><p>The file does not contain any patterns to display.</p>';
+                return;
+            }
+            
+            noData.style.display = 'none';
+            container.classList.add('active');
+            
+            let html = `
+                <table class="patterns-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Pattern</th>
+                            <th style="width: 30%;">What's Impacting</th>
+                            <th style="width: 45%;">Recommendation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            patterns.forEach((pattern, index) => {
+                html += renderPatternRow(pattern, index);
+            });
+            
+            html += `
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function renderPatternRow(pattern, index) {
+            const patternName = pattern.top_pattern || 'Unnamed Pattern';
+            const patternRank = pattern.pattern_rank || (index + 1);
+            const patternType = pattern.pattern_type || '';
+            const whatIsImpacting = pattern.what_is_impacting || '';
+            const patternDetails = pattern.pattern_details || '';
+            const whyItMatters = pattern.why_it_matters || '';
+            const recommendedNextStep = pattern.recommended_next_step || '';
+            const validationNeeded = pattern.validation_needed;
+            const evidenceSummary = Array.isArray(pattern.evidence_summary) ? pattern.evidence_summary : [];
+            const impactSummary = pattern.impact_summary || {};
+            
+            // Build Pattern Name Cell
+            let patternCell = `<div class="pattern-name-cell">`;
+            patternCell += `<div style="font-size: 0.8em; color: #667eea; font-weight: 700; margin-bottom: 5px;">RANK ${patternRank}</div>`;
+            patternCell += `<div style="margin-bottom: 8px;">${escapeHtml(patternName)}</div>`;
+            if (patternType) {
+                patternCell += `<div style="font-size: 0.75em; color: #6c757d; text-transform: uppercase; letter-spacing: 0.5px;">${escapeHtml(patternType).replace(/_/g, ' ')}</div>`;
+            }
+            if (validationNeeded) {
+                patternCell += `<div style="margin-top: 8px; padding: 4px 8px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; font-size: 0.75em; color: #856404; display: inline-block;">⚠️ Validation Required</div>`;
+            }
+            patternCell += `</div>`;
+            
+            // Build Entities Cell with Drill-Down Paths
+            let entitiesHtml = '<div class="entities-cell">';
+            if (whatIsImpacting) {
+                entitiesHtml += '<div class="entity-section">';
+                entitiesHtml += '<div class="entity-label">What\'s Impacting</div>';
+                entitiesHtml += `<div class="entity-values" style="font-weight: 600; color: #495057;">${escapeHtml(whatIsImpacting)}</div>`;
+                entitiesHtml += '</div>';
+            }
+            
+            // Build drill-down paths from source cards
+            const drillDownPaths = buildDrillDownPaths(pattern);
+            if (drillDownPaths.length > 0) {
+                entitiesHtml += '<div class="entity-section">';
+                entitiesHtml += '<div class="entity-label">Drill-Down Paths</div>';
+                entitiesHtml += '<div style="display: flex; flex-direction: column; gap: 8px;">';
+                drillDownPaths.forEach(path => {
+                    entitiesHtml += `<div class="drill-path">${path}</div>`;
+                });
+                entitiesHtml += '</div>';
+                entitiesHtml += '</div>';
+            }
+            
+            if (impactSummary.estimated_delta) {
+                entitiesHtml += '<div class="entity-section">';
+                entitiesHtml += '<div class="entity-label">Impact</div>';
+                entitiesHtml += `<div class="entity-values" style="font-weight: 700; color: #28a745;">${escapeHtml(impactSummary.estimated_delta)}</div>`;
+                entitiesHtml += '</div>';
+            }
+            
+            if (drillDownPaths.length === 0 && !whatIsImpacting) {
+                entitiesHtml += '<span class="empty-cell">No drill-down paths available</span>';
+            }
+            entitiesHtml += '</div>';
+            
+            // Build Recommendation Cell
+            let recommendationHtml = '<div class="recommendation-cell">';
+            if (recommendedNextStep) {
+                recommendationHtml += `<div class="rec-description">${escapeHtml(recommendedNextStep)}</div>`;
+            }
+            
+            if (whyItMatters) {
+                recommendationHtml += `<div class="rec-rationale">${escapeHtml(whyItMatters)}</div>`;
+            }
+            
+            if (evidenceSummary.length > 0) {
+                recommendationHtml += '<div style="margin-top: 12px; font-size: 0.85em;"><strong>Evidence:</strong></div>';
+                recommendationHtml += '<ul class="rec-bullets">';
+                evidenceSummary.slice(0, 3).forEach(item => {
+                    recommendationHtml += `<li>${escapeHtml(item)}</li>`;
+                });
+                if (evidenceSummary.length > 3) {
+                    recommendationHtml += `<li style="color: #6c757d; font-style: italic;">+${evidenceSummary.length - 3} more evidence items</li>`;
+                }
+                recommendationHtml += '</ul>';
+            }
+            
+            if (!recommendedNextStep && !whyItMatters && evidenceSummary.length === 0) {
+                recommendationHtml += '<span class="empty-cell">No recommendations available</span>';
+            }
+            recommendationHtml += '</div>';
+            
+            return `
+                <tr>
+                    <td>${patternCell}</td>
+                    <td>${entitiesHtml}</td>
+                    <td>${recommendationHtml}</td>
+                </tr>
+            `;
+        }
+
+        function buildDrillDownPaths(pattern) {
+            const sourceCardIds = pattern.source_card_ids || [];
+            const cards = currentData?.output?.cards || [];
+            const paths = [];
+            
+            // Technical values to filter out
+            const technicalValues = new Set([
+                'AUTH_CODE_DISTRIBUTION',
+                'UNMAPPED',
+                '-3',
+                '-2',
+                '-1',
+                'null',
+                'undefined',
+                ''
+            ]);
+            
+            // Helper function to check if value is technical/internal
+            const isValidBusinessValue = (value) => {
+                if (!value) return false;
+                const upperValue = String(value).toUpperCase();
+                if (technicalValues.has(upperValue)) return false;
+                if (upperValue.startsWith('UNKNOWN')) return false;
+                if (upperValue.match(/^-?\d+$/)) return false; // Skip pure numeric codes
+                return true;
+            };
+            
+            // Create a map for quick card lookup
+            const cardMap = {};
+            cards.forEach(card => {
+                cardMap[card.card_id] = card;
+            });
+            
+            // Process each source card
+            sourceCardIds.forEach(cardId => {
+                const card = cardMap[cardId];
+                if (!card) return;
+                
+                const dimensions = card.dimensions || {};
+                const contextDimensions = card.context_dimensions || {};
+                const sourceEntity = card.source_entity || {};
+                const stage = card.stage || '';
+                
+                // Build path in three sections: Source → Drill-Down Filters → Clinical Context
+                const pathComponents = [];
+                
+                // SECTION 1: Source Entity (Anomaly Starting Point)
+                if (sourceEntity.type && sourceEntity.name && isValidBusinessValue(sourceEntity.name)) {
+                    const entityTypeLabel = {
+                        'states': 'State',
+                        'providers': 'Provider',
+                        'products': 'Product',
+                        'drg': 'DRG',
+                        'diagnosis': 'Dx'
+                    }[sourceEntity.type] || sourceEntity.type;
+                    pathComponents.push(`[${entityTypeLabel}: ${sourceEntity.name}]`);
+                }
+                
+                // SECTION 2: Operational Drill-Down Dimensions (Filters Applied)
+                const filterComponents = [];
+                
+                // State filter
+                if (dimensions.service_area_state && 
+                    isValidBusinessValue(dimensions.service_area_state)) {
+                    filterComponents.push(dimensions.service_area_state);
+                }
+                
+                // Product filter with ER indicator
+                if (dimensions.product_description && 
+                    isValidBusinessValue(dimensions.product_description)) {
+                    let productLabel = dimensions.product_description;
+                    if (contextDimensions.er_admit_indicator === 'Y') {
+                        productLabel += ' (ER)';
+                    }
+                    filterComponents.push(productLabel);
+                }
+                
+                // Facility type filter
+                if (dimensions.facility_type && 
+                    (dimensions.facility_type === 'Not Mapped' || isValidBusinessValue(dimensions.facility_type))) {
+                    filterComponents.push(dimensions.facility_type);
+                }
+                
+                // PA status filter
+                if (dimensions.pa_required_code && isValidBusinessValue(dimensions.pa_required_code)) {
+                    const paLabel = dimensions.pa_required_code === 'Y' ? 'PA Y' : 
+                                   dimensions.pa_required_code === 'N' ? 'PA N' : 
+                                   dimensions.pa_required_code;
+                    filterComponents.push(paLabel);
+                }
+                
+                // Add clinical category from context if it helps differentiate
+                if (contextDimensions.hcc_medium && 
+                    isValidBusinessValue(contextDimensions.hcc_medium)) {
+                    filterComponents.push(contextDimensions.hcc_medium);
+                }
+                
+                // Join filter components
+                if (filterComponents.length > 0) {
+                    pathComponents.push(filterComponents.join(' + '));
+                }
+                
+                // SECTION 3: Clinical Context (Provider + DRG + Diagnosis)
+                const clinicalComponents = [];
+                
+                // Provider
+                if (contextDimensions.rendering_provider_name && 
+                    isValidBusinessValue(contextDimensions.rendering_provider_name)) {
+                    clinicalComponents.push(contextDimensions.rendering_provider_name);
+                }
+                
+                // DRG
+                if (contextDimensions.drg_name && 
+                    isValidBusinessValue(contextDimensions.drg_name)) {
+                    const drgName = contextDimensions.drg_name.length > 45 
+                        ? contextDimensions.drg_name.substring(0, 42) + '...'
+                        : contextDimensions.drg_name;
+                    clinicalComponents.push(drgName);
+                }
+                
+                // Primary diagnosis
+                if (contextDimensions.primary_diagnosis_name && 
+                    isValidBusinessValue(contextDimensions.primary_diagnosis_name)) {
+                    const diagName = contextDimensions.primary_diagnosis_name.length > 35 
+                        ? contextDimensions.primary_diagnosis_name.substring(0, 32) + '...'
+                        : contextDimensions.primary_diagnosis_name;
+                    clinicalComponents.push(diagName);
+                }
+                
+                // Join clinical components
+                if (clinicalComponents.length > 0) {
+                    pathComponents.push(clinicalComponents.join(' | '));
+                }
+                
+                // Add impact metrics
+                const metrics = card.metrics || {};
+                const delta = metrics.value?.delta;
+                const admissions = metrics.explainer?.admissions?.delta;
+                
+                let impactStr = '';
+                if (delta != null) {
+                    const deltaFormatted = formatCurrency(delta);
+                    impactStr = `Δ${deltaFormatted}`;
+                    if (admissions != null && admissions !== 0) {
+                        impactStr += ` (${admissions > 0 ? '+' : ''}${admissions} admits)`;
+                    }
+                }
+                
+                // Only add path if it has meaningful business components
+                // Require at least 2 components for a meaningful path (e.g., State + Product)
+                if (pathComponents.length >= 2) {
+                    const pathStr = pathComponents.join(' → ');
+                    paths.push({
+                        pathStr: pathStr,
+                        delta: delta || 0,
+                        admissions: admissions || 0
+                    });
+                }
+            });
+            
+            // Merge duplicate paths and aggregate their metrics
+            const pathMap = {};
+            paths.forEach(pathObj => {
+                if (!pathMap[pathObj.pathStr]) {
+                    pathMap[pathObj.pathStr] = {
+                        pathStr: pathObj.pathStr,
+                        totalDelta: 0,
+                        totalAdmissions: 0,
+                        count: 0
+                    };
+                }
+                pathMap[pathObj.pathStr].totalDelta += pathObj.delta;
+                pathMap[pathObj.pathStr].totalAdmissions += pathObj.admissions;
+                pathMap[pathObj.pathStr].count += 1;
+            });
+            
+            // Convert back to array and format with aggregated impacts
+            const mergedPaths = Object.values(pathMap).map(item => {
+                const impactStr = formatCurrency(item.totalDelta);
+                const admitsStr = item.totalAdmissions !== 0 
+                    ? ` (${item.totalAdmissions > 0 ? '+' : ''}${Math.round(item.totalAdmissions)} admits)` 
+                    : '';
+                const countLabel = item.count > 1 ? ` [${item.count} cells]` : '';
+                return `${item.pathStr} <span class="path-impact">Δ${impactStr}${admitsStr}${countLabel}</span>`;
+            });
+            
+            // Sort by absolute delta (largest impact first) and limit to top paths
+            const sortedPaths = Object.values(pathMap)
+                .sort((a, b) => Math.abs(b.totalDelta) - Math.abs(a.totalDelta))
+                .slice(0, 10)
+                .map(item => {
+                    const impactStr = formatCurrency(item.totalDelta);
+                    const admitsStr = item.totalAdmissions !== 0 
+                        ? ` (${item.totalAdmissions > 0 ? '+' : ''}${Math.round(item.totalAdmissions)} admits)` 
+                        : '';
+                    const countLabel = item.count > 1 ? ` [${item.count} cells]` : '';
+                    return `${item.pathStr} <span class="path-impact">Δ${impactStr}${admitsStr}${countLabel}</span>`;
+                });
+            
+            return sortedPaths;
+        }
+        
+        function formatCurrency(value) {
+            if (value == null) return '';
+            const absValue = Math.abs(value);
+            const sign = value >= 0 ? '+' : '-';
+            
+            if (absValue >= 1000000) {
+                return `${sign}$${(absValue / 1000000).toFixed(1)}M`;
+            } else if (absValue >= 1000) {
+                return `${sign}$${(absValue / 1000).toFixed(1)}K`;
+            } else {
+                return `${sign}$${absValue.toFixed(0)}`;
+            }
+        }
+
+        function escapeHtml(text) {
+            if (text == null) return '';
+            const div = document.createElement('div');
+            div.textContent = String(text);
+            return div.innerHTML;
+        }
+
+        function saveRenderedHTML() {
+            try {
+                // Get the original filename
+                const originalFilename = document.getElementById('jsonFile').files[0]?.name || 'pattern_results.json';
+                
+                // Read the current page HTML
+                const currentHTML = document.documentElement.outerHTML;
+                
+                // Find the script section
+                const scriptStartMarker = 'let currentData = null;';
+                const scriptStartIndex = currentHTML.indexOf(scriptStartMarker);
+                
+                if (scriptStartIndex === -1) {
+                    alert('Error: Could not find script section to modify.');
+                    return;
+                }
+                
+                // Replace "let currentData = null;" with embedded data
+                const beforeCurrentData = currentHTML.substring(0, scriptStartIndex);
+                const afterCurrentData = currentHTML.substring(scriptStartIndex + scriptStartMarker.length);
+                
+                // Create the embedded data initialization
+                const embeddedDataInit = `let currentData = ${JSON.stringify(currentData)};
+        
+        // Auto-populate on page load with embedded data
+        window.addEventListener('DOMContentLoaded', function() {
+            if (currentData) {
+                console.log('Auto-loading embedded data...');
+                parseAndDisplayMetadata('${originalFilename}');
+                renderPatterns();
+                const saveBtn = document.getElementById('saveRenderedBtn');
+                saveBtn.textContent = '✓ Data Embedded';
+                saveBtn.title = 'Data is already embedded. Use Ctrl+S to save this file.';
+                saveBtn.style.opacity = '1';
+                document.getElementById('jsonFile').disabled = true;
+            }
+        });`;
+                
+                // Build the new HTML
+                const newHTML = beforeCurrentData + embeddedDataInit + afterCurrentData;
+                
+                // Create blob and download
+                const blob = new Blob([newHTML], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                
+                // Create download filename based on original JSON filename
+                let downloadFilename = 'pattern_rendered.html';
+                if (originalFilename) {
+                    const baseName = originalFilename.replace(/\.json$/i, '');
+                    downloadFilename = `${baseName}_rendered.html`;
+                }
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = downloadFilename;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                
+                // Cleanup
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+                
+                alert(`✓ Rendered HTML saved!\n\nThe file "${downloadFilename}" has been downloaded.`);
+                
+            } catch (error) {
+                console.error('Error saving rendered HTML:', error);
+                alert('Error saving file: ' + error.message + '\n\nCheck the browser console for details.');
+            }
+        }
+    </script>
+</body>
+</html>

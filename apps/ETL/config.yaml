@@ -17,16 +17,16 @@ dev:
       url: "https://vault.acr.awsdns.internal.das"
       verify_ssl: true
       cert_path: "root_chain.pem"
-  
+
   s3:
     bucket: "piai-idiscovery-slv-gbd-s3-bucket-data-phi-us-east-1"
     region: "us-east-1"
     base_path: "deep_rsrch/dataz/outbound"
-  
+
   table_mapping:
     gbd: "D01_COC.COC_DTI_STG.COC_CMN_DATA_INSGHT_STG"
     nogbd: "D01_COC.COC_DTI_STG_NOGBD.COC_CMN_DATA_INSGHT_STG"
-  
+
   target_table:
     gbd:
       org: "D01_COC.COC_DTI_STG.COC_CMN_DEEP_RSRCH_INSGHT_STG"
@@ -34,24 +34,25 @@ dev:
     nogbd:
       org: "D01_COC.COC_DTI_STG_NOGBD.COC_CMN_DEEP_RSRCH_INSGHT_STG"
       bkp: "D01_COC.COC_DTI_STG_NOGBD.WORK_COC_CMN_DEEP_RSRCH_INSGHT_BKP"
-  
+
   agent_api:
     base_url: "http://127.0.0.1:8000"
     timeout: 300
-  
+
   database:
     truncate_table: false
     save_to_db: false
     use_backup_table: false  # Set to true to use _BKP tables for testing
-  
+
   job_tracking:
     enabled: false  # Enable/disable job tracking system (for multi-user testing)
 
-# UAT Configuration (pl)
+# UAT Configuration (pl)  --  CONFIGURED FOR COMMERCIAL ASO
+# Lines marked "⚠️ CONFIRM" must be verified with your data team before running.
 uat:
   snowflake:
     account: "carelon-eda-preprod.privatelink"
-    database: "U01_COC"
+    database: "U01_COC"                # ⚠️ CONFIRM: DB that holds schema DL_MCKINSEY_COC_STG
     schema: "COC_DTI_STG"
     warehouse: "U01_COC_DTI_LOAD_WH"
     role_suffix: "_PRIVS"
@@ -63,33 +64,35 @@ uat:
       url: "https://vault.acr.awsdns.internal.das"
       verify_ssl: true
       cert_path: "root_chain.pem"
-  
+
   s3:
     bucket: "piai-idiscovery-gld-gbd-s3-bucket-data-phi-us-east-1"
     region: "us-east-1"
     base_path: "deep_rsrch/dataz/outbound"
-  
+
+  # SOURCE - pipeline READS KEY_INSIGHT / DEEP_DIVE rows from here
   table_mapping:
-    gbd: "U01_COC.COC_DTI_STG.COC_CMN_DATA_INSGHT_STG"
-    nogbd: "U01_COC.COC_DTI_STG_NOGBD.COC_CMN_DATA_INSGHT_STG"
-  
+    gbd: "U01_COC.DL_MCKINSEY_COC_STG.COC_CMN_DATA_INSGHT_ASO_STG"     # ⚠️ CONFIRM DB + schema
+    nogbd: "U01_COC.DL_MCKINSEY_COC_STG.COC_CMN_DATA_INSGHT_ASO_STG"   # ⚠️ CONFIRM DB + schema
+
+  # TARGET - pipeline WRITES Pattern / Recommendation / Policy here
   target_table:
     gbd:
-      org: "U01_COC.COC_DTI_STG.COC_CMN_DEEP_RSRCH_INSGHT_STG"
-      bkp: "U01_COC.COC_DTI_STG.WORK_COC_CMN_DEEP_RSRCH_INSGHT_BKP"
+      org: "U01_COC.DL_MCKINSEY_COC_STG.COC_CMN_DEEP_RSRCH_INSGHT_ASO_STG"       # ⚠️ CONFIRM exists
+      bkp: "U01_COC.DL_MCKINSEY_COC_STG.WORK_COC_CMN_DEEP_RSRCH_INSGHT_ASO_BKP"  # ⚠️ CONFIRM exists
     nogbd:
-      org: "U01_COC.COC_DTI_STG_NOGBD.COC_CMN_DEEP_RSRCH_INSGHT_STG"
-      bkp: "U01_COC.COC_DTI_STG_NOGBD.WORK_COC_CMN_DEEP_RSRCH_INSGHT_BKP"
-  
+      org: "U01_COC.DL_MCKINSEY_COC_STG.COC_CMN_DEEP_RSRCH_INSGHT_ASO_STG"       # ⚠️ CONFIRM
+      bkp: "U01_COC.DL_MCKINSEY_COC_STG.WORK_COC_CMN_DEEP_RSRCH_INSGHT_ASO_BKP"  # ⚠️ CONFIRM
+
   agent_api:
     base_url: "https://idiscovery-deep-research-api-uat.istio.carelon.com"
     timeout: 300
-  
+
   database:
     truncate_table: false
     save_to_db: true
     use_backup_table: true  # Set to true to use _BKP tables for testing
-  
+
   job_tracking:
     enabled: false  # Enable/disable job tracking system (for multi-user testing)
 
@@ -109,16 +112,16 @@ prod:
       url: "https://vault.acr.awsdns.internal.das"
       verify_ssl: true
       cert_path: "root_chain.pem"
-  
+
   s3:
     bucket: "piai-idiscovery-plat-gbd-s3-bucket-data-phi-us-east-1"
     region: "us-east-1"
     base_path: "deep_rsrch/dataz/outbound"
-  
+
   table_mapping:
     gbd: "P01_COC.COC_DTI_STG.COC_CMN_DATA_INSGHT_STG"
     nogbd: "P01_COC.COC_DTI_STG_NOGBD.COC_CMN_DATA_INSGHT_STG"
-  
+
   target_table:
     gbd:
       org: "P01_COC.COC_DTI_STG.COC_CMN_DEEP_RSRCH_INSGHT_STG"
@@ -126,16 +129,16 @@ prod:
     nogbd:
       org: "P01_COC.COC_DTI_STG_NOGBD.COC_CMN_DEEP_RSRCH_INSGHT_STG"
       bkp: "P01_COC.COC_DTI_STG_NOGBD.WORK_COC_CMN_DEEP_RSRCH_INSGHT_BKP"
-  
+
   agent_api:
     base_url: "http://idiscovery-deep-research-api.nginx.plat-dig-sharedservdigital2.awsdns.internal.das"
     timeout: 300
-  
+
   database:
     truncate_table: false
     save_to_db: true
     use_backup_table: false  # Set to true to use _BKP tables for testing
-  
+
   job_tracking:
     enabled: false  # Enable/disable job tracking system (for multi-user testing)
 
@@ -144,11 +147,11 @@ pipeline:
   default_lob: "gbd"
   default_statscl_mdl_cd: "IP AUTH"
   csv_file: "SampleData-dev-deep-research.csv"
-  
+
   # Local development mode
   local: false  # Set to true for local development
   local_lob: "offshore"  # Options: "offshore" or other values
-  
+
   # S3 logging settings
   s3_logging:
     enabled: true
@@ -157,13 +160,13 @@ pipeline:
       - "payload"
       - "agents_results"
       - "final_result"
-  
+
   # Semantic YAML configuration paths for correlation and pattern agents
   semantic_config:
     # OON model configurations
     oon:
       dev: "configs/correlation_pattern/coc_ecap_oon_semantic_view_with_samples_dev.yaml"
-      uat: "configs/correlation_pattern/coc_ecap_oon_semantic_view_with_samples_uat.yaml"
+      uat: "configs/correlation_pattern/coc_ecap_oon_semantic_view_with_samples_uat.yaml"     # ⚠️ ASO: may need an ASO-specific semantic view
       prod: "configs/correlation_pattern/coc_ecap_oon_semantic_view_with_samples_prod.yaml"
       local: "configs/correlation_pattern/coc_ecap_oon_semantic_view_with_samples_local.yaml"
       local_offshore: "configs/correlation_pattern/coc_ecap_oon_semantic_view_with_samples_local_offshore.yaml"
